@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+dart compile exe -o pl ./bin/cli.dart

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#
+# Requirements:
+#  - Install lcov (e.g., brew install lcov)
+#  - Install Dart coverage tooling: dart pub global activate coverage
+
+set -eu
+
+echo '[COV] Running code coverage tools...'
+
+echo '[COV] Generating lcov.info coverage report...'
+dart pub global run coverage:format_coverage --report-on=lib --lcov -o ./build/coverage/lcov.info -i ./build/coverage
+
+echo '[COV] Generating HTML version of lcov.info...'
+genhtml -o ./build/coverage/report ./build/coverage/lcov.info
+
+REPORT_HTML_FILE="file://$(pwd)/build/coverage/report/index.html"
+echo "[COV] Final HTML report available at $REPORT_HTML_FILE"
+open "$REPORT_HTML_FILE"
