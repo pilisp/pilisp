@@ -1,0 +1,48 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Release
+
+on:
+  release:
+    types: [ "published" ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+            output-name: pl-linux
+          - os: macOS-latest
+            output-name: pl-macOS
+          - os: windows-latest
+            output-name: pl-windows.exe
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # Note: This workflow uses the latest stable version of the Dart SDK.
+      # You can specify other versions if desired, see documentation here:
+      # https://github.com/dart-lang/setup-dart/blob/main/README.md
+      # - uses: dart-lang/setup-dart@v1
+      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Create build directory
+        run: mkdir build
+
+      - name: Build release artifacts
+        run: dart compile exe -v -o build/${{ matrix.output-name }} bin/cli.dart
+
+      - name: Add artifacts to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/${{ matrix.output-name }}
