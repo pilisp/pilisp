@@ -72,8 +72,8 @@ Copyright © Daniel Gregoire 2022–2023
 <!-- Links -->
 
 [embedding]: https://github.com/pilisp/pilisp/blob/main/doc/Embedding.md
-[pilisp-core]: https://github.com/pilisp/pilisp/blob/lib/src/pilisp_core_pilisp.dart
+[pilisp-core]: https://github.com/pilisp/pilisp/blob/main/lib/src/pilisp_core_pilisp.dart
 [pilisp-org]: https://github.com/pilisp
-[pilisp-tests]: https://github.com/pilisp/pilisp/blob/test/pilisp_test.dart
+[pilisp-tests]: https://github.com/pilisp/pilisp/blob/main/test/pilisp_test.dart
 [releases]: https://github.com/pilisp/pilisp/releases
 [tutorial]: https://github.com/pilisp/pilisp/blob/main/doc/Tutorial.md
