@@ -30,8 +30,8 @@ class PLEnv {
 
   // TODO Consider prefixing most of these with `PL/` and simplifying them, leveraging multi-arity func. in PiLisp rather than by hand here in Dart
   static final IMap<PLSymbol, PLBindingEntry> baseScope = IMap({
-    PLSymbol('*pilisp-version*'): PLBindingEntry.withMeta(
-        '1.0.0', IMap({termDoc: 'Returns the current version of PiLisp.'})),
+    PLSymbol('*pilisp-version*'): PLBindingEntry.withMeta('1.0.0-alpha.1',
+        IMap({termDoc: 'Returns the current version of PiLisp.'})),
     PLSymbol('identical?'): PLBindingEntry.withMeta(isIdenticalFn,
         IMap({termDoc: 'Returns true if x and y are the same object.'})),
     PLSymbol('bindings'): PLBindingEntry.withMeta(

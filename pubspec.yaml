@@ -1,6 +1,6 @@
 name: pilisp
 description: An interpreted Lisp inspired by Clojure.
-version: 1.0.0
+version: 1.0.0-alpha.1
 repository: https://github.com/pilisp/pilisp
 
 environment:

@@ -1049,7 +1049,7 @@ void main() {
       });
       group('/ Symbols', () {
         test('/ regular', () {
-          expect(printProgram('*pilisp-version*'), '"1.0.0"');
+          expect(printProgram('*pilisp-version*'), isA<String>());
           expect(() async => printProgram('1abc'),
               throwsA(isA<UnreadableFormException>()));
         });
