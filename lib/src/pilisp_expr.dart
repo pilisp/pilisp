@@ -1492,9 +1492,9 @@ class PLFunction extends PLNamedInvocable {
   /// Select the arity to invoke based on their signatures and the number of [args].
   ///
   /// Examples:
-  ///  - args:    a b
-  ///  - arities: ([] ...) ([x] ...) ([x & ys] ...)
-  ///  - return:  ([x & ys] ...)
+  ///  - args:    `a b`
+  ///  - arities: `([] ...) ([x] ...) ([x & ys] ...)`
+  ///  - return:  `([x & ys] ...)`
   PLArity negotiateArity(Iterable<Object?> args) {
     final len = args.length;
     if (arities.containsKey(len)) {

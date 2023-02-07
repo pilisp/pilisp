@@ -1,4 +1,4 @@
-An interpreted Lisp inspired by Clojure.
+PiLisp—An interpreted Lisp inspired by Clojure.
 
 Runs on all supported Dart targets.
 
@@ -43,6 +43,12 @@ PiLisp.loadString('(+ 1 2 3 4)');
 * [PiLisp Core Implementation][pilisp-core]
 * [PiLisp Core Tests][pilisp-tests]
 * [TODO Embedding PiLisp in Dart Programs][embedding]
+
+The name "PiLisp" was originally a shortened form of "Piped Lisp," because a
+first prototype of this language was developed while building [a REPL
+](https://github.com/semperos/shortcut-repl) for the Shortcut project management
+SaaS product that included a rudimentary Lisp whose defining feature was use of
+the pipe character `|` as an equivalent of Clojure's thread-first macro `->`.
 
 ## Build
 
