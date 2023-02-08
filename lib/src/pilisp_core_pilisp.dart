@@ -763,10 +763,12 @@ final corePiLisp = r'''
 
 ;; NB: Extend with vectors, sets, and maps, then use different
 ;;     predicate for pl macro.
-(defn invocable?
+(defn invocable-form?
+  {:private true}
   [x]
   (or (list? x)
       (fn? x)
+      (symbol? x)
       (term? x)))
 
 (def pipe-param '$)
@@ -794,7 +796,7 @@ final corePiLisp = r'''
         ;; partition-by wrapped every clause in a list; unwrap if non-invocable
         first-clause (if (= 1 (count first-clause))
                        (let [fst (first first-clause)]
-                         (if (invocable? fst)
+                         (if (invocable-form? fst)
                            first-clause
                            fst))
                        first-clause)
