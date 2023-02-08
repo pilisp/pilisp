@@ -265,7 +265,9 @@ class PLEnv {
         })),
   }).addAll(wrapperBindings.toIMap());
 
-  /// PiLisp does not have namespaces. As such, nested scopes perform the work of both a global "namespace" (the 0th scope) and smaller lexical scopes introduced by `fn` and `let`.
+  /// PiLisp does not have namespaces. As such, nested scopes perform the work
+  /// of both a global "namespace" (the 0th scope) and smaller lexical scopes
+  /// introduced by `fn` and `let`.
   List<Map<PLSymbol, PLBindingEntry>> scopes = [baseScope.unlock];
 
   PLEnv();

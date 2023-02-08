@@ -8,7 +8,7 @@ import 'pilisp_read.dart';
 
 export 'pilisp_core.dart' show PLState;
 export 'pilisp_core_pilisp.dart' show corePiLisp;
-export 'pilisp_env.dart' show PLEnv;
+export 'pilisp_env.dart' show PLEnv, PLBindingEntry;
 export 'pilisp_expr.dart'
     show
         PLException,
@@ -49,10 +49,10 @@ class PiLisp {
   }
 
   /// Prints the given [value] as a readable PiLisp form.
-  void print(Object? value, {PLEnv? env}) {
+  static void print(Object? value, {PLEnv? env}) {
     print(printToString(value, env: env));
   }
 
   /// Returns the name of the PiLisp type of the given [value].
-  String piLispTypeName(Object? value) => typeString(value);
+  static String piLispTypeName(Object? value) => typeString(value);
 }
