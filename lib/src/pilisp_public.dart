@@ -54,5 +54,5 @@ class PiLisp {
   }
 
   /// Returns the name of the PiLisp type of the given [value].
-  static String piLispTypeName(Object? value) => typeString(value);
+  static String typeName(Object? value) => typeString(value);
 }
