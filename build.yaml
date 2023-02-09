@@ -4,7 +4,7 @@ builders:
     import: "package:pilisp/builder.dart"
     builder_factories: [ "piLispDartLibraryBuilder" ]
     build_extensions: { ".dart": [ ".stub.dart" ] }
-    auto_apply: dependents
+    # auto_apply: dependents
     build_to: source
     applies_builders: [ "source_gen" ]
 targets:
