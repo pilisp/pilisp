@@ -766,13 +766,11 @@ final corePiLisp = r'''
 (defn invocable-form?
   {:private true}
   [x]
-  (or (list? x)
-      (fn? x)
+  (or (fn? x)
       (symbol? x)
       (term? x)))
 
 (def pipe-param '$)
-(def pipe? (partial = '|))
 
 (defn specifies-pipe-param?
   {:private true}
@@ -787,10 +785,10 @@ final corePiLisp = r'''
 (defmacro piped
   {:doc "The Piped Lisp macro."}
   [& forms]
-  (let [delimited-forms (->> (partition-by pipe? forms)
+  (let [delimited-forms (->> (partition-by (partial = '|) forms)
                              ;; Remove | as pure syntax, and support
                              ;; empty expressions
-                             (remove (fn [coll] (every? pipe? coll))))
+                             (remove (fn [coll] (every? (partial = '|) coll))))
         ;; The expr for as->
         first-clause (first delimited-forms)
         ;; partition-by wrapped every clause in a list; unwrap if non-invocable
