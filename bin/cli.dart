@@ -24,7 +24,8 @@ void repl() {
 
     try {
       final programData = PiLisp.readString(programSource);
-      final programResult = PiLisp.loadString(programSource);
+      final programResult = PiLisp.loadString('(piped\n$programSource\n)');
+      // final programResult = PiLisp.loadString(programSource);
       // NB: Make it stress-free to eval these REPL-specific bindings.
       if (programData != PLSymbol('*3') &&
           programData != PLSymbol('*2') &&
