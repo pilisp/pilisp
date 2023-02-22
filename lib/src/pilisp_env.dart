@@ -17,7 +17,7 @@ class PLEnv {
   bool isPrintJson = false;
   int indentIndex = 0;
   int indentSize = 2;
-  bool printStackTraces = false;
+  bool printStackTraces = true;
   List<String> stackFrames = [];
   BigInt _symbolId = BigInt.zero;
 
@@ -156,7 +156,7 @@ class PLEnv {
         })),
     PLSymbol('keys'): PLBindingEntry.withMeta(keysFn,
         IMap({termDoc: 'Returns a vector of the keys of the given map.'})),
-    PLSymbol('values'): PLBindingEntry.withMeta(valuesFn,
+    PLSymbol('vals'): PLBindingEntry.withMeta(valuesFn,
         IMap({termDoc: 'Returns a vector of the values of the given map.'})),
     PLSymbol('+'): PLBindingEntry.withMeta(
         addFn, IMap({termDoc: 'Returns the sum of all arguments.'})),
