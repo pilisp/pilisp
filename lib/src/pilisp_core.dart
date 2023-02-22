@@ -423,9 +423,11 @@ Object? conjFn(PLEnv env, PLVector args) {
     for (final x in xs) {
       if (x is PLVector && x.length == 2) {
         m[x[0]] = x[1];
+      } else if (x is IMap<Object?, Object?>) {
+        m.addAll(x.unlock);
       } else {
         throw ArgumentError(
-            'Cannot conj ${plPrintToString(env, x)} onto a map. You must provide two-item vectors as map entries.');
+            'Cannot conj ${plPrintToString(env, x)} onto a map. Only maps and two-item vectors supported.');
       }
     }
     m.addAll(coll.unlock);
