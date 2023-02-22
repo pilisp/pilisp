@@ -390,32 +390,6 @@ class PLEnv {
     }
   }
 
-  Object? withParams(
-      PLSymbol fnName, PLVector symbols, PLVector values, Object? Function() f,
-      {Map<PLSymbol, PLBindingEntry>? scope}) {
-    if (scope != null) {
-      pushScope(scope);
-    }
-    pushEmptyScope();
-    pushStackFrame(fnName);
-    try {
-      for (var i = 0; i < symbols.length; i++) {
-        final sym = symbols[i] as PLSymbol;
-        final value = values[i];
-        addBindingValue(sym, value);
-      }
-
-      final returnValue = f();
-      return returnValue;
-    } finally {
-      if (scope != null) {
-        popScope();
-      }
-      popStackFrame();
-      popScope(); // empty scope
-    }
-  }
-
   String indentedString(String s) {
     return currentIndentation() + s;
   }

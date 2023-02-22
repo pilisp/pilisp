@@ -369,8 +369,15 @@ class PLList extends PLExprIterable
         if (doBody.isEmpty) {
           return null;
         }
-        return doBody.fold(
-            null, (previousValue, element) => plEval(env, element));
+        if (doBody.length == 1) {
+          return plEval(env, doBody.first);
+        } else {
+          Object? rv;
+          for (final form in doBody) {
+            rv = plEval(env, form);
+          }
+          return rv;
+        }
       } else if (sym == symbolQuote) {
         if (length != 2) {
           throw FormatException(
@@ -1076,17 +1083,17 @@ bool isTruthy(Object? o) {
 void validateParams(Object? params) {
   if (params is PLVector) {
     if (params.isNotEmpty) {
-      params.fold(<PLSymbol>{}, (acc, element) {
-        if (element is! PLSymbol) {
+      final seenParams = <PLSymbol>{};
+      for (final param in params.iter) {
+        if (param is! PLSymbol) {
           throw FormatException(
-              'Function signatures must consist solely of symbols, but encountered $element of type ${typeString(element)} $params');
+              'Function signatures must consist solely of symbols, but encountered $param of type ${typeString(param)} $params');
         }
-        if (!acc.add(element)) {
+        if (!seenParams.add(param)) {
           throw FormatException(
-              'Function signatures must consist solely of unique symbol, but encountered duplicate $element in $params');
+              'Function signatures must consist solely of unique symbol, but encountered duplicate $param in $params');
         }
-        return acc;
-      });
+      }
       validateVariableArityParams(params);
     }
   } else {
@@ -1541,22 +1548,45 @@ class PLFunction extends PLNamedInvocable {
       finalArgs = args.toIList();
     }
     if (isMacro) {
-      return env.withParams(
-          name,
-          finalParams.toPLVector(),
-          finalArgs.toPLVector(),
-          () => plEval(env, arity.interpretedBody ?? arity.body),
-          scope: arity.closedScope);
+      Object? returnValue;
+      env.pushScope(arity.closedScope);
+      env.pushEmptyScope();
+      env.pushStackFrame(name);
+      try {
+        for (var i = 0; i < finalParams.length; i++) {
+          final sym = finalParams[i];
+          final value = finalArgs[i];
+          env.addBindingValue(sym, value);
+        }
+
+        returnValue = plEval(env, arity.interpretedBody ?? arity.body);
+        // return returnValue;
+      } finally {
+        env.popScope();
+        env.popStackFrame();
+        env.popScope(); // empty scope
+      }
+      return returnValue;
     } else {
-      final evaledArgs = finalArgs;
-      // NB. Have ourselves turned around a bit. Determine where the initial
-      //     eval is happening.
-      // finalArgs.map((element) => plEval(env, element)).toIList();
-      final preparedParams = finalParams.toPLVector();
-      final preparedArgs = evaledArgs.toPLVector();
-      return env.withParams(name, preparedParams, preparedArgs,
-          () => plEval(env, arity.interpretedBody ?? arity.body),
-          scope: arity.closedScope);
+      Object? returnValue;
+      env.pushScope(arity.closedScope);
+      env.pushEmptyScope();
+      env.pushStackFrame(name);
+      try {
+        for (var i = 0; i < finalParams.length; i++) {
+          final sym = finalParams[i];
+          final value = finalArgs[i];
+          env.addBindingValue(sym, value);
+        }
+
+        returnValue = plEval(env, arity.interpretedBody ?? arity.body);
+      } finally {
+        env.popScope();
+        env.popStackFrame();
+        env.popScope(); // empty scope
+      }
+
+      return returnValue;
     }
   }
 

@@ -1365,6 +1365,10 @@ void main() {
               throwsA(isA<RangeError>()));
           expect(evalProgram('(nth [0 1 2] 3 .default)'), PLTerm('default'));
         });
+        test('/ take', () {
+          expect(
+              evalProgram('(count (take 115 (sort (keys (bindings)))))'), 115);
+        });
       });
       group('/ types core', () {
         test('/ int?', () {
