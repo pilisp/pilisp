@@ -1489,10 +1489,11 @@ class PLFunction extends PLNamedInvocable {
     return fn;
   }
 
-  factory PLFunction.fromArities(
-      PLSymbol name, IMap<int, PLArity> existingArities) {
+  factory PLFunction.fromFn(PLSymbol name, PLFunction otherFn) {
     PLFunction fn = PLFunction._(name);
-    fn.arities = existingArities;
+    fn.arities = otherFn.arities;
+    fn.variableArity = otherFn.variableArity;
+    fn.isMacro = otherFn.isMacro;
     return fn;
   }
 
@@ -1596,11 +1597,11 @@ class PLFunction extends PLNamedInvocable {
   /// the environment that it closes over.
   Object? eval(PLEnv env) {
     // NB: Mint a new function to mutate its closed scopes. Otherwise you're editing global function arities!
-    final newFunction = PLFunction.fromArities(name, arities);
+    final newFunction = PLFunction.fromFn(name, this);
     for (final arity in newFunction.arities.values) {
       final syms = arity.closedScope.keys;
       for (final sym in syms) {
-        final closedScopeValue = arity.closedScope[sym]!;
+        // final closedScopeValue = arity.closedScope[sym]!;
         // if (closedScopeValue.value == declaredValue) {
         final envBinding = env.getBinding(sym);
         if (envBinding != null) {
