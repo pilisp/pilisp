@@ -706,7 +706,7 @@ final corePiLisp = r'''
   {:doc "Returns a map that consists of the rest of the maps conj-ed onto the first.  If a key occurs in more than one map, the mapping from the latter (left-to-right) will be the mapping in the result."}
   [& maps]
   (when (some identity maps)
-    (reduce #(conj (or %1 {}) %2) maps)))
+    (reduce (fn merge-reduce [acc m] (conj (or acc {}) m)) maps)))
 
 (defn interleave
   {:doc "Returns a sequence of the first item in each coll, then the second etc."}
@@ -948,6 +948,21 @@ final corePiLisp = r'''
         (str (first coll))
         (str/join* "" sep coll)))))
 
+;; Maps
+
+(defn select-keys
+  {:doc "Returns a map containing only those entries in map whose key is in keys"}
+  [map keyseq]
+  (loop [ret {} keys (seq keyseq)]
+    (if keys
+      (let [k (first keys)]
+        (if (contains-key? map k)
+          (recur (assoc ret k (get map k))
+                 (next keys))
+          (recur ret
+                 (next keys))))
+      ret)))
+
 ;; Sets
 
 (defn max-key
@@ -1019,11 +1034,10 @@ final corePiLisp = r'''
     (reduce (fn [s k] (if (pred k) s (disj s k)))
             xset xset))
 
-;; TODO Impl after select-keys
-#_(defn project
-  "Returns a rel of the elements of xrel with only the keys in ks"
+(defn set/project
+  {:doc "Returns a rel of the elements of xrel with only the keys in ks"}
   [xrel ks]
-  (set (map #(select-keys % ks) xrel)) xrel)
+  (set (map (fn [m] (select-keys m ks)) xrel)))
 
 (defn rename-keys
   "Returns the map with the keys in kmap renamed to the vals in kmap"
@@ -1043,8 +1057,7 @@ final corePiLisp = r'''
   [xrel kmap]
   (set (map #(rename-keys % kmap) xrel)) xrel)
 
-;; TODO Impl after select-keys
-#_(defn index
+(defn set/index
   "Returns a map of the distinct values of ks in the xrel mapped to a
   set of the maps in xrel with the corresponding values of ks."
   [xrel ks]
@@ -1054,40 +1067,40 @@ final corePiLisp = r'''
          (assoc m ik (conj (get m ik #{}) x))))
      {} xrel))
 
-;; TODO Reimpl with reduce-kv
-(defn set/map-invert
-  "Returns the map with the vals mapped to the keys."
+(defn invert-map
+  {:doc "Returns the map with the vals mapped to the keys."}
   [m]
   ;; persistent!
-  (reduce (fn [m entry] (let [[k v] entry] (assoc m v k)))
-          {}
-             ;; (transient {})
-          m))
+  (reduce
+   (fn [m entry]
+     (let [[k v] entry]
+       (assoc m v k)))
+   {}
+   m))
 
-;; TODO Impl after select-keys
-#_(defn set/join
+(defn set/join
   "When passed 2 rels, returns the rel corresponding to the natural
   join. When passed an additional keymap, joins on the corresponding
   keys."
   ([xrel yrel] ;natural join
    (if (and (seq xrel) (seq yrel))
-     (let [ks (intersection (set (keys (first xrel))) (set (keys (first yrel))))
+     (let [ks (set/intersection (set (keys (first xrel))) (set (keys (first yrel))))
            [r s] (if (<= (count xrel) (count yrel))
                    [xrel yrel]
                    [yrel xrel])
-           idx (index r ks)]
-       (reduce (fn [ret x]
+           idx (set/index r ks)]
+       (reduce (fn set-join-reduce [ret x]
                  (let [found (idx (select-keys x ks))]
                    (if found
-                     (reduce #(conj %1 (merge %2 x)) ret found)
+                     (reduce (fn reduce-found [a b] (conj a (merge b x))) ret found)
                      ret)))
                #{} s))
      #{}))
   ([xrel yrel km] ;arbitrary key mapping
    (let [[r s k] (if (<= (count xrel) (count yrel))
-                   [xrel yrel (map-invert km)]
+                   [xrel yrel (invert-map km)]
                    [yrel xrel km])
-         idx (index r (vals k))]
+         idx (set/index r (vals k))]
      (reduce (fn [ret x]
                (let [found (idx (rename-keys (select-keys x (keys k)) k))]
                  (if found
