@@ -259,7 +259,7 @@ class PLList extends PLExprIterable
 
   @override
   Object? eval(PLEnv env) {
-    if (isEmpty) return null;
+    if (isEmpty) return PLList([]);
     // Special forms first
     if (firstOrNull is PLSymbol) {
       final sym = first as PLSymbol;
