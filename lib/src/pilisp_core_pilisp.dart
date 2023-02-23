@@ -672,6 +672,13 @@ final corePiLisp = r'''
   [pred coll]
   (filter (complement pred) coll))
 
+(defn reverse
+  {:doc "Returns items of coll in reverse order. Vectors returned as vectors."}
+  [coll]
+  (if (vector? coll)
+    (into [] (reduce conj () coll))
+    (reduce conj () coll)))
+
 ;; TODO Support vector use-case
 (defn assoc
   {:doc "assoc[iate]. When applied to a map, returns a new map of the
