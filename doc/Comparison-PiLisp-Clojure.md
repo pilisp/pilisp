@@ -20,6 +20,10 @@ thus cannot provide ad hoc Dart reflection. The core PiLisp implementation does,
 however, generate PiLisp stubs for many Dart Core classes and methods. See
 PiLisp forms that start with `dart/`.
 
+PiLisp calls keywords _terms_ and supports writing them either with a
+leading colon or a leading dot, i.e. `.a` is equivalent to `:a`. Terms
+are printed in the colon form.
+
 Destructuring is a powerful tool of thought. PiLisp supports destructuring in
 `let` bindings. By design, it does not support them in function signatures.
 
