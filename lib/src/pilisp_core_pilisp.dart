@@ -797,12 +797,12 @@ final corePiLisp = r'''
                              ;; empty expressions
                              (remove (fn [coll] (every? (partial = '|) coll))))
         ;; The expr for as->
-        first-clause (first delimited-forms)
+        first-clause-form (first delimited-forms)
         ;; partition-by wrapped every clause in a list; unwrap if non-invocable
-        first-clause (if (= 1 (count first-clause))
-                       (let [fst (first first-clause)]
+        first-clause (if (= 1 (count first-clause-form))
+                       (let [fst (first first-clause-form)]
                          (if (invocable-form? fst)
-                           first-clause
+                           first-clause-form
                            fst))
                        first-clause)
         ;; Body of as->
@@ -814,9 +814,20 @@ final corePiLisp = r'''
                                  ;;     of this macro.
                                  (if (specifies-pipe-param? form)
                                    form
-                                   (concat form [pipe-param])))))]
-    ;; as-> does the heavy lifting
-    (concat (list 'as-> first-clause pipe-param) next-clauses)))
+                                   (concat form [pipe-param])))))
+        first-g (gensym 'first)]
+    ;; TODO Fix: def foo 42
+    ;; TODO Fix: eval all, return final within first
+    ;; TODO Fix: Not limited to when there aren't next-clauses
+    (if (empty? next-clauses)
+      (list 'let
+            [first-g (last first-clause-form)]
+            (list 'if
+                  (list 'fn? first-g)
+                  (list first-g)
+                  first-g))
+      ;; as-> does the heavy lifting
+      (concat (list 'as-> first-clause pipe-param) next-clauses))))
 
 (defn destructure [bindings]
   (let [bents (partition 2 bindings)
