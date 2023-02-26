@@ -773,9 +773,11 @@ final corePiLisp = r'''
 (defn invocable-form?
   {:private true}
   [x]
-  (or (fn? x)
-      (symbol? x)
-      (term? x)))
+  (or (fn? x)     ;; invocable
+      (symbol? x) ;; resolve to invocable
+      (term? x)   ;; invocable
+      (list? x)   ;; eval to invocable
+      ))
 
 (def pipe-param '$)
 
@@ -798,13 +800,11 @@ final corePiLisp = r'''
                              (remove (fn [coll] (every? (partial = '|) coll))))
         ;; The expr for as->
         first-clause-form (first delimited-forms)
-        ;; partition-by wrapped every clause in a list; unwrap if non-invocable
-        first-clause (if (= 1 (count first-clause-form))
-                       (let [fst (first first-clause-form)]
-                         (if (invocable-form? fst)
-                           first-clause-form
-                           fst))
-                       first-clause)
+        car (first first-clause-form)
+        ;; partition-by wrapped every clause in a list
+        first-clause (if (invocable-form? car)
+                       first-clause-form
+                       (cons 'do first-clause-form))
         ;; Body of as->
         next-clauses (->> (next delimited-forms)
                           (map (fn [form]
@@ -814,19 +814,10 @@ final corePiLisp = r'''
                                  ;;     of this macro.
                                  (if (specifies-pipe-param? form)
                                    form
-                                   (concat form [pipe-param])))))
-        first-g (gensym 'first)]
-    ;; TODO Fix: def foo 42
-    ;; TODO Fix: eval all, return final within first
-    ;; TODO Fix: Not limited to when there aren't next-clauses
+                                   (concat form [pipe-param])))))]
+    ;; as-> does the heavy lifting
     (if (empty? next-clauses)
-      (list 'let
-            [first-g (last first-clause-form)]
-            (list 'if
-                  (list 'fn? first-g)
-                  (list first-g)
-                  first-g))
-      ;; as-> does the heavy lifting
+      first-clause
       (concat (list 'as-> first-clause pipe-param) next-clauses))))
 
 (defn destructure [bindings]
