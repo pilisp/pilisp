@@ -776,7 +776,9 @@ final corePiLisp = r'''
   (or (fn? x)     ;; invocable
       (symbol? x) ;; resolve to invocable
       (term? x)   ;; invocable
-      (list? x)   ;; eval to invocable
+      (and (list? x)
+           (or (= 'fn (first x))
+               (= 'fn* (first x))))   ;; fn literal
       ))
 
 (def pipe-param '$)
