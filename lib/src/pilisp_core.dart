@@ -109,7 +109,29 @@ bool debugBangFn(PLEnv env, PLVector args) {
     }
   } else {
     throw FormatException(
-        'The debug! function expect 1 argument, but received ${args.length} arguments.');
+        'The debug! function expects 1 argument, but received ${args.length} arguments.');
+  }
+}
+
+Object? plSetParentFn(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    env.parent = args[0];
+    return env.parent;
+  } else if (args.isEmpty) {
+    env.parent = null;
+    return null;
+  } else {
+    throw FormatException(
+        'The pl/set-parent function expects 0 or 1 argument, but received ${args.length} arguments.');
+  }
+}
+
+Object? plGetParentFn(PLEnv env, PLVector args) {
+  if (args.isEmpty) {
+    return env.parent;
+  } else {
+    throw ArgumentError(
+        'The pl/get-parent function expects 0 arguments, but received ${args.length} arguments.');
   }
 }
 

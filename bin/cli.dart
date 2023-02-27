@@ -15,7 +15,15 @@ void repl() {
   // TODO Handle interrupts.
   while (true) {
     if (showPrompt) {
-      stdout.write('pl> ');
+      final parent = piLispEnv.parent;
+      if (parent == null) {
+        stdout.write('pl> ');
+      } else {
+        final printParent = piLispEnv.getBindingValue(PLSymbol('parent-to-string'));
+        if (printParent is PLFunction) {
+          stdout.write('${printParent.invoke(piLispEnv, [parent])}> ');
+        }
+      }
     }
     final line = stdin.readLineSync(encoding: Encoding.getByName('utf-8')!);
     if (line == null) break;

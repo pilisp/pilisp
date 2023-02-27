@@ -941,6 +941,54 @@ final corePiLisp = r'''
   (let [destructured-bindings (destructure bindings)]
     (list 'let* destructured-bindings (cons 'do body))))
 
+;; PiLisp Environment
+
+(defn parent-to-string
+  [x]
+  (cond
+    (symbol? x) x
+    (vector? x) (str "[#"(count x) "]")
+    (list? x) (str "(#"(count x) ")")
+    (map? x) (str "{#"(count x) "}")
+    (set? x) (str "#{#"(count x) "}")
+    (string? x) (str "\"#"(count x) "\"")
+    :else (type x)))
+
+(defmacro cd
+  {:doc "Change the current parent value in the PiLisp environment. Macro so as to support symbols for names and binding resolution."}
+  ([] '(pl/set-parent))
+  ([new-parent]
+   (list 'pl/set-parent
+         (if (symbol? new-parent)
+           (list 'quote new-parent)
+           new-parent))))
+
+(defn .
+  {:doc "Current parent value. Resolves symbols using bindings at invocation time."}
+  []
+  (let [value (pl/get-parent)]
+    (if (symbol? value)
+      (let [bs (bindings)]
+        (if (contains-key? bs value)
+          (.value (get (bindings) value))
+          (println "Warning: No such symbol" value)))
+      value)))
+
+(defn ls
+  ([] (ls (.)))
+  ([x]
+   (cond
+     (or (vector? x)
+         (list? x)
+         (set? x))
+     x
+
+     (or (string? x)
+         (map? x))
+     (seq x)
+
+     :else nil)))
+
 ;; Strings
 
 (let [str/join*

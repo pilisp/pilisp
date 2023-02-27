@@ -20,10 +20,9 @@ class PLEnv {
   bool printStackTraces = true;
   List<String> stackFrames = [];
   BigInt _symbolId = BigInt.zero;
-
   bool isDebug = false;
-
   BigInt nextId() => _symbolId += BigInt.one;
+  Object? parent;
 
   /// These sets of [PLSymbol] are created as part of lexical closure processing.
   List<Set<PLSymbol>> closureScopes = [];
@@ -41,6 +40,14 @@ class PLEnv {
             'Returns a map of all bindings currently in scope. Keys are the symbols, values are a map of :value and :meta'
       }),
     ),
+    PLSymbol('pl/get-parent'): PLBindingEntry.withMeta(
+        plGetParentFn,
+        IMap({
+          termDoc:
+              'Return the current parent value from the PiLisp environment.'
+        })),
+    PLSymbol('pl/set-parent'): PLBindingEntry.withMeta(plSetParentFn,
+        IMap({termDoc: 'Set the environment parent to the given value.'})),
     PLSymbol('pl/debug!'): PLBindingEntry.withMeta(debugBangFn,
         IMap({termDoc: 'Set the debug environment to true or false.'})),
     PLSymbol('next-symbol-id'): PLBindingEntry.withMeta(
