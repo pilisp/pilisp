@@ -39,11 +39,15 @@ void repl() {
       if (programData == loadFileSym ||
           (programData is PLList && programData[0] == loadFileSym)) {
         if (programData is PLList) {
-          loadFile(programData.last.toString());
+          final fileName = programData.last.toString();
+          print('Loading $fileName');
+          loadFile(fileName);
         } else {
           final expr = PiLisp.readString('[ $programSource ]');
           if (expr is PLVector) {
-            loadFile(expr.last.toString());
+            final fileName = expr.last.toString();
+            print('Loading $fileName');
+            loadFile(fileName);
           }
         }
       } else {
