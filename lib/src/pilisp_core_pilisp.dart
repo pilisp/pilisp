@@ -1205,6 +1205,53 @@ final corePiLisp = r'''
   (and (>= (count set1) (count set2))
        (every? #(contains? set1 %) set2)))
 
+;; Walk
+
+;; walk, prewalk, and postwalk implemented above
+
+(defn keywordize-keys
+  {:doc "Recursively transforms all map keys from strings to keywords."}
+  [m]
+  (let [f (fn [entry] (let [[k v] entry] (if (string? k) [(keyword k) v] [k v])))]
+    ;; only apply to maps
+    (postwalk (fn [x] (if (map? x) (into {} (map f x)) x)) m)))
+
+(defn stringify-keys
+  {:doc "Recursively transforms all map keys from keywords to strings."}
+  [m]
+  (let [f (fn [entry] (let [[k v] entry] (if (keyword? k) [(name k) v] [k v])))]
+    ;; only apply to maps
+    (postwalk (fn [x] (if (map? x) (into {} (map f x)) x)) m)))
+
+(defn prewalk-replace
+  {:doc "Recursively transforms form by replacing keys in smap with their values.  Like clojure/replace but works on any data structure.  Does replacement at the root of the tree first."}
+  [smap form]
+  (prewalk (fn [x] (if (contains? smap x) (smap x) x)) form))
+
+(defn postwalk-replace
+  {:doc "Recursively transforms form by replacing keys in smap with their values.  Like clojure/replace but works on any data structure.  Does replacement at the leaves of the tree first."}
+  [smap form]
+  (postwalk (fn [x] (if (contains? smap x) (smap x) x)) form))
+
+(defn macroexpand-all
+  {:doc "Recursively performs all possible macroexpansions in form."}
+  [form]
+  (prewalk (fn [x] (if (seq? x) (macroexpand x) x)) form))
+
+(comment
+  (defn postwalk-demo
+    {:doc "Demonstrates the behavior of postwalk by printing each form as it is
+  walked.  Returns form."}
+    [form]
+    (postwalk (fn [x] (print "Walked: ") (prn x) x) form))
+
+  (defn prewalk-demo
+    {:doc "Demonstrates the behavior of prewalk by printing each form as it is
+  walked.  Returns form."}
+    [form]
+    (prewalk (fn [x] (print "Walked: ") (prn x) x) form))
+  )
+
 ;; Test Framework
 
 (def test/suite
