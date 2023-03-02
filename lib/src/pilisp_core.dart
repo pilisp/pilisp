@@ -621,7 +621,9 @@ Object? getFn(PLEnv env, PLVector args) {
     final coll = args[0];
     final selector = args[1];
     final defaultIfMissing = args[2];
-    if (coll is IMap) {
+    if (coll == null) {
+      return defaultIfMissing;
+    } else if (coll is IMap) {
       if (coll.containsKey(selector)) {
         return coll.get(selector);
       } else {
