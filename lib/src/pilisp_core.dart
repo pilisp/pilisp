@@ -97,6 +97,44 @@ IMap<PLSymbol, IMap<Object?, Object?>> bindingsFn(PLEnv env, PLVector args) {
   }
 }
 
+PLList arglistsFn(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final fn = args[0];
+    if (fn is Function) {
+      // As close as we can get for now.
+      return PLList([fn.toString()]);
+    } else if (fn is PLFunction) {
+      final arities = fn.arities;
+      final l = <PLVector>[];
+      for (final arity in arities.values) {
+        l.add(arity.params);
+      }
+      return PLList(l);
+    } else if (fn is PLTerm) {
+      return PLList([
+        [PLSymbol('map')].toPLVector(),
+        [PLSymbol('map'), PLSymbol('default-not-found')].toPLVector(),
+      ]);
+    } else if (fn is PLVector) {
+      return PLList([
+        [PLSymbol('index')].toPLVector(),
+        [PLSymbol('index'), PLSymbol('default-not-found')].toPLVector(),
+      ]);
+    } else if (fn is PLMap) {
+      return PLList([
+        [PLSymbol('key')].toPLVector(),
+        [PLSymbol('key'), PLSymbol('default-not-found')].toPLVector(),
+      ]);
+    } else {
+      throw ArgumentError(
+          'The arglists function expects an invocable value, but received a ${typeString(fn)}');
+    }
+  } else {
+    throw ArgumentError(
+        'The arglists function expects 1 argument, but received ${args.length} arguments.');
+  }
+}
+
 bool debugBangFn(PLEnv env, PLVector args) {
   if (args.length == 1) {
     final bl = args[0];

@@ -40,6 +40,8 @@ class PLEnv {
             'Returns a map of all bindings currently in scope. Keys are the symbols, values are a map of :value and :meta'
       }),
     ),
+    PLSymbol('arglists'): PLBindingEntry.withMeta(arglistsFn,
+        IMap({termDoc: 'Return arglists for given invocable value.'})),
     PLSymbol('pl/get-parent'): PLBindingEntry.withMeta(
         plGetParentFn,
         IMap({
