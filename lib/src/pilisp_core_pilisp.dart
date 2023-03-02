@@ -921,16 +921,11 @@ final corePiLisp = r'''
       (reduce process-entry [] bents))))
 
 (defmacro let
-  {:doc "binding => binding-form init-expr
-  binding-form => name, or destructuring-form
-  destructuring-form => map-destructure-form, or seq-destructure-form
+  {:doc "binding => binding-form init-expr binding-form => name, or destructuring-form destructuring-form => map-destructure-form, or seq-destructure-form
 
-  Evaluates the exprs in a lexical context in which the symbols in
-  the binding-forms are bound to their respective init-exprs or parts
-  therein.
+  Evaluates the exprs in a lexical context in which the symbols in the binding-forms are bound to their respective init-exprs or parts therein.
 
-  See https://clojure.org/reference/special_forms#binding-forms for
-  more information about destructuring."}
+  See https://clojure.org/reference/special_forms#binding-forms for more information about destructuring."}
   [bindings & body]
   ;; (assert-args
   ;;  (vector? bindings) "a vector for its binding"
