@@ -793,7 +793,7 @@ final corePiLisp = r'''
                     form)]
     (deref result)))
 
-(defmacro piped
+(defmacro pl>
   {:doc "The Piped Lisp macro."}
   [& forms]
   (let [delimited-forms (->> (partition-by (partial = '|) forms)
