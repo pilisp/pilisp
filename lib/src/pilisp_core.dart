@@ -667,6 +667,18 @@ Object? getFn(PLEnv env, PLVector args) {
       } else {
         return defaultIfMissing;
       }
+    } else if (coll is PLVector) {
+      if (selector is int) {
+        if (selector >= 0 && selector < coll.length) {
+          return coll[selector];
+        } else {
+          // NB. Model Clojure's behavior.
+          return null;
+        }
+      } else {
+        // NB. Model Clojure's behavior.
+        return null;
+      }
     } else if (coll is ISet) {
       if (coll.contains(selector)) {
         return selector;
@@ -675,7 +687,7 @@ Object? getFn(PLEnv env, PLVector args) {
       }
     } else {
       throw FormatException(
-          'The get* function expects its first argument to be a map, but received a ${typeString(coll)} argument.');
+          'The get* function expects its first argument to be a map, set, or vector, but received a ${typeString(coll)} argument.');
     }
   } else {
     throw FormatException(
