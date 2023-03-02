@@ -1,4 +1,4 @@
-// ;; -*- mode: clojure -*-
+// ;; -*- mode: pilisp -*-
 final corePiLisp = r'''
 (def fn
   {:macro true
