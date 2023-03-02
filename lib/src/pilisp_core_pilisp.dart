@@ -681,10 +681,7 @@ final corePiLisp = r'''
 
 ;; TODO Support vector use-case
 (defn assoc
-  {:doc "assoc[iate]. When applied to a map, returns a new map of the
-    same (hashed/sorted) type, that contains the mapping of key(s) to
-    val(s). When applied to a vector, returns a new vector that
-    contains val at index. Note - index must be <= (count vector)."}
+  {:doc "assoc[iate]. When applied to a map, returns a new map of the same (hashed/sorted) type, that contains the mapping of key(s) to val(s). When applied to a vector, returns a new vector that contains val at index. Note - index must be <= (count vector)."}
   ([map key val] (assoc* map key val))
   ([map key val & kvs]
    (let [ret (assoc* map key val)]
@@ -941,9 +938,43 @@ final corePiLisp = r'''
   (let [destructured-bindings (destructure bindings)]
     (list 'let* destructured-bindings (cons 'do body))))
 
+;; Destructured Let now available.
+
+(defn get-in
+  {:doc "Returns the value in a nested associative structure, where ks is a sequence of keys. Returns nil if the key is not present, or the not-found value if supplied."}
+  ([m ks]
+   (reduce get m ks))
+  ([m ks not-found]
+   (loop [sentinel (dart/Object.)
+          m m
+          ks (seq ks)]
+     (if ks
+       (let [m (get m (first ks) sentinel)]
+         (if (identical? sentinel m)
+           not-found
+           (recur sentinel m (next ks))))
+       m))))
+
+(defn resolve
+  {:doc "Resolve a symbol to an entry in the PiLisp bindings map."}
+  [sym]
+  (get (bindings) sym))
+
+(defmacro doc
+  {:doc "Print doc string for the binding for `sym`, if it exists."}
+  [sym]
+  (let [binding-g (gensym 'binding)]
+    (list 'let [binding-g (list 'resolve (list 'quote sym))]
+          (list 'if (list 'nil? binding-g)
+                (list 'println (list 'str "<No binding for " sym " >"))
+                (list 'println (list 'or
+                                     (list 'get-in binding-g [:meta :doc])
+                                     "<No documentation>"))))))
+
 ;; PiLisp Environment
 
 (defn parent-to-string
+  {:doc "How should the parent value of the environment be rendered as a string, for example in the REPL prompt?"}
   [x]
   (cond
     (symbol? x) x
@@ -1307,6 +1338,6 @@ final corePiLisp = r'''
 ;; REPL
 
 (defn help []
-  "Peruse (bindings) for available forms.")
+  "Peruse the map returned from (bindings) for available forms and their metadata.")
 
 ''';
