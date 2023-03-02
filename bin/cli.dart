@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:pilisp/pilisp.dart';
 
+final loadFileSym = PLSymbol('repl/load-file');
+
 void repl() {
   piLispEnv.addBindingValue(PLSymbol('*3'), null);
   piLispEnv.addBindingValue(PLSymbol('*2'), null);
@@ -19,7 +21,8 @@ void repl() {
       if (parent == null) {
         stdout.write('pl> ');
       } else {
-        final printParent = piLispEnv.getBindingValue(PLSymbol('parent-to-string'));
+        final printParent =
+            piLispEnv.getBindingValue(PLSymbol('parent-to-string'));
         if (printParent is PLFunction) {
           stdout.write('${printParent.invoke(piLispEnv, [parent])}> ');
         }
@@ -32,23 +35,36 @@ void repl() {
 
     try {
       final programData = PiLisp.readString(programSource);
-      final programResult = PiLisp.loadString('(pl>\n$programSource\n)');
-      // final programResult = PiLisp.loadString(programSource);
-      // NB: Make it stress-free to eval these REPL-specific bindings.
-      if (programData != PLSymbol('*3') &&
-          programData != PLSymbol('*2') &&
-          programData != PLSymbol('*1') &&
-          programData != PLSymbol('*e')) {
-        piLispEnv.addBindingValue(
-            PLSymbol('*3'), piLispEnv.getBindingValue(PLSymbol('*2')));
-        piLispEnv.addBindingValue(
-            PLSymbol('*2'), piLispEnv.getBindingValue(PLSymbol('*1')));
-        piLispEnv.addBindingValue(PLSymbol('*1'), programResult);
+      // NB. Support loading files despite lack of dart:io in core PiLisp
+      if (programData == loadFileSym ||
+          (programData is PLList && programData[0] == loadFileSym)) {
+        if (programData is PLList) {
+          loadFile(programData.last.toString());
+        } else {
+          final expr = PiLisp.readString('[ $programSource ]');
+          if (expr is PLVector) {
+            loadFile(expr.last.toString());
+          }
+        }
+      } else {
+        final programResult = PiLisp.loadString('(pl>\n$programSource\n)');
+        // final programResult = PiLisp.loadString(programSource);
+        // NB: Make it stress-free to eval these REPL-specific bindings.
+        if (programData != PLSymbol('*3') &&
+            programData != PLSymbol('*2') &&
+            programData != PLSymbol('*1') &&
+            programData != PLSymbol('*e')) {
+          piLispEnv.addBindingValue(
+              PLSymbol('*3'), piLispEnv.getBindingValue(PLSymbol('*2')));
+          piLispEnv.addBindingValue(
+              PLSymbol('*2'), piLispEnv.getBindingValue(PLSymbol('*1')));
+          piLispEnv.addBindingValue(PLSymbol('*1'), programResult);
+        }
+        stdout.writeln(PiLisp.printToString(programResult));
+        // Clean-up
+        showPrompt = true;
+        multiLineProgram = '';
       }
-      stdout.writeln(PiLisp.printToString(programResult));
-      // Clean-up
-      showPrompt = true;
-      multiLineProgram = '';
     } on UnexpectedEndOfInput {
       // In practice, these are async errors (see above) because the function is async.
       showPrompt = false;
