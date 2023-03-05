@@ -658,9 +658,17 @@ final corePiLisp = r'''
   [f & colls]
   (apply concat (apply map f colls)))
 
+;; NB. Implemented with reduce to prevent stack consumption.
 (defn filter
   [pred coll]
-  (when-let [s (seq coll)]
+  (reduce
+   (fn [acc item]
+     (if (pred item)
+       (conj acc item)
+       acc))
+   []
+   coll)
+  #_(when-let [s (seq coll)]
     (let [f (first s) r (rest s)]
       (if (pred f)
         (cons f (filter pred r))
