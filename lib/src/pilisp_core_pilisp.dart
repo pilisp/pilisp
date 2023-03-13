@@ -7,7 +7,7 @@ final corePiLisp = r'''
 
 (def let
   {:macro true
-   :doc "Create local bindings."}
+   :doc "Create local bindings. Version with destructuring defined below."}
   (fn* let [& args] (cons 'let* args)))
 
 (declare map)

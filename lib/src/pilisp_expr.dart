@@ -457,6 +457,7 @@ class PLList extends PLExprIterable
           final bindingVec = this[1];
           final body = skip(2);
           if (bindingVec is PLVector) {
+            // Separate params, args
             if (bindingVec.length.isEven) {
               List<PLSymbol> params = [];
               List<Object?> args = [];
@@ -473,20 +474,34 @@ class PLList extends PLExprIterable
                   }
                 }
               }
-              final loopFnSym =
-                  PLSymbol('loop-${nextSymbolIdFn(env, PLVector([]))}');
-              final functionDef = PLList([
-                symbolFn,
-                loopFnSym,
-                params.toPLVector(),
-                PLList([symbolDo]).addAll(body)
-              ]);
-              env.pushEmptyScope();
-              env.addBindingValue(loopFnSym, plEval(env, functionDef));
-              final invocation = PLList([functionDef]).addAll(args);
-              final returnValue = plEval(env, invocation);
-              env.popScope();
-              return returnValue;
+              final latestRecurForm = PLRecurForm.evalArgs(
+                  env, params.toPLVector(), args.toPLVector());
+              print(
+                  "LATEST RECUR FORM ${latestRecurForm.params} ${latestRecurForm.args}");
+              env.recurSlots.add(latestRecurForm);
+              while (true) {
+                final lastRecurForm = env.recurSlots.last;
+                final letBindings = <Object?>[];
+                for (int i = 0; i < lastRecurForm.params.length; i++) {
+                  letBindings.add(lastRecurForm.params[i]);
+                  letBindings.add(lastRecurForm.args[i]);
+                }
+                final letBindingVec = letBindings.toPLVector();
+                print("LET BINDING VEC RECUR $letBindingVec");
+                final loopAsLet = PLList([
+                  symbolLet,
+                  letBindingVec,
+                ]).addAll(body);
+                final returnValue = plEval(env, loopAsLet);
+                if (returnValue is PLRecurForm) {
+                  // See below. Evaluation of recur updates the env.recurForm
+                  env.recurSlots[env.recurSlots.length - 1] = returnValue;
+                  continue;
+                } else {
+                  env.recurSlots.removeLast();
+                  return returnValue;
+                }
+              }
             } else {
               throw FormatException(
                   'The loop special form expects its first argument to be a vector of bindings with an even number of items, but encountered ${bindingVec.length} items.');
@@ -498,11 +513,15 @@ class PLList extends PLExprIterable
         }
       } else if (sym == symbolRecur) {
         // TODO Error when not in tail position.
-        // TODO Don't consume stack.
         final recurArgs = skip(1);
-        final fnName = env.stackFrames.last;
-        final rewritten = PLList([PLSymbol(fnName)]).addAll(recurArgs);
-        return plEval(env, rewritten);
+        if (env.recurSlots.isNotEmpty) {
+          // See loop above for how this is leveraged.
+          return PLRecurForm.evalArgs(
+              env, env.recurSlots.last.params, recurArgs.toPLVector());
+        } else {
+          throw FormatException(
+              'The recur form can only be used within a loop (recur to named function not supported).');
+        }
       } else if (sym == symbolIf) {
         if (length != 4) {
           throw FormatException(
@@ -582,7 +601,12 @@ class PLList extends PLExprIterable
         return plEval(env, macroExpand(env, this));
       } else {
         // NB Laziness of map here may be why eval of args is wonky b/w fns and macros.
-        final evaluated = map((expr) => plEval(env, expr));
+        final l = <Object?>[];
+        for (final form in iter) {
+          l.add(plEval(env, form));
+        }
+        final evaluated = l.toPLList();
+        // final evaluated = map((expr) => plEval(env, expr));
         final inv = evaluated.first;
         final args = evaluated.skip(1);
         if (inv is PLInvocable) {
@@ -615,7 +639,12 @@ class PLList extends PLExprIterable
       }
     }
 
-    final evaluated = map((expr) => plEval(env, expr));
+    final l = <Object?>[];
+    for (final item in iter) {
+      l.add(plEval(env, item));
+    }
+    final evaluated = l.toPLList();
+    // final evaluated = map((expr) => plEval(env, expr));
     final inv = evaluated.first;
     final args = evaluated.skip(1);
 
@@ -670,6 +699,34 @@ class PLList extends PLExprIterable
   }
 }
 
+class PLRecurForm {
+  PLVector params;
+  PLVector args;
+  PLRecurForm._(this.params, this.args);
+
+  factory PLRecurForm.evalArgs(PLEnv env, PLVector params, PLVector argForms) {
+    print("EVAL ARGS $params $argForms");
+    final rf = PLRecurForm._(params, argForms);
+    final l = <Object?>[];
+    for (final item in argForms.iter) {
+      l.add(plEval(env, item));
+    }
+    rf.args = l.toPLVector();
+    print("POST EVAL ARGS ${rf.params} ${rf.args}");
+    return rf;
+  }
+
+  PLVector get bindingVector {
+    final l = <Object?>[];
+    for (var i = 0; i < params.length; i++) {
+      l.add(params[i]);
+      l.add(args[i]);
+    }
+    print('PLRecurForm LOOP RECUR bindingVector $l');
+    return l.toPLVector();
+  }
+}
+
 class PLVector extends PLExprIterable
     with FromIListMixin<Object?, PLVector>
     implements PLInvocable {
@@ -693,7 +750,12 @@ class PLVector extends PLExprIterable
 
   @override
   Object? eval(PLEnv env) {
-    return map((element) => plEval(env, element)).toPLVector();
+    // return map((element) => plEval(env, element)).toPLVector();
+    final l = <Object?>[];
+    for (final item in iter) {
+      l.add(plEval(env, item));
+    }
+    return l.toPLVector();
   }
 
   @override

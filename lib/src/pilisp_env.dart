@@ -23,6 +23,7 @@ class PLEnv {
   bool isDebug = false;
   BigInt nextId() => _symbolId += BigInt.one;
   Object? parent;
+  List<PLRecurForm> recurSlots = [];
 
   /// These sets of [PLSymbol] are created as part of lexical closure processing.
   List<Set<PLSymbol>> closureScopes = [];
