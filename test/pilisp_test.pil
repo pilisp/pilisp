@@ -1,13 +1,14 @@
-;; -*- mode: clojure -*-
+;; -*- mode: pilisp -*-
 (defn test-map
   {:test true}
   []
-  (test/is [2 3 4 5 6] (map inc [1 2 3 4 5])))
+  (test/is= [3 4 5 6] (map dec [4 5 6 7]))
+  (test/is= [9 10 11 12] (map inc [8 9 10 11])))
 
 (defn test-pl
   {:test true}
   []
-  (test/is 4
+  (test/is= 4
            (pl> [0 1 2 3 4 5 6 7 8 9] | map (partial * 3) | filter even? | last | | / $ 6)))
 
 (defn test-reduce
@@ -15,52 +16,46 @@
   []
   (let [product (fn [product n] (* product n))]
     (test/group "Reduce"
-                (test/is 15 (reduce + [1 2 3 4 5]))
-                (test/is 15 (reduce + 0 [1 2 3 4 5]))
-                (test/is 20 (reduce + 5 [1 2 3 4 5]))
-                (test/is 120 (reduce product [1 2 3 4 5]))
-                (test/is 0 (reduce product 0 [1 2 3 4 5]))
-                (test/is 600 (reduce product 5 [1 2 3 4 5])))))
+                (test/is= 15 (reduce + [1 2 3 4 5]))
+                (test/is= 15 (reduce + 0 [1 2 3 4 5]))
+                (test/is= 20 (reduce + 5 [1 2 3 4 5]))
+                (test/is= 120 (reduce product [1 2 3 4 5]))
+                (test/is= 0 (reduce product 0 [1 2 3 4 5]))
+                (test/is= 600 (reduce product 5 [1 2 3 4 5])))))
 
 (defn test-rem
   {:test true}
   []
   (test/group "Arithmetic"
-              (test/is 1 (rem 6 5))))
+              (test/is= 1 (rem 6 5))))
 
 (defn test-dart-iterable-class
   {:test true}
   []
   (test/group "Iterable.join"
-              (test/is "abc" (dart/Iterable.join (to-dart-list ['a 'b 'c])))
-              (test/is "a, b, c" (dart/Iterable.join-full (to-dart-list ['a 'b 'c]) ", "))))
+              (test/is= "abc" (dart/Iterable.join (to-dart-list ['a 'b 'c])))
+              (test/is= "a, b, c" (dart/Iterable.join-full (to-dart-list ['a 'b 'c]) ", "))))
 
 (def core-pilisp-tests
   (reduce
-   (fn [acc entry]
-     ;; NB Boy, really need destructuring.
-     (let [sym (first entry)
-           m (second entry)
-           value (:value m)
-           metadata (:meta m)]
-       (if (:test metadata)
+   (fn [acc binding]
+     (let [{:keys [value meta]} binding]
+       (if (:test meta)
          (conj acc value)
          acc)))
    []
-   (bindings)))
+   (vals (bindings))))
 
 (defn run-core-pilisp-tests []
-  (map (fn [f] (f)) core-pilisp-tests))
+  (map (fn tester [f] (f)) core-pilisp-tests))
 
 (run-core-pilisp-tests)
 (println (test/suite-report))
 (let [report (deref test/suite)
-      fail (:fail report)
-      error (:error report)
+      {:keys [fail error]} report
       exit-fail? (or (> (count fail) 0)
                      (> (count error) 0))]
-  (println "Test Results\n" report)
   (test/suite-reset)
   (if exit-fail?
     (throw (ex-info "Tests failed. See report above.") {})
-    :pass))
+    :all-tests-pass))
