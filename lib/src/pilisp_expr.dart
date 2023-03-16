@@ -263,7 +263,22 @@ class PLList extends PLExprIterable
     // Special forms first
     if (firstOrNull is PLSymbol) {
       final sym = first as PLSymbol;
-      if (sym == symbolDef) {
+      if (sym == symbolDo) {
+        // do: Multiple forms, returning value of last.
+        final doBody = skip(1);
+        if (doBody.isEmpty) {
+          return null;
+        }
+        if (doBody.length == 1) {
+          return plEval(env, doBody.first);
+        } else {
+          Object? rv;
+          for (final form in doBody) {
+            rv = plEval(env, form);
+          }
+          return rv;
+        }
+      } else if (sym == symbolDef) {
         if (length == 3) {
           final defName = this[1];
           final defValue = this[2];
@@ -363,21 +378,6 @@ class PLList extends PLExprIterable
                 'Malformed params for unnamed fn*: ${plPrintToString(env, this)}');
           }
         }
-      } else if (sym == symbolDo) {
-        // do: Multiple forms, returning value of last.
-        final doBody = skip(1);
-        if (doBody.isEmpty) {
-          return null;
-        }
-        if (doBody.length == 1) {
-          return plEval(env, doBody.first);
-        } else {
-          Object? rv;
-          for (final form in doBody) {
-            rv = plEval(env, form);
-          }
-          return rv;
-        }
       } else if (sym == symbolQuote) {
         if (length != 2) {
           throw FormatException(
@@ -404,36 +404,39 @@ class PLList extends PLExprIterable
             PLSymbol? symbol;
             Object? value;
             int numScopes = 0;
-            for (var i = 0; i < bindings.length; i++) {
-              if (i.isEven) {
-                final maybeSymbol = bindings[i];
-                if (maybeSymbol is PLSymbol) {
-                  symbol = maybeSymbol;
+            try {
+              for (var i = 0; i < bindings.length; i++) {
+                if (i.isEven) {
+                  final maybeSymbol = bindings[i];
+                  if (maybeSymbol is PLSymbol) {
+                    symbol = maybeSymbol;
+                  } else {
+                    throw FormatException(
+                        "The let special form's bindings must be symbols, but encountered a ${typeString(maybeSymbol)} value: ${plPrintToString(env, maybeSymbol)}");
+                  }
                 } else {
-                  throw FormatException(
-                      "The let special form's bindings must be symbols, but encountered a ${typeString(maybeSymbol)} value: ${plPrintToString(env, maybeSymbol)}");
+                  // Follows let semantics of Clojure, in which each binding is
+                  // available to the ones that follow.
+                  env.pushEmptyScope();
+                  // A new scope is pushed _before_ the right-hand side is
+                  // evaluated, so that scope-affecting code does not affect
+                  // the parent scope of the `let` itself.
+                  value = plEval(env, bindings[i]);
+                  numScopes += 1;
+                  // Known to be populated by previous iteration of loop above.
+                  // Known to be a symbol by runtime type check above.
+                  env.addBindingValue(symbol!, value);
                 }
-              } else {
-                // Follows let semantics of Clojure, in which each binding is
-                // available to the ones that follow.
-                env.pushEmptyScope();
-                // A new scope is pushed _before_ the right-hand side is
-                // evaluated, so that scope-affecting code does not affect
-                // the parent scope of the `let` itself.
-                value = plEval(env, bindings[i]);
-                numScopes += 1;
-                // Known to be populated by previous iteration of loop above.
-                // Known to be a symbol by runtime type check above.
-                env.addBindingValue(symbol!, value);
+              }
+              final doInvocation = PLList(
+                  IList<Object?>([symbolDo]).addAll(letStarArgs.skip(1)));
+              return plEval(env, doInvocation);
+            } finally {
+              // NB. Pop as many scopes as were successfully added before an error.
+              for (var i = 0; i < numScopes; i++) {
+                env.popScope();
               }
             }
-            final doInvocation =
-                PLList(IList<Object?>([symbolDo]).addAll(letStarArgs.skip(1)));
-            final returnValue = plEval(env, doInvocation);
-            for (var i = 0; i < numScopes; i++) {
-              env.popScope();
-            }
-            return returnValue;
           } else {
             throw FormatException(
                 'The let special form\'s bindings vector must have an even number of elements, encountered ${bindings.length} elements.');
@@ -482,11 +485,14 @@ class PLList extends PLExprIterable
                 PLList([symbolDo]).addAll(body)
               ]);
               env.pushEmptyScope();
-              env.addBindingValue(loopFnSym, plEval(env, functionDef));
-              final invocation = PLList([functionDef]).addAll(args);
-              final returnValue = plEval(env, invocation);
-              env.popScope();
-              return returnValue;
+              try {
+                env.addBindingValue(loopFnSym, plEval(env, functionDef));
+                final invocation = PLList([functionDef]).addAll(args);
+                final returnValue = plEval(env, invocation);
+                return returnValue;
+              } finally {
+                env.popScope();
+              }
             } else {
               throw FormatException(
                   'The loop special form expects its first argument to be a vector of bindings with an even number of items, but encountered ${bindingVec.length} items.');
@@ -1117,7 +1123,7 @@ abstract class PLInvocable extends PLExpr {
 }
 
 abstract class PLNamedInvocable extends PLInvocable {
-  PLSymbol name = PLSymbol('<unnamed>');
+  PLSymbol name = PLSymbol('<nameless>');
 
   @override
 
@@ -1133,16 +1139,18 @@ abstract class PLNamedInvocable extends PLInvocable {
 }
 
 class PLArity {
-  late final PLSymbol fnName;
+  PLSymbol fnName = PLSymbol('nameless-arity');
   late final PLVector params;
   late final PLList body;
   late final PLList? interpretedBody;
   late final int indexOfAmpersandParam;
   late final bool isVariableArity;
   late final int numRequiredArgs;
-  late final Map<PLSymbol, PLBindingEntry> closedScope;
+  late Map<PLSymbol, PLBindingEntry> closedScope;
 
-  PLArity._(PLEnv env, this.fnName, PLList arityDefinition) {
+  PLArity._(this.fnName);
+
+  PLArity.fromDefinition(PLEnv env, PLList arityDefinition) {
     final params = arityDefinition.elementAt(0);
     validateParams(params);
     final unExpandedBody = PLList([symbolDo]).addAll(arityDefinition.skip(1));
@@ -1160,12 +1168,12 @@ class PLArity {
   }
 
   factory PLArity.withEnv(PLEnv env, PLSymbol fnName, PLList arityDefinition) {
-    final arity = PLArity._(env, fnName, arityDefinition);
+    final arity = PLArity.fromDefinition(env, arityDefinition);
     final boundSymbols = arity.params.toList()..add(fnName);
     env.pushEmptyClosureScope();
     env.addAllClosureScopedSymbols(List<PLSymbol>.from(boundSymbols));
     final ic = interpretBody(arity.body, env);
-    arity.closedScope = ic.closedScope;
+    arity.closedScope = ic.closedScope; // .toIMap();
     if (ic.code is PLList) {
       arity.interpretedBody = ic.code as PLList;
     } else {
@@ -1175,13 +1183,25 @@ class PLArity {
     return arity;
   }
 
-  // factory PLArity.fromPLArity(PLArity plArity, PLEnv env) {
-  // final clonedPLArity = PLArity._(env, plArity.fnName, arityDefinition)
-  // }
-
   @override
   String toString() {
     return 'PLArity[${params.join(' ')}]';
+  }
+
+  PLArity clone() {
+    final newArity = PLArity._(fnName);
+    newArity.body = PLList(body.iter);
+    newArity.params = PLVector(params.iter);
+    if (interpretedBody != null) {
+      newArity.interpretedBody = PLList(interpretedBody!.iter);
+    } else {
+      newArity.interpretedBody = null;
+    }
+    newArity.indexOfAmpersandParam = indexOfAmpersandParam;
+    newArity.isVariableArity = isVariableArity;
+    newArity.numRequiredArgs = numRequiredArgs;
+    newArity.closedScope = Map.from(closedScope);
+    return newArity;
   }
 }
 
@@ -1210,17 +1230,20 @@ PLInterpretedCode interpretBody(Object? form, PLEnv env) {
       final headSym = form[0];
       if (headSym == symbolFn) {
         env.pushScope(closedScopeMappings);
-        final plFn = plEval(env, form);
-        env.popScope();
-        if (plFn is PLFunction) {
-          for (final arity in plFn.arities.values) {
-            closedScopeMappings.addAll(arity.closedScope);
+        try {
+          final plFn = plEval(env, form);
+          if (plFn is PLFunction) {
+            for (final arity in plFn.arities.values) {
+              closedScopeMappings.addAll(arity.closedScope); // .unlock);
+            }
+          } else {
+            throw 'Developer Error: Expects a PLFunction but evaluated to a ${typeString(plFn)}';
           }
-        } else {
-          throw 'Developer Error: Expects a PLFunction but evaluated to a ${typeString(plFn)}';
+          // CODE ADD
+          code.add(plFn);
+        } finally {
+          env.popScope();
         }
-        // CODE ADD
-        code.add(plFn);
       } else if (headSym == symbolQuote) {
         // CODE ADD
         code.add(form);
@@ -1438,7 +1461,7 @@ class PLInterpretedCode {
 }
 
 class PLFunction extends PLNamedInvocable {
-  late final IMap<int, PLArity> arities;
+  late IMap<int, PLArity> arities;
   late final PLArity? variableArity;
 
   bool isMacro = false;
@@ -1489,11 +1512,25 @@ class PLFunction extends PLNamedInvocable {
     return fn;
   }
 
-  factory PLFunction.fromFn(PLSymbol name, PLFunction otherFn) {
+  factory PLFunction.fromFn(PLEnv env, PLSymbol name, PLFunction otherFn) {
     PLFunction fn = PLFunction._(name);
     fn.arities = otherFn.arities;
     fn.variableArity = otherFn.variableArity;
     fn.isMacro = otherFn.isMacro;
+    Map<int, PLArity> newArities = {};
+    for (final arityNum in fn.arities.keys) {
+      final arity = fn.arities[arityNum]!;
+      final clonedArity = arity.clone();
+      final syms = clonedArity.closedScope.keys;
+      for (final sym in syms) {
+        final envBinding = env.getBinding(sym);
+        if (envBinding != null) {
+          clonedArity.closedScope[sym] = PLBindingEntry(envBinding.value);
+        }
+      }
+      newArities[arityNum] = clonedArity;
+    }
+    fn.arities = newArities.toIMap();
     return fn;
   }
 
@@ -1550,7 +1587,7 @@ class PLFunction extends PLNamedInvocable {
     }
     if (isMacro) {
       Object? returnValue;
-      env.pushScope(arity.closedScope);
+      env.pushScope(arity.closedScope); // .unlock);
       env.pushEmptyScope();
       env.pushStackFrame(name);
       try {
@@ -1559,18 +1596,17 @@ class PLFunction extends PLNamedInvocable {
           final value = finalArgs[i];
           env.addBindingValue(sym, value);
         }
-
         returnValue = plEval(env, arity.interpretedBody ?? arity.body);
         // return returnValue;
       } finally {
-        env.popScope();
         env.popStackFrame();
         env.popScope(); // empty scope
+        env.popScope(); // closed scope
       }
       return returnValue;
     } else {
       Object? returnValue;
-      env.pushScope(arity.closedScope);
+      env.pushScope(arity.closedScope); // .unlock);
       env.pushEmptyScope();
       env.pushStackFrame(name);
       try {
@@ -1579,12 +1615,11 @@ class PLFunction extends PLNamedInvocable {
           final value = finalArgs[i];
           env.addBindingValue(sym, value);
         }
-
         returnValue = plEval(env, arity.interpretedBody ?? arity.body);
       } finally {
-        env.popScope();
         env.popStackFrame();
         env.popScope(); // empty scope
+        env.popScope(); // closed scope
       }
 
       return returnValue;
@@ -1597,20 +1632,12 @@ class PLFunction extends PLNamedInvocable {
   /// the environment that it closes over.
   Object? eval(PLEnv env) {
     // NB: Mint a new function to mutate its closed scopes. Otherwise you're editing global function arities!
-    final newFunction = PLFunction.fromFn(name, this);
-    for (final arity in newFunction.arities.values) {
-      final syms = arity.closedScope.keys;
-      for (final sym in syms) {
-        // final closedScopeValue = arity.closedScope[sym]!;
-        // if (closedScopeValue.value == declaredValue) {
-        final envBinding = env.getBinding(sym);
-        if (envBinding != null) {
-          arity.closedScope[sym] = PLBindingEntry(envBinding.value);
-        }
-        // }
-      }
-    }
-    return newFunction;
+    return PLFunction.fromFn(env, name, this);
+  }
+
+  @override
+  String toString() {
+    return '#<PLFunction: $name>';
   }
 }
 
