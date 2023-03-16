@@ -269,7 +269,7 @@ final corePiLisp = r'''
      ([x y z] (f (g x y z)))
      ([x y z & args] (f (apply g x y z args)))))
   ([f g & fs]
-   (reduce comp (list f g fs))))
+   (reduce comp (cons f (cons g fs)))))
 
 (defmacro when-let
   {:doc "When test is true, evaluates body with binding-form bound to the value of test"}
