@@ -630,26 +630,45 @@ final corePiLisp = r'''
   (defn butlast [coll]
     (butlast* [] coll)))
 
+(declare interleave)
+
 (defn map
   ([f coll]
    (when-let [s (seq coll)]
-     (cons (f (first s)) (map f (rest s)))))
+     (reduce
+      (fn map-reduce-1 [acc item]
+        (conj acc (f item)))
+      (empty s)
+      s)))
   ([f c1 c2]
    (let [s1 (seq c1) s2 (seq c2)]
      (when (and s1 s2)
-       (cons (f (first s1) (first s2))
-             (map f (rest s1) (rest s2))))))
+       (reduce
+        (fn map-reduce-2 [acc item]
+          (let [item-a (first item) item-b (second item)]
+            (conj acc (f item-a item-b))))
+        (empty s1)
+        (partition 2 (interleave s1 s2))))))
   ([f c1 c2 c3]
    (let [s1 (seq c1) s2 (seq c2) s3 (seq c3)]
-     (when (and  s1 s2 s3)
-       (cons (f (first s1) (first s2) (first s3))
-             (map f (rest s1) (rest s2) (rest s3))))))
-  ([f c1 c2 c3 & colls]
-   (let [step (fn step [cs]
-                (let [ss (map seq cs)]
-                  (when (every? identity ss)
-                    (cons (map first ss) (step (map rest ss))))))]
-     (map #(apply f %) (step (conj colls c3 c2 c1))))))
+     (when (and s1 s2 s3)
+       (reduce
+        (fn map-reduce-3 [acc item]
+          (let [item-a (first item) item-b (second item) item-c (third item)]
+            (conj acc (f item-a item-b item-c))))
+        (empty s1)
+        (partition 3 (interleave s1 s2 s3))))))
+  ([f c1 c2 c3 c4]
+   (let [s1 (seq c1) s2 (seq c2) s3 (seq c3) s4 (seq c4)]
+     (when (and s1 s2 s3 s4)
+       (reduce
+        (fn map-reduce-3 [acc item]
+          (let [item-a (first item) item-b (second item) item-c (third item) item-d (fourth item)]
+            (conj acc (f item-a item-b item-c item-d))))
+        (empty s1)
+        (partition 4 (interleave s1 s2 s3 s4))))))
+  ;; NB. Submit a pull request if you want more.
+  )
 
 (def mapv (comp vec map))
 
@@ -662,7 +681,7 @@ final corePiLisp = r'''
 (defn filter
   [pred coll]
   (reduce
-   (fn [acc item]
+   (fn filter-reduce [acc item]
      (if (pred item)
        (conj acc item)
        acc))
