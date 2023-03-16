@@ -1267,13 +1267,18 @@ final corePiLisp = r'''
 
 ;; Test Framework
 
+(def test/suite-empty
+  {:scopes [:test/suite]
+   :pass []
+   :fail []
+   :error []})
+
 (def test/suite
   {:doc "Central test suite state for default test framework reporting."}
-  (state
-   {:scopes [:test/suite]
-    :pass []
-    :fail []
-    :error []}))
+  (state test/suite-empty))
+
+(defn test/suite-reset []
+  (write-state test/suite test/suite-empty))
 
 (defmacro test/group
   {:doc "Group tests under a string description. Saves to test/suite."}
@@ -1285,7 +1290,8 @@ final corePiLisp = r'''
               (list 'finally
                     (list 'write-state test/suite 'update :scopes 'butlast)))))
 
-(defmacro test/is
+;; TODO Refactor to accept single form with truthy semantics, rather than expected actual
+(defmacro test/is=
   {:doc "Specify a test condition that should hold true. Saves to test/suite."}
   [expected actual & message]
   (let [result_ (gensym "result")
@@ -1317,6 +1323,38 @@ final corePiLisp = r'''
                        {:expected expected
                         :expected-code (list 'quote expected)
                         :actual-code (list 'quote actual)
+                        :error    (list 'type e_)
+                        :explanation (list 'str e_)
+                        :stacktrace (list 'stacktrace/current)}])))))
+
+(defmacro test/is
+  {:doc "Specify a test condition that should hold true. Saves to test/suite."}
+  [test & message]
+  (let [result_ (gensym "result")
+        e_ (gensym "error")
+        msg_ (gensym "msg")]
+    (list 'try
+          (list 'let [result_ test]
+                (list 'write-state
+                      'test/suite
+                      'update
+                      (list 'if result_ :pass :fail)
+                      'conj
+                      [(list :scopes (list 'deref 'test/suite))
+                       (list 'when (list 'not result_)
+                             {:actual result_
+                              :test-code (list 'quote test)})
+                       (list 'let [msg_ (list 'first message)]
+                             (list 'when (list 'seq msg_)
+                                   msg_))]))
+          (list 'catch '_ e_
+                (list 'write-state
+                      'test/suite
+                      'update
+                      :error
+                      'conj
+                      [(list :scopes (list 'deref 'test/suite))
+                       {:test-code (list 'quote test)
                         :error    (list 'type e_)
                         :explanation (list 'str e_)
                         :stacktrace (list 'stacktrace/current)}])))))
@@ -1374,13 +1412,10 @@ final corePiLisp = r'''
 (defn test/suite-report
   ([] (test/suite-report test/suite))
   ([suite-state]
-   (let [st    (deref suite-state)
-         pass  (:pass st)
-         fail  (:fail st)
-         error (:error st)
+   (let [{:keys [pass fail error]} (deref suite-state)
          fail-count (count fail)
          error-count (count error)
-         msg (str "PiLisp Test Results: "
+         msg (str "Test Results: "
                   (count pass)  " pass, "
                   fail-count  " fail, "
                   error-count " error.")]

@@ -59,6 +59,8 @@
       error (:error report)
       exit-fail? (or (> (count fail) 0)
                      (> (count error) 0))]
+  (println "Test Results\n" report)
+  (test/suite-reset)
   (if exit-fail?
     (throw (ex-info "Tests failed. See report above.") {})
     :pass))
