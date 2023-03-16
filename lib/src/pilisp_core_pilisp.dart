@@ -779,7 +779,7 @@ final corePiLisp = r'''
   {:private true}
   [x]
   (or (fn? x)     ;; invocable
-      (symbol? x) ;; resolve to invocable
+      (symbol? x) ;; may resolve to invocable
       (term? x)   ;; invocable
       (and (list? x)
            (or (= 'fn (first x))
@@ -808,9 +808,13 @@ final corePiLisp = r'''
         ;; The expr for as->
         first-clause-form (first delimited-forms)
         car (first first-clause-form)
+        car-g (gensym 'car)
         ;; partition-by wrapped every clause in a list
         first-clause (if (invocable-form? car)
-                       first-clause-form
+                       (list 'let [car-g car]
+                             (list 'if (list 'fn? car-g) ;; TODO Decide on term auto-invocation
+                                   first-clause-form
+                                   (list 'do car-g)))
                        (cons 'do first-clause-form))
         ;; Body of as->
         next-clauses (->> (next delimited-forms)
