@@ -190,6 +190,7 @@ final corePiLisp = r'''
         (recur threaded (next forms)))
       x)))
 
+;; TODO reduce
 (defn concat
   {:doc "Returns a lazy seq representing the concatenation of the elements in the supplied colls."}
   ([] nil)
@@ -307,6 +308,7 @@ final corePiLisp = r'''
                        then)
                  else)))))
 
+;; TODO reduce
 (defn nthrest
   {:doc "Returns the nth rest of coll, coll when n is 0."}
   [coll n]
@@ -315,6 +317,7 @@ final corePiLisp = r'''
       (recur (dec n) (rest xs))
       xs)))
 
+;; TODO reduce
 (defn drop
   [n coll]
   (let [step (fn [n coll]
@@ -324,6 +327,7 @@ final corePiLisp = r'''
                    s)))]
     (step n coll)))
 
+;; TODO reduce
 (let [repeat*
       (fn repeat*
         [coll n x]
@@ -336,6 +340,7 @@ final corePiLisp = r'''
     ([n x]
      (repeat* [] n x))))
 
+;; TODO reduce
 (let [iterate*
       (fn iterate*
         [coll n f x]
@@ -349,6 +354,7 @@ final corePiLisp = r'''
     ([n f x]
      (iterate* [x] (dec n) f x))))
 
+;; TODO reduce
 (defn take
   {:doc "Returns a sequence of the first n items in coll, or all items if there are fewer than n.  Returns a stateful transducer when no collection is provided."}
   [n coll]
@@ -356,12 +362,14 @@ final corePiLisp = r'''
     (when-let [s (seq coll)]
       (cons (first s) (take (dec n) (rest s))))))
 
+;; TODO reduce
 (defn take-while
   [pred coll]
   (when-let [s (seq coll)]
     (when (pred (first s))
       (cons (first s) (take-while pred (rest s))))))
 
+;; TODO reduce
 (defn partition
   {:doc "Returns a lazy sequence of lists of n items each, at offsets step apart. If step is not supplied, defaults to n, i.e. the partitions do not overlap. If a pad collection is supplied, use its elements as necessary to complete last partition upto n items. In case there are not enough padding elements, return a partition with less than n items."}
   ([n coll]
@@ -378,6 +386,7 @@ final corePiLisp = r'''
          (cons p (partition n step pad (nthrest s step)))
          (list (take n (concat p pad))))))))
 
+;; TODO reduce
 (defn partition-by
   [f coll]
   (when-let [s (seq coll)]
@@ -686,12 +695,7 @@ final corePiLisp = r'''
        (conj acc item)
        acc))
    []
-   coll)
-  #_(when-let [s (seq coll)]
-    (let [f (first s) r (rest s)]
-      (if (pred f)
-        (cons f (filter pred r))
-        (filter pred r)))))
+   coll))
 
 (def filterv (comp vec filter))
 
@@ -739,6 +743,7 @@ final corePiLisp = r'''
   (when (some identity maps)
     (reduce (fn merge-reduce [acc m] (conj (or acc {}) m)) maps)))
 
+;; TODO reduce
 (defn interleave
   {:doc "Returns a sequence of the first item in each coll, then the second etc."}
   ([] ())
@@ -1048,6 +1053,7 @@ final corePiLisp = r'''
 
 ;; Strings
 
+;; TODO reduce
 (let [str/join*
       (fn str/join*
         [acc sep coll]
