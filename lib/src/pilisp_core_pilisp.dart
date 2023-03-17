@@ -190,7 +190,6 @@ final corePiLisp = r'''
         (recur threaded (next forms)))
       x)))
 
-;; TODO reduce
 (defn concat
   {:doc "Returns a lazy seq representing the concatenation of the elements in the supplied colls."}
   ([] nil)
@@ -198,16 +197,26 @@ final corePiLisp = r'''
   ([x y]
    (let [s (seq x)]
      (if s
-       (cons (first s) (concat (next s) y))
+       (reduce
+        (fn concat-reduce-2 [acc s-item]
+          (cons s-item acc))
+        y
+        (reverse s))
        y)))
   ([x y & zs]
-   (let [cat (fn cat [xys zs]
-               (let [xys (seq xys)]
-                 (if xys
-                   (cons (first xys) (cat (next xys) zs))
-                   (when zs
-                     (cat (first zs) (next zs))))))]
-     (cat (concat x y) zs))))
+   (let [all (cons x (cons y zs))]
+     (reduce
+      (fn concat-reduce-3 [acc coll]
+        (let [s (seq coll)]
+          (if s
+            (reduce
+             (fn concat-reduce-3-inner [acc-inner s-item]
+               (cons s-item acc-inner))
+             acc
+             (reverse s))
+            acc)))
+      ()
+      (reverse all)))))
 
 (defmacro and
   {:doc "Evaluates exprs one at a time, from left to right. If a form returns logical false (nil or false), and returns that value and doesn't evaluate any of the other expressions, otherwise it returns the value of the last expr. (and) returns true."}
