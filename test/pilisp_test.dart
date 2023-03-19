@@ -1321,6 +1321,22 @@ void main() {
         test('/ fn rebound', () {
           expect(evalProgram('((fn [a] a) 42)'), 42);
         });
+        test('/ while', () {
+          expect(evalProgram('(while false 42)'), null);
+          evalProgram('(def st (state true))');
+          expect(evalProgram('(while @st (write-state st false) 42)'), 42);
+          evalProgram(r'''
+(do
+(def counter (state 0))
+(def ret (state []))
+(while (< @counter 10)
+  (write-state counter inc)
+  (write-state ret conj @counter))
+  )
+''');
+          expect(
+              evalProgram('@ret'), PLVector([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
+        });
       });
       group('/ destructuring', () {
         group('/ map destructuring', () {

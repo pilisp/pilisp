@@ -20,6 +20,7 @@ final symbolQuote = PLSymbol('quote');
 final symbolRecur = PLSymbol('recur');
 final symbolThrow = PLSymbol('throw');
 final symbolTry = PLSymbol('try');
+final symbolWhile = PLSymbol('while');
 final ISet<PLSymbol> specialForms = ISet({
   symbolCatch,
   symbolDeclare,
@@ -34,6 +35,7 @@ final ISet<PLSymbol> specialForms = ISet({
   symbolRecur,
   symbolThrow,
   symbolTry,
+  symbolWhile,
 });
 
 // Oft-used symbols
@@ -509,6 +511,21 @@ class PLList extends PLExprIterable
         final fnName = env.stackFrames.last;
         final rewritten = PLList([PLSymbol(fnName)]).addAll(recurArgs);
         return plEval(env, rewritten);
+      } else if (sym == symbolWhile) {
+        if (length < 2) {
+          throw FormatException(
+              'The while special form expects a condition and body, but received $length arguments.');
+        } else {
+          final test = this[1];
+          final body = skip(2);
+          Object? returnValue;
+          while (isTruthy(plEval(env, test))) {
+            returnValue =
+                plEval(env, PLList(<Object?>[PLSymbol('do'), ...body]));
+          }
+          // NB. Unlike Clojure, while returns last "returned" value.
+          return returnValue;
+        }
       } else if (sym == symbolIf) {
         if (length != 4) {
           throw FormatException(
