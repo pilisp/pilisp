@@ -163,6 +163,12 @@ class PLEnv {
           termDoc:
               'Reduce the collection using the given function. Uses initial value as accumulator if provided, else the function must support a zero arity that is used to generate the initial accumulator.'
         })),
+    PLSymbol('range'): PLBindingEntry.withMeta(
+        rangeFn,
+        IMap({
+          termDoc:
+              'Return a vector of integers from start to end by step. Niladic returns 0 to 1000 exclusive.'
+        })),
     PLSymbol('keys'): PLBindingEntry.withMeta(keysFn,
         IMap({termDoc: 'Returns a vector of the keys of the given map.'})),
     PLSymbol('vals'): PLBindingEntry.withMeta(valuesFn,

@@ -971,6 +971,60 @@ Object? reduceFn(PLEnv env, PLVector args) {
   }
 }
 
+/// Niladic arity returns a range of 0 to 1000 exclusive.
+PLVector rangeFn(PLEnv env, PLVector args) {
+  int start = 0;
+  int end = 1000;
+  int step = 1;
+  if (args.length == 1) {
+    final x = args[0];
+    if (x is int) {
+      end = x;
+    } else {
+      throw ArgumentError(
+          'The range function expects its first argument to be an integer, but received a ${typeString(x)} value.');
+    }
+  } else if (args.length == 2) {
+    final x = args[0];
+    if (x is int) {
+      start = x;
+      final y = args[1];
+      if (y is int) {
+        end = y;
+      } else {
+        throw ArgumentError(
+            'The range function expects its second argument to be an integer, but received a ${typeString(x)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The range function expects its first argument to be an integer, but received a ${typeString(x)} value.');
+    }
+  } else if (args.length == 3) {
+    final x = args[0];
+    if (x is int) {
+      start = x;
+      final y = args[1];
+      if (y is int) {
+        end = y;
+        final z = args[2];
+        if (z is int) {
+          step = z;
+        } else {
+          throw ArgumentError(
+              'The range function expects its third argument to be an integer, but received a ${typeString(x)} value.');
+        }
+      } else {
+        throw ArgumentError(
+            'The range function expects its second argument to be an integer, but received a ${typeString(x)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The range function expects its first argument to be an integer, but received a ${typeString(x)} value.');
+    }
+  }
+  return [for (var i = start; i < end; i = i + step) i].toPLVector();
+}
+
 bool equalToFn(PLEnv env, PLVector args) {
   if (args.isEmpty) {
     return true;
