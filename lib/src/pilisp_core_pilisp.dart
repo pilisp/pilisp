@@ -175,7 +175,94 @@ final corePiLisp = r'''
      (get* coll key default)
      (nth coll key default))))
 
-(declare seq?)
+(defn int?
+  {:doc "Returns true if the argument is an int."}
+  [x]
+  (= 'int (type x)))
+
+(defn double?
+  {:doc "Returns true if the argument is a double."}
+  [x]
+  (= 'double (type x)))
+
+(defn symbol?
+  {:doc "Returns true if the argument is a symbol."}
+  [x]
+  (= 'symbol (type x)))
+
+(defn keyword?
+  {:doc "Returns true if the argument is a term (keyword equivalent). For compatibility with Clojure expectations."}
+  [x]
+  (= 'term (type x)))
+
+(defn term?
+  {:doc "Returns true if the argument is a term (keyword equivalent)."}
+  [x]
+  (= 'term (type x)))
+
+(defn ident?
+  {:doc "Returns true if x is a symbol or term (keyword)"}
+  [x] (or (term? x) (symbol? x)))
+
+(defn list?
+  {:doc "Returns true if the argument is a list."}
+  [x]
+  (= 'list (type x)))
+
+(defn vector?
+  {:doc "Returns true if the argument is a vector."}
+  [x]
+  (= 'vector (type x)))
+
+(defn seq?
+  {:doc "Returns true if the argument is a seq-able collection."}
+  [x]
+  (or (list? x)
+      (vector? x)))
+
+(defn coll?
+  {:doc "Returns true if the argument is an immutable collection."}
+  [x]
+  (or (list? x)
+      (vector? x)
+      (map? x)
+      (set? x)))
+
+(defn reg-exp?
+  {:doc "Returns true if the argument is a regular expression."}
+  [x]
+  (= 'RegExp (type x)))
+
+(defn named?
+  {:doc "Returns true if the argument is a string, symbol, or term."}
+  [x]
+  (let [t (type x)]
+    (or (= 'String t)
+        (= 'symbol t)
+        (= 'term t))))
+
+(defmacro cond
+  {:doc "Takes a set of test/expr pairs. It evaluates each test one at a time. If a test returns logical true, cond evaluates and returns the value of the corresponding expr and doesn't evaluate any of the other tests or exprs. (cond) returns nil."}
+  [& clauses]
+  (when (seq clauses)
+    (list 'if (first clauses)
+          (if (next clauses)
+            (second clauses)
+            (throw
+             (ex-info "cond requires an even number of forms"
+                      {:num-forms (count clauses)
+                       :clauses (quote clauses)})))
+          (cons 'cond (next (next clauses))))))
+
+(defn empty
+  {:doc "Returns an empty collection of the same category as coll, or nil"}
+  [coll]
+  (cond
+    (list? coll) '()
+    (vector? coll) []
+    (map? coll) {}
+    (set? coll) #{}
+    :else nil))
 
 (defmacro ->
   {:doc "Threads the expr through the forms. Inserts x as the second item in the first form, making a list of it if it is not a list already. If there are more forms, inserts the first form as the second item in second form, etc."}
@@ -189,6 +276,13 @@ final corePiLisp = r'''
                        (list form x))]
         (recur threaded (next forms)))
       x)))
+
+(defn reverse
+  {:doc "Returns items of coll in reverse order. Vectors returned as vectors."}
+  [coll]
+  (if (vector? coll)
+    (into [] (reduce conj () coll))
+    (reduce conj () coll)))
 
 (defn concat
   {:doc "Returns a lazy seq representing the concatenation of the elements in the supplied colls."}
@@ -317,14 +411,18 @@ final corePiLisp = r'''
                        then)
                  else)))))
 
-;; TODO reduce
 (defn nthrest
   {:doc "Returns the nth rest of coll, coll when n is 0."}
   [coll n]
-  (loop [n n xs coll]
-    (if-let [xs (and (pos? n) (seq xs))]
-      (recur (dec n) (rest xs))
-      xs)))
+  (cond
+    (neg? n) coll
+    (> n (count coll)) (empty coll)
+    :else
+    (reduce
+     (fn [acc n]
+       (next acc))
+     coll
+     (range n))))
 
 ;; TODO reduce
 (defn drop
@@ -404,19 +502,6 @@ final corePiLisp = r'''
           run (cons fst (take-while (fn partition-taker [x] (= fv (f x))) (next s)))]
       (cons run (partition-by f (drop (count run) s))))))
 
-(defmacro cond
-  {:doc "Takes a set of test/expr pairs. It evaluates each test one at a time. If a test returns logical true, cond evaluates and returns the value of the corresponding expr and doesn't evaluate any of the other tests or exprs. (cond) returns nil."}
-  [& clauses]
-  (when (seq clauses)
-    (list 'if (first clauses)
-          (if (next clauses)
-            (second clauses)
-            (throw
-             (ex-info "cond requires an even number of forms"
-                      {:num-forms (count clauses)
-                       :clauses (quote clauses)})))
-          (cons 'cond (next (next clauses))))))
-
 (defn true?
   {:doc "Returns true if identical to the boolean value true. Prefer truthy/falsey semantics where possible."}
   [x]
@@ -452,72 +537,6 @@ final corePiLisp = r'''
   {:doc "Returns true regardless of argument."}
   [_x]
   true)
-
-(defn int?
-  {:doc "Returns true if the argument is an int."}
-  [x]
-  (= 'int (type x)))
-
-(defn double?
-  {:doc "Returns true if the argument is a double."}
-  [x]
-  (= 'double (type x)))
-
-(defn symbol?
-  {:doc "Returns true if the argument is a symbol."}
-  [x]
-  (= 'symbol (type x)))
-
-(defn keyword?
-  {:doc "Returns true if the argument is a term (keyword equivalent). For compatibility with Clojure expectations."}
-  [x]
-  (= 'term (type x)))
-
-(defn term?
-  {:doc "Returns true if the argument is a term (keyword equivalent)."}
-  [x]
-  (= 'term (type x)))
-
-(defn ident?
-  {:doc "Returns true if x is a symbol or term (keyword)"}
-  [x] (or (term? x) (symbol? x)))
-
-(defn list?
-  {:doc "Returns true if the argument is a list."}
-  [x]
-  (= 'list (type x)))
-
-(defn vector?
-  {:doc "Returns true if the argument is a vector."}
-  [x]
-  (= 'vector (type x)))
-
-(defn seq?
-  {:doc "Returns true if the argument is a seq-able collection."}
-  [x]
-  (or (list? x)
-      (vector? x)))
-
-(defn coll?
-  {:doc "Returns true if the argument is an immutable collection."}
-  [x]
-  (or (list? x)
-      (vector? x)
-      (map? x)
-      (set? x)))
-
-(defn reg-exp?
-  {:doc "Returns true if the argument is a regular expression."}
-  [x]
-  (= 'RegExp (type x)))
-
-(defn named?
-  {:doc "Returns true if the argument is a string, symbol, or term."}
-  [x]
-  (let [t (type x)]
-    (or (= 'String t)
-        (= 'symbol t)
-        (= 'term t))))
 
 (defn full-name
   [x]
@@ -581,16 +600,6 @@ final corePiLisp = r'''
     (nil? (seq coll)) true
     (pred (first coll)) (every? pred (next coll))
     :else false))
-
-(defn empty
-  {:doc "Returns an empty collection of the same category as coll, or nil"}
-  [coll]
-  (cond
-    (list? coll) '()
-    (vector? coll) []
-    (map? coll) {}
-    (set? coll) #{}
-    :else nil))
 
 (defn empty? [coll] (not (seq coll)))
 
@@ -711,13 +720,6 @@ final corePiLisp = r'''
 (defn remove
   [pred coll]
   (filter (complement pred) coll))
-
-(defn reverse
-  {:doc "Returns items of coll in reverse order. Vectors returned as vectors."}
-  [coll]
-  (if (vector? coll)
-    (into [] (reduce conj () coll))
-    (reduce conj () coll)))
 
 ;; TODO Support vector use-case
 (defn assoc
@@ -1059,6 +1061,18 @@ final corePiLisp = r'''
      (seq x)
 
      :else nil)))
+
+(defn apropos [search]
+  (let [search (dart/String.toLowerCase (name search))]
+    (map key
+         (filter
+          (fn [binding]
+            (let [[sym {:keys [value meta]}] binding
+                  doc (dart/String.toLowerCase (or (:doc meta) ""))
+                  sym (-> sym name dart/String.toLowerCase)]
+              (or (dart/String.contains sym search)
+                  (dart/String.contains doc search))))
+          (bindings)))))
 
 ;; Strings
 
