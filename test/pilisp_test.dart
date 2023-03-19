@@ -1,6 +1,5 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:pilisp/pilisp.dart';
-import 'package:pilisp/src/pilisp_expr.dart';
 
 import 'package:test/test.dart';
 
@@ -62,22 +61,28 @@ void main() {
         test('/ regular', () {
           expect(PiLisp.readString('ls'), PLSymbol('ls'));
           expect(PiLisp.readString('ls!'), PLSymbol('ls!'));
+          expect(PiLisp.readString('ls1234567890!#&*'),
+              PLSymbol('ls1234567890!#&*'));
           expect(PiLisp.readString('ls1234567890!@#&*'),
-              PLSymbol('ls1234567890!@#&*'));
+              PLSymbol('ls1234567890!'));
           expect(() async => PiLisp.readString('1abc'),
               throwsA(isA<UnreadableFormException>()));
         });
         test('/ term (dot)', () {
           expect(PiLisp.readString('.id'), PLTerm('id'));
           expect(PiLisp.readString('.id!'), PLTerm('id!'));
-          expect(PiLisp.readString('.id1234567890!@#&*'),
-              PLTerm('id1234567890!@#&*'));
+          expect(PiLisp.readString('.id1234567890!#&*'),
+              PLTerm('id1234567890!#&*'));
+          expect(
+              PiLisp.readString('.id1234567890!@#&*'), PLTerm('id1234567890!'));
         });
         test('/ term (colon)', () {
           expect(PiLisp.readString(':id'), PLTerm('id'));
           expect(PiLisp.readString(':id!'), PLTerm('id!'));
-          expect(PiLisp.readString(':id1234567890!@#&*'),
-              PLTerm('id1234567890!@#&*'));
+          expect(PiLisp.readString(':id1234567890!#&*'),
+              PLTerm('id1234567890!#&*'));
+          expect(
+              PiLisp.readString(':id1234567890!@#&*'), PLTerm('id1234567890!'));
         });
         test('/ with punctuation chars', () {
           expect(PiLisp.readString('Date#now'), PLSymbol('Date#now'));
@@ -1056,7 +1061,8 @@ void main() {
         test('/ term', () {
           expect(printProgram('.id'), ':id');
           expect(printProgram('.id!'), ':id!');
-          expect(printProgram('.id1234567890!@#&*'), ':id1234567890!@#&*');
+          expect(printProgram('.id1234567890!#&*'), ':id1234567890!#&*');
+          expect(printProgram('.id1234567890!@#&*'), ':id1234567890!');
         });
       });
       group('/ Lists', () {

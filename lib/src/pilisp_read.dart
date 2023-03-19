@@ -15,6 +15,7 @@ RegExp matchesStringEscape = RegExp(
     r'\\(?:x([0-9a-fA-F]{2})|u([0-9a-fA-F]{4})|u\{([0-9a-fA-F]+)\}|(.))');
 RegExp matchesSymbol = RegExp(r'([.:])?([^0-9].*)$');
 
+int at = '@'.codeUnitAt(0);
 int backSlash = r'\'.codeUnitAt(0);
 int bang = '!'.codeUnitAt(0);
 int doubleQuote = '"'.codeUnitAt(0);
@@ -32,6 +33,7 @@ int singleQuote = "'".codeUnitAt(0);
 int underscore = '_'.codeUnitAt(0);
 
 Set<int> macroCodeUnits = {
+  at, // Deref via @
   doubleQuote, // String
   lCurlyBracket, // Map (open)
   lParen, // Invocation (open)
@@ -136,6 +138,8 @@ class PiLispStringReader {
             value = readCommentLine();
           } else if (cu == singleQuote) {
             value = PLList([symbolQuote, read(-1)]);
+          } else if (cu == at) {
+            value = PLList([PLSymbol('deref'), read(-1)]);
           } else if (cu == octothorpe) {
             final dispatchCu = read1();
             if (dispatchMacroCodeUnits.contains(dispatchCu)) {
