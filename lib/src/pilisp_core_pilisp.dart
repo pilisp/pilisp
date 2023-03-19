@@ -419,20 +419,14 @@ final corePiLisp = r'''
     (> n (count coll)) (empty coll)
     :else
     (reduce
-     (fn [acc n]
+     (fn [acc _]
        (next acc))
      coll
      (range n))))
 
-;; TODO reduce
 (defn drop
   [n coll]
-  (let [step (fn [n coll]
-               (let [s (seq coll)]
-                 (if (and (pos? n) s)
-                   (drop (dec n) (rest s))
-                   s)))]
-    (step n coll)))
+  (nthrest coll n))
 
 ;; TODO reduce
 (let [repeat*
