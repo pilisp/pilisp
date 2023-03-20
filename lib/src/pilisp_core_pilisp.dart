@@ -443,18 +443,16 @@ final corePiLisp = r'''
   [n coll]
   (nthrest coll n))
 
-;; TODO reduce
-(let [repeat*
-      (fn repeat*
-        [coll n x]
-        (if (= n 0)
-          coll
-          (repeat* (conj coll x) (dec n) x)))]
-  (defn repeat
-    {:doc "Returns a sequence of xs of length n."}
-    ([x] (repeat 1 x))
-    ([n x]
-     (repeat* [] n x))))
+(defn repeat
+  {:doc "Returns a sequence of xs of length n."}
+  ([x] (repeat 1 x))
+  ([n x]
+   (let [c (state 0)
+         r (state [])]
+     (while (< @c n)
+       (! c inc)
+       (! r conj x))
+     @r)))
 
 ;; TODO reduce
 (let [iterate*
