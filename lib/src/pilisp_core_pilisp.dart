@@ -1099,22 +1099,23 @@ final corePiLisp = r'''
 
 ;; Strings
 
-;; TODO reduce
-(let [str/join*
-      (fn str/join*
-        [acc sep coll]
-        (if (empty? acc)
-          (str/join* (str (first coll)) sep (next coll))
-          (if (empty? coll)
-            acc
-            (str/join* (str acc sep (first coll)) sep (next coll)))))]
-  (defn str/join
-    [sep coll]
-    (if (empty? coll)
-      ""
-      (if (= 1 (count coll))
-        (str (first coll))
-        (str/join* "" sep coll)))))
+(defn str/join
+  [sep coll]
+  (let [sb (dart/StringBuffer.)]
+    (cond
+      (empty? coll) ""
+      (= 1 (count coll)) (str (first coll))
+      :else
+      (do
+        (dart/StringBuffer.write sb (first coll))
+        (dart/StringBuffer.toString
+         (reduce
+          (fn [sb item]
+            (dart/StringBuffer.write sb sep)
+            (dart/StringBuffer.write sb item)
+            sb)
+          sb
+          (next coll)))))))
 
 ;; Maps
 
