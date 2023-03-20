@@ -848,6 +848,7 @@ Object seqSkip(Object o, int n) {
       'The value ${typeString(o)} cannot provide a sub-sequence using skip.');
 }
 
+// TODO Implement reduced and short-circuit where needed here.
 /// Matches Clojure semantics for reduce
 Object? reduceFn(PLEnv env, PLVector args) {
   final al = args.length;

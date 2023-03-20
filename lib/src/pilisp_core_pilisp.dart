@@ -467,6 +467,7 @@ final corePiLisp = r'''
          (! prev next-value)
          (! ret conj next-value))))))
 
+;; TODO Can be done with reduce + reduced.
 (defn take
   {:doc "Returns a sequence of the first n items in coll, or all items if there are fewer than n.  Returns a stateful transducer when no collection is provided."}
   [n coll]
@@ -474,6 +475,16 @@ final corePiLisp = r'''
     (<= n 0) ()
     (> n (count coll)) coll
     :else
+    ;; (reduce
+    ;;  (fn [acc item]
+    ;;    (if (= n 0)
+    ;;      (reduced (:ret acc))
+    ;;      (-> acc
+    ;;          (update :n dec)
+    ;;          (update :ret conj item))))
+    ;;  {:n n
+    ;;   :ret []}
+    ;;  coll)
     (let [c (state 0)
           coll (state coll)
           ret (state [])]
@@ -481,8 +492,10 @@ final corePiLisp = r'''
         (! c inc)
         (! ret conj (first @coll))
         (! coll (next @coll)))
-      @ret)))
+      @ret)
+    ))
 
+;; TODO Can be done with reduce + reduced.
 (defn take-while
   {:doc "Returns a sequence of successive items from coll while (pred item) returns logical true."}
   [pred coll]
