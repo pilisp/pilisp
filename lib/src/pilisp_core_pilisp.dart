@@ -413,6 +413,19 @@ final corePiLisp = r'''
                        then)
                  else)))))
 
+(defmacro time
+  {:doc "Evaluates expr and prints the time it took. Returns the value of expr."}
+  [expr]
+  (let [sw-g (gensym 'stopwatch)
+        ret-g (gensym 'return)]
+    (list 'let
+          [sw-g (list 'dart/Stopwatch.)
+           '_ (list 'dart/Stopwatch.start sw-g)
+           ret-g expr
+           '_ (list 'dart/Stopwatch.stop sw-g)]
+          (list 'println (list 'str "Elapsed time: " (list '/ (list 'dart/Stopwatch.elapsedMicroseconds sw-g) 1000) " milliseconds"))
+          ret-g)))
+
 (defn nthrest
   {:doc "Returns the nth rest of coll, coll when n is 0."}
   [coll n]
