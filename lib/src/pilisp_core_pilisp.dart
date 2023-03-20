@@ -467,13 +467,21 @@ final corePiLisp = r'''
          (! prev next-value)
          (! ret conj next-value))))))
 
-;; TODO reduce
 (defn take
   {:doc "Returns a sequence of the first n items in coll, or all items if there are fewer than n.  Returns a stateful transducer when no collection is provided."}
   [n coll]
-  (when (pos? n)
-    (when-let [s (seq coll)]
-      (cons (first s) (take (dec n) (rest s))))))
+  (cond
+    (<= n 0) ()
+    (> n (count coll)) coll
+    :else
+    (let [c (state 0)
+          coll (state coll)
+          ret (state [])]
+      (while (< @c n)
+        (! c inc)
+        (! ret conj (first @coll))
+        (! coll (next @coll)))
+      @ret)))
 
 ;; TODO reduce
 (defn take-while
