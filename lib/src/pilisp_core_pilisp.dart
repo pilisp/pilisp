@@ -483,12 +483,17 @@ final corePiLisp = r'''
         (! coll (next @coll)))
       @ret)))
 
-;; TODO reduce
 (defn take-while
+  {:doc "Returns a sequence of successive items from coll while (pred item) returns logical true."}
   [pred coll]
-  (when-let [s (seq coll)]
-    (when (pred (first s))
-      (cons (first s) (take-while pred (rest s))))))
+  (let [ret (state [])
+        item (state (first coll))
+        coll (state (next coll))]
+    (while (pred @item)
+      (! ret conj @item)
+      (! item (first @coll))
+      (! coll (next @coll)))
+    @ret))
 
 ;; TODO reduce
 (defn partition
