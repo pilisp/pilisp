@@ -90,6 +90,8 @@ final corePiLisp = r'''
   [& xs]
   (apply print (conj xs "\n")))
 
+(def ! write-state)
+
 ;; Math
 
 (defn inc [n] (+ n 1))
