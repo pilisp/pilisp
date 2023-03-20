@@ -848,7 +848,20 @@ Object seqSkip(Object o, int n) {
       'The value ${typeString(o)} cannot provide a sub-sequence using skip.');
 }
 
-// TODO Implement reduced and short-circuit where needed here.
+class PLReduced {
+  final Object? value;
+  PLReduced(this.value);
+}
+
+PLReduced reducedFn(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    return PLReduced(args[0]);
+  } else {
+    throw ArgumentError(
+        'The reduced function expects 1 argument, but received ${args.length} arguments.');
+  }
+}
+
 /// Matches Clojure semantics for reduce
 Object? reduceFn(PLEnv env, PLVector args) {
   final al = args.length;
@@ -873,7 +886,7 @@ Object? reduceFn(PLEnv env, PLVector args) {
             return fn.invoke(env, []);
           } else {
             throw FormatException(
-                'The reduce function expects its first argument to be a function, but received a ${typeString(fn)}');
+                'The reduce function expects its first argument to be a function, but received a ${typeString(fn)} value.');
           }
         }
       } else if (seqLength(coll) == 1) {
@@ -885,7 +898,7 @@ Object? reduceFn(PLEnv env, PLVector args) {
           } else if (fn is PLFunction) {
             return fn.invoke(env, PLVector([item1, item2]).toIList);
           } else {
-            throw 'The reduce function expects its first argument to be a function, but received a ${typeString(fn)} value';
+            throw 'The reduce function expects its first argument to be a function, but received a ${typeString(fn)} value.';
           }
         } else {
           return nthFn(env, PLVector([coll, 0]));
@@ -919,14 +932,24 @@ Object? reduceFn(PLEnv env, PLVector args) {
             Object? acc = initialAcc;
             if (fn is Function) {
               for (final x in restIter) {
+                if (acc is PLReduced) {
+                  return acc.value;
+                } else if (x is PLReduced) {
+                  return x.value;
+                }
                 acc = fn(env, PLVector([acc, x]));
               }
-              return acc;
+              return acc is PLReduced ? acc.value : acc;
             } else if (fn is PLFunction) {
               for (final x in restIter) {
+                if (acc is PLReduced) {
+                  return acc.value;
+                } else if (x is PLReduced) {
+                  return x.value;
+                }
                 acc = fn.invoke(env, PLVector([acc, x]).toIList);
               }
-              return acc;
+              return acc is PLReduced ? acc.value : acc;
             } else {
               throw 'The reduce function expects its first argument to be a function, but received a ${typeString(fn)} value';
             }
@@ -947,14 +970,24 @@ Object? reduceFn(PLEnv env, PLVector args) {
 
           if (fn is Function) {
             for (final x in collIter) {
+              if (acc is PLReduced) {
+                return acc.value;
+              } else if (x is PLReduced) {
+                return x.value;
+              }
               acc = fn(env, PLVector([acc, x]));
             }
-            return acc;
+            return acc is PLReduced ? acc.value : acc;
           } else if (fn is PLFunction) {
             for (final x in collIter) {
+              if (acc is PLReduced) {
+                return acc.value;
+              } else if (x is PLReduced) {
+                return x.value;
+              }
               acc = fn.invoke(env, PLVector([acc, x]).toIList);
             }
-            return acc;
+            return acc is PLReduced ? acc.value : acc;
           } else {
             throw 'The reduce function expects its first argument to be a function, but received a ${typeString(fn)} value';
           }

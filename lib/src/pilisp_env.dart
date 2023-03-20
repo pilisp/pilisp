@@ -163,6 +163,12 @@ class PLEnv {
           termDoc:
               'Reduce the collection using the given function. Uses initial value as accumulator if provided, else the function must support a zero arity that is used to generate the initial accumulator.'
         })),
+    PLSymbol('reduced'): PLBindingEntry.withMeta(
+        reducedFn,
+        IMap({
+          termDoc:
+              'Return a reduced value. The reduce function will immediately return this value when provided as the accumulator.'
+        })),
     PLSymbol('range'): PLBindingEntry.withMeta(
         rangeFn,
         IMap({
