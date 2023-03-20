@@ -454,19 +454,18 @@ final corePiLisp = r'''
        (! r conj x))
      @r)))
 
-;; TODO reduce
-(let [iterate*
-      (fn iterate*
-        [coll n f x]
-        (if (= n 0)
-          coll
-          (let [latest (f x)]
-            (iterate* (conj coll latest) (dec n) f latest))))]
-  (defn iterate
-    {:doc "Returns a sequence of xs of length n."}
-    ([f x] (iterate 1 x))
-    ([n f x]
-     (iterate* [x] (dec n) f x))))
+(defn iterate
+  {:doc "Returns a sequence of x, (f x), (f (f x)) etc."}
+  ([f x] (iterate 1 x))
+  ([n f x]
+   (let [c    (state 1)
+         prev (state x)
+         ret  (state [x])]
+     (while (< @c n)
+       (! c inc)
+       (let [next-value (f @prev)]
+         (! prev next-value)
+         (! ret conj next-value))))))
 
 ;; TODO reduce
 (defn take
