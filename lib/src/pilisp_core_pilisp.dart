@@ -88,7 +88,8 @@ final corePiLisp = r'''
 (defn println
   {:doc "Print to STDOUT and append a newline."}
   [& xs]
-  (apply print (conj xs "\n")))
+  ;; NB. For core PiLisp, Dart's print is used, which appends a new line.
+  (apply print xs #_(conj xs "\n")))
 
 (def ! write-state)
 
@@ -467,7 +468,8 @@ final corePiLisp = r'''
          (! prev next-value)
          (! ret conj next-value))))))
 
-;; TODO Can be done with reduce + reduced.
+(declare update)
+
 (defn take
   {:doc "Returns a sequence of the first n items in coll, or all items if there are fewer than n.  Returns a stateful transducer when no collection is provided."}
   [n coll]
@@ -475,16 +477,7 @@ final corePiLisp = r'''
     (<= n 0) ()
     (> n (count coll)) coll
     :else
-    ;; (reduce
-    ;;  (fn [acc item]
-    ;;    (if (= n 0)
-    ;;      (reduced (:ret acc))
-    ;;      (-> acc
-    ;;          (update :n dec)
-    ;;          (update :ret conj item))))
-    ;;  {:n n
-    ;;   :ret []}
-    ;;  coll)
+    ;; CONSIDER: reduce + reduced
     (let [c (state 0)
           coll (state coll)
           ret (state [])]
@@ -492,21 +485,18 @@ final corePiLisp = r'''
         (! c inc)
         (! ret conj (first @coll))
         (! coll (next @coll)))
-      @ret)
-    ))
+      @ret)))
 
-;; TODO Can be done with reduce + reduced.
 (defn take-while
   {:doc "Returns a sequence of successive items from coll while (pred item) returns logical true."}
   [pred coll]
-  (let [ret (state [])
-        item (state (first coll))
-        coll (state (next coll))]
-    (while (pred @item)
-      (! ret conj @item)
-      (! item (first @coll))
-      (! coll (next @coll)))
-    @ret))
+  (reduce
+   (fn take-while-reduce [acc item]
+     (if (pred item)
+       (conj acc item)
+       (reduced acc)))
+   []
+   coll))
 
 ;; TODO reduce
 (defn partition
@@ -531,7 +521,7 @@ final corePiLisp = r'''
   (when-let [s (seq coll)]
     (let [fst (first s)
           fv (f fst)
-          run (cons fst (take-while (fn partition-taker [x] (= fv (f x))) (next s)))]
+          run (cons fst (take-while (fn partition-by-take-while [x] (= fv (f x))) (next s)))]
       (cons run (partition-by f (drop (count run) s))))))
 
 (defn true?
@@ -854,12 +844,13 @@ final corePiLisp = r'''
       ))
 
 (def pipe-param '$)
+(def pipe-sep (partial = '|))
 
 (defn specifies-pipe-param?
   {:private true}
   [form]
   (let [result (state false)
-        _ (postwalk (fn [x]
+        _ (postwalk (fn pipe-param-walk [x]
                       (when (= x pipe-param)
                         (write-state result true)))
                     form)]
@@ -868,10 +859,10 @@ final corePiLisp = r'''
 (defmacro pl>
   {:doc "The Piped Lisp macro."}
   [& forms]
-  (let [delimited-forms (->> (partition-by (partial = '|) forms)
+  (let [delimited-forms (->> (partition-by pipe-sep forms)
                              ;; Remove | as pure syntax, and support
                              ;; empty expressions
-                             (remove (fn [coll] (every? (partial = '|) coll))))
+                             (remove (fn is-pipe [coll] (every? pipe-sep coll))))
         ;; The expr for as->
         first-clause-form (first delimited-forms)
         car (first first-clause-form)
@@ -885,7 +876,7 @@ final corePiLisp = r'''
                        (cons 'do first-clause-form))
         ;; Body of as->
         next-clauses (->> (next delimited-forms)
-                          (map (fn [form]
+                          (map (fn format-next-clause [form]
                                  ;; NB: There are possible footguns here,
                                  ;;     but I think they're easily detected and
                                  ;;     avoided given intended scope of usage
