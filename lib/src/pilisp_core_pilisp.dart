@@ -1009,7 +1009,6 @@ final corePiLisp = r'''
   {:doc "Iverson boolean"}
   {true 1 false 0})
 
-;; TODO reduce
 (defn interleave
   {:doc "Returns a sequence of the first item in each coll, then the second etc."}
   ([] ())
