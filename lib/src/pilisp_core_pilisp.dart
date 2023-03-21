@@ -776,21 +776,6 @@ final corePiLisp = r'''
   (when (some identity maps)
     (reduce (fn merge-reduce [acc m] (conj (or acc {}) m)) maps)))
 
-;; TODO reduce
-(defn interleave
-  {:doc "Returns a sequence of the first item in each coll, then the second etc."}
-  ([] ())
-  ([c1] c1)
-  ([c1 c2]
-   (let [s1 (seq c1) s2 (seq c2)]
-     (when (and s1 s2)
-       (cons (first s1) (cons (first s2)
-                              (interleave (rest s1) (rest s2)))))))
-  ([c1 c2 & colls]
-   (let [ss (map seq (conj colls c2 c1))]
-     (when (every? identity ss)
-       (concat (map first ss) (apply interleave (map rest ss)))))))
-
 ;; NB: For now. Consider whether we need full MapEntry support.
 (def key first)
 (def val second)
@@ -1019,6 +1004,43 @@ final corePiLisp = r'''
            not-found
            (recur sentinel m (next ks))))
        m))))
+
+(def ibool
+  {:doc "Iverson boolean"}
+  {true 1 false 0})
+
+;; TODO reduce
+(defn interleave
+  {:doc "Returns a sequence of the first item in each coll, then the second etc."}
+  ([] ())
+  ([c1] c1)
+  ([c1 c2]
+   (let [s1 (seq c1) s2 (seq c2)]
+     (:ret
+      (reduce
+       (fn interleave-reduce [acc item]
+         (let [{:keys [s2 ret]} acc]
+           (if (empty? s2)
+             (reduced {:ret ret})
+             {:s2 (next s2)
+              :ret (conj ret item (first s2))})))
+       {:s2 s2
+        :ret []}
+       s1))))
+  ([c1 c2 & colls]
+   ;; TODO Consider varargs as lists to match Clojure
+   (let [ss (map seq (vec (cons c1 (cons c2 colls))))]
+     (reduce
+      (fn interleave-reduce-var [acc item]
+        (let [{:keys [others ret]} acc
+              some-empty? (= 1 (reduce * (map (comp ibool empty?) others)))]
+          (if some-empty?
+            (reduced {:ret ret})
+            {:others (map next others)
+             :ret (apply conj ret item (map first others))})))
+      {:others (next ss)
+       :ret []}
+      (first ss)))))
 
 (defn resolve
   {:doc "Resolve a symbol to an entry in the PiLisp bindings map."}
