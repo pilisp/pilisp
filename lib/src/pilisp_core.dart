@@ -475,7 +475,7 @@ Object? conjFn(PLEnv env, PLVector args) {
   final coll = args[0];
   final xs = args.skip(1);
   if (coll == null) {
-    return PLVector([]);
+    return PLVector([...xs]);
   } else if (coll is PLVector) {
     return coll.addAll(xs);
   } else if (coll is IMap) {
