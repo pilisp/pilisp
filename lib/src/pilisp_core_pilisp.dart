@@ -530,7 +530,7 @@ final corePiLisp = r'''
 (declare empty?)
 
 (defn partition
-  {:doc "Returns a lazy sequence of lists of n items each, at offsets step apart. If step is not supplied, defaults to n, i.e. the partitions do not overlap. If a pad collection is supplied, use its elements as necessary to complete last partition upto n items. In case there are not enough padding elements, return a partition with less than n items."}
+  {:doc "Returns a sequence of lists of n items each, at offsets step apart. If step is not supplied, defaults to n, i.e. the partitions do not overlap. If a pad collection is supplied, use its elements as necessary to complete last partition upto n items. In case there are not enough padding elements, return a partition with less than n items."}
   ([n coll]
    (partition n n coll))
   ([n step coll]
@@ -551,14 +551,34 @@ final corePiLisp = r'''
                     remnant
                     (take (- n (count remnant)) pad)))))))
 
-;; TODO reduce
-(defn partition-by
+(defn partition-by*
   [f coll]
   (when-let [s (seq coll)]
     (let [fst (first s)
           fv (f fst)
           run (cons fst (take-while (fn partition-by-take-while [x] (= fv (f x))) (next s)))]
-      (cons run (partition-by f (drop (count run) s))))))
+      (cons run (partition-by* f (drop (count run) s))))))
+
+(defn partition-by
+  [f coll]
+  (let [s (seq coll)
+        m (reduce
+           (fn [acc item]
+             (let [prev (:prev acc) part (:part acc) whole (:whole acc)
+                   check (f item)]
+               (if (= check prev)
+                 {:prev prev
+                  :part (conj part item)
+                  :whole whole}
+                 {:prev check
+                  :part [item]
+                  :whole (conj whole part)})))
+           {:prev (f (first s))
+            :part [(first s)]
+            :whole []}
+           (next s))
+        whole (:whole m) part (:part m)]
+    (conj whole part)))
 
 (defn true?
   {:doc "Returns true if identical to the boolean value true. Prefer truthy/falsey semantics where possible."}
@@ -902,7 +922,8 @@ final corePiLisp = r'''
   (let [delimited-forms (->> (partition-by pipe-sep forms)
                              ;; Remove | as pure syntax, and support
                              ;; empty expressions
-                             (remove (fn is-pipe [coll] (every? pipe-sep coll))))
+                             (remove (fn is-pipe [coll] (every? pipe-sep coll)))
+                             (map #(into () (reverse %))))
         ;; The expr for as->
         first-clause-form (first delimited-forms)
         car (first first-clause-form)
