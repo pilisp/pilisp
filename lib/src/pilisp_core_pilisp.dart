@@ -917,7 +917,7 @@ final corePiLisp = r'''
     (deref result)))
 
 (defmacro pl>
-  {:doc "The Piped Lisp macro."}
+  {:doc "The Piped Lisp macro, extended to understanding the global parent value."}
   [& forms]
   (let [delimited-forms (->> (partition-by pipe-sep forms)
                              ;; Remove | as pure syntax, and support
@@ -932,7 +932,9 @@ final corePiLisp = r'''
         first-clause (if (invocable-form? car)
                        (list 'let [car-g car]
                              (list 'if (list 'fn? car-g) ;; TODO Decide on term auto-invocation
-                                   first-clause-form
+                                   (if (> (count first-clause-form) 1)
+                                     first-clause-form
+                                     (reverse (cons (list '.) (reverse first-clause-form))))
                                    (list 'do car-g)))
                        (cons 'do first-clause-form))
         ;; Body of as->
@@ -1064,7 +1066,10 @@ final corePiLisp = r'''
   (let [destructured-bindings (destructure bindings)]
     (list 'let* destructured-bindings (cons 'do body))))
 
-;; Destructured Let now available.
+;; Destructured let now available.
+
+(defn bindings []
+  (into {} (remove (comp :private :meta val) (bindings*))))
 
 (defn get-in
   {:doc "Returns the value in a nested associative structure, where ks is a sequence of keys. Returns nil if the key is not present, or the not-found value if supplied."}
@@ -1158,7 +1163,7 @@ final corePiLisp = r'''
 
 (defn .
   {:doc "Current parent value. Resolves symbols using bindings at invocation time."}
-  []
+  [& _]
   (let [value (pl/get-parent)]
     (if (symbol? value)
       (let [bs (bindings)]
