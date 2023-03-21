@@ -33,7 +33,7 @@ class PLEnv {
         IMap({termDoc: 'Returns the current version of PiLisp.'})),
     PLSymbol('identical?'): PLBindingEntry.withMeta(isIdenticalFn,
         IMap({termDoc: 'Returns true if x and y are the same object.'})),
-    PLSymbol('bindings'): PLBindingEntry.withMeta(
+    PLSymbol('bindings*'): PLBindingEntry.withMeta(
       bindingsFn,
       IMap({
         termDoc:
