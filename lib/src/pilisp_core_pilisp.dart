@@ -934,7 +934,12 @@ final corePiLisp = r'''
                              (list 'if (list 'fn? car-g) ;; TODO Decide on term auto-invocation
                                    (if (> (count first-clause-form) 1)
                                      first-clause-form
-                                     (reverse (cons (list '.) (reverse first-clause-form))))
+                                     (if (list? car)
+                                       ;; Assume arguments have been passed as desired.
+                                       first-clause-form
+                                       ;; Support quick invocation of single-argument functions
+                                       ;; designed to refer to the current parent.
+                                       (reverse (cons (list '.) (reverse first-clause-form)))))
                                    (list 'do car-g)))
                        (cons 'do first-clause-form))
         ;; Body of as->
