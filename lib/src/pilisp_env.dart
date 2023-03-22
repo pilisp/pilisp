@@ -50,6 +50,12 @@ class PLEnv {
         })),
     PLSymbol('pl/set-parent'): PLBindingEntry.withMeta(plSetParentFn,
         IMap({termDoc: 'Set the environment parent to the given value.'})),
+    PLSymbol('resolve*'): PLBindingEntry.withMeta(
+        resolveFn,
+        IMap({
+          termDoc:
+              'Return a binding for the given symbol. Throws an exception if unresolvable.'
+        })),
     PLSymbol('pl/debug!'): PLBindingEntry.withMeta(debugBangFn,
         IMap({termDoc: 'Set the debug environment to true or false.'})),
     PLSymbol('next-symbol-id'): PLBindingEntry.withMeta(
@@ -432,6 +438,10 @@ class PLBindingEntry {
     final plBindingEntry = PLBindingEntry(value);
     plBindingEntry.meta = meta;
     return plBindingEntry;
+  }
+
+  IMap<PLTerm, Object?> toPLExpr() {
+    return IMap({PLTerm('meta'): meta, PLTerm('value'): value});
   }
 
   bool get isMacro => meta.get(PLTerm('macro')) == true;

@@ -2,6 +2,7 @@
 import 'dart:collection';
 
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
+import 'package:pilisp/src/pilisp_error.dart';
 
 import 'pilisp_env.dart';
 import 'pilisp_expr.dart';
@@ -85,10 +86,7 @@ IMap<PLSymbol, IMap<Object?, Object?>> bindingsFn(PLEnv env, PLVector args) {
     Map<PLSymbol, IMap<Object?, Object?>> ret = {};
     for (final key in m.keys) {
       final bindingEntry = m[key]!;
-      ret[key] = IMap({
-        PLTerm('value'): bindingEntry.value,
-        PLTerm('meta'): bindingEntry.meta,
-      });
+      ret[key] = bindingEntry.toPLExpr();
     }
     return ret.toIMap();
   } else {
@@ -170,6 +168,26 @@ Object? plGetParentFn(PLEnv env, PLVector args) {
   } else {
     throw ArgumentError(
         'The pl/get-parent function expects 0 arguments, but received ${args.length} arguments.');
+  }
+}
+
+Object? resolveFn(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final sym = args[0];
+    if (sym is PLSymbol) {
+      if (env.isBound(sym)) {
+        // [env.isBound] ensures it's present
+        return env.getBinding(sym)!.toPLExpr();
+      } else {
+        throw UndefinedSymbol(sym);
+      }
+    } else {
+      throw ArgumentError(
+          'The resolve* function expects its first argument to be a symbol, but received a ${typeString(sym)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The resolve* function expects 1 argument, but received ${args.length} arguments.');
   }
 }
 

@@ -1134,9 +1134,12 @@ final corePiLisp = r'''
       (first ss)))))
 
 (defn resolve
-  {:doc "Resolve a symbol to an entry in the PiLisp bindings map."}
+  {:doc "Resolve a symbol to an entry in the PiLisp bindings map. The structure of this map is:
+
+  - `:meta`  The metadata stored for this entry
+  - `:value` The PiLisp value stored for this entry"}
   [sym]
-  (get (bindings) sym))
+  (resolve* sym))
 
 (defmacro doc
   {:doc "Print doc string for the binding for `sym`, if it exists."}
@@ -1165,7 +1168,7 @@ final corePiLisp = r'''
 
 (defmacro cd
   {:doc "Change the current parent value in the PiLisp environment. Macro so as to support symbols for names and binding resolution."}
-  ([] '(pl/set-parent))
+  ([] '(pl/set-parent nil))
   ([new-parent]
    (list 'pl/set-parent
          (if (symbol? new-parent)
@@ -1177,10 +1180,7 @@ final corePiLisp = r'''
   [& _]
   (let [value (pl/get-parent)]
     (if (symbol? value)
-      (let [bs (bindings)]
-        (if (contains-key? bs value)
-          (.value (get (bindings) value))
-          (println "Warning: No such symbol" value)))
+      (.value (resolve value))
       value)))
 
 (defn ls
