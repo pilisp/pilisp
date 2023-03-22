@@ -41,13 +41,13 @@ void repl() {
         if (programData is PLList) {
           final fileName = programData.last.toString();
           print('Loading $fileName');
-          loadFile(fileName);
+          loadFile(fileName, []);
         } else {
           final expr = PiLisp.readString('[ $programSource ]');
           if (expr is PLVector) {
             final fileName = expr.last.toString();
             print('Loading $fileName');
-            loadFile(fileName);
+            loadFile(fileName, []);
           }
         }
       } else {
@@ -87,8 +87,11 @@ String readFile(String path) {
   return File(path).readAsStringSync();
 }
 
-Future<void> loadFile(String path) async {
+Future<void> loadFile(String path, Iterable<String> args) async {
   final programSource = readFile(path);
+  PiLisp.loadString('''
+(def *command-line-args* '[${args.map((e) => '"${e.replaceAll('"', '\\"')}"').join(' ')}])
+''');
   stdout.writeln(PiLisp.printToString(PiLisp.loadString(programSource)));
   await piLispEnv.shutDown();
 }
@@ -96,20 +99,29 @@ Future<void> loadFile(String path) async {
 final usage = r'''
 PiLisp
 
-pl        - Run REPL
-pl [file] - Loads the file as PiLisp code
+pl                  - Run PiLisp REPL
+pl -h/--help        - Print usage information
+pl -l/--load <file> - Load the file as PiLisp code, binds args to *command-line-args*
 ''';
 
 void main(List<String> args) async {
   if (args.isEmpty) {
     repl();
-  } else if (args.length == 1) {
+  } else if (args.isNotEmpty) {
     final arg = args[0].trim();
     if (arg == '-h' || arg == '--help') {
       print(usage);
       exit(0);
+    } else if (arg == '-l' || arg == '--load') {
+      if (args.length >= 2) {
+        await loadFile(args[1], args.skip(2));
+      } else {
+        print(usage);
+        exit(1);
+      }
     } else {
-      await loadFile(args[0]);
+      // Assume single file name to load, no further args
+      await loadFile(args[0], []);
     }
     exit(0);
   } else {
