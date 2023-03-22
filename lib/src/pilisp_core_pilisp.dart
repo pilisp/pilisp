@@ -929,7 +929,12 @@ final corePiLisp = r'''
         car (first first-clause-form)
         car-g (gensym 'car)
         ;; partition-by wrapped every clause in a list
-        first-clause (if (invocable-form? car)
+        first-clause (cond
+                       ;; NB. It's natural to want to def in this way. Not
+                       ;;     clear whether that's true of other special forms.
+                       (= car 'def) first-clause-form
+
+                       (invocable-form? car)
                        (list 'let [car-g car]
                              (list 'if (list 'fn? car-g) ;; TODO Decide on term auto-invocation
                                    (if (> (count first-clause-form) 1)
@@ -941,7 +946,8 @@ final corePiLisp = r'''
                                        ;; designed to refer to the current parent.
                                        (reverse (cons (list '.) (reverse first-clause-form)))))
                                    (list 'do car-g)))
-                       (cons 'do first-clause-form))
+
+                       :else (cons 'do first-clause-form))
         ;; Body of as->
         next-clauses (->> (next delimited-forms)
                           (map (fn format-next-clause [form]
