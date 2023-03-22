@@ -1311,7 +1311,6 @@ PLInterpretedCode interpretBody(Object? form, PLEnv env) {
             } else {
               final interpretedBindingValue =
                   interpretBody(bindingVector[i], env);
-              // TODO Causes mass test failure
               closedScopeMappings.addAll(interpretedBindingValue.closedScope);
               // CODE ADD
               interpretedLetBindingVector =
@@ -1690,7 +1689,6 @@ Object? plEval(PLEnv env, Object? expr) {
   env.debugPrint('[DEBUG] ${plPrintToString(env, expr)}');
   try {
     if (expr is PLExpr) {
-      // TODO Special handling for PLFunction to capture bindings only available at eval time. Should be able to nab those identified in closedScope for the arities of the function.
       if (expr is PLList) {
         // NB: Report line number of form where an exception is raised.
         try {
