@@ -1213,6 +1213,31 @@ final corePiLisp = r'''
                   (dart/String.contains doc search))))
           (bindings)))))
 
+;; Math
+
+;; dart:math constants:
+;;
+;; e
+;; ln10
+;; ln2
+;; log10e
+;; log2e
+;; pi
+;; sqrt1_2
+;; sqrt2
+
+;; dart/dart-math-pow
+;; dart/dart-math-acos
+;; dart/dart-math-log
+;; dart/dart-math-cos
+;; dart/dart-math-tan
+;; dart/dart-math-sin
+;; dart/dart-math-exp
+;; dart/dart-math-asin
+;; dart/dart-math-atan
+;; dart/dart-math-sqrt
+;; dart/dart-math-atan2
+
 ;; Strings
 
 (defn subs
