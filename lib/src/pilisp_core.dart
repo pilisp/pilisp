@@ -133,6 +133,15 @@ PLList arglistsFn(PLEnv env, PLVector args) {
   }
 }
 
+PLEnv envFn(PLEnv env, PLVector args) {
+  if (args.isEmpty) {
+    return env;
+  } else {
+    throw ArgumentError(
+        'The pl/env function does not accept any arguments, but received ${args.length} arguments.');
+  }
+}
+
 bool debugBangFn(PLEnv env, PLVector args) {
   if (args.length == 1) {
     final bl = args[0];
@@ -448,6 +457,55 @@ List<Object?> toDartListFn(PLEnv env, PLVector args) {
   }
 }
 
+List<int> toDartIntListFn(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final coll = args[0];
+    List<int> l = [];
+    if (coll is PLList) {
+      for (final x in coll.iter) {
+        if (x is int) {
+          l.add(x);
+        } else {
+          throw ArgumentError(
+              'The to-dart-int-list function expects all of the items in the collection passed to it to be ints, but received a ${typeString(x)} value.');
+        }
+      }
+    } else if (coll is PLVector) {
+      for (final x in coll.iter) {
+        if (x is int) {
+          l.add(x);
+        } else {
+          throw ArgumentError(
+              'The to-dart-int-list function expects all of the items in the collection passed to it to be ints, but received a ${typeString(x)} value.');
+        }
+      }
+    } else if (coll is IList) {
+      for (final x in coll) {
+        if (x is int) {
+          l.add(x);
+        } else {
+          throw ArgumentError(
+              'The to-dart-int-list function expects all of the items in the collection passed to it to be ints, but received a ${typeString(x)} value.');
+        }
+      }
+    } else if (coll is List) {
+      if (coll is List<int>) {
+        return coll;
+      } else {
+        throw ArgumentError(
+            'The dart-to-int-list function expects a list passed to it to be List<int>, but received a ${typeString(coll)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The to-dart-int-list function does not know how to convert a ${typeString(coll)} value into a Dart List.');
+    }
+    return l;
+  } else {
+    throw FormatException(
+        'The to-dart-int-list function expects 1 argument, but received ${args.length} arguments.');
+  }
+}
+
 Map<Object?, Object?> toDartMapFn(PLEnv env, PLVector args) {
   if (args.length == 1) {
     final coll = args[0];
@@ -714,7 +772,12 @@ Object? getFn(PLEnv env, PLVector args) {
 }
 
 int countFn(PLEnv env, PLVector args) {
-  final seq = seqFn(env, PLVector([args[0]]));
+  final fst = args[0];
+  if (fst is String) {
+    return fst.length;
+  }
+  // TODO Don't create a seq just to do count. Check types, use seq as fallback.
+  final seq = seqFn(env, PLVector([fst]));
   if (seq == null) {
     return 0;
   } else {
@@ -1309,22 +1372,27 @@ bool isFnFn(PLEnv env, PLVector args) {
 }
 
 PLException exInfoFn(PLEnv env, PLVector args) {
-  if (args.length != 2) {
-    throw FormatException(
-        'The ex-info function expects a message and a data map, but received ${args.length} arguments.');
-  }
-  final message = args[0];
-  final data = args[1];
-  if (message is String) {
-    if (data is IMap) {
+  var data = IMap({});
+  if (args.length == 1 || args.length == 2) {
+    final message = args[0];
+    if (args.length == 2) {
+      final maybeMap = args[1];
+      if (maybeMap is IMap) {
+        data = maybeMap;
+      } else {
+        throw FormatException(
+            'The ex-info function expects its second argument to be a map, but received a ${typeString(data)} value.');
+      }
+    }
+    if (message is String) {
       return PLException.withData(message, data);
     } else {
       throw FormatException(
-          'The ex-info function expects its second argument to be a map, but received a ${typeString(data)} value.');
+          'The ex-info function expects its first argument to be a String, but received a ${typeString(message)} value.');
     }
   } else {
-    throw FormatException(
-        'The ex-info function expects its first argument to be a String, but received a ${typeString(message)} value.');
+    throw ArgumentError(
+        'The ex-info expects 1 or 2 arguments, but received ${args.length} arguments.');
   }
 }
 

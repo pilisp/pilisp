@@ -42,6 +42,8 @@ class PLEnv {
     ),
     PLSymbol('arglists'): PLBindingEntry.withMeta(arglistsFn,
         IMap({termDoc: 'Return arglists for given invocable value.'})),
+    PLSymbol('pl/env'): PLBindingEntry.withMeta(
+        envFn, IMap({termDoc: 'The PiLisp environment for evaluation.'})),
     PLSymbol('pl/get-parent'): PLBindingEntry.withMeta(
         plGetParentFn,
         IMap({
@@ -116,6 +118,12 @@ class PLEnv {
         toDartListFn,
         IMap({
           termDoc: 'Returns a Dart List representation of the given collection.'
+        })),
+    PLSymbol('to-dart-int-list'): PLBindingEntry.withMeta(
+        toDartIntListFn,
+        IMap({
+          termDoc:
+              'Returns a Dart List<int> representation of the given collection.'
         })),
     PLSymbol('to-dart-map'): PLBindingEntry.withMeta(
         toDartMapFn,

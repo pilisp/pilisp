@@ -36,6 +36,16 @@
               (test/is= "abc" (dart/Iterable.join (to-dart-list ['a 'b 'c])))
               (test/is= "a, b, c" (dart/Iterable.join-full (to-dart-list ['a 'b 'c]) ", "))))
 
+(defn test-string-functions
+  {:test true}
+  []
+  (test/group "String functions"
+              (test/is= true (str/blank? nil))
+              (test/is= true (str/blank? ""))
+              (test/is= true (str/blank? " "))
+              (test/is= true (str/blank? " \t \n  \r \t     \r\n"))
+              (test/is= true (not (str/blank? " \t pilisp  \n\n")))))
+
 (def core-pilisp-tests
   (reduce
    (fn [acc binding]
@@ -57,5 +67,5 @@
                      (> (count error) 0))]
   (test/suite-reset)
   (if exit-fail?
-    (throw (ex-info "Tests failed. See report above.") {})
+    (throw (ex-info "Tests failed. See report above."))
     :all-tests-pass))

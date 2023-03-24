@@ -9,6 +9,8 @@ import 'package:build/build.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:source_gen/source_gen.dart';
 
+import '../pilisp.dart';
+
 final listType = reflectType(List);
 final typedDataType = reflectType(TypedData);
 final mapType = reflectType(Map);
@@ -106,6 +108,7 @@ final sourceClasses = {
   num,
   Object,
   Pattern,
+  PiLisp,
   // pragma, // skip
   RegExp,
   RegExpMatch,
@@ -147,6 +150,7 @@ final importsForGenerated = [
   'dart:typed_data',
   'dart:math',
   'package:fast_immutable_collections/fast_immutable_collections.dart',
+  '../pilisp.dart',
   'pilisp_env.dart',
   'pilisp_expr.dart',
 ];

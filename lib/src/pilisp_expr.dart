@@ -1694,11 +1694,11 @@ Object? plEval(PLEnv env, Object? expr) {
         try {
           return expr.eval(env);
         } catch (_) {
-          // if (expr.loc != null) {
-          //   final id = env.nextId();
-          //   print('($id) Error on line ${expr.loc}');
-          //   print('($id) Form:\n${plPrintToString(env, expr)}');
-          // }
+          if (expr.loc != null) {
+            final id = env.nextId();
+            print('($id) Error on line ${expr.loc}');
+            print('($id) Form:\n${plPrintToString(env, expr)}');
+          }
           rethrow;
         }
       }

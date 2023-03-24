@@ -236,6 +236,9 @@ final corePiLisp = r'''
   [x]
   (= 'RegExp (type x)))
 
+(def regex reg-exp?)
+(def regexp reg-exp?)
+
 (defn named?
   {:doc "Returns true if the argument is a string, symbol, or term."}
   [x]
@@ -1212,23 +1215,110 @@ final corePiLisp = r'''
 
 ;; Strings
 
+(defn subs
+  ([s start] (dart/String.substring s start))
+  ([s start end-exclusive] (dart/String.substring-full s start end-exclusive)))
+
+(def substring subs)
+
+(defn str/from-char-codes
+  [char-codes]
+  (dart/String.fromCharCodes (to-dart-int-list char-codes)))
+
+(defn str/upper-case
+  {:doc "Converts string to all upper-case."}
+  [s]
+  (dart/String.toUpperCase s))
+
+(defn str/lower-case
+  {:doc "Converts string to all lower-case."}
+  [s]
+  (dart/String.toLowerCase s))
+
+(defn str/capitalize
+  {:doc "Converts first character of the string to upper-case, all other characters to lower-case."}
+  [s]
+  (let [s (str s)]
+    (if (< (count s) 2)
+      (dart/String.toUpperCase s)
+      (str (dart/String.toUpperCase (subs s 0 1))
+           (dart/String.toLowerCase (subs s 1))))))
+
+(defn str/replace
+  {:doc "Replace all instances in `s` of `match` with `replacement`. The `match` can be any Dart `Pattern`."}
+  [s match replacement]
+  (dart/String.replaceAll s match replacement))
+
+(defn str/replace-first
+  {:doc "Replace first instance in `s` of `match` with `replacement`, optionally starting at `from-idx`. The `match` can be any Dart `Pattern`."}
+  ([s match replacement] (str/replace-first s match replacement 0))
+  ([s match replacement from-idx]
+   (if (not (reg-exp? match))
+     (throw (ex-info (str "The str/replace function expects its second argument to be a regular expression, but received a " (type match) " value.")))
+     (dart/String.replaceFirst-full s match replacement from-idx))))
+
+(defn str/split
+  {:doc "Split the string `s` into vectors when `match` is encountered. The `match` can be any Dart `Pattern`."}
+  [s match]
+  (dart/String.split s match))
+
 (defn str/join
-  [sep coll]
-  (let [sb (dart/StringBuffer.)]
-    (cond
-      (empty? coll) ""
-      (= 1 (count coll)) (str (first coll))
-      :else
-      (do
-        (dart/StringBuffer.write sb (first coll))
-        (dart/StringBuffer.toString
-         (reduce
-          (fn [sb item]
-            (dart/StringBuffer.write sb sep)
-            (dart/StringBuffer.write sb item)
-            sb)
-          sb
-          (next coll)))))))
+  ([coll]
+   (dart/Iterable.join (to-dart-list coll)))
+  ([sep coll]
+   (dart/Iterable.join-full (to-dart-list coll) sep)))
+
+(defn str/trim
+  {:doc "Trim whitespace at beginning and end of `s`."}
+  [s]
+  (dart/String.trim s))
+
+(defn str/triml
+  {:doc "Trim whitespace at beginning (left side) of `s`."}
+  [s]
+  (dart/String.trimLeft s))
+
+(def str/trim-left str/triml)
+
+(defn str/trimr
+  {:doc "Trim whitespace at end (right side) of `s`."}
+  [s]
+  (dart/String.trimRight s))
+
+(def str/trim-right str/triml)
+
+(defn str/trim-newline
+  {:doc "Trim trailing newlines."}
+  [s]
+  (dart/String.replaceAll s #"(\n|\r\n|\r)+$" ""))
+
+(defn str/blank?
+  [s]
+  (or (nil? s)
+      (empty? s)
+      (dart/RegExp.hasMatch #"^[ \t\r\n]+$" s)))
+
+;; TODO str/escape. Need to consider whether char type is worth it.
+
+(defn str/index-of
+  ([pattern value] (dart/String.indexOf pattern value))
+  ([pattern value from-idx] (dart/String.indexOf-full pattern value from-idx)))
+
+(defn str/last-index-of
+  ([pattern value] (dart/String.lastIndexOf pattern value))
+  ([pattern value from-idx] (dart/String.lastIndexOf-full pattern value from-idx)))
+
+(defn str/starts-with?
+  [s substr]
+  (dart/String.startsWith s substr))
+
+(defn str/ends-with?
+  [s substr]
+  (dart/String.endsWith s substr))
+
+(defn str/includes?
+  ([s substr] (dart/String.contains s substr))
+  ([s substr from-idx] (dart/String.contains-full s substr from-idx)))
 
 ;; Maps
 
@@ -1450,6 +1540,17 @@ final corePiLisp = r'''
     (prewalk (fn [x] (print "Walked: ") (prn x) x) form))
   )
 
+;; PiLisp
+
+(defn read-string [s]
+  (dart/PiLisp.readString s))
+
+(defn load-string [s]
+  (dart/PiLisp.loadString s))
+
+(defn eval [form]
+  (dart/PiLisp.eval form))
+
 ;; Test Framework
 
 (def test/suite-empty
@@ -1552,7 +1653,7 @@ final corePiLisp = r'''
         data (second fail)
         expected (:expected data)
         actual (:actual data)
-        expected-code (:expected-code data)
+        expected-code (or (:expected-code data) (:test-code data))
         actual-code (:actual-code data)
 
         msg (third fail)]
@@ -1575,7 +1676,7 @@ final corePiLisp = r'''
 
         data (second error)
         expected (:expected data)
-        expected-code (:expected-code data)
+        expected-code (or (:expected-code data) (:test-code data))
         actual-code (:actual-code data)
         error (:error data)
         explanation (:explanation data)

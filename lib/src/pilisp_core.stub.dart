@@ -9,6 +9,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:math';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
+import '../pilisp.dart';
 import 'pilisp_env.dart';
 import 'pilisp_expr.dart';
 
@@ -1138,6 +1139,29 @@ Map<PLSymbol, PLBindingEntry> wrapperBindings = {
 // END matchAsPrefix -----------------------
 // START CTOR  -----------------------
 // Skipping binding for constructor of abstract class Pattern
+// END  -----------------------
+// Class PiLisp with 7 declarations
+// START readString -----------------------
+  PLSymbol('dart/PiLisp.readString'): PLBindingEntry(dart_PiLisp_readString),
+// END readString -----------------------
+// START eval -----------------------
+  PLSymbol('dart/PiLisp.eval'): PLBindingEntry(dart_PiLisp_eval),
+// END eval -----------------------
+// START loadString -----------------------
+  PLSymbol('dart/PiLisp.loadString'): PLBindingEntry(dart_PiLisp_loadString),
+// END loadString -----------------------
+// START printToString -----------------------
+  PLSymbol('dart/PiLisp.printToString'):
+      PLBindingEntry(dart_PiLisp_printToString),
+// END printToString -----------------------
+// START print -----------------------
+  PLSymbol('dart/PiLisp.print'): PLBindingEntry(dart_PiLisp_print),
+// END print -----------------------
+// START typeName -----------------------
+  PLSymbol('dart/PiLisp.typeName'): PLBindingEntry(dart_PiLisp_typeName),
+// END typeName -----------------------
+// START CTOR  -----------------------
+  PLSymbol('dart/PiLisp.'): PLBindingEntry(dart_PiLisp_),
 // END  -----------------------
 // Class RegExp with 11 declarations
 // START escape -----------------------
@@ -6904,6 +6928,125 @@ Match? dart_Pattern_matchAsPrefix_full(PLEnv env, PLVector args) {
   } else {
     throw ArgumentError(
         'The dart/Pattern.matchAsPrefix-full function expects 3 argument(s) (the Pattern object + matchAsPrefix args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Object? dart_PiLisp_readString(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! String) {
+      throw ArgumentError(
+          'The dart/PiLisp.readString function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = PiLisp.readString(
+      args[0] as String,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/PiLisp.readString function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Object? dart_PiLisp_eval(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Object) {
+      throw ArgumentError(
+          'The dart/PiLisp.eval function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = PiLisp.eval(
+      args[0] as Object,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/PiLisp.eval function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Object? dart_PiLisp_loadString(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! String) {
+      throw ArgumentError(
+          'The dart/PiLisp.loadString function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = PiLisp.loadString(
+      args[0] as String,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/PiLisp.loadString function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+String? dart_PiLisp_printToString(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Object) {
+      throw ArgumentError(
+          'The dart/PiLisp.printToString function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = PiLisp.printToString(
+      args[0] as Object,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/PiLisp.printToString function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+void dart_PiLisp_print(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Object) {
+      throw ArgumentError(
+          'The dart/PiLisp.print function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = PiLisp.print(
+      args[0] as Object,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/PiLisp.print function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+String? dart_PiLisp_typeName(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Object) {
+      throw ArgumentError(
+          'The dart/PiLisp.typeName function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = PiLisp.typeName(
+      args[0] as Object,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/PiLisp.typeName function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+PiLisp? dart_PiLisp_(PLEnv env, PLVector args) {
+  if (args.isEmpty) {
+    final returnValue = PiLisp();
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/PiLisp. function expects 0 constructor argument(s) but received ${args.length} arguments.');
   }
 }
 
