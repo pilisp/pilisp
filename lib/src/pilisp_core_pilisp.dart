@@ -922,18 +922,18 @@ final corePiLisp = r'''
   {:doc "Traverses form, an arbitrary data structure.  inner and outer are functions.  Applies inner to each element of form, building up a data structure of the same type, then applies outer to the result. Recognizes all Clojure data structures. Consumes seqs as with doall."}
   [inner outer form]
   (cond
-   (list? form) (outer (apply list (map inner form)))
-   (map-entry? form)
-   (outer [(inner (key form)) (inner (val form))])
-   ;; (instance? clojure.lang.IRecord form)
-   ;;   (outer (reduce (fn [r x] (conj r (inner x))) form form))
-   (coll? form) (outer (into (empty form) (map inner form)))
-   :else (outer form)))
+    (list? form) (outer (apply list (map inner form)))
+    (map-entry? form)
+    (outer [(inner (key form)) (inner (val form))])
+    ;; (instance? clojure.lang.IRecord form)
+    ;;   (outer (reduce (fn [r x] (conj r (inner x))) form form))
+    (coll? form) (outer (into (empty form) (map inner form)))
+    :else (outer form)))
 
 (defn postwalk
   {:doc  "Performs a depth-first, post-order traversal of form.  Calls f on each sub-form, uses f's return value in place of the original. Recognizes all Clojure data structures. Consumes seqs as with doall."}
   [f form]
-  (walk (partial postwalk f) f form))
+  (walk (fn postwalk-fn [x] (postwalk f x)) f form))
 
 (defn prewalk
   {:doc "Like postwalk, but does pre-order traversal."}
@@ -1604,7 +1604,7 @@ final corePiLisp = r'''
 (defn postwalk-replace
   {:doc "Recursively transforms form by replacing keys in smap with their values.  Like clojure/replace but works on any data structure.  Does replacement at the leaves of the tree first."}
   [smap form]
-  (postwalk (fn [x] (if (contains? smap x) (smap x) x)) form))
+  (postwalk (fn postwalk-replace-fn [x] (if (contains? smap x) (smap x) x)) form))
 
 (defn macroexpand-all
   {:doc "Recursively performs all possible macroexpansions in form."}
