@@ -1007,7 +1007,10 @@ final corePiLisp = r'''
                                        first-clause-form
                                        ;; Support quick invocation of single-argument functions
                                        ;; designed to refer to the current parent.
-                                       (reverse (cons (list '.) (reverse first-clause-form)))))
+                                       (if (= car 'cd)
+                                         ;; Special handling for `cd` to reset parent to nil
+                                         (list 'cd nil)
+                                         (reverse (cons (list '.) (reverse first-clause-form))))))
                                    (list 'do car-g)))
 
                        :else (cons 'do first-clause-form))
