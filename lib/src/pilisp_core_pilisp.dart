@@ -1674,6 +1674,25 @@ final corePiLisp = r'''
     (prewalk (fn [x] (print "Walked: ") (prn x) x) form))
   )
 
+;; Template
+
+(defn apply-template
+  [argv expr values]
+  (assert (vector? argv))
+  (assert (every? symbol? argv))
+  (postwalk-replace (zipmap argv values) expr))
+
+(defmacro do-template
+  {:doc "Repeatedly copies expr (in a do block) for each group of arguments in values.  values are automatically partitioned by the number of arguments in argv, an argument vector as in defn.
+
+  Example: (macroexpand '(do-template [x y] (+ y x) 2 4 3 5))
+           ;=> (do (+ 4 2) (+ 5 3))"}
+  [argv expr & values]
+  (let [c    (count argv)
+        body (map (fn [a] (apply-template argv expr a))
+                  (partition c values))]
+    (cons 'do body)))
+
 ;; PiLisp
 
 (defn read-string [s]
