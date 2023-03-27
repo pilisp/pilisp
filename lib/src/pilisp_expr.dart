@@ -1596,7 +1596,7 @@ class PLFunction extends PLNamedInvocable {
               .add(variableParam))
           .toIList();
       // Bind symbol after `&` to a "vector" of the arguments provided.
-      finalArgs = requiredArgs.toIList().add(variableArgs.toPLVector());
+      finalArgs = requiredArgs.toIList().add(variableArgs.toPLList());
     } else {
       finalParams = List<PLSymbol>.from(arity.params.iter).toIList();
       finalArgs = args.toIList();
