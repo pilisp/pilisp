@@ -501,34 +501,64 @@ final corePiLisp = r'''
    []
    coll))
 
-(defn partition-reduction
-  {:doc "Returns map of parts, whole, and step-n for partitioning the giving collection with n-sized buckets at step intervals."
+;; NB. The partition reduction helpers avoid stack consumption via recursive calls with cons.
+(defn partition-reduction-list
+  {:doc "Returns map of parts, whole, and step-n for partitioning the given list with n-sized buckets at step intervals."
    :private true}
   [n step coll]
   (reduce
-            (fn [acc item]
-              ;; NB. Destructuring not available yet, see below
-              (let [parts (:parts acc) whole (:whole acc) step-n (:step-n acc)
-                    ;; Handle completed partition
-                    v (if (= n (count (first parts)))
-                        [(next parts) (conj whole (first parts))]
-                        [parts whole])
-                    parts (first v) whole (second v)
-                    ;; Add new partition if step
-                    v (if (> step-n 0)
-                        [(dec step-n) parts]
-                        ;; Start next step, include this step as 1st
-                        [(dec step) (conj parts [])])
-                    step-n (first v) parts (second v)
-                    ;; Fill in partitions with current item
-                    parts (map #(conj % item) parts)]
-                {:parts parts
-                 :step-n step-n
-                 :whole whole}))
-            {:parts [[]]
-             :step-n step
-             :whole []}
-            coll))
+   (fn partition-reduction-list-reduce [acc item]
+     ;; NB. Destructuring not available yet, see below
+     (let [parts (:parts acc) whole (:whole acc) step-n (:step-n acc)
+           ;; Handle completed partition
+           v (if (= n (count (first parts)))
+               [(next parts) (concat whole (list (reverse (first parts))))]
+               [parts whole])
+           parts (first v) whole (second v)
+           ;; Add new partition if step
+           v (if (> step-n 0)
+               [(dec step-n) parts]
+               ;; Start next step, include this step as 1st
+               [(dec step) (concat parts '(()))])
+           step-n (first v) parts (second v)
+           ;; Fill in partitions with current item
+           parts (map #(cons item %) parts)]
+       {:parts parts
+        :step-n step-n
+        :whole whole}))
+   {:parts '(())
+    :step-n step
+    :whole ()}
+   coll))
+
+(defn partition-reduction-vector
+  {:doc "Returns map of parts, whole, and step-n for partitioning the given vector with n-sized buckets at step intervals."
+   :private true}
+  [n step coll]
+  (reduce
+   (fn partition-reduction-vector-reduce [acc item]
+     ;; NB. Destructuring not available yet, see below
+     (let [parts (:parts acc) whole (:whole acc) step-n (:step-n acc)
+           ;; Handle completed partition
+           v (if (= n (count (first parts)))
+               [(next parts) (conj whole (first parts))]
+               [parts whole])
+           parts (first v) whole (second v)
+           ;; Add new partition if step
+           v (if (> step-n 0)
+               [(dec step-n) parts]
+               ;; Start next step, include this step as 1st
+               [(dec step) (conj parts [])])
+           step-n (first v) parts (second v)
+           ;; Fill in partitions with current item
+           parts (map #(conj % item) parts)]
+       {:parts parts
+        :step-n step-n
+        :whole whole}))
+   {:parts [[]]
+    :step-n step
+    :whole []}
+   coll))
 
 (declare empty?)
 
@@ -537,22 +567,36 @@ final corePiLisp = r'''
   ([n coll]
    (partition n n coll))
   ([n step coll]
-   (let [m (partition-reduction n step coll)
+   (assert (or (vector? coll) (list? coll)))
+   (let [lst? (list? coll)
+         m (if lst?
+             (partition-reduction-list n step coll)
+             (partition-reduction-vector n step coll))
          parts (:parts m) whole (:whole m)
          remnant (first parts)]
      (if (= n (count remnant))
-       (conj whole remnant)
+       (if lst?
+         (concat whole (list (reverse remnant)))
+         (conj whole remnant))
        whole)))
   ([n step pad coll]
-   (let [m (partition-reduction n step coll)
+   (assert (or (vector? coll) (list? coll)))
+   (let [lst? (list? coll)
+         m (if lst?
+             (partition-reduction-list n step coll)
+             (partition-reduction-vector n step coll))
          parts (:parts m) whole (:whole m)
          remnant (first parts)]
      (if (empty? remnant)
        whole
-       (conj whole
-             (apply conj
-                    remnant
-                    (take (- n (count remnant)) pad)))))))
+       (if lst?
+         (concat whole
+                 (list (concat (reverse remnant)
+                               (take (- n (count remnant)) pad))))
+         (conj whole
+               (apply conj
+                      remnant
+                      (take (- n (count remnant)) pad))))))))
 
 (defn partition-by*
   [f coll]
