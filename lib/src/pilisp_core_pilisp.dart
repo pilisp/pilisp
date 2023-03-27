@@ -806,38 +806,54 @@ final corePiLisp = r'''
 (defn map
   ([f coll]
    (when-let [s (seq coll)]
-     (reduce
-      (fn map-reduce-1 [acc item]
-        (conj acc (f item)))
-      (empty s)
-      s)))
+     (let [ret (reduce
+                (fn map-reduce-1 [acc item]
+                  (conj acc (f item)))
+                (empty s)
+                s)]
+       ;; NB. Clojure's map returns a lazy seq using cons, and so order
+       ;;     is not an issue. This and further checks on list? ensure
+       ;;     the order is correct given conj with lists appends to
+       ;;     the head, rather than the tail.
+       (if (list? ret)
+         (reverse ret)
+         ret))))
   ([f c1 c2]
    (let [s1 (seq c1) s2 (seq c2)]
      (when (and s1 s2)
-       (reduce
-        (fn map-reduce-2 [acc item]
-          (let [item-a (first item) item-b (second item)]
-            (conj acc (f item-a item-b))))
-        (empty s1)
-        (partition 2 (interleave s1 s2))))))
+       (let [ret (reduce
+                  (fn map-reduce-2 [acc item]
+                    (let [item-a (first item) item-b (second item)]
+                      (conj acc (f item-a item-b))))
+                  (empty s1)
+                  (partition 2 (interleave s1 s2)))]
+         (if (list? ret)
+           (reverse ret)
+           ret)))))
   ([f c1 c2 c3]
    (let [s1 (seq c1) s2 (seq c2) s3 (seq c3)]
      (when (and s1 s2 s3)
-       (reduce
-        (fn map-reduce-3 [acc item]
-          (let [item-a (first item) item-b (second item) item-c (third item)]
-            (conj acc (f item-a item-b item-c))))
-        (empty s1)
-        (partition 3 (interleave s1 s2 s3))))))
+       (let [ret (reduce
+                  (fn map-reduce-3 [acc item]
+                    (let [item-a (first item) item-b (second item) item-c (third item)]
+                      (conj acc (f item-a item-b item-c))))
+                  (empty s1)
+                  (partition 3 (interleave s1 s2 s3)))]
+         (if (list? ret)
+           (reverse ret)
+           ret)))))
   ([f c1 c2 c3 c4]
    (let [s1 (seq c1) s2 (seq c2) s3 (seq c3) s4 (seq c4)]
      (when (and s1 s2 s3 s4)
-       (reduce
-        (fn map-reduce-3 [acc item]
-          (let [item-a (first item) item-b (second item) item-c (third item) item-d (fourth item)]
-            (conj acc (f item-a item-b item-c item-d))))
-        (empty s1)
-        (partition 4 (interleave s1 s2 s3 s4))))))
+       (let [ret (reduce
+                  (fn map-reduce-3 [acc item]
+                    (let [item-a (first item) item-b (second item) item-c (third item) item-d (fourth item)]
+                      (conj acc (f item-a item-b item-c item-d))))
+                  (empty s1)
+                  (partition 4 (interleave s1 s2 s3 s4)))]
+         (if (list? ret)
+           (reverse ret)
+           ret)))))
   ;; NB. Submit a pull request if you want more.
   )
 
