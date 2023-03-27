@@ -1172,7 +1172,13 @@ final corePiLisp = r'''
   ([] ())
   ([c1] c1)
   ([c1 c2]
-   (let [s1 (seq c1) s2 (seq c2)]
+   (let [s1 (seq c1) s2 (seq c2)
+         lst? (list? c1)
+         ret-f (if lst?
+                 (fn interleave-ret-list [ret item coll]
+                   (concat ret (list item (first coll))))
+                 (fn interleave-ret-vector [ret item coll]
+                   (conj ret item (first coll))))]
      (:ret
       (reduce
        (fn interleave-reduce [acc item]
@@ -1180,24 +1186,64 @@ final corePiLisp = r'''
            (if (empty? s2)
              (reduced {:ret ret})
              {:s2 (next s2)
-              :ret (conj ret item (first s2))})))
+              :ret (ret-f ret item s2)})))
        {:s2 s2
-        :ret []}
+        :ret (empty c1)}
        s1))))
   ([c1 c2 & colls]
-   ;; TODO Consider varargs as lists to match Clojure
-   (let [ss (map seq (vec (cons c1 (cons c2 colls))))]
-     (reduce
-      (fn interleave-reduce-var [acc item]
-        (let [{:keys [others ret]} acc
-              some-empty? (= 1 (reduce * (map (comp ibool empty?) others)))]
-          (if some-empty?
-            (reduced {:ret ret})
-            {:others (map next others)
-             :ret (apply conj ret item (map first others))})))
-      {:others (next ss)
-       :ret []}
-      (first ss)))))
+   (let [ss (map seq (vec (cons c1 (cons c2 colls))))
+         lst? (list? c1)
+         ret-f (if lst?
+                 (fn interleave-ret-list [ret item others]
+                   (concat ret (cons item (map first others))))
+                 (fn interleave-ret-vector [ret item others]
+                   (apply conj ret item (map first others))))]
+     (:ret
+      (reduce
+       (fn interleave-reduce-var [acc item]
+         (let [{:keys [others ret]} acc
+               some-empty? (= 1 (reduce * (map (comp ibool empty?) others)))]
+           (if some-empty?
+             (reduced {:ret ret})
+             {:others (map next others)
+              :ret (ret-f ret item others)})))
+       {:others (next ss)
+        :ret (empty c1)}
+       (first ss))))))
+
+(defn min
+  ([a b] (if (< a b) a b))
+  ([a b & cs]
+   (reduce
+    (fn [acc x]
+      (if (< x acc)
+        x
+        acc))
+    (min a b)
+    cs)))
+
+(defn max
+  ([a b] (if (> a b) a b))
+  ([a b & cs]
+   (reduce
+    (fn [acc x]
+      (if (> x acc)
+        x
+        acc))
+    (max a b)
+    cs)))
+
+(defn zipmap
+  [keys vals]
+  (let [c (state 0)
+        length (min (count keys) (count vals))
+        m (state {})]
+    (while (< @c length)
+      (let [k (nth keys @c)
+            v (nth vals @c)
+            _ (write-state c inc)]
+        (write-state m assoc k v)))
+    @m))
 
 (defn resolve
   {:doc "Resolve a symbol to an entry in the PiLisp bindings map. The structure of this map is:
