@@ -1,5 +1,7 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 
+import 'dart:math' as math;
+
 import 'pilisp_core.dart';
 import 'pilisp_core.stub.dart';
 import 'pilisp_expr.dart';
@@ -262,6 +264,23 @@ class PLEnv {
           termDoc:
               'Returns PiLisp-readable string representation of the forms provided.'
         })),
+    // Math
+    PLSymbol('math/e'): PLBindingEntry.withMeta(
+        math.e, IMap({termDoc: 'Mathematical constant dart:math.e'})),
+    PLSymbol('math/ln10'): PLBindingEntry.withMeta(
+        math.ln10, IMap({termDoc: 'Mathematical constant dart:math.ln10'})),
+    PLSymbol('math/ln2'): PLBindingEntry.withMeta(
+        math.ln2, IMap({termDoc: 'Mathematical constant dart:math.ln2'})),
+    PLSymbol('math/log10e'): PLBindingEntry.withMeta(
+        math.log10e, IMap({termDoc: 'Mathematical constant dart:math.log10e'})),
+    PLSymbol('math/log2e'): PLBindingEntry.withMeta(
+        math.log2e, IMap({termDoc: 'Mathematical constant dart:math.log2e'})),
+    PLSymbol('math/pi'): PLBindingEntry.withMeta(
+        math.pi, IMap({termDoc: 'Mathematical constant dart:math.pi'})),
+    PLSymbol('math/sqrt1-2'): PLBindingEntry.withMeta(math.sqrt1_2,
+        IMap({termDoc: 'Mathematical constant dart:math.sqrt1_2'})),
+    PLSymbol('math/sqrt2'): PLBindingEntry.withMeta(
+        math.sqrt2, IMap({termDoc: 'Mathematical constant dart:math.sqrt2'})),
     PLSymbol('state'): PLBindingEntry.withMeta(
         stateFn,
         IMap({
