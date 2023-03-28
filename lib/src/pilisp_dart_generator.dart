@@ -151,7 +151,6 @@ final importsForGenerated = [
   'dart:math',
   'package:fast_immutable_collections/fast_immutable_collections.dart',
   '../pilisp.dart',
-  'pilisp_env.dart',
   'pilisp_expr.dart',
 ];
 
