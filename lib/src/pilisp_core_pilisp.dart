@@ -1716,7 +1716,6 @@ final corePiLisp = r'''
               (list 'finally
                     (list 'write-state test/suite 'update :scopes 'butlast)))))
 
-;; TODO Refactor to accept single form with truthy semantics, rather than expected actual
 (defmacro test/is=
   {:doc "Specify a test condition that should hold true. Saves to test/suite."}
   [expected actual & message]
@@ -1784,6 +1783,33 @@ final corePiLisp = r'''
                         :error    (list 'type e_)
                         :explanation (list 'str e_)
                         :stacktrace (list 'stacktrace/current)}])))))
+
+(defmacro test/throws
+  {:doc "Specify a test condition that should throw an exception. Saves to test/suite."}
+  [test & message]
+  (let [result_ (gensym "result")
+        e_ (gensym "error")
+        msg_ (gensym "msg")]
+    (list 'try
+          (list 'let [result_ test]
+                (list 'write-state
+                      'test/suite
+                      'update
+                      :fail
+                      'conj
+                      [(list :scopes (list 'deref 'test/suite))
+                       {:expected "To throw an exception"
+                        :actual result_}
+                       (list 'let [msg_ (list 'first message)]
+                             (list 'when (list 'seq msg_)
+                                   msg_))]))
+          (list 'catch '_ e_
+                (list 'write-state
+                      'test/suite
+                      'update
+                      :pass
+                      'conj
+                      [(list :scopes (list 'deref 'test/suite)) nil])))))
 
 (defn test/format-fail
   {:private true}
