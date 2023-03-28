@@ -262,12 +262,6 @@ class PLEnv {
           termDoc:
               'Returns PiLisp-readable string representation of the forms provided.'
         })),
-    PLSymbol('uri'): PLBindingEntry.withMeta(
-        uriFn,
-        IMap({
-          termDoc:
-              'Tries to parse its argument as a Uri. Throws if not a valid Uri.'
-        })),
     PLSymbol('state'): PLBindingEntry.withMeta(
         stateFn,
         IMap({

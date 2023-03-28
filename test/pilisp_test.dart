@@ -1300,13 +1300,6 @@ void main() {
           expect(evalProgram('(> 3 2 3)'), false);
         });
       });
-      group('/ network', () {
-        test('/ uri', () {
-          expect(() async => evalProgram('(uri "::invalid::")'),
-              throwsA(isA<FormatException>()));
-          expect(evalProgram('(uri "file:///tmp/state.pil")'), isA<Uri>());
-        });
-      });
     });
     group('/ Core', () {
       group('/ macros for special forms', () {

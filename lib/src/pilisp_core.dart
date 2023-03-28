@@ -1431,18 +1431,6 @@ String prStrFn(PLEnv env, PLVector args) {
   return args.map((x) => plPrintToString(env, x)).join(' ');
 }
 
-Uri uriFn(PLEnv env, PLVector args) {
-  if (args.length == 1) {
-    final uriString = args[0];
-    if (uriString is String) {
-      return Uri.parse(uriString);
-    } else {
-      throw 'The uri function expects its argument to be a string, but received a ${typeString(uriString)} argument.';
-    }
-  }
-  throw 'The uri function expects 1 argument, but received ${args.length} arguments.';
-}
-
 PLState stateFn(PLEnv env, PLVector args) {
   if (args.isEmpty) {
     return PLState(env);
