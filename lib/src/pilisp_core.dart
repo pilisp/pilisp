@@ -589,20 +589,32 @@ Object? conjFn(PLEnv env, PLVector args) {
   }
 }
 
-IMap<Object?, Object?> assocFn(PLEnv env, PLVector args) {
+Object? assocFn(PLEnv env, PLVector args) {
   if (args.length >= 3) {
     final coll = args[0];
     final key = args[1];
     final value = args[2];
     if (coll is IMap<Object?, Object?>) {
       return coll.add(key, value);
+    } else if (coll is PLVector) {
+      if (key is int) {
+        if (key == coll.length) {
+          // NB. Match Clojure behavior
+          return coll.add(value);
+        } else {
+          return coll.put(key, value);
+        }
+      } else {
+        throw ArgumentError(
+            'When assoc-ing into a vector, the key must be an integer, but received a ${typeString(key)} value.');
+      }
     } else {
-      throw FormatException(
-          'The assoc function expects its first argument to be a map, but received a ${typeString(coll)}');
+      throw ArgumentError(
+          'The assoc* function expects its first argument to be a map, but received a ${typeString(coll)}');
     }
   } else {
-    throw FormatException(
-        'The assoc function expects at least 3 arguments, but only received ${args.length} arguments.');
+    throw ArgumentError(
+        'The assoc* function expects at least 3 arguments, but only received ${args.length} arguments.');
   }
 }
 
