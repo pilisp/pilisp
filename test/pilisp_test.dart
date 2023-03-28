@@ -12,7 +12,7 @@ void main() {
   group('Language', () {
     group('/ Reading', () {
       test('/ Unreadable', () {
-        expect(() async => PiLisp.readString('#<Some Object>'),
+        expect(() => PiLisp.readString('#<Some Object>'),
             throwsA(isA<UnreadableFormException>()));
       });
       test('/ Multiple forms returns first', () {
@@ -65,7 +65,7 @@ void main() {
               PLSymbol('ls1234567890!#&*'));
           expect(PiLisp.readString('ls1234567890!@#&*'),
               PLSymbol('ls1234567890!'));
-          expect(() async => PiLisp.readString('1abc'),
+          expect(() => PiLisp.readString('1abc'),
               throwsA(isA<UnreadableFormException>()));
         });
         test('/ term (dot)', () {
@@ -90,11 +90,11 @@ void main() {
       });
       group('/ Vectors', () {
         test('/ unclosed', () {
-          expect(() async => PiLisp.readString('['),
+          expect(() => PiLisp.readString('['),
               throwsA(isA<UnexpectedEndOfInput>()));
         });
         test('/ improperly closed', () {
-          expect(() async => PiLisp.readString('[1 2 3 4}'),
+          expect(() => PiLisp.readString('[1 2 3 4}'),
               throwsA(isA<MismatchedDelimiter>()));
         });
         test('/ empty', () {
@@ -142,7 +142,7 @@ void main() {
       });
       group('/ Maps', () {
         test('/ unclosed', () {
-          expect(() async => PiLisp.readString('{'),
+          expect(() => PiLisp.readString('{'),
               throwsA(isA<UnexpectedEndOfInput>()));
         });
         test('/ empty', () {
@@ -202,7 +202,7 @@ void main() {
       });
       group('/ Sets', () {
         test('/ unclosed', () {
-          expect(() async => PiLisp.readString('#{'),
+          expect(() => PiLisp.readString('#{'),
               throwsA(isA<UnexpectedEndOfInput>()));
         });
         test('/ empty', () {
@@ -238,7 +238,7 @@ void main() {
         group('/ escapes', () {
           test('/ single character', () {
             expect(PiLisp.readString(r'"x\\y"'), r'x\y');
-            expect(() async => PiLisp.readString(r'"x\y"'),
+            expect(() => PiLisp.readString(r'"x\y"'),
                 throwsA(isA<UnsupportedEscapeCharacter>()));
             expect(PiLisp.readString(r'"He said, \"What are you doing?\""'),
                 'He said, "What are you doing?"');
@@ -255,9 +255,9 @@ void main() {
             expect(PiLisp.readString(r'"Hi ★"'), 'Hi \u2605');
             expect(PiLisp.readString(r'"Music \u{1D11E}"'), 'Music 𝄞');
             expect(PiLisp.readString(r'"Music 𝄞"'), 'Music \u{1D11E}');
-            expect(() async => PiLisp.readString(r'"Hi \u260"'),
+            expect(() => PiLisp.readString(r'"Hi \u260"'),
                 throwsA(isA<UnsupportedEscapeCharacter>()));
-            expect(() async => PiLisp.readString(r'"Hi \uzzzz"'),
+            expect(() => PiLisp.readString(r'"Hi \uzzzz"'),
                 throwsA(isA<UnsupportedEscapeCharacter>()));
           });
         });
@@ -317,7 +317,7 @@ void main() {
           });
           group('/ anonymous fn #()', () {
             test('/ improper anonymous arg', () {
-              expect(() async => evalProgram('#(%bad)'),
+              expect(() => evalProgram('#(%bad)'),
                   throwsA(isA<MalformedAnonymousArgument>()));
               expect(evalProgram('#(%1-a-thing)'), isA<PLFunction>());
             });
@@ -588,7 +588,7 @@ void main() {
         group('/ Escapes', () {
           test('/ single character', () {
             expect(evalProgram(r'"x\\y"'), 'x\\y');
-            expect(() async => evalProgram(r'"x\y"'),
+            expect(() => evalProgram(r'"x\y"'),
                 throwsA(isA<UnsupportedEscapeCharacter>()));
             expect(evalProgram(r'"He said, \"What are you doing?\""'),
                 'He said, "What are you doing?"');
@@ -604,9 +604,9 @@ void main() {
             expect(evalProgram(r'"Hi ★"'), 'Hi \u2605');
             expect(evalProgram(r'"Music \u{1D11E}"'), 'Music 𝄞');
             expect(evalProgram(r'"Music 𝄞"'), 'Music \u{1D11E}');
-            expect(() async => evalProgram(r'"Hi \u260"'),
+            expect(() => evalProgram(r'"Hi \u260"'),
                 throwsA(isA<UnsupportedEscapeCharacter>()));
-            expect(() async => evalProgram(r'"Hi \uzzzz"'),
+            expect(() => evalProgram(r'"Hi \uzzzz"'),
                 throwsA(isA<UnsupportedEscapeCharacter>()));
           });
         });
@@ -623,11 +623,10 @@ void main() {
       group('/ Special forms', () {
         group('/ def', () {
           test('/ malformed', () {
-            expect(() async => evalProgram('(def)'),
+            expect(() => evalProgram('(def)'), throwsA(isA<FormatException>()));
+            expect(() => evalProgram('(def alpha)'),
                 throwsA(isA<FormatException>()));
-            expect(() async => evalProgram('(def alpha)'),
-                throwsA(isA<FormatException>()));
-            expect(() async => evalProgram('(def alpha 1 2)'),
+            expect(() => evalProgram('(def alpha 1 2)'),
                 throwsA(isA<FormatException>()));
           });
           test('/ minimal', () {
@@ -650,7 +649,7 @@ void main() {
             expect(evalProgram('(do (def eta "xyz"))'), 'xyz');
             expect(evalProgram('eta'), 'xyz');
             expect(
-                () async => evalProgram('theta'),
+                () => evalProgram('theta'),
                 throwsA(isA<UndefinedSymbol>().having(
                     (exception) => exception.symbol,
                     'Symbol should not be defined',
@@ -752,7 +751,7 @@ void main() {
                   PLVector([1, 2, 3]));
             });
             test('/ with required args', () {
-              expect(() async => evalProgram('((fn* [a & args] a))'),
+              expect(() => evalProgram('((fn* [a & args] a))'),
                   throwsA(isA<FormatException>()));
               expect(evalProgram('((fn* [a & args] a) 1)'), 1);
               expect(evalProgram('((fn* [a & args] args) 1)'), PLVector([]));
@@ -778,13 +777,13 @@ void main() {
             });
             group('/ with variable arity', () {
               test('/ too many variable arity signatures', () {
-                expect(() async => evalProgram('(fn* ([a & bs]) ([a b & cs]))'),
+                expect(() => evalProgram('(fn* ([a & bs]) ([a b & cs]))'),
                     throwsA(isA<FormatException>()));
               });
               test('/ ambiguous required vs variable arities', () {
-                expect(() async => evalProgram('(fn* ([a & bs]) ([a b]))'),
+                expect(() => evalProgram('(fn* ([a & bs]) ([a b]))'),
                     throwsA(isA<FormatException>()));
-                expect(() async => evalProgram('(fn* ([a & bs]) ([a b c]))'),
+                expect(() => evalProgram('(fn* ([a & bs]) ([a b c]))'),
                     throwsA(isA<FormatException>()));
               });
               test('/ just variable arity', () {
@@ -833,9 +832,9 @@ void main() {
         });
         group('/ quote', () {
           test('/ malformed', () {
-            expect(() async => evalProgram('(quote)'),
-                throwsA(isA<FormatException>()));
-            expect(() async => evalProgram('(quote a b)'),
+            expect(
+                () => evalProgram('(quote)'), throwsA(isA<FormatException>()));
+            expect(() => evalProgram('(quote a b)'),
                 throwsA(isA<FormatException>()));
           });
           test('/ minimal', () {
@@ -894,13 +893,12 @@ void main() {
         });
         group('/ if', () {
           test('/ malformed', () {
-            expect(() async => evalProgram('(if)'),
+            expect(() => evalProgram('(if)'), throwsA(isA<FormatException>()));
+            expect(() => evalProgram('(if true)'),
                 throwsA(isA<FormatException>()));
-            expect(() async => evalProgram('(if true)'),
+            expect(() => evalProgram('(if true "true")'),
                 throwsA(isA<FormatException>()));
-            expect(() async => evalProgram('(if true "true")'),
-                throwsA(isA<FormatException>()));
-            expect(() async => evalProgram('(if true "true" "false" "oops")'),
+            expect(() => evalProgram('(if true "true" "false" "oops")'),
                 throwsA(isA<FormatException>()));
           });
           test('/ literal condition', () {
@@ -918,7 +916,7 @@ void main() {
         });
         group('/ try/catch/finally', () {
           test('/ try standalone', () {
-            expect(() async => evalProgram('(try (throw (ex-info "wow" {})))'),
+            expect(() => evalProgram('(try (throw (ex-info "wow" {})))'),
                 throwsA(isA<Exception>()));
           });
           test('/ try + finally', () {
@@ -1055,7 +1053,7 @@ void main() {
       group('/ Symbols', () {
         test('/ regular', () {
           expect(printProgram('*pilisp-version*'), isA<String>());
-          expect(() async => printProgram('1abc'),
+          expect(() => printProgram('1abc'),
               throwsA(isA<UnreadableFormException>()));
         });
         test('/ term', () {
@@ -1174,8 +1172,7 @@ void main() {
       group('/ collections', () {
         group('/ seq', () {
           test('/ seq basics', () {
-            expect(() async => evalProgram('(seq)'),
-                throwsA(isA<FormatException>()));
+            expect(() => evalProgram('(seq)'), throwsA(isA<FormatException>()));
             expect(evalProgram('(seq [])'), null);
             expect(evalProgram("(seq '()))"), null);
           });
@@ -1198,18 +1195,17 @@ void main() {
         });
         test('/ conj', () {
           expect(evalProgram('(conj)'), allOf(isA<PLVector>(), PLVector([])));
-          expect(() async => evalProgram('(conj 1)'),
-              throwsA(isA<UnsupportedError>()));
+          expect(
+              () => evalProgram('(conj 1)'), throwsA(isA<UnsupportedError>()));
           expect(evalProgram('(conj [] 1)'), evalProgram('[1]'));
           expect(evalProgram('(conj [] 1 2 3 "4" .five [6 7])'),
               evalProgram('[1 2 3 "4" .five [6 7]]'));
         });
         test('/ cons', () {
-          expect(() async => evalProgram('(cons)'),
-              throwsA(isA<UnsupportedError>()));
-          expect(() async => evalProgram('(cons 1)'),
-              throwsA(isA<UnsupportedError>()));
-          expect(() async => evalProgram('(cons 1 2)'),
+          expect(() => evalProgram('(cons)'), throwsA(isA<UnsupportedError>()));
+          expect(
+              () => evalProgram('(cons 1)'), throwsA(isA<UnsupportedError>()));
+          expect(() => evalProgram('(cons 1 2)'),
               throwsA(isA<UnsupportedError>()));
           expect(evalProgram("(cons 1 '(2 3))"), evalProgram("'(1 2 3)"));
           expect(evalProgram('(cons [.a .b] [.c .d])'),
@@ -1222,7 +1218,7 @@ void main() {
           expect(evalProgram('(count "привет")'), 6);
         });
         test('/ nth*', () {
-          expect(() async => evalProgram('(nth* [] 1 .default)'),
+          expect(() => evalProgram('(nth* [] 1 .default)'),
               throwsA(isA<FormatException>()));
         });
         test('/ next', () {
@@ -1240,17 +1236,16 @@ void main() {
           expect(evalProgram('(+ 1 2 3)'), 6);
           expect(evalProgram('(+ 1 -2 3)'), 2);
           expect(evalProgram('(+ 1 2.5 3)'), 6.5);
-          expect(() async => evalProgram('(+ 1 nil 3)'),
+          expect(() => evalProgram('(+ 1 nil 3)'),
               throwsA(isA<UnsupportedError>()));
         });
         test('/ -', () {
-          expect(
-              () async => evalProgram('(-)'), throwsA(isA<FormatException>()));
+          expect(() => evalProgram('(-)'), throwsA(isA<FormatException>()));
           expect(evalProgram('(- 1)'), -1);
           expect(evalProgram('(- 1 2 3)'), -4);
           expect(evalProgram('(- 1 -2 3)'), 0);
           expect(evalProgram('(- 1 2.5 3)'), -4.5);
-          expect(() async => evalProgram('(- 1 nil 3)'),
+          expect(() => evalProgram('(- 1 nil 3)'),
               throwsA(isA<UnsupportedError>()));
         });
         test('/ *', () {
@@ -1259,17 +1254,16 @@ void main() {
           expect(evalProgram('(* 1 2 4)'), 8);
           expect(evalProgram('(* 1 -2 3)'), -6);
           expect(evalProgram('(* 1 2.5 3)'), 7.5);
-          expect(() async => evalProgram('(* 1 nil 3)'),
+          expect(() => evalProgram('(* 1 nil 3)'),
               throwsA(isA<UnsupportedError>()));
         });
         test('/ /', () {
-          expect(
-              () async => evalProgram('(/)'), throwsA(isA<FormatException>()));
+          expect(() => evalProgram('(/)'), throwsA(isA<FormatException>()));
           expect(evalProgram('(/ 2)'), 0.5);
           expect(evalProgram('(/ 6 3)'), 2);
           expect(evalProgram('(/ 6 3 2)'), 1);
           expect(evalProgram('(/ 6 1.5)'), 4);
-          expect(() async => evalProgram('(/ 1 nil 3)'),
+          expect(() => evalProgram('(/ 1 nil 3)'),
               throwsA(isA<UnsupportedError>()));
         });
       });
@@ -1376,8 +1370,8 @@ void main() {
           expect(evalProgram('(nth [0 1 2] 0)'), 0);
           expect(evalProgram('(nth [0 1 2] 1)'), 1);
           expect(evalProgram('(nth [0 1 2] 2)'), 2);
-          expect(() async => evalProgram('(nth [0 1 2] 3)'),
-              throwsA(isA<RangeError>()));
+          expect(
+              () => evalProgram('(nth [0 1 2] 3)'), throwsA(isA<RangeError>()));
           expect(evalProgram('(nth [0 1 2] 3 .default)'), PLTerm('default'));
         });
         test('/ take', () {
@@ -1446,8 +1440,8 @@ void main() {
         });
       });
       test('/ identity', () {
-        expect(() async => evalProgram('(identity)'),
-            throwsA(isA<FormatException>()));
+        expect(
+            () => evalProgram('(identity)'), throwsA(isA<FormatException>()));
         expect(evalProgram('(identity 1)'), 1);
         expect(evalProgram('(identity nil)'), null);
         expect(evalProgram('(identity identity)'), isA<PLFunction>());
