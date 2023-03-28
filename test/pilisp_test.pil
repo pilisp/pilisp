@@ -5,6 +5,18 @@
   (test/is= [3 4 5 6] (map dec [4 5 6 7]))
   (test/is= [9 10 11 12] (map inc [8 9 10 11])))
 
+(defn test-assoc
+  {:test true}
+  []
+  (test/is= {.a .b}       (assoc {} .a .b))
+  (test/is= {.a .b .c .d} (assoc {} .a .b .c .d))
+  (test/is= {.a .b .c .z} (assoc {.a .b .c .d} .c .z))
+  (test/is= [0 .a]        (assoc [0 1] 1 .a))
+  (test/is= [.a 1]        (assoc [0 1] 0 .a))
+  (test/is= [.a]          (assoc [] 0 .a))
+  (test/is= [.a .b]       (assoc [.a] 1 .b))
+  (test/throws (= [] (assoc [] 1 .b))))
+
 (defn test-pl
   {:test true}
   []
