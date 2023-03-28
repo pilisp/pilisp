@@ -1022,7 +1022,9 @@ final corePiLisp = r'''
                                        (if (= car 'cd)
                                          ;; Special handling for `cd` to reset parent to nil
                                          (list 'cd nil)
-                                         (reverse (cons (list '.) (reverse first-clause-form))))))
+                                         (list 'if (list 'nil? (list 'pl/get-parent))
+                                               first-clause-form
+                                               (reverse (cons (list '.) (reverse first-clause-form)))))))
                                    (list 'do car-g)))
 
                        :else (cons 'do first-clause-form))
