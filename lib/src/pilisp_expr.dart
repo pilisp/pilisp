@@ -1686,36 +1686,17 @@ class PLNil extends PLExpr {
 }
 
 Object? plEval(PLEnv env, Object? expr) {
+  // TODO Lazy string build
   env.debugPrint('[DEBUG] ${plPrintToString(env, expr)}');
-  try {
-    if (expr is PLExpr) {
-      if (expr is PLList) {
-        // NB: Report line number of form where an exception is raised.
-        try {
-          return expr.eval(env);
-        } catch (_) {
-          if (expr.loc != null) {
-            final id = env.nextId();
-            print('($id) Error on line ${expr.loc}');
-            print('($id) Form:\n${plPrintToString(env, expr)}');
-          }
-          rethrow;
-        }
-      }
-      return expr.eval(env);
-    } else if (expr is IMap) {
-      return expr._plEval(env);
-    } else if (expr is ISet) {
-      return expr._plEval(env);
-    } else {
-      // NB: Support Dart interop.
-      return expr;
-    }
-  } catch (e) {
-    if (env.printStackTraces) {
-      print(env.currentStackTrace());
-    }
-    rethrow;
+  if (expr is PLExpr) {
+    return expr.eval(env);
+  } else if (expr is IMap) {
+    return expr._plEval(env);
+  } else if (expr is ISet) {
+    return expr._plEval(env);
+  } else {
+    // NB: Support Dart interop.
+    return expr;
   }
 }
 

@@ -10,7 +10,6 @@ import 'dart:typed_data';
 import 'dart:math';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import '../pilisp.dart';
-import 'pilisp_env.dart';
 import 'pilisp_expr.dart';
 
 Map<PLSymbol, PLBindingEntry> wrapperBindings = {
@@ -1154,9 +1153,9 @@ Map<PLSymbol, PLBindingEntry> wrapperBindings = {
   PLSymbol('dart/PiLisp.printToString'):
       PLBindingEntry(dart_PiLisp_printToString),
 // END printToString -----------------------
-// START print -----------------------
-  PLSymbol('dart/PiLisp.print'): PLBindingEntry(dart_PiLisp_print),
-// END print -----------------------
+// START printValue -----------------------
+  PLSymbol('dart/PiLisp.printValue'): PLBindingEntry(dart_PiLisp_printValue),
+// END printValue -----------------------
 // START typeName -----------------------
   PLSymbol('dart/PiLisp.typeName'): PLBindingEntry(dart_PiLisp_typeName),
 // END typeName -----------------------
@@ -7004,20 +7003,20 @@ String? dart_PiLisp_printToString(PLEnv env, PLVector args) {
 }
 
 // ignore: non_constant_identifier_names, strict_raw_type
-void dart_PiLisp_print(PLEnv env, PLVector args) {
+void dart_PiLisp_printValue(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Object) {
       throw ArgumentError(
-          'The dart/PiLisp.print function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+          'The dart/PiLisp.printValue function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
     }
 
-    final returnValue = PiLisp.print(
+    final returnValue = PiLisp.printValue(
       args[0] as Object,
     );
     return returnValue;
   } else {
     throw ArgumentError(
-        'The dart/PiLisp.print function expects 1 argument(s) but received ${args.length} arguments.');
+        'The dart/PiLisp.printValue function expects 1 argument(s) but received ${args.length} arguments.');
   }
 }
 

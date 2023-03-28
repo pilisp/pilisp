@@ -34,13 +34,36 @@ class PiLisp {
   /// Given an [expr] value (presumably returned by [readString] after reading
   /// some PiLisp code), evaluate it and return the resulting value.
   static Object? eval(Object expr, {PLEnv? env}) {
-    return plEval(env ?? piLispEnv, expr);
+    final ev = env ?? piLispEnv;
+    try {
+      return plEval(ev, expr);
+    } catch (e) {
+      if (expr is PLList) {
+        if (expr.loc != null) {
+          final id = ev.nextId();
+          print('($id) Error on line ${expr.loc}');
+          print('($id) Form:\n${plPrintToString(ev, expr)}');
+        }
+      }
+      if (ev.printStackTraces) {
+        print(ev.currentStackTrace());
+      }
+      rethrow;
+    }
   }
 
   /// Given a [programSource], read and evaluate every form found, returning the
   /// final one.
   static Object? loadString(String programSource, {PLEnv? env}) {
-    return plLoad(env ?? piLispEnv, programSource);
+    final ev = env ?? piLispEnv;
+    try {
+      return plLoad(env ?? piLispEnv, programSource);
+    } catch (e) {
+      if (ev.printStackTraces) {
+        print(ev.currentStackTrace());
+      }
+      rethrow;
+    }
   }
 
   /// Returns a string of the given [value] as a readable PiLisp form.
@@ -49,7 +72,7 @@ class PiLisp {
   }
 
   /// Prints the given [value] as a readable PiLisp form.
-  static void print(Object? value, {PLEnv? env}) {
+  static void printValue(Object? value, {PLEnv? env}) {
     print(printToString(value, env: env));
   }
 
