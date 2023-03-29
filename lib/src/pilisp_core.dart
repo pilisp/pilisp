@@ -36,8 +36,6 @@ class PLState extends PLExpr implements PLDeref {
 
   PLState.withValue(this.env, this.value);
 
-  PLState.withFilePersistence(this.env, this.value);
-
   /// If read from disk, returns a [Future]. Otherwise synchronously returns
   /// the state's [value].
   Object? readFromState({int timeout = 10000, bool refresh = false}) {
