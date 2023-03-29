@@ -525,6 +525,55 @@ List<int> toDartIntListFn(PLEnv env, PLVector args) {
   }
 }
 
+List<Future<dynamic>> toDartFutureListFn(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final coll = args[0];
+    List<Future<dynamic>> l = [];
+    if (coll is PLList) {
+      for (final x in coll.iter) {
+        if (x is Future) {
+          l.add(x);
+        } else {
+          throw ArgumentError(
+              'The to-dart-future-list function expects all of the items in the collection passed to it to be Futures, but received a ${typeString(x)} value.');
+        }
+      }
+    } else if (coll is PLVector) {
+      for (final x in coll.iter) {
+        if (x is Future) {
+          l.add(x);
+        } else {
+          throw ArgumentError(
+              'The to-dart-future-list function expects all of the items in the collection passed to it to be Futures, but received a ${typeString(x)} value.');
+        }
+      }
+    } else if (coll is IList) {
+      for (final x in coll) {
+        if (x is Future) {
+          l.add(x);
+        } else {
+          throw ArgumentError(
+              'The to-dart-future-list function expects all of the items in the collection passed to it to be Futures, but received a ${typeString(x)} value.');
+        }
+      }
+    } else if (coll is List) {
+      if (coll is List<Future>) {
+        return coll;
+      } else {
+        throw ArgumentError(
+            'The dart-to-int-list function expects a list passed to it to be List<Future<dynamic>>, but received a ${typeString(coll)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The to-dart-future-list function does not know how to convert a ${typeString(coll)} value into a Dart List.');
+    }
+    return l;
+  } else {
+    throw FormatException(
+        'The to-dart-future-list function expects 1 argument, but received ${args.length} arguments.');
+  }
+}
+
 Map<Object?, Object?> toDartMapFn(PLEnv env, PLVector args) {
   if (args.length == 1) {
     final coll = args[0];
@@ -1583,4 +1632,178 @@ Object? writeStateFn(PLEnv env, PLVector args) {
   }
   throw FormatException(
       'The write-state function expects at least 2 arguments, but received ${args.length} arguments');
+}
+
+Future<Object> futureValueFn(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    return Future<Object>.value(args[0]);
+  } else {
+    throw ArgumentError(
+        'The future/value function expects 1 argument, but received ${args.length} arguments.');
+  }
+}
+
+dynamic Function() dartDynamicFunction0Fn(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final plFn = args[0];
+    if (plFn is PLFunction) {
+      if (plFn.arities.containsKey(0)) {
+        return () => plFn.invoke(env, []);
+      } else {
+        throw ArgumentError(
+            'The dart-dynamic-function-0 function expects its function to support taking 0 arguments, but received a function with arities: ${plFn.arities.keys.toIList().sort().join(', ')}');
+      }
+    } else {
+      throw ArgumentError(
+          'The dart-dynamic-function-0 function expects its first argument to be a PiLisp function, but received ${args.length} arguments.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart-dynamic-function-0 function expects 1 argument, but received ${args.length} arguments.');
+  }
+}
+
+dynamic Function(dynamic) dartDynamicFunction1Fn(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final plFn = args[0];
+    if (plFn is PLFunction) {
+      if (plFn.arities.containsKey(1)) {
+        return (dynamic o) => plFn.invoke(env, [o]);
+      } else {
+        throw ArgumentError(
+            'The dart-dynamic-function-1 function expects its function to support taking 1 argument, but received a function with arities: ${plFn.arities.keys.toIList().sort().join(', ')}');
+      }
+    } else {
+      throw ArgumentError(
+          'The dart-dynamic-function-1 function expects its first argument to be a PiLisp function, but received a ${typeString(plFn)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart-dynamic-function-1 function expects 1 argument, but received ${args.length} arguments.');
+  }
+}
+
+Function dartFunctionFn(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final arity = args[0];
+    final plFn = args[1];
+    if (arity is int) {
+      if (plFn is PLFunction) {
+        if (plFn.arities.containsKey(arity)) {
+          switch (arity) {
+            case 0:
+              return (PLEnv env, PLVector args) => args.isEmpty
+                  ? plFn.invoke(env, [])
+                  : throw ArgumentError(
+                      'The function ${plFn.name} expects 0 arguments, but received ${args.length} arguments.');
+            case 1:
+              return (PLEnv env, PLVector args) => args.length == 1
+                  ? plFn.invoke(env, [args[0]])
+                  : throw ArgumentError(
+                      'The function ${plFn.name} expects 1 arguments, but received ${args.length} arguments.');
+            case 2:
+              return (PLEnv env, PLVector args) => args.length == 2
+                  ? plFn.invoke(env, [args[0], args[1]])
+                  : throw ArgumentError(
+                      'The function ${plFn.name} expects 2 arguments, but received ${args.length} arguments.');
+            case 3:
+              return (PLEnv env, PLVector args) => args.length == 3
+                  ? plFn.invoke(env, [args[0], args[1], args[2]])
+                  : throw ArgumentError(
+                      'The function ${plFn.name} expects 3 arguments, but received ${args.length} arguments.');
+            case 4:
+              return (PLEnv env, PLVector args) => args.length == 4
+                  ? plFn.invoke(env, [args[0], args[1], args[2], args[3]])
+                  : throw ArgumentError(
+                      'The function ${plFn.name} expects 4 arguments, but received ${args.length} arguments.');
+            case 5:
+              return (PLEnv env, PLVector args) => args.length == 5
+                  ? plFn.invoke(
+                      env, [args[0], args[1], args[2], args[3], args[4]])
+                  : throw ArgumentError(
+                      'The function ${plFn.name} expects 5 arguments, but received ${args.length} arguments.');
+            case 6:
+              return (PLEnv env, PLVector args) => args.length == 6
+                  ? plFn.invoke(env,
+                      [args[0], args[1], args[2], args[3], args[4], args[5]])
+                  : throw ArgumentError(
+                      'The function ${plFn.name} expects 6 arguments, but received ${args.length} arguments.');
+            case 7:
+              return (PLEnv env, PLVector args) => args.length == 7
+                  ? plFn.invoke(env, [
+                      args[0],
+                      args[1],
+                      args[2],
+                      args[3],
+                      args[4],
+                      args[5],
+                      args[6]
+                    ])
+                  : throw ArgumentError(
+                      'The function ${plFn.name} expects 7 arguments, but received ${args.length} arguments.');
+            case 8:
+              return (PLEnv env, PLVector args) => args.length == 8
+                  ? plFn.invoke(env, [
+                      args[0],
+                      args[1],
+                      args[2],
+                      args[3],
+                      args[4],
+                      args[5],
+                      args[6],
+                      args[7]
+                    ])
+                  : throw ArgumentError(
+                      'The function ${plFn.name} expects 8 arguments, but received ${args.length} arguments.');
+            case 9:
+              return (PLEnv env, PLVector args) => args.length == 9
+                  ? plFn.invoke(env, [
+                      args[0],
+                      args[1],
+                      args[2],
+                      args[3],
+                      args[4],
+                      args[5],
+                      args[6],
+                      args[7],
+                      args[8]
+                    ])
+                  : throw ArgumentError(
+                      'The function ${plFn.name} expects 9 arguments, but received ${args.length} arguments.');
+            case 10:
+              return (PLEnv env, PLVector args) => args.length == 10
+                  ? plFn.invoke(env, [
+                      args[0],
+                      args[1],
+                      args[2],
+                      args[3],
+                      args[4],
+                      args[5],
+                      args[6],
+                      args[7],
+                      args[8],
+                      args[9]
+                    ])
+                  : throw ArgumentError(
+                      'The function ${plFn.name} expects 10 arguments, but received ${args.length} arguments.');
+            default:
+              throw UnsupportedError(
+                  'The dart-function function only supports creating a Dart function with up to 10 arguments, but received a specification of $arity arguments.');
+          }
+        } else {
+          throw ArgumentError(
+              'You asked dart-function to invoke your function with $arity arguments, but it only supports arities of these numbers of arguments: ${plFn.arities.keys.toIList().sort().join(', ')}');
+        }
+      } else {
+        throw ArgumentError(
+            'The dart-function function expects its second argument to be a PiLisp function, but received a ${typeString(plFn)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The dart-function function expects its first argument to be a number, but received a ${typeString(arity)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart-function function expects 2 arguments, but received ${args.length} arguments.');
+  }
 }

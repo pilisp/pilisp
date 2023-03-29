@@ -143,6 +143,12 @@ class PLEnv {
           termDoc:
               'Returns a Dart List<int> representation of the given collection.'
         })),
+    PLSymbol('to-dart-future-list'): PLBindingEntry.withMeta(
+        toDartFutureListFn,
+        IMap({
+          termDoc:
+              'Returns a Dart List<Future<dynamic>> representation of the given collection.'
+        })),
     PLSymbol('to-dart-map'): PLBindingEntry.withMeta(
         toDartMapFn,
         IMap({
@@ -326,6 +332,30 @@ class PLEnv {
         IMap({
           termDoc:
               'Writes a value into a state object. If the state object is persistent, persists synchronously before returning.'
+        })),
+    PLSymbol('dart-function'): PLBindingEntry.withMeta(
+        dartFunctionFn,
+        IMap({
+          termDoc:
+              'Returns a Dart function that invokes the given PiLisp function with the number of arguments specified in the first argument.'
+        })),
+    PLSymbol('dart-dynamic-function-0'): PLBindingEntry.withMeta(
+        dartDynamicFunction0Fn,
+        IMap({
+          termDoc:
+              'Returns a Dart function of signature: dynamic Function(). Designed for use with Future methods.'
+        })),
+    PLSymbol('dart-dynamic-function-1'): PLBindingEntry.withMeta(
+        dartDynamicFunction1Fn,
+        IMap({
+          termDoc:
+              'Returns a Dart function of signature: dynamic Function(dynamic). Designed for use with Future methods.'
+        })),
+    PLSymbol('future/value'): PLBindingEntry.withMeta(
+        futureValueFn,
+        IMap({
+          termDoc: 'Returns a Future<PLVector> value via Dart'
+              's Future.value constructor.'
         })),
   }).addAll(wrapperBindings.toIMap());
 

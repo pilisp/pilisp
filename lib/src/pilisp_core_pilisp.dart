@@ -1764,7 +1764,15 @@ final corePiLisp = r'''
 (defn eval [form]
   (dart/PiLisp.eval form))
 
-;; Test Framework
+;; # Futures
+
+(def future future/value)
+
+(defn future/then
+  [fut function]
+  (dart/Future.then fut (dart-dynamic-function-1 function)))
+
+;; # Test Framework
 
 (def test/suite-empty
   {:scopes [:test/suite]
