@@ -1378,6 +1378,11 @@ void main() {
           expect(
               evalProgram('(count (take 115 (sort (keys (bindings)))))'), 115);
         });
+        test('/ butlast', () {
+          expect(evalProgram('''(butlast [1])'''), PLVector([]));
+          expect(evalProgram('''(butlast [1 2])'''), PLVector([1]));
+          expect(evalProgram('''(butlast [1 2 3])'''), PLVector([1, 2]));
+        });
       });
       group('/ types core', () {
         test('/ int?', () {
