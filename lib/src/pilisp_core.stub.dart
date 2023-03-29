@@ -5,6 +5,7 @@
 // **************************************************************************
 
 // START Dart wrappers for PiLisp
+import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:math';
@@ -529,6 +530,54 @@ Map<PLSymbol, PLBindingEntry> wrapperBindings = {
 // START CTOR  -----------------------
 // Skipping binding for constructor of abstract class Function
 // END  -----------------------
+// Class Future with 16 declarations
+// START wait -----------------------
+  PLSymbol('dart/Future.wait'): PLBindingEntry(dart_Future_wait),
+// END wait -----------------------
+// START any -----------------------
+  PLSymbol('dart/Future.any'): PLBindingEntry(dart_Future_any),
+// END any -----------------------
+// START forEach -----------------------
+  PLSymbol('dart/Future.forEach'): PLBindingEntry(dart_Future_forEach),
+// END forEach -----------------------
+// START doWhile -----------------------
+// START then -----------------------
+  PLSymbol('dart/Future.then'): PLBindingEntry(dart_Future_then),
+// END then -----------------------
+// START catchError -----------------------
+  PLSymbol('dart/Future.catchError'): PLBindingEntry(dart_Future_catchError),
+// END catchError -----------------------
+// START whenComplete -----------------------
+  PLSymbol('dart/Future.whenComplete'):
+      PLBindingEntry(dart_Future_whenComplete),
+// END whenComplete -----------------------
+// START asStream -----------------------
+  PLSymbol('dart/Future.asStream'): PLBindingEntry(dart_Future_asStream),
+// END asStream -----------------------
+// START timeout -----------------------
+  PLSymbol('dart/Future.timeout'): PLBindingEntry(dart_Future_timeout),
+// END timeout -----------------------
+// START CTOR  -----------------------
+  PLSymbol('dart/Future.'): PLBindingEntry(dart_Future_),
+// END  -----------------------
+// START CTOR microtask -----------------------
+  PLSymbol('dart/Future.microtask'): PLBindingEntry(dart_Future_microtask),
+// END microtask -----------------------
+// START CTOR sync -----------------------
+  PLSymbol('dart/Future.sync'): PLBindingEntry(dart_Future_sync),
+// END sync -----------------------
+// START CTOR value -----------------------
+// START CTOR error -----------------------
+  PLSymbol('dart/Future.error'): PLBindingEntry(dart_Future_error),
+  PLSymbol('dart/Future.error-full'): PLBindingEntry(dart_Future_error_full),
+// END error -----------------------
+// START CTOR delayed -----------------------
+  PLSymbol('dart/Future.delayed'): PLBindingEntry(dart_Future_delayed),
+  PLSymbol('dart/Future.delayed-full'):
+      PLBindingEntry(dart_Future_delayed_full),
+// END delayed -----------------------
+// START X0 -----------------------
+// END X0 -----------------------
 // Class int with 31 declarations
 // START & -----------------------
 // END & -----------------------
@@ -3640,6 +3689,314 @@ int? dart_Function_hashCode(PLEnv env, PLVector args) {
   } else {
     throw ArgumentError(
         'The dart/Function.hashCode function expects 1 argument(s) (the Function object + hashCode args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Future_wait(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Iterable) {
+      throw ArgumentError(
+          'The dart/Future.wait function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = Future.wait(
+      args[0] as Iterable<Future>,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/Future.wait function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Future_any(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Iterable) {
+      throw ArgumentError(
+          'The dart/Future.any function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = Future.any(
+      args[0] as Iterable<Future>,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/Future.any function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Future_forEach(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    if (args[0] is! Iterable) {
+      throw ArgumentError(
+          'The dart/Future.forEach function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+    }
+    if (args[1] is! dynamic Function(dynamic)) {
+      throw ArgumentError(
+          'The dart/Future.forEach function expects its 2nd argument to be a (dynamic) -> dynamic value, but received a ${typeString(args[1])} value.');
+    }
+
+    final returnValue = Future.forEach(
+      args[0] as Iterable<dynamic>,
+      args[1] as dynamic Function(dynamic),
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/Future.forEach function expects 2 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Future_then(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Future) {
+      if (args[1] is! dynamic Function(dynamic)) {
+        throw ArgumentError(
+            'The dart/Future.then function expects its 2nd argument to be a (dynamic) -> dynamic value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.then(
+        args[1] as dynamic Function(dynamic),
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Future.then function expects its first argument to be a Future object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Future.then function expects 2 argument(s) (the Future object + then args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Future_catchError(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Future) {
+      if (args[1] is! Function) {
+        throw ArgumentError(
+            'The dart/Future.catchError function expects its 2nd argument to be a Function value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.catchError(
+        args[1] as Function,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Future.catchError function expects its first argument to be a Future object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Future.catchError function expects 2 argument(s) (the Future object + catchError args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Future_whenComplete(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Future) {
+      if (args[1] is! void Function()) {
+        throw ArgumentError(
+            'The dart/Future.whenComplete function expects its 2nd argument to be a () -> void value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.whenComplete(
+        args[1] as void Function(),
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Future.whenComplete function expects its first argument to be a Future object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Future.whenComplete function expects 2 argument(s) (the Future object + whenComplete args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Stream? dart_Future_asStream(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is Future) {
+      final returnValue = o.asStream();
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Future.asStream function expects its first argument to be a Future object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Future.asStream function expects 1 argument(s) (the Future object + asStream args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Future_timeout(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Future) {
+      if (args[1] is! Duration) {
+        throw ArgumentError(
+            'The dart/Future.timeout function expects its 2nd argument to be a Duration value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.timeout(
+        args[1] as Duration,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Future.timeout function expects its first argument to be a Future object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Future.timeout function expects 2 argument(s) (the Future object + timeout args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Future_(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! FutureOr Function()) {
+      throw ArgumentError(
+          'The dart/Future. function expects its 1st argument to be a () -> dart.async.FutureOr value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = Future(
+      args[0] as FutureOr Function(),
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/Future. function expects 1 constructor argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Future_microtask(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! FutureOr Function()) {
+      throw ArgumentError(
+          'The dart/Future.microtask function expects its 1st argument to be a () -> dart.async.FutureOr value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = Future.microtask(
+      args[0] as FutureOr Function(),
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/Future.microtask function expects 1 constructor argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Future_sync(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! FutureOr Function()) {
+      throw ArgumentError(
+          'The dart/Future.sync function expects its 1st argument to be a () -> dart.async.FutureOr value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = Future.sync(
+      args[0] as FutureOr Function(),
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/Future.sync function expects 1 constructor argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Future_error(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Object) {
+      throw ArgumentError(
+          'The dart/Future.error function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = Future.error(
+      args[0] as Object,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/Future.error function expects 1 constructor argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Future_error_full(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    if (args[0] is! Object) {
+      throw ArgumentError(
+          'The dart/Future.error-full function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+    }
+    if (args[1] is! StackTrace) {
+      throw ArgumentError(
+          'The dart/Future.error-full function expects its 2nd argument to be a StackTrace value, but received a ${typeString(args[1])} value.');
+    }
+
+    final returnValue = Future.error(
+      args[0] as Object,
+      args[1] as StackTrace,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/Future.error-full function expects 2 constructor argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Future_delayed(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Duration) {
+      throw ArgumentError(
+          'The dart/Future.delayed function expects its 1st argument to be a Duration value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = Future.delayed(
+      args[0] as Duration,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/Future.delayed function expects 1 constructor argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Future_delayed_full(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    if (args[0] is! Duration) {
+      throw ArgumentError(
+          'The dart/Future.delayed-full function expects its 1st argument to be a Duration value, but received a ${typeString(args[0])} value.');
+    }
+    if (args[1] is! FutureOr Function()) {
+      throw ArgumentError(
+          'The dart/Future.delayed-full function expects its 2nd argument to be a () -> dart.async.FutureOr value, but received a ${typeString(args[1])} value.');
+    }
+
+    final returnValue = Future.delayed(
+      args[0] as Duration,
+      args[1] as FutureOr Function(),
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/Future.delayed-full function expects 2 constructor argument(s) but received ${args.length} arguments.');
   }
 }
 

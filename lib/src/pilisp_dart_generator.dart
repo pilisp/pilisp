@@ -20,6 +20,8 @@ final Set<String> prohibitedMethods = {
   'int.>>>', // NB: Labeled as an operator but not excluded by v.isOperator check
   'Enum.compareByIndex', // NB: This and next have type args, which
   'Enum.compareByName', //      are not yet supported
+  'Future.doWhile', // NB: Type needs to be specified differently
+  'Future.value_full', // NB: Bad type X0
   'Iterable.elementAt', // NB: Type-generic
   'Iterable.first', // NB: Type-generic
   'Iterable.firstWhere', // NB: Type-generic
@@ -95,7 +97,7 @@ final sourceClasses = {
   // Expando, // skip
   // Finalizer, // skip
   Function,
-  // Future,
+  Future,
   int,
   Invocation,
   Iterable,
@@ -137,6 +139,7 @@ final sourceClasses = {
 /// or because I do not understand what it is checking for. These class names have
 /// regular constructors that we do want in the generated output.
 final desiredConstructors = {
+  'Future',
   'Object',
   'Random',
   'RegExp',
@@ -146,6 +149,7 @@ final desiredConstructors = {
 };
 
 final importsForGenerated = [
+  'dart:async',
   'dart:convert',
   'dart:typed_data',
   'dart:math',
