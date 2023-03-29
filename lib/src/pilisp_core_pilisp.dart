@@ -513,6 +513,25 @@ final corePiLisp = r'''
    []
    coll))
 
+(defn butlast
+  {:doc "Return the collection with all but the last item."}
+  [coll]
+  (let [length (count coll)
+        penultimate (dec length)
+        ret (reduce
+             (fn butlast-reduce [acc x]
+               (if (= (.idx acc) penultimate)
+                 (reduced (.ret acc))
+                 (-> acc
+                     (update .idx inc)
+                     (update .ret conj x))))
+             {:ret (empty coll)
+              :idx 0}
+             coll)]
+    (if (list? coll)
+      (reverse ret)
+      ret)))
+
 ;; NB. The partition reduction helpers avoid stack consumption via recursive calls with cons.
 (defn partition-reduction-list
   {:doc "Returns map of parts, whole, and step-n for partitioning the given list with n-sized buckets at step intervals."
@@ -803,15 +822,6 @@ final corePiLisp = r'''
 (def contains? contains-key?)
 
 (def disj dissoc)
-
-(let [butlast*
-      (fn butlast*
-        [ret coll]
-        (if (next coll)
-          (butlast* (conj ret (first coll)) (next coll))
-          ret))]
-  (defn butlast [coll]
-    (butlast* [] coll)))
 
 (declare interleave)
 
