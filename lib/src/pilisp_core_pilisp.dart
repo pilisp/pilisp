@@ -1411,6 +1411,18 @@ final corePiLisp = r'''
                   (dart/String.contains doc search))))
           (bindings)))))
 
+(defn apropos-full [search]
+  (let [search (dart/String.toLowerCase (full-name search))]
+    (map key
+         (filter
+          (fn [binding]
+            (let [[sym {:keys [value meta]}] binding
+                  doc (dart/String.toLowerCase (or (:doc meta) ""))
+                  sym (-> sym full-name dart/String.toLowerCase)]
+              (or (dart/String.contains sym search)
+                  (dart/String.contains doc search))))
+          (bindings)))))
+
 ;; Strings
 
 (defn subs
