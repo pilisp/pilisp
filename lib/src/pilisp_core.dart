@@ -962,7 +962,11 @@ Object? reduceFn(PLEnv env, PLVector args) {
   final arity3 = al == 3;
   if (arity2 || arity3) {
     final fn = args[0];
-    final coll = seqFn(env, PLVector([args.last]));
+    final lastArg = args.last;
+    if (lastArg is PLReduced) {
+      return lastArg.value;
+    }
+    final coll = seqFn(env, PLVector([lastArg]));
 
     if (coll == null ||
         coll is Iterable ||
@@ -970,13 +974,18 @@ Object? reduceFn(PLEnv env, PLVector args) {
         coll is PLVector) {
       if (coll == null || seqIsEmpty(coll)) {
         if (arity3) {
-          return args[1]; // initial accumulator value
+          final arg1 = args[1];
+          return arg1 is PLReduced
+              ? arg1.value
+              : arg1; // initial accumulator value
         } else {
           if (fn is Function) {
             // Questioning design choice of _not_ making all of these PLInvocable instances.
-            return fn(env, PLVector([]));
+            final ret = fn(env, PLVector([]));
+            return ret is PLReduced ? ret.value : ret;
           } else if (fn is PLFunction) {
-            return fn.invoke(env, []);
+            final ret = fn.invoke(env, []);
+            return ret is PLReduced ? ret.value : ret;
           } else {
             throw FormatException(
                 'The reduce function expects its first argument to be a function, but received a ${typeString(fn)} value.');
@@ -987,14 +996,18 @@ Object? reduceFn(PLEnv env, PLVector args) {
           final item1 = args[1];
           final item2 = seqFirst(coll);
           if (fn is Function) {
-            return fn(env, PLVector([item1, item2]));
+            final ret = fn(env, PLVector([item1, item2]));
+            return ret is PLReduced ? ret.value : ret;
           } else if (fn is PLFunction) {
-            return fn.invoke(env, PLVector([item1, item2]).toIList);
+            final ret = fn.invoke(env, PLVector([item1, item2]).toIList);
+            return ret is PLReduced ? ret.value : ret;
           } else {
             throw 'The reduce function expects its first argument to be a function, but received a ${typeString(fn)} value.';
           }
         } else {
-          return nthFn(env, PLVector([coll, 0]));
+          // NB. Reduced not likely possible here.
+          final ret = nthFn(env, PLVector([coll, 0]));
+          return ret is PLReduced ? ret.value : ret;
         }
       } else {
         if (args.length == 2) {
@@ -1010,7 +1023,7 @@ Object? reduceFn(PLEnv env, PLVector args) {
           }
           final rest = seqSkip(coll, 2);
           if (seqIsEmpty(rest)) {
-            return initialAcc;
+            return initialAcc is PLReduced ? initialAcc.value : initialAcc;
           } else {
             Iterable<Object?> restIter;
             if (rest is Iterable) {
