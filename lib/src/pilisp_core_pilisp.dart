@@ -152,13 +152,19 @@ final corePiLisp = r'''
 
 (defn last [coll] (nth coll (dec (count coll))))
 
-(defn defmacro
+(def defmacro
   {.macro true}
-  [name metadata & arity-definitions]
-  (cons 'defn
-        (cons name
-              (cons (assoc* metadata :macro true)
-                    arity-definitions))))
+  (fn defmacro [name metadata & arity-definitions]
+    (let [explicit-metadata? (or (string? metadata) (map? metadata))
+          arity-definitions (if explicit-metadata?
+                              arity-definitions
+                              (cons metadata arity-definitions))]
+      (list 'def name (assoc*
+                       (if explicit-metadata?
+                         metadata
+                         {})
+                       .macro true)
+            (cons 'fn* (cons name arity-definitions))))))
 
 (defmacro comment
   {:doc "Ignores body, yields nil"}
