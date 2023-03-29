@@ -1029,9 +1029,10 @@ final corePiLisp = r'''
                                        first-clause-form
                                        ;; Support quick invocation of single-argument functions
                                        ;; designed to refer to the current parent.
-                                       (if (= car 'cd)
+                                       (if (or (= car 'cd)
+                                               (= car 'pwd))
                                          ;; Special handling for `cd` to reset parent to nil
-                                         (list 'cd nil)
+                                         (list car)
                                          (list 'if (list 'nil? (list 'pl/get-parent))
                                                first-clause-form
                                                (reverse (cons (list '.) (reverse first-clause-form)))))))
@@ -1291,25 +1292,87 @@ final corePiLisp = r'''
 ;; PiLisp Environment
 
 (defn parent-to-string
-  {:doc "How should the parent value of the environment be rendered as a string, for example in the REPL prompt?"}
-  [x]
+  {:doc "How should the parent selector of the environment be rendered as a string, for example in the REPL prompt?"}
+  [parent]
   (cond
-    (symbol? x) x
-    (vector? x) (str "[#"(count x) "]")
-    (list? x) (str "(#"(count x) ")")
-    (map? x) (str "{#"(count x) "}")
-    (set? x) (str "#{#"(count x) "}")
-    (string? x) (str "\"#"(count x) "\"")
-    :else (type x)))
+    (symbol? parent) parent
+    (vector? parent) (str "[#"(count parent) "]")
+    (list? parent) (str "(#"(count parent) ")")
+    (map? parent) (str "{#"(count parent) "}")
+    (set? parent) (str "#{#"(count parent) "}")
+    (string? parent) (str "\"#"(count parent) "\"")
+    :else (type parent)))
 
 (defmacro cd
   {:doc "Change the current parent value in the PiLisp environment. Macro so as to support symbols for names and binding resolution."}
-  ([] '(pl/set-parent nil))
+  ([] '(do (pl/set-parent nil)
+           (pl/set-parent-selector nil)))
   ([new-parent]
-   (list 'pl/set-parent
-         (if (symbol? new-parent)
-           (list 'quote new-parent)
-           new-parent))))
+   (let [new-parent-g (gensym 'new-parent)
+         current-parent-g (gensym 'current-parent)
+         current-parent-selector-g (gensym 'current-parent-selector)
+         current-parent-selector-count-g (gensym 'current-parent-selector-count)]
+     (list 'let [new-parent-g new-parent
+                 current-parent-g (list 'pl/get-parent)
+                 current-parent-selector-g (list 'pl/get-parent-selector)
+                 current-parent-selector-count-g (list 'if (list 'coll? current-parent-selector-g)
+                                                       (list 'count current-parent-selector-g)
+                                                       -1)]
+           ;; Parent
+           (list 'pl/set-parent
+                 (list 'cond
+                       (list 'nil? current-parent-g)
+                       (list 'if (list 'symbol? new-parent)
+                             (list 'quote new-parent)
+                             new-parent-g)
+
+                       (list '= new-parent-g ..)
+                       (list 'cond
+                             (list '> current-parent-selector-count-g 2)
+                             (list 'get-in
+                                   (list 'first current-parent-selector-g)
+                                   (list 'butlast (list 'next current-parent-selector-g)))
+
+                             (list '= current-parent-selector-count-g 2)
+                             (list 'first current-parent-selector-g)
+
+                             (list 'or
+                                   (list '= current-parent-selector-count-g 1)
+                                   (list '= current-parent-selector-count-g -1))
+                             nil)
+
+                       :else (list 'pl/set-parent
+                                   (list 'cond
+                                         (list 'coll? current-parent-g) (list 'get current-parent-g new-parent-g)
+                                         :else new-parent-g))))
+
+           ;; Parent Selector
+           (list 'pl/set-parent-selector
+                 (list 'if (list 'symbol? new-parent)
+                       ;; TODO Consider whether this is intuitive.
+                       [(list 'quote new-parent)]
+                       (list 'if (list 'nil? new-parent-g)
+                             nil
+                             (list 'cond
+                                   (list '= new-parent-g ..)
+                                   (list 'cond
+                                         (list '>= current-parent-selector-count-g 2)
+                                         (list 'butlast current-parent-selector-g)
+
+                                         (list 'or
+                                               (list '= current-parent-selector-count-g 1)
+                                               (list '= current-parent-selector-count-g -1))
+                                         nil)
+
+
+                                   (list 'nil? current-parent-g)
+                                   [new-parent-g]
+
+                                   (list 'coll? current-parent-g)
+                                   (list 'conj current-parent-selector-g new-parent-g)
+
+                                   :else [new-parent-g]) )))
+           (list 'pl/get-parent)))))
 
 (defn .
   {:doc "Current parent value. Resolves symbols using bindings at invocation time."}
@@ -1318,6 +1381,8 @@ final corePiLisp = r'''
     (if (symbol? value)
       (.value (resolve value))
       value)))
+
+(def pwd pl/get-parent-selector)
 
 (defn ls
   ([] (ls (.)))
@@ -1393,7 +1458,7 @@ final corePiLisp = r'''
 (defn str/split
   {:doc "Split the string `s` into vectors when `match` is encountered. The `match` can be any Dart `Pattern`."}
   [s match]
-  (dart/String.split s match))
+  (vec (dart/String.split s match)))
 
 (defn str/join
   ([coll]

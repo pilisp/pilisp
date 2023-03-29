@@ -24,7 +24,12 @@ class PLEnv {
   BigInt _symbolId = BigInt.zero;
   bool isDebug = false;
   BigInt nextId() => _symbolId += BigInt.one;
+
+  /// At the REPL, a [parent] value may be set that establishes a context in which certain functions that are aware of the environment's parent value will use it as an argument.
   Object? parent;
+
+  /// The [parent] can be located within a nested structure, so the [parentSelector] describes the path taken to arrive at the current [parent] value.
+  Object? parentSelector;
 
   /// These sets of [PLSymbol] are created as part of lexical closure processing.
   List<Set<PLSymbol>> closureScopes = [];
@@ -52,8 +57,19 @@ class PLEnv {
           termDoc:
               'Return the current parent value from the PiLisp environment.'
         })),
+    PLSymbol('pl/get-parent-selector'): PLBindingEntry.withMeta(
+        plGetParentSelectorFn,
+        IMap({
+          termDoc:
+              'Return the current parentSelector value from the PiLisp environment.'
+        })),
     PLSymbol('pl/set-parent'): PLBindingEntry.withMeta(plSetParentFn,
         IMap({termDoc: 'Set the environment parent to the given value.'})),
+    PLSymbol('pl/set-parent-selector'): PLBindingEntry.withMeta(
+        plSetParentSelectorFn,
+        IMap({
+          termDoc: 'Set the environment parentSelector to the given value.'
+        })),
     PLSymbol('resolve*'): PLBindingEntry.withMeta(
         resolveFn,
         IMap({

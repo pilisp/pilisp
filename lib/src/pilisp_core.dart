@@ -171,12 +171,33 @@ Object? plSetParentFn(PLEnv env, PLVector args) {
   }
 }
 
+Object? plSetParentSelectorFn(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    return env.parentSelector = args[0];
+  } else if (args.length == 0) {
+    env.parentSelector = null;
+    return null;
+  } else {
+    throw ArgumentError(
+        'The pl/set-parent-selector function expects 0 or 1 argument, but received ${args.length} arguments.');
+  }
+}
+
 Object? plGetParentFn(PLEnv env, PLVector args) {
   if (args.isEmpty) {
     return env.parent;
   } else {
     throw ArgumentError(
         'The pl/get-parent function expects 0 arguments, but received ${args.length} arguments.');
+  }
+}
+
+Object? plGetParentSelectorFn(PLEnv env, PLVector args) {
+  if (args.isEmpty) {
+    return env.parentSelector;
+  } else {
+    throw ArgumentError(
+        'The pl/get-parent-selector function expects 0 arguments, but received ${args.length} arguments.');
   }
 }
 
