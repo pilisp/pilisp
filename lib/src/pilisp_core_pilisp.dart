@@ -93,7 +93,7 @@ final corePiLisp = r'''
 
 (def ! write-state)
 
-;; Math
+;; # Math
 
 ;; dart/dart-math-pow
 ;; dart/dart-math-acos
@@ -125,7 +125,7 @@ final corePiLisp = r'''
 (defn even? [n] (zero? (mod n 2)))
 (defn odd? [n] (not (even? n)))
 
-;; Collections
+;; # Collections
 
 (def rest next)
 (defn nnext [coll] (next (next coll)))
@@ -658,6 +658,8 @@ final corePiLisp = r'''
         whole (:whole m) part (:part m)]
     (conj whole part)))
 
+;; # Predicates
+
 (defn true?
   {:doc "Returns true if identical to the boolean value true. Prefer truthy/falsey semantics where possible."}
   [x]
@@ -712,6 +714,8 @@ final corePiLisp = r'''
      ([a b] (f (if (nil? a) x a) (if (nil? b) y b)))
      ([a b c] (f (if (nil? a) x a) (if (nil? b) y b) (if (nil? c) z c)))
      ([a b c & ds] (apply f (if (nil? a) x a) (if (nil? b) y b) (if (nil? c) z c) ds)))))
+
+;; # Names & "Namespaces"
 
 (defn full-name
   [x]
@@ -1289,7 +1293,7 @@ final corePiLisp = r'''
                                      (list 'get-in binding-g [:meta :doc])
                                      "<No documentation>"))))))
 
-;; PiLisp Environment
+;; # PiLisp Environment
 
 (defn parent-to-string
   {:doc "How should the parent selector of the environment be rendered as a string, for example in the REPL prompt?"}
@@ -1399,31 +1403,7 @@ final corePiLisp = r'''
 
      :else nil)))
 
-(defn apropos [search]
-  (let [search (dart/String.toLowerCase (name search))]
-    (map key
-         (filter
-          (fn [binding]
-            (let [[sym {:keys [value meta]}] binding
-                  doc (dart/String.toLowerCase (or (:doc meta) ""))
-                  sym (-> sym name dart/String.toLowerCase)]
-              (or (dart/String.contains sym search)
-                  (dart/String.contains doc search))))
-          (bindings)))))
-
-(defn apropos-full [search]
-  (let [search (dart/String.toLowerCase (full-name search))]
-    (map key
-         (filter
-          (fn [binding]
-            (let [[sym {:keys [value meta]}] binding
-                  doc (dart/String.toLowerCase (or (:doc meta) ""))
-                  sym (-> sym full-name dart/String.toLowerCase)]
-              (or (dart/String.contains sym search)
-                  (dart/String.contains doc search))))
-          (bindings)))))
-
-;; Strings
+;; # Strings
 
 (defn subs
   ([s start] (dart/String.substring s start))
@@ -1530,8 +1510,6 @@ final corePiLisp = r'''
   ([s substr] (dart/String.contains s substr))
   ([s substr from-idx] (dart/String.contains-full s substr from-idx)))
 
-;; Maps
-
 (defn select-keys
   {:doc "Returns a map containing only those entries in map whose key is in keys"}
   [map keyseq]
@@ -1545,7 +1523,7 @@ final corePiLisp = r'''
                  (next keys))))
       ret)))
 
-;; Sets
+;; # Sets
 
 (defn max-key
   {:doc "Returns the x for which (k x), a number, is greatest. If there are multiple such xs, the last one is returned."}
@@ -1703,7 +1681,7 @@ final corePiLisp = r'''
   (and (>= (count set1) (count set2))
        (every? #(contains? set1 %) set2)))
 
-;; Walk
+;; # Walk
 
 ;; walk, prewalk, and postwalk implemented above
 
@@ -1750,7 +1728,7 @@ final corePiLisp = r'''
     (prewalk (fn [x] (print "Walked: ") (prn x) x) form))
   )
 
-;; Template
+;; # Template
 
 (defn apply-template
   [argv expr values]
@@ -1769,7 +1747,7 @@ final corePiLisp = r'''
                   (partition c values))]
     (cons 'do body)))
 
-;; PiLisp
+;; # PiLisp
 
 (defn read-string [s]
   (dart/PiLisp.readString s))
@@ -1966,9 +1944,33 @@ final corePiLisp = r'''
           (when (> error-count 0)
             (str "\n\n## Errors ##\n\n" (str/join "\n" (map test/format-error error))))))))
 
-;; REPL
+;; # REPL
 
 (defn help []
   "Peruse the map returned from (bindings) for available forms and their metadata.")
+
+(defn apropos [search]
+  (let [search (dart/String.toLowerCase (name search))]
+    (map key
+         (filter
+          (fn [binding]
+            (let [[sym {:keys [value meta]}] binding
+                  doc (dart/String.toLowerCase (or (:doc meta) ""))
+                  sym (-> sym name dart/String.toLowerCase)]
+              (or (dart/String.contains sym search)
+                  (dart/String.contains doc search))))
+          (bindings)))))
+
+(defn apropos-full [search]
+  (let [search (dart/String.toLowerCase (full-name search))]
+    (map key
+         (filter
+          (fn [binding]
+            (let [[sym {:keys [value meta]}] binding
+                  doc (dart/String.toLowerCase (or (:doc meta) ""))
+                  sym (-> sym full-name dart/String.toLowerCase)]
+              (or (dart/String.contains sym search)
+                  (dart/String.contains doc search))))
+          (bindings)))))
 
 ''';
