@@ -28,10 +28,8 @@ analyzer:
     strict-casts: true
     strict-inference: true
     strict-raw-types: true
-
-# analyzer:
-#   exclude:
-#     - path/to/excluded/files/**
+  exclude:
+    - lib/src/pilisp_core.stub.dart # Generated code
 
 # For more information about the core and recommended set of lints, see
 # https://dart.dev/go/core-lints
