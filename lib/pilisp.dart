@@ -6,13 +6,12 @@
 /// and Web targets:
 ///
 ///  * [pilisp-native](https://github.com/pilisp/pilisp-native)
-///  * [pilisp-dart-vm](https://github.com/pilisp/pilisp-dart-vm)
-///  * [pilisp-flutter](https://github.com/pilisp/pilisp-flutter)
 ///  * [pilisp-web](https://github.com/pilisp/pilisp-web)
+///  * Others TBD
 ///
-/// If you need to read a file, make an HTTP request, embed PiLisp in a Flutter
-/// application, or want to try out PiLisp in the browser, you should use one of
-/// the projects listed above.
+/// If you need to read a file, make an HTTP request, application, or want to
+/// try out PiLisp in the browser, you should use one of the projects listed
+/// above.
 ///
 ///
 /// ## Dart API
@@ -41,48 +40,48 @@
 /// types in the language:
 ///
 /// ```clojure
+/// pl> 1
 /// 1
-/// ;; 1
 ///
-/// (type 1)
-/// ;; int
-///
+/// pl> (type 1)
 /// int
-/// ;; Symbol int is undefined.
 ///
-/// 'int
-/// ;; int
+/// pl> int
+/// Symbol int is undefined.
 ///
-/// (type int)
-/// ;; symbol
+/// pl> 'int
+/// int
 ///
-/// '(type int)
-/// ;; (
-/// ;;   type
-/// ;;   int
-/// ;; )
+/// pl> (type int)
+/// symbol
 ///
-/// (type '(type int))
-/// ;; list
+/// pl> '(type int)
+/// (
+///   type
+///   int
+/// )
 ///
-/// (list 1 2 3)
+/// pl> (type '(type int))
+/// list
+///
+/// pl> (list 1 2 3)
 /// (
 ///   1
 ///   2
 ///   3
 /// )
 ///
-/// (+ 1 2 3)
-/// ;; 6
+/// pl> (+ 1 2 3)
+/// 6
 ///
-/// (fn? +)
-/// ;; true
+/// pl> (fn? +)
+/// true
 ///
-/// (type +)
-/// ;; (PLEnv, PLVector) => num
+/// pl> (type +)
+/// (PLEnv, PLVector) => num
 ///
-/// +
-/// ;; #<(PLEnv, PLVector) => num: Closure: (PLEnv, PLVector) => num from Function 'addFn': static.>
+/// pl> +
+/// #<(PLEnv, PLVector) => num: Closure: (PLEnv, PLVector) => num from Function 'addFn': static.>
 ///
 /// ```
 ///

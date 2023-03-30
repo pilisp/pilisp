@@ -43,6 +43,8 @@ PiLisp.loadString('(+ 1 2 3 4)');
 * [PiLisp Core Implementation][pilisp-core]
 * [PiLisp Core Tests][pilisp-tests]
 * [TODO Embedding PiLisp in Dart Programs][embedding]
+* [pilisp-native] that takes advantage of host facilities (e.g., `dart:io`)
+* [pilisp-web] that compiles to JavaScript targeting the Web
 
 The name "PiLisp" was originally a shortened form of "Piped Lisp," because a
 first prototype of this language was developed while building [a REPL
@@ -79,7 +81,9 @@ Copyright © Daniel Gregoire 2022–2023
 
 [embedding]: https://github.com/pilisp/pilisp/blob/main/doc/Embedding.md
 [pilisp-core]: https://github.com/pilisp/pilisp/blob/main/lib/src/pilisp_core_pilisp.dart
+[pilisp-native]: https://github.com/pilisp/pilisp-native
 [pilisp-org]: https://github.com/pilisp
 [pilisp-tests]: https://github.com/pilisp/pilisp/blob/main/test/pilisp_test.dart
+[pilisp-web]: https://github.com/pilisp/pilisp-web
 [releases]: https://github.com/pilisp/pilisp/releases
 [tutorial]: https://github.com/pilisp/pilisp/blob/main/doc/Tutorial.md

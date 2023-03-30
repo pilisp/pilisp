@@ -25,6 +25,18 @@ export 'pilisp_error.dart';
 
 PLEnv piLispEnv = PLEnv().loadString(corePiLisp);
 
+/// The [PiLisp] class exposes static methods for reading, evaluating, printing,
+/// and identifying the type of PiLisp expressions.
+///
+/// See the package-level documentation and project README for more information
+/// about the language itself.
+///
+/// The methods that require a [PLEnv] instance rely on the [piLispEnv] instance
+/// by default, which loads the core language implementation. In general, you
+/// will want to extend this base environment, rather than creating one from
+/// scratch. See the
+/// [pilisp-native](https://github.com/pilisp/pilisp-native) project for a
+/// non-trivial example of extending the base [PLEnv].
 class PiLisp {
   /// Given a [programSource], read and return the first expression found.
   static Object readString(String programSource) {

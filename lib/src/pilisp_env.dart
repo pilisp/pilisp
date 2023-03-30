@@ -478,6 +478,7 @@ class PLEnv {
     indentDec();
   }
 
+  // TODO Consider how to ensure string building is avoided until needed.
   void debugPrint(String s) {
     if (isDebug) {
       print(s);
@@ -495,6 +496,11 @@ class PLEnv {
   }
 }
 
+/// A [PLBindingEntry] represents a symbol bound to a value in the PiLisp
+/// [PLEnv] environment.
+///
+/// In PiLisp, only bindings can have metadata, so a [PLBindingEntry] has a
+/// [meta] field for this purpose.
 class PLBindingEntry {
   Object? value;
   IMap<Object?, Object?> meta = IMap({});

@@ -20,13 +20,10 @@ abstract class PLDeref {
   Object? dereference({int timeout = 10000});
 }
 
-/// State that can optionally be persisted to storage outside main memory.
+/// Container for mutable state.
 ///
-/// Akin to Clojure's clojure.lang.Volatile, by default this is just a "place"
+/// Akin to Clojure's `clojure.lang.Volatile`, by default this is just a "place"
 /// for mutable in-memory state from an otherwise immutable PiLisp program.
-///
-/// I plan to offer an option in the state PiLisp function to mark a given
-/// [PLState] object as persistent. In this state,
 class PLState extends PLExpr implements PLDeref {
   static final readRequired = Object();
   Object? value = readRequired;

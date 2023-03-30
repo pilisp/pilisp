@@ -69,6 +69,11 @@ abstract class PLAbstractExpr {
   String typeName();
 }
 
+/// A [PLExpr] knows how to evaluate itself within the context of a [PLEnv]
+/// instance.
+///
+/// Non-[PLExpr] values can still be evaluated by PiLisp. Most Dart objects
+/// simply evaluate to themselves.
 abstract class PLExpr extends PLAbstractExpr {
   @override
   Object? eval(PLEnv env) {
@@ -139,6 +144,10 @@ class PLSymbol extends PLExpr implements Comparable<Object?> {
   }
 }
 
+/// A PiLisp [PLTerm] is equivalent to a Clojure keyword.
+///
+/// Syntactically, PiLisp terms can start with either a `.` or `:`. They are
+/// printed with the `:` for better Clojure/EDN interoperability.
 class PLTerm extends PLExpr implements PLInvocable {
   /// Factory for new symbol cells.
   factory PLTerm(String name) =>
@@ -1686,8 +1695,7 @@ class PLNil extends PLExpr {
 }
 
 Object? plEval(PLEnv env, Object? expr) {
-  // TODO Lazy string build
-  env.debugPrint('[DEBUG] ${plPrintToString(env, expr)}');
+  // env.debugPrint('[DEBUG] ${plPrintToString(env, expr)}');
   if (expr is PLExpr) {
     return expr.eval(env);
   } else if (expr is IMap) {
