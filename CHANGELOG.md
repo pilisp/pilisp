@@ -1,4 +1,9 @@
-## v1.0.0-alpha.5 (GitHub Pre-Release)
+## v1.0.0-alpha.6
+
+* Renames `corePiLisp` to `piLispCore`
+* Documentation updates
+
+## v1.0.0-alpha.5 (GitHub Pre-Release Only)
 
 * Extended `cd` to allow traversing nested structures
 * Nascent `Future` support (see pilisp-native for more)
@@ -7,7 +12,7 @@
 * Fixes bugs where `reduce` could return a `PLReduced`
 * Reimplements `butlast` using `reduce`
 
-## v1.0.0-alpha.4 (GitHub Pre-Release)
+## v1.0.0-alpha.4 (GitHub Pre-Release Only)
 
 * Exposed functions for `read-string`, `load-string`, and `eval`
 * Ported `clojure.string` forms
@@ -22,7 +27,7 @@
 * `cd` with no args now works in first position of `pl>` (and hence, at the REPL)
 * Varargs are now bound as a list, rather than a vector
 
-## v1.0.0-alpha.3 (GitHub Pre-Release)
+## v1.0.0-alpha.3 (GitHub Pre-Release Only)
 
 * Impl. resolve in Dart for performance
 * Support `def` in `pl>`
@@ -56,7 +61,7 @@
 * Port rest of clojure.walk
 
 
-## v1.0.0-alpha.2 (GitHub Pre-Release)
+## v1.0.0-alpha.2 (GitHub Pre-Release Only)
 
 * **⚡️ Features**
    * This release is the first compatible with the under-development [inf-pilisp](https://github.com/pilisp/emacs-inf-pilisp) Emacs package, for developing in PiLisp using Emacs' "Inferior Lisp" facilities.
@@ -73,6 +78,6 @@
    * `values` renamed to `vals` to match Clojure name
    * Empty invocations now return the empty list, rather than `nil`
 
-## v1.0.0-alpha.1 (GitHub Pre-Release)
+## v1.0.0-alpha.1 (GitHub Pre-Release Only)
 
 * Initial version.
