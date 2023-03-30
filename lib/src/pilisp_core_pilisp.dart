@@ -1,5 +1,5 @@
 // ;; -*- mode: pilisp -*-
-final corePiLisp = r'''
+final piLispCore = r'''
 (def fn
   {:macro true
    :doc "Define functions."}

@@ -7,7 +7,7 @@ import 'pilisp_print.dart';
 import 'pilisp_read.dart';
 
 export 'pilisp_core.dart' show PLState;
-export 'pilisp_core_pilisp.dart' show corePiLisp;
+export 'pilisp_core_pilisp.dart' show piLispCore;
 export 'pilisp_env.dart' show PLEnv, PLBindingEntry;
 export 'pilisp_expr.dart'
     show
@@ -23,7 +23,7 @@ export 'pilisp_expr.dart'
         PLVector;
 export 'pilisp_error.dart';
 
-PLEnv piLispEnv = PLEnv().loadString(corePiLisp);
+PLEnv piLispEnv = PLEnv().loadString(piLispCore);
 
 /// The [PiLisp] class exposes static methods for reading, evaluating, printing,
 /// and identifying the type of PiLisp expressions.
