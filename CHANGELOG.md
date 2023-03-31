@@ -1,3 +1,8 @@
+## v1.0.0-alpha.7
+
+* Adds `PLAwait` value that signals to Dart code evaluating PiLisp programs that the final value should be `await`ed.
+   * This will be leveraged in [pilisp-cli](https://github.com/pilisp/pilisp-cli) for both `repl` and `loadFile` use-cases.
+
 ## v1.0.0-alpha.6
 
 * Renames `corePiLisp` to `piLispCore`
