@@ -11,7 +11,6 @@ import 'dart:typed_data';
 import 'dart:math';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import '../pilisp.dart';
-import 'pilisp_core.dart';
 import 'pilisp_expr.dart';
 
 Map<PLSymbol, PLBindingEntry> wrapperBindings = {

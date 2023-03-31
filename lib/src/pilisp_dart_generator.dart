@@ -10,7 +10,6 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:source_gen/source_gen.dart';
 
 import '../pilisp.dart';
-import 'pilisp_core.dart';
 
 final listType = reflectType(List);
 final typedDataType = reflectType(TypedData);
@@ -159,7 +158,6 @@ final importsForGenerated = [
   'dart:math',
   'package:fast_immutable_collections/fast_immutable_collections.dart',
   '../pilisp.dart',
-  'pilisp_core.dart',
   'pilisp_expr.dart',
 ];
 
