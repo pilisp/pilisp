@@ -60,6 +60,31 @@ class PLState extends PLExpr implements PLDeref {
   }
 }
 
+class PLAwait extends PLExpr implements PLDeref {
+  Future<Object?> value;
+  PLAwait._(this.value);
+
+  factory PLAwait.forValue(Object? x) {
+    final v = x is Future ? x : Future.value(x);
+    return PLAwait._(v);
+  }
+
+  @override
+  Object? dereference({int timeout = 10000}) {
+    return value;
+  }
+
+  @override
+  String printToString(PLEnv env) {
+    return '#<await $value>';
+  }
+
+  @override
+  String typeName() {
+    return 'await';
+  }
+}
+
 bool isIdenticalFn(PLEnv env, PLVector args) {
   if (args.length == 2) {
     final x = args[0];

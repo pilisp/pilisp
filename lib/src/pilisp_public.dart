@@ -6,7 +6,7 @@ import 'pilisp_expr.dart';
 import 'pilisp_print.dart';
 import 'pilisp_read.dart';
 
-export 'pilisp_core.dart' show PLState;
+export 'pilisp_core.dart' show PLAwait, PLState;
 export 'pilisp_core_pilisp.dart' show piLispCore;
 export 'pilisp_env.dart' show PLEnv, PLBindingEntry;
 export 'pilisp_expr.dart'

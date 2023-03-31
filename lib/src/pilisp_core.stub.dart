@@ -11,6 +11,7 @@ import 'dart:typed_data';
 import 'dart:math';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import '../pilisp.dart';
+import 'pilisp_core.dart';
 import 'pilisp_expr.dart';
 
 Map<PLSymbol, PLBindingEntry> wrapperBindings = {
@@ -1211,6 +1212,23 @@ Map<PLSymbol, PLBindingEntry> wrapperBindings = {
 // START CTOR  -----------------------
   PLSymbol('dart/PiLisp.'): PLBindingEntry(dart_PiLisp_),
 // END  -----------------------
+// Class PLAwait with 6 declarations
+// START value -----------------------
+// START dereference -----------------------
+  PLSymbol('dart/PLAwait.dereference'):
+      PLBindingEntry(dart_PLAwait_dereference),
+// END dereference -----------------------
+// START printToString -----------------------
+  PLSymbol('dart/PLAwait.printToString'):
+      PLBindingEntry(dart_PLAwait_printToString),
+// END printToString -----------------------
+// START typeName -----------------------
+  PLSymbol('dart/PLAwait.typeName'): PLBindingEntry(dart_PLAwait_typeName),
+// END typeName -----------------------
+// START CTOR _ -----------------------
+// START CTOR forValue -----------------------
+  PLSymbol('dart/PLAwait.forValue'): PLBindingEntry(dart_PLAwait_forValue),
+// END forValue -----------------------
 // Class RegExp with 11 declarations
 // START escape -----------------------
   PLSymbol('dart/RegExp.escape'): PLBindingEntry(dart_RegExp_escape),
@@ -7403,6 +7421,82 @@ PiLisp? dart_PiLisp_(PLEnv env, PLVector args) {
   } else {
     throw ArgumentError(
         'The dart/PiLisp. function expects 0 constructor argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Object? dart_PLAwait_dereference(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is PLAwait) {
+      final returnValue = o.dereference();
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/PLAwait.dereference function expects its first argument to be a PLAwait object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/PLAwait.dereference function expects 1 argument(s) (the PLAwait object + dereference args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+String? dart_PLAwait_printToString(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is PLAwait) {
+      if (args[1] is! PLEnv) {
+        throw ArgumentError(
+            'The dart/PLAwait.printToString function expects its 2nd argument to be a PLEnv value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.printToString(
+        args[1] as PLEnv,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/PLAwait.printToString function expects its first argument to be a PLAwait object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/PLAwait.printToString function expects 2 argument(s) (the PLAwait object + printToString args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+String? dart_PLAwait_typeName(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is PLAwait) {
+      final returnValue = o.typeName();
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/PLAwait.typeName function expects its first argument to be a PLAwait object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/PLAwait.typeName function expects 1 argument(s) (the PLAwait object + typeName args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+PLAwait? dart_PLAwait_forValue(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Object) {
+      throw ArgumentError(
+          'The dart/PLAwait.forValue function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = PLAwait.forValue(
+      args[0] as Object,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/PLAwait.forValue function expects 1 constructor argument(s) but received ${args.length} arguments.');
   }
 }
 

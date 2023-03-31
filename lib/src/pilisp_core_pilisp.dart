@@ -1772,6 +1772,11 @@ final piLispCore = r'''
   [fut function]
   (dart/Future.then fut (dart-dynamic-function-1 function)))
 
+(defn future/await
+  {:doc "Return an object that indicates to Dart code invoking this PiLisp program that the user wants to `await` the value. Accepts any value, calling Dart's `Future.value` constructor on non-Futures."}
+  [x]
+  (dart/PLAwait.forValue x))
+
 ;; # Test Framework
 
 (def test/suite-empty

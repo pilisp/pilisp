@@ -10,6 +10,7 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:source_gen/source_gen.dart';
 
 import '../pilisp.dart';
+import 'pilisp_core.dart';
 
 final listType = reflectType(List);
 final typedDataType = reflectType(TypedData);
@@ -51,6 +52,8 @@ final Set<String> prohibitedMethods = {
   'List.replaceRange', // NB: Type-generic
   'List.setAll', // NB: Type-generic
   'List.setRange', // NB: Type-generic
+  'PLAwait._', // NB: Private ctor
+  'PLAwait.value', // BUG in code gen
   'Map.addAll', // NB: Type-generic
   'Map.fromIterables', // NB: Type-generic
   'Map.of', // NB: Type-generic
@@ -111,6 +114,7 @@ final sourceClasses = {
   Object,
   Pattern,
   PiLisp,
+  PLAwait,
   // pragma, // skip
   RegExp,
   RegExpMatch,
@@ -155,6 +159,7 @@ final importsForGenerated = [
   'dart:math',
   'package:fast_immutable_collections/fast_immutable_collections.dart',
   '../pilisp.dart',
+  'pilisp_core.dart',
   'pilisp_expr.dart',
 ];
 
