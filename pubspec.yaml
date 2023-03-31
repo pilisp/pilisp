@@ -1,6 +1,6 @@
 name: pilisp
 description: An interpreted Lisp inspired by Clojure. Runs on all Dart targets.
-version: 1.0.0-alpha.6
+version: 1.0.0-alpha.7
 repository: https://github.com/pilisp/pilisp
 
 environment:
