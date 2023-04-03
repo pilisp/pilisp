@@ -1777,6 +1777,14 @@ final piLispCore = r'''
   [x]
   (dart/PLAwait.forValue x))
 
+;; # Date and Time
+
+;; NB. Just going to keep adding forms until the start-up time is unacceptable,
+;;     then will think on optimal way to split things out and allow loading them.
+
+(defn current-time-millis []
+  (dart/DateTime.millisecondsSinceEpoch (dart/DateTime.now)))
+
 ;; # Test Framework
 
 (def test/suite-empty
