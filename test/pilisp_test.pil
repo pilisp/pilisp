@@ -1,4 +1,30 @@
 ;; -*- mode: pilisp -*-
+(defmulti length {:doc "Returns the length of a value."} type)
+
+(defmethod length vector
+  [v]
+  (count v))
+
+(defmethod length map
+  [m]
+  (count m))
+
+(defn test-multi-methods
+  {:test true}
+  []
+  (test/with-group "Implemented methods"
+    (test/is= 4 (length [1 2 3 4]))
+    (test/is= 2 (length {1 2 3 4}))
+    (test/is= 2 (count (methods length))))
+
+  (test/with-group "Unimplemented methods"
+    (test/throws (length "nope")))
+
+  (test/with-group "Removing methods"
+    (remove-method length 'vector)
+    (test/throws (length [1 2 3 4]))
+    (test/is= 1 (count (methods length)))))
+
 (defn test-map
   {:test true}
   []
@@ -21,42 +47,42 @@
   {:test true}
   []
   (test/is= 4
-           (pl> [0 1 2 3 4 5 6 7 8 9] | map (partial * 3) | filter even? | last | | / $ 6)))
+            (pl> [0 1 2 3 4 5 6 7 8 9] | map (partial * 3) | filter even? | last | | / $ 6)))
 
 (defn test-reduce
   {:test true}
   []
   (let [product (fn [product n] (* product n))]
-    (test/group "Reduce"
-                (test/is= 15 (reduce + [1 2 3 4 5]))
-                (test/is= 15 (reduce + 0 [1 2 3 4 5]))
-                (test/is= 20 (reduce + 5 [1 2 3 4 5]))
-                (test/is= 120 (reduce product [1 2 3 4 5]))
-                (test/is= 0 (reduce product 0 [1 2 3 4 5]))
-                (test/is= 600 (reduce product 5 [1 2 3 4 5])))))
+    (test/with-group "Reduce"
+      (test/is= 15 (reduce + [1 2 3 4 5]))
+      (test/is= 15 (reduce + 0 [1 2 3 4 5]))
+      (test/is= 20 (reduce + 5 [1 2 3 4 5]))
+      (test/is= 120 (reduce product [1 2 3 4 5]))
+      (test/is= 0 (reduce product 0 [1 2 3 4 5]))
+      (test/is= 600 (reduce product 5 [1 2 3 4 5])))))
 
 (defn test-rem
   {:test true}
   []
-  (test/group "Arithmetic"
-              (test/is= 1 (rem 6 5))))
+  (test/with-group "Arithmetic"
+    (test/is= 1 (rem 6 5))))
 
 (defn test-dart-iterable-class
   {:test true}
   []
-  (test/group "Iterable.join"
-              (test/is= "abc" (dart/Iterable.join (to-dart-list ['a 'b 'c])))
-              (test/is= "a, b, c" (dart/Iterable.join-full (to-dart-list ['a 'b 'c]) ", "))))
+  (test/with-group "Iterable.join"
+    (test/is= "abc" (dart/Iterable.join (to-dart-list ['a 'b 'c])))
+    (test/is= "a, b, c" (dart/Iterable.join-full (to-dart-list ['a 'b 'c]) ", "))))
 
 (defn test-string-functions
   {:test true}
   []
-  (test/group "String functions"
-              (test/is= true (str/blank? nil))
-              (test/is= true (str/blank? ""))
-              (test/is= true (str/blank? " "))
-              (test/is= true (str/blank? " \t \n  \r \t     \r\n"))
-              (test/is= true (not (str/blank? " \t pilisp  \n\n")))))
+  (test/with-group "String functions"
+    (test/is= true (str/blank? nil))
+    (test/is= true (str/blank? ""))
+    (test/is= true (str/blank? " "))
+    (test/is= true (str/blank? " \t \n  \r \t     \r\n"))
+    (test/is= true (not (str/blank? " \t pilisp  \n\n")))))
 
 (def core-pilisp-tests
   (reduce

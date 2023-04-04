@@ -1836,7 +1836,7 @@ final piLispCore = r'''
 (defn test/suite-reset []
   (write-state test/suite test/suite-empty))
 
-(defmacro test/group
+(defmacro test/with-group
   {:doc "Group tests under a string description. Saves to test/suite."}
   [description & body]
   (list 'do
