@@ -85,6 +85,68 @@ class PLAwait extends PLExpr implements PLDeref {
   }
 }
 
+/// Dispatch based on aritrary dispatch functions, with specializations for
+/// faster type-based dispatch.
+///
+/// Since PiLisp is interpreted and there is no story for dynamic class creation
+/// in Dart, both protocols and multi-methods are backed by [PLMultiMethod].
+class PLMultiMethod extends PLNamedInvocable {
+  final bool isTypeDispatched;
+  IMap<PLSymbol, PLInvocable> implsByType = IMap({});
+
+  PLMultiMethod(this.isTypeDispatched);
+
+  @override
+  String typeName() {
+    return isTypeDispatched ? 'protocol' : 'multi-method';
+  }
+
+  @override
+  String printToString(PLEnv env) {
+    return '#<${isTypeDispatched ? 'protocol' : 'multi-method'}: $name>';
+  }
+
+  @override
+  Object? invoke(PLEnv env, Iterable<Object?> args) {
+    if (isTypeDispatched) {
+      return invokeTypeDispatchedMethod(env, args);
+    } else {
+      return invokeFunctionDispatchedMethod(env, args);
+    }
+  }
+
+  // Protocols
+
+  Object? invokeTypeDispatchedMethod(PLEnv env, Iterable<Object?> args) {
+    if (args.isNotEmpty) {
+      final dispatcher = args.first;
+      final dispatcherType = PLSymbol(typeString(dispatcher));
+      final impl = implsByType[dispatcherType];
+      if (impl != null) {
+        return impl.invoke(env, args);
+      } else {
+        throw ArgumentError(
+            'No method in protocol $name for type: $dispatcherType');
+      }
+    } else {
+      throw ArgumentError(
+          'The $name protocol method expects at least 1 argument, but received none.');
+    }
+  }
+
+  void addTypeDispatchedMethod(PLSymbol dispatchType, PLInvocable invocable) {
+    implsByType = implsByType.add(dispatchType, invocable);
+  }
+
+  void removeTypeDispatchedMethod(PLSymbol dispatchType) {
+    implsByType = implsByType.remove(dispatchType);
+  }
+
+  // Multi-methods
+
+  Object? invokeFunctionDispatchedMethod(PLEnv env, Iterable<Object?> args) {}
+}
+
 bool isIdenticalFn(PLEnv env, PLVector args) {
   if (args.length == 2) {
     final x = args[0];
