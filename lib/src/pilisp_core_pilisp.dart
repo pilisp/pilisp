@@ -166,6 +166,42 @@ final piLispCore = r'''
                        .macro true)
             (cons 'fn* (cons name arity-definitions))))))
 
+(defmacro defmulti
+  {:doc "Create a new type or dispatch-based multi-method."}
+  [name metadata dispatch]
+  (let [explicit-metadata? (or (string? metadata) (map? metadata))]
+    (list 'def name (if explicit-metadata?
+                      metadata
+                      {})
+          (dart/PLMultiMethod. name (= 'type dispatch)))))
+
+(declare resolve)
+
+(defmacro defmethod
+  {:doc "Add a new method implementation for the given multi-method."}
+  [name dispatch-value metadata & arity-definitions]
+  (let [explicit-metadata? (or (string? metadata) (map? metadata))
+        arity-definitions (if explicit-metadata?
+                            arity-definitions
+                            (cons metadata arity-definitions))
+        multi-method (.value (resolve name))]
+    (if (dart/PLMultiMethod.isTypeDispatched multi-method)
+      (list 'dart/PLMultiMethod.addTypeDispatchedMethod
+            multi-method
+            (list 'quote dispatch-value)
+            (cons 'fn* (cons name arity-definitions)))
+      (list 'throw (list 'ex-info "Unimplemented")))))
+
+(defn methods [multi-method]
+  (if (dart/PLMultiMethod.isTypeDispatched multi-method)
+    (dart/PLMultiMethod.allMethodsByType multi-method)
+    (dart/PLMultiMethod.allMethodsByDispatch multi-method)))
+
+(defn remove-method [multi-method dispatch-value]
+  (if (dart/PLMultiMethod.isTypeDispatched multi-method)
+    (dart/PLMultiMethod.removeTypeDispatchedMethod multi-method dispatch-value)
+    (throw (ex-info "Unimplemented"))))
+
 (defmacro comment
   {:doc "Ignores body, yields nil"}
   [& body])
