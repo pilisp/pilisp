@@ -11,6 +11,7 @@ import 'dart:typed_data';
 import 'dart:math';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import '../pilisp.dart';
+import 'pilisp_core.dart';
 import 'pilisp_expr.dart';
 
 Map<PLSymbol, PLBindingEntry> wrapperBindings = {
@@ -1228,6 +1229,52 @@ Map<PLSymbol, PLBindingEntry> wrapperBindings = {
 // START CTOR forValue -----------------------
   PLSymbol('dart/PLAwait.forValue'): PLBindingEntry(dart_PLAwait_forValue),
 // END forValue -----------------------
+// Class PLMultiMethod with 13 declarations
+// START isTypeDispatched -----------------------
+  PLSymbol('dart/PLMultiMethod.isTypeDispatched'):
+      PLBindingEntry(dart_PLMultiMethod_isTypeDispatched),
+// END isTypeDispatched -----------------------
+// START implsByType -----------------------
+// START implsByDispatch -----------------------
+// START typeName -----------------------
+  PLSymbol('dart/PLMultiMethod.typeName'):
+      PLBindingEntry(dart_PLMultiMethod_typeName),
+// END typeName -----------------------
+// START printToString -----------------------
+  PLSymbol('dart/PLMultiMethod.printToString'):
+      PLBindingEntry(dart_PLMultiMethod_printToString),
+// END printToString -----------------------
+// START allMethodsByType -----------------------
+  PLSymbol('dart/PLMultiMethod.allMethodsByType'):
+      PLBindingEntry(dart_PLMultiMethod_allMethodsByType),
+// END allMethodsByType -----------------------
+// START allMethodsByDispatch -----------------------
+  PLSymbol('dart/PLMultiMethod.allMethodsByDispatch'):
+      PLBindingEntry(dart_PLMultiMethod_allMethodsByDispatch),
+// END allMethodsByDispatch -----------------------
+// START invoke -----------------------
+  PLSymbol('dart/PLMultiMethod.invoke'):
+      PLBindingEntry(dart_PLMultiMethod_invoke),
+// END invoke -----------------------
+// START invokeTypeDispatchedMethod -----------------------
+  PLSymbol('dart/PLMultiMethod.invokeTypeDispatchedMethod'):
+      PLBindingEntry(dart_PLMultiMethod_invokeTypeDispatchedMethod),
+// END invokeTypeDispatchedMethod -----------------------
+// START addTypeDispatchedMethod -----------------------
+  PLSymbol('dart/PLMultiMethod.addTypeDispatchedMethod'):
+      PLBindingEntry(dart_PLMultiMethod_addTypeDispatchedMethod),
+// END addTypeDispatchedMethod -----------------------
+// START removeTypeDispatchedMethod -----------------------
+  PLSymbol('dart/PLMultiMethod.removeTypeDispatchedMethod'):
+      PLBindingEntry(dart_PLMultiMethod_removeTypeDispatchedMethod),
+// END removeTypeDispatchedMethod -----------------------
+// START invokeFunctionDispatchedMethod -----------------------
+  PLSymbol('dart/PLMultiMethod.invokeFunctionDispatchedMethod'):
+      PLBindingEntry(dart_PLMultiMethod_invokeFunctionDispatchedMethod),
+// END invokeFunctionDispatchedMethod -----------------------
+// START CTOR  -----------------------
+  PLSymbol('dart/PLMultiMethod.'): PLBindingEntry(dart_PLMultiMethod_),
+// END  -----------------------
 // Class RegExp with 11 declarations
 // START escape -----------------------
   PLSymbol('dart/RegExp.escape'): PLBindingEntry(dart_RegExp_escape),
@@ -2442,11 +2489,11 @@ bool dart_DateTime_isUtc(PLEnv env, PLVector args) {
       return o.isUtc;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.isUtc function expects its argument to be a bool but received a ${typeString(o)} value.');
+          'The dart/DateTime.isUtc function expects its argument to be a DateTime but received a ${typeString(o)} value.');
     }
   } else {
     throw ArgumentError(
-        'The dart/DateTime.isUtc function expects 1 argument of type bool but received ${args.length} arguments.');
+        'The dart/DateTime.isUtc function expects 1 argument of type DateTime but received ${args.length} arguments.');
   }
 }
 
@@ -7500,6 +7547,262 @@ PLAwait? dart_PLAwait_forValue(PLEnv env, PLVector args) {
 }
 
 // ignore: non_constant_identifier_names, strict_raw_type
+bool dart_PLMultiMethod_isTypeDispatched(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is PLMultiMethod) {
+      return o.isTypeDispatched;
+    } else {
+      throw ArgumentError(
+          'The dart/PLMultiMethod.isTypeDispatched function expects its argument to be a PLMultiMethod but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/PLMultiMethod.isTypeDispatched function expects 1 argument of type PLMultiMethod but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+String? dart_PLMultiMethod_typeName(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is PLMultiMethod) {
+      final returnValue = o.typeName();
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/PLMultiMethod.typeName function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/PLMultiMethod.typeName function expects 1 argument(s) (the PLMultiMethod object + typeName args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+String? dart_PLMultiMethod_printToString(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is PLMultiMethod) {
+      if (args[1] is! PLEnv) {
+        throw ArgumentError(
+            'The dart/PLMultiMethod.printToString function expects its 2nd argument to be a PLEnv value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.printToString(
+        args[1] as PLEnv,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/PLMultiMethod.printToString function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/PLMultiMethod.printToString function expects 2 argument(s) (the PLMultiMethod object + printToString args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+IMap? dart_PLMultiMethod_allMethodsByType(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is PLMultiMethod) {
+      final returnValue = o.allMethodsByType;
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/PLMultiMethod.allMethodsByType function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/PLMultiMethod.allMethodsByType function expects 1 argument(s) (the PLMultiMethod object + allMethodsByType args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+IMap? dart_PLMultiMethod_allMethodsByDispatch(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is PLMultiMethod) {
+      final returnValue = o.allMethodsByDispatch;
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/PLMultiMethod.allMethodsByDispatch function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/PLMultiMethod.allMethodsByDispatch function expects 1 argument(s) (the PLMultiMethod object + allMethodsByDispatch args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Object? dart_PLMultiMethod_invoke(PLEnv env, PLVector args) {
+  if (args.length == 3) {
+    final o = args[0];
+    if (o is PLMultiMethod) {
+      if (args[1] is! PLEnv) {
+        throw ArgumentError(
+            'The dart/PLMultiMethod.invoke function expects its 2nd argument to be a PLEnv value, but received a ${typeString(args[1])} value.');
+      }
+      if (args[2] is! Iterable) {
+        throw ArgumentError(
+            'The dart/PLMultiMethod.invoke function expects its 3rd argument to be a Iterable value, but received a ${typeString(args[2])} value.');
+      }
+
+      final returnValue = o.invoke(
+        args[1] as PLEnv,
+        args[2] as Iterable<Object>,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/PLMultiMethod.invoke function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/PLMultiMethod.invoke function expects 3 argument(s) (the PLMultiMethod object + invoke args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Object? dart_PLMultiMethod_invokeTypeDispatchedMethod(
+    PLEnv env, PLVector args) {
+  if (args.length == 3) {
+    final o = args[0];
+    if (o is PLMultiMethod) {
+      if (args[1] is! PLEnv) {
+        throw ArgumentError(
+            'The dart/PLMultiMethod.invokeTypeDispatchedMethod function expects its 2nd argument to be a PLEnv value, but received a ${typeString(args[1])} value.');
+      }
+      if (args[2] is! Iterable) {
+        throw ArgumentError(
+            'The dart/PLMultiMethod.invokeTypeDispatchedMethod function expects its 3rd argument to be a Iterable value, but received a ${typeString(args[2])} value.');
+      }
+
+      final returnValue = o.invokeTypeDispatchedMethod(
+        args[1] as PLEnv,
+        args[2] as Iterable<Object>,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/PLMultiMethod.invokeTypeDispatchedMethod function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/PLMultiMethod.invokeTypeDispatchedMethod function expects 3 argument(s) (the PLMultiMethod object + invokeTypeDispatchedMethod args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+void dart_PLMultiMethod_addTypeDispatchedMethod(PLEnv env, PLVector args) {
+  if (args.length == 3) {
+    final o = args[0];
+    if (o is PLMultiMethod) {
+      if (args[1] is! PLSymbol) {
+        throw ArgumentError(
+            'The dart/PLMultiMethod.addTypeDispatchedMethod function expects its 2nd argument to be a PLSymbol value, but received a ${typeString(args[1])} value.');
+      }
+      if (args[2] is! PLInvocable) {
+        throw ArgumentError(
+            'The dart/PLMultiMethod.addTypeDispatchedMethod function expects its 3rd argument to be a PLInvocable value, but received a ${typeString(args[2])} value.');
+      }
+
+      final returnValue = o.addTypeDispatchedMethod(
+        args[1] as PLSymbol,
+        args[2] as PLInvocable,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/PLMultiMethod.addTypeDispatchedMethod function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/PLMultiMethod.addTypeDispatchedMethod function expects 3 argument(s) (the PLMultiMethod object + addTypeDispatchedMethod args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+void dart_PLMultiMethod_removeTypeDispatchedMethod(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is PLMultiMethod) {
+      if (args[1] is! PLSymbol) {
+        throw ArgumentError(
+            'The dart/PLMultiMethod.removeTypeDispatchedMethod function expects its 2nd argument to be a PLSymbol value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.removeTypeDispatchedMethod(
+        args[1] as PLSymbol,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/PLMultiMethod.removeTypeDispatchedMethod function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/PLMultiMethod.removeTypeDispatchedMethod function expects 2 argument(s) (the PLMultiMethod object + removeTypeDispatchedMethod args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Object? dart_PLMultiMethod_invokeFunctionDispatchedMethod(
+    PLEnv env, PLVector args) {
+  if (args.length == 3) {
+    final o = args[0];
+    if (o is PLMultiMethod) {
+      if (args[1] is! PLEnv) {
+        throw ArgumentError(
+            'The dart/PLMultiMethod.invokeFunctionDispatchedMethod function expects its 2nd argument to be a PLEnv value, but received a ${typeString(args[1])} value.');
+      }
+      if (args[2] is! Iterable) {
+        throw ArgumentError(
+            'The dart/PLMultiMethod.invokeFunctionDispatchedMethod function expects its 3rd argument to be a Iterable value, but received a ${typeString(args[2])} value.');
+      }
+
+      final returnValue = o.invokeFunctionDispatchedMethod(
+        args[1] as PLEnv,
+        args[2] as Iterable<Object>,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/PLMultiMethod.invokeFunctionDispatchedMethod function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/PLMultiMethod.invokeFunctionDispatchedMethod function expects 3 argument(s) (the PLMultiMethod object + invokeFunctionDispatchedMethod args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+PLMultiMethod? dart_PLMultiMethod_(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    if (args[0] is! PLSymbol) {
+      throw ArgumentError(
+          'The dart/PLMultiMethod. function expects its 1st argument to be a PLSymbol value, but received a ${typeString(args[0])} value.');
+    }
+    if (args[1] is! bool) {
+      throw ArgumentError(
+          'The dart/PLMultiMethod. function expects its 2nd argument to be a bool value, but received a ${typeString(args[1])} value.');
+    }
+
+    final returnValue = PLMultiMethod(
+      args[0] as PLSymbol,
+      args[1] as bool,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/PLMultiMethod. function expects 2 constructor argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
 String? dart_RegExp_escape(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
@@ -7794,11 +8097,11 @@ String dart_RuneIterator_string(PLEnv env, PLVector args) {
       return o.string;
     } else {
       throw ArgumentError(
-          'The dart/RuneIterator.string function expects its argument to be a String but received a ${typeString(o)} value.');
+          'The dart/RuneIterator.string function expects its argument to be a RuneIterator but received a ${typeString(o)} value.');
     }
   } else {
     throw ArgumentError(
-        'The dart/RuneIterator.string function expects 1 argument of type String but received ${args.length} arguments.');
+        'The dart/RuneIterator.string function expects 1 argument of type RuneIterator but received ${args.length} arguments.');
   }
 }
 
@@ -7994,11 +8297,11 @@ String dart_Runes_string(PLEnv env, PLVector args) {
       return o.string;
     } else {
       throw ArgumentError(
-          'The dart/Runes.string function expects its argument to be a String but received a ${typeString(o)} value.');
+          'The dart/Runes.string function expects its argument to be a Runes but received a ${typeString(o)} value.');
     }
   } else {
     throw ArgumentError(
-        'The dart/Runes.string function expects 1 argument of type String but received ${args.length} arguments.');
+        'The dart/Runes.string function expects 1 argument of type Runes but received ${args.length} arguments.');
   }
 }
 

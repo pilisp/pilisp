@@ -7,6 +7,7 @@ import 'dart:typed_data';
 
 import 'package:build/build.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
+import 'package:pilisp/src/pilisp_core.dart';
 import 'package:source_gen/source_gen.dart';
 
 import '../pilisp.dart';
@@ -53,6 +54,8 @@ final Set<String> prohibitedMethods = {
   'List.setRange', // NB: Type-generic
   'PLAwait._', // NB: Private ctor
   'PLAwait.value', // BUG in code gen
+  'PLMultiMethod.implsByType', // Non-essential and breaks
+  'PLMultiMethod.implsByDispatch', // Non-essential and breaks
   'Map.addAll', // NB: Type-generic
   'Map.fromIterables', // NB: Type-generic
   'Map.of', // NB: Type-generic
@@ -114,6 +117,7 @@ final sourceClasses = {
   Pattern,
   PiLisp,
   PLAwait,
+  PLMultiMethod,
   // pragma, // skip
   RegExp,
   RegExpMatch,
@@ -158,6 +162,7 @@ final importsForGenerated = [
   'dart:math',
   'package:fast_immutable_collections/fast_immutable_collections.dart',
   '../pilisp.dart',
+  'pilisp_core.dart',
   'pilisp_expr.dart',
 ];
 
@@ -510,7 +515,8 @@ void writeVariableMirrorWrappers(
     final variableTypeName = MirrorSystem.getName(v.type.simpleName);
     final isBrokenMethod = (className == 'DateTime' && declName == 'isUtc') ||
         (className == 'Runes' && declName == 'string') ||
-        (className == 'RuneIterator' && declName == 'string');
+        (className == 'RuneIterator' && declName == 'string') ||
+        (className == 'PLMultiMethod' && declName == 'isTypeDispatched');
     functionDefs.add('''
   // ignore: non_constant_identifier_names, strict_raw_type
   $variableTypeName $wrapperDartName(PLEnv env, PLVector args) {
@@ -519,10 +525,10 @@ void writeVariableMirrorWrappers(
       if (o is $className) {
         return o.$declName;
       } else {
-      throw ArgumentError('The $wrapperPiLispName function expects its argument to be a $variableTypeName but received a \${typeString(o)} value.');
+      throw ArgumentError('The $wrapperPiLispName function expects its argument to be a $className but received a \${typeString(o)} value.');
       }
     } else {
-      throw ArgumentError('The $wrapperPiLispName function expects 1 argument of type $variableTypeName but received \${args.length} arguments.');
+      throw ArgumentError('The $wrapperPiLispName function expects 1 argument of type $className but received \${args.length} arguments.');
     }${isBrokenMethod ? '}' : ''}''');
     // NB: I'm not taking more time to track this down   ^
     //     I'm assuming it's either a trivial bug of mine, or a deep bug.

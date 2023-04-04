@@ -93,8 +93,11 @@ class PLAwait extends PLExpr implements PLDeref {
 class PLMultiMethod extends PLNamedInvocable {
   final bool isTypeDispatched;
   IMap<PLSymbol, PLInvocable> implsByType = IMap({});
+  IMap<Object?, PLInvocable> implsByDispatch = IMap({});
 
-  PLMultiMethod(this.isTypeDispatched);
+  PLMultiMethod(PLSymbol name, this.isTypeDispatched) {
+    super.name = name;
+  }
 
   @override
   String typeName() {
@@ -105,6 +108,9 @@ class PLMultiMethod extends PLNamedInvocable {
   String printToString(PLEnv env) {
     return '#<${isTypeDispatched ? 'protocol' : 'multi-method'}: $name>';
   }
+
+  IMap<PLSymbol, PLInvocable> get allMethodsByType => implsByType;
+  IMap<Object?, PLInvocable> get allMethodsByDispatch => implsByDispatch;
 
   @override
   Object? invoke(PLEnv env, Iterable<Object?> args) {
