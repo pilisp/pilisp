@@ -9,6 +9,10 @@
   [m]
   (count m))
 
+(defmulti  default-length {} type)
+(defmethod default-length vector [v] (count v))
+(defmethod default-length :default [x] [(type x) (count x)])
+
 (defn test-multi-methods
   {:test true}
   []
@@ -23,7 +27,11 @@
   (test/with-group "Removing methods"
     (remove-method length 'vector)
     (test/throws (length [1 2 3 4]))
-    (test/is= 1 (count (methods length)))))
+    (test/is= 1 (count (methods length))))
+
+  (test/with-group "Default methods"
+    (test/is= 4 (default-length [1 2 3 4]))
+    (test/is= ['map 2] (default-length {1 2 3 4}))))
 
 (defn test-map
   {:test true}

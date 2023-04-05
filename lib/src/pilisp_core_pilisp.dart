@@ -166,6 +166,12 @@ final piLispCore = r'''
                        .macro true)
             (cons 'fn* (cons name arity-definitions))))))
 
+(defmacro comment
+  {:doc "Ignores body, yields nil"}
+  [& body])
+
+;; TODO Hierarchies
+;; TODO Method preference (after hierarchies)
 (defmacro defmulti
   {:doc "Create a new type or dispatch-based multi-method."}
   [name metadata dispatch]
@@ -188,7 +194,9 @@ final piLispCore = r'''
     (if (dart/PLMultiMethod.isTypeDispatched multi-method)
       (list 'dart/PLMultiMethod.addTypeDispatchedMethod
             multi-method
-            (list 'quote dispatch-value)
+            (if (= :default dispatch-value)
+              (list 'quote '__multi-method-default)
+              (list 'quote dispatch-value))
             (cons 'fn* (cons name arity-definitions)))
       (list 'throw (list 'ex-info "Unimplemented")))))
 
@@ -201,10 +209,6 @@ final piLispCore = r'''
   (if (dart/PLMultiMethod.isTypeDispatched multi-method)
     (dart/PLMultiMethod.removeTypeDispatchedMethod multi-method dispatch-value)
     (throw (ex-info "Unimplemented"))))
-
-(defmacro comment
-  {:doc "Ignores body, yields nil"}
-  [& body])
 
 (defn into
   {:doc "Returns a new coll consisting of to-coll with all of the items of from-coll conjoined. A transducer may be supplied."}

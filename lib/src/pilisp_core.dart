@@ -130,6 +130,9 @@ class PLMultiMethod extends PLNamedInvocable {
       final impl = implsByType[dispatcherType];
       if (impl != null) {
         return impl.invoke(env, args);
+      } else if (implsByType.containsKey(PLSymbol('__multi-method-default'))) {
+        final defaultImpl = implsByType[PLSymbol('__multi-method-default')];
+        return defaultImpl!.invoke(env, args);
       } else {
         throw ArgumentError(
             'No method in protocol $name for type: $dispatcherType');
