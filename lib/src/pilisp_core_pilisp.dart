@@ -1238,9 +1238,16 @@ final piLispCore = r'''
            (recur sentinel m (next ks))))
        m))))
 
-(def ibool
-  {:doc "Iverson boolean"}
-  {true 1 false 0})
+(defn boolean [x]
+  (if (or (nil? x)
+          (= false x))
+    false
+    true))
+
+(defn ibool
+  {:doc "Iverson boolean. Converts based on truthy semantics."}
+  [x]
+  ({true 1 false 0} (boolean x)))
 
 (defn interleave
   {:doc "Returns a sequence of the first item in each coll, then the second etc."}
