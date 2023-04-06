@@ -23,6 +23,14 @@ export 'pilisp_expr.dart'
         PLVector;
 export 'pilisp_error.dart';
 
+/// This is the default language environment for the core PiLisp language.
+///
+/// The base instance of [PLEnv] creates bindings for those things implemented
+/// in Dart. This instance of it is then augmented by evaluating the
+/// [piLispCore] PiLisp source code.
+///
+/// The static methods of the [PiLisp] class use this [PLEnv] instance by
+/// default, but accept a custom instance as an optional parameter.
 PLEnv piLispEnv = PLEnv().loadString(piLispCore);
 
 /// The [PiLisp] class exposes static methods for reading, evaluating, printing,

@@ -60,12 +60,15 @@ String typeString(Object? o) {
 }
 
 abstract class PLAbstractExpr {
+  /// Evaluate the current object according to the semantics of PiLisp.
+  ///
+  /// Most values evaluate to themselves.
   Object? eval(PLEnv env);
 
-  // void print(PLEnv env);
+  /// Print this object to a [String].
   String printToString(PLEnv env);
 
-  // String toJson();
+  /// Provide the name of the type of this object.
   String typeName();
 }
 

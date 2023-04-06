@@ -17,6 +17,8 @@ import 'pilisp_print.dart';
 //  - eval
 
 abstract class PLDeref {
+  /// Return a contained value, honoring the given [timeout] by throwing an
+  /// exception if it is exceeded.
   Object? dereference({int timeout = 10000});
 }
 
@@ -31,6 +33,7 @@ class PLState extends PLExpr implements PLDeref {
 
   PLState(this.env);
 
+  /// Create a [PLState] containing the given [value].
   PLState.withValue(this.env, this.value);
 
   /// If read from disk, returns a [Future]. Otherwise synchronously returns
@@ -60,10 +63,25 @@ class PLState extends PLExpr implements PLDeref {
   }
 }
 
+/// A [PLAwait] value signals to Dart code that is execute PiLisp programs that
+/// the user wishes to `await` the result.
+///
+/// The CLI provided by the `pilisp_cli` package honors this value for top-level
+/// REPL values and for the return value of its file-loading methods.
+///
+/// **Warning**: There is no support in core PiLisp to await a Future value in
+/// the middle of a PiLisp program. The `pilisp-native` language extension does
+/// provide a `future/wait-for` form that will synchronously wait for a `Future`
+/// to produce a value. If you use `future/await` anywhere other than the final
+/// return value of an expression at the REPL or in a file of PiLisp code, you
+/// will be trying to operate on an instance of [PLAwait] rather than the
+/// underlying value.
 class PLAwait extends PLExpr implements PLDeref {
   Future<Object?> value;
   PLAwait._(this.value);
 
+  /// Create an instance of [PLAwait] for any value, wrapping it in
+  /// [Future.value] if not already a Future.
   factory PLAwait.forValue(Object? x) {
     final v = x is Future ? x : Future.value(x);
     return PLAwait._(v);
