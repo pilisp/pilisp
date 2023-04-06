@@ -9,6 +9,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:math';
+import 'package:http/http.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import '../pilisp.dart';
 import 'pilisp_core.dart';
@@ -126,6 +127,40 @@ Map<PLSymbol, PLBindingEntry> wrapperBindings = {
 // START CTOR from -----------------------
   PLSymbol('dart/BigInt.from'): PLBindingEntry(dart_BigInt_from),
 // END from -----------------------
+// Class Client with 11 declarations
+// START head -----------------------
+  PLSymbol('dart/Client.head'): PLBindingEntry(dart_Client_head),
+// END head -----------------------
+// START get -----------------------
+  PLSymbol('dart/Client.get'): PLBindingEntry(dart_Client_get),
+// END get -----------------------
+// START post -----------------------
+  PLSymbol('dart/Client.post'): PLBindingEntry(dart_Client_post),
+// END post -----------------------
+// START put -----------------------
+  PLSymbol('dart/Client.put'): PLBindingEntry(dart_Client_put),
+// END put -----------------------
+// START patch -----------------------
+  PLSymbol('dart/Client.patch'): PLBindingEntry(dart_Client_patch),
+// END patch -----------------------
+// START delete -----------------------
+  PLSymbol('dart/Client.delete'): PLBindingEntry(dart_Client_delete),
+// END delete -----------------------
+// START read -----------------------
+  PLSymbol('dart/Client.read'): PLBindingEntry(dart_Client_read),
+// END read -----------------------
+// START readBytes -----------------------
+  PLSymbol('dart/Client.readBytes'): PLBindingEntry(dart_Client_readBytes),
+// END readBytes -----------------------
+// START send -----------------------
+  PLSymbol('dart/Client.send'): PLBindingEntry(dart_Client_send),
+// END send -----------------------
+// START close -----------------------
+  PLSymbol('dart/Client.close'): PLBindingEntry(dart_Client_close),
+// END close -----------------------
+// START CTOR  -----------------------
+// Skipping binding for constructor of abstract class Client
+// END  -----------------------
 // Class DateTime with 55 declarations
 // START monday -----------------------
   PLSymbol('dart/DateTime.monday'): PLBindingEntry(DateTime.monday),
@@ -1324,6 +1359,75 @@ Map<PLSymbol, PLBindingEntry> wrapperBindings = {
 // START CTOR  -----------------------
 // Skipping binding for constructor of abstract class RegExpMatch
 // END  -----------------------
+// Class Request with 17 declarations
+// START _defaultEncoding -----------------------
+// END _defaultEncoding -----------------------
+// START _bodyBytes -----------------------
+// END _bodyBytes -----------------------
+// START contentLength -----------------------
+  PLSymbol('dart/Request.contentLength'):
+      PLBindingEntry(dart_Request_contentLength),
+// END contentLength -----------------------
+// START contentLength= -----------------------
+  PLSymbol('dart/Request.contentLength='):
+      PLBindingEntry(dart_Request_contentLength__set_to),
+// END contentLength= -----------------------
+// START encoding -----------------------
+  PLSymbol('dart/Request.encoding'): PLBindingEntry(dart_Request_encoding),
+// END encoding -----------------------
+// START encoding= -----------------------
+  PLSymbol('dart/Request.encoding='):
+      PLBindingEntry(dart_Request_encoding__set_to),
+// END encoding= -----------------------
+// START bodyBytes -----------------------
+  PLSymbol('dart/Request.bodyBytes'): PLBindingEntry(dart_Request_bodyBytes),
+// END bodyBytes -----------------------
+// START bodyBytes= -----------------------
+  PLSymbol('dart/Request.bodyBytes='):
+      PLBindingEntry(dart_Request_bodyBytes__set_to),
+// END bodyBytes= -----------------------
+// START body -----------------------
+  PLSymbol('dart/Request.body'): PLBindingEntry(dart_Request_body),
+// END body -----------------------
+// START body= -----------------------
+  PLSymbol('dart/Request.body='): PLBindingEntry(dart_Request_body__set_to),
+// END body= -----------------------
+// START bodyFields -----------------------
+  PLSymbol('dart/Request.bodyFields'): PLBindingEntry(dart_Request_bodyFields),
+// END bodyFields -----------------------
+// START bodyFields= -----------------------
+  PLSymbol('dart/Request.bodyFields='):
+      PLBindingEntry(dart_Request_bodyFields__set_to),
+// END bodyFields= -----------------------
+// START finalize -----------------------
+  PLSymbol('dart/Request.finalize'): PLBindingEntry(dart_Request_finalize),
+// END finalize -----------------------
+// START _contentType -----------------------
+// END _contentType -----------------------
+// START _contentType= -----------------------
+// END _contentType= -----------------------
+// START _checkFinalized -----------------------
+// END _checkFinalized -----------------------
+// START CTOR  -----------------------
+  PLSymbol('dart/Request.'): PLBindingEntry(dart_Request_),
+// END  -----------------------
+// Class Response with 5 declarations
+// START bodyBytes -----------------------
+  PLSymbol('dart/Response.bodyBytes'): PLBindingEntry(dart_Response_bodyBytes),
+// END bodyBytes -----------------------
+// START body -----------------------
+  PLSymbol('dart/Response.body'): PLBindingEntry(dart_Response_body),
+// END body -----------------------
+// START fromStream -----------------------
+  PLSymbol('dart/Response.fromStream'):
+      PLBindingEntry(dart_Response_fromStream),
+// END fromStream -----------------------
+// START CTOR  -----------------------
+  PLSymbol('dart/Response.'): PLBindingEntry(dart_Response_),
+// END  -----------------------
+// START CTOR bytes -----------------------
+  PLSymbol('dart/Response.bytes'): PLBindingEntry(dart_Response_bytes),
+// END bytes -----------------------
 // Class RuneIterator with 11 declarations
 // START string -----------------------
   PLSymbol('dart/RuneIterator.string'):
@@ -2001,6 +2105,39 @@ Map<PLSymbol, PLBindingEntry> wrapperBindings = {
 // START Function pow
   PLSymbol('dart/dart-math-pow'): PLBindingEntry(dart_dart_math_pow),
 // END Function pow
+// Library package:http/http.dart
+// START Function head
+  PLSymbol('dart/package-http-http-dart-head'):
+      PLBindingEntry(dart_package_http_http_dart_head),
+// END Function head
+// START Function post
+  PLSymbol('dart/package-http-http-dart-post'):
+      PLBindingEntry(dart_package_http_http_dart_post),
+// END Function post
+// START Function put
+  PLSymbol('dart/package-http-http-dart-put'):
+      PLBindingEntry(dart_package_http_http_dart_put),
+// END Function put
+// START Function readBytes
+  PLSymbol('dart/package-http-http-dart-readBytes'):
+      PLBindingEntry(dart_package_http_http_dart_readBytes),
+// END Function readBytes
+// START Function get
+  PLSymbol('dart/package-http-http-dart-get'):
+      PLBindingEntry(dart_package_http_http_dart_get),
+// END Function get
+// START Function delete
+  PLSymbol('dart/package-http-http-dart-delete'):
+      PLBindingEntry(dart_package_http_http_dart_delete),
+// END Function delete
+// START Function patch
+  PLSymbol('dart/package-http-http-dart-patch'):
+      PLBindingEntry(dart_package_http_http_dart_patch),
+// END Function patch
+// START Function read
+  PLSymbol('dart/package-http-http-dart-read'):
+      PLBindingEntry(dart_package_http_http_dart_read),
+// END Function read
 };
 
 // ignore: non_constant_identifier_names, strict_raw_type
@@ -2478,6 +2615,239 @@ BigInt? dart_BigInt_from(PLEnv env, PLVector args) {
   } else {
     throw ArgumentError(
         'The dart/BigInt.from function expects 1 constructor argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Client_head(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Client) {
+      if (args[1] is! Uri) {
+        throw ArgumentError(
+            'The dart/Client.head function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.head(
+        args[1] as Uri,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Client.head function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Client.head function expects 2 argument(s) (the Client object + head args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Client_get(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Client) {
+      if (args[1] is! Uri) {
+        throw ArgumentError(
+            'The dart/Client.get function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.get(
+        args[1] as Uri,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Client.get function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Client.get function expects 2 argument(s) (the Client object + get args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Client_post(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Client) {
+      if (args[1] is! Uri) {
+        throw ArgumentError(
+            'The dart/Client.post function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.post(
+        args[1] as Uri,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Client.post function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Client.post function expects 2 argument(s) (the Client object + post args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Client_put(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Client) {
+      if (args[1] is! Uri) {
+        throw ArgumentError(
+            'The dart/Client.put function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.put(
+        args[1] as Uri,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Client.put function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Client.put function expects 2 argument(s) (the Client object + put args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Client_patch(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Client) {
+      if (args[1] is! Uri) {
+        throw ArgumentError(
+            'The dart/Client.patch function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.patch(
+        args[1] as Uri,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Client.patch function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Client.patch function expects 2 argument(s) (the Client object + patch args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Client_delete(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Client) {
+      if (args[1] is! Uri) {
+        throw ArgumentError(
+            'The dart/Client.delete function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.delete(
+        args[1] as Uri,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Client.delete function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Client.delete function expects 2 argument(s) (the Client object + delete args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Client_read(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Client) {
+      if (args[1] is! Uri) {
+        throw ArgumentError(
+            'The dart/Client.read function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.read(
+        args[1] as Uri,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Client.read function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Client.read function expects 2 argument(s) (the Client object + read args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Client_readBytes(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Client) {
+      if (args[1] is! Uri) {
+        throw ArgumentError(
+            'The dart/Client.readBytes function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.readBytes(
+        args[1] as Uri,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Client.readBytes function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Client.readBytes function expects 2 argument(s) (the Client object + readBytes args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Client_send(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Client) {
+      if (args[1] is! BaseRequest) {
+        throw ArgumentError(
+            'The dart/Client.send function expects its 2nd argument to be a BaseRequest value, but received a ${typeString(args[1])} value.');
+      }
+
+      final returnValue = o.send(
+        args[1] as BaseRequest,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Client.send function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Client.send function expects 2 argument(s) (the Client object + send args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+void dart_Client_close(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is Client) {
+      final returnValue = o.close();
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Client.close function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Client.close function expects 1 argument(s) (the Client object + close args) but received ${args.length} arguments.');
   }
 }
 
@@ -8090,6 +8460,333 @@ Iterable? dart_RegExpMatch_groupNames(PLEnv env, PLVector args) {
 }
 
 // ignore: non_constant_identifier_names, strict_raw_type
+int? dart_Request_contentLength(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is Request) {
+      final returnValue = o.contentLength;
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Request.contentLength function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Request.contentLength function expects 1 argument(s) (the Request object + contentLength args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+void dart_Request_contentLength__set_to(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Request) {
+      if (args[1] is! int) {
+        throw ArgumentError(
+            'The dart/Request.contentLength= function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+      }
+
+      o.contentLength = args[1] as int;
+    } else {
+      throw ArgumentError(
+          'The dart/Request.contentLength= function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Request.contentLength= function expects 2 argument(s) (the Request object + contentLength= args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Encoding? dart_Request_encoding(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is Request) {
+      final returnValue = o.encoding;
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Request.encoding function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Request.encoding function expects 1 argument(s) (the Request object + encoding args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+void dart_Request_encoding__set_to(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Request) {
+      if (args[1] is! Encoding) {
+        throw ArgumentError(
+            'The dart/Request.encoding= function expects its 2nd argument to be a Encoding value, but received a ${typeString(args[1])} value.');
+      }
+
+      o.encoding = args[1] as Encoding;
+    } else {
+      throw ArgumentError(
+          'The dart/Request.encoding= function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Request.encoding= function expects 2 argument(s) (the Request object + encoding= args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Uint8List? dart_Request_bodyBytes(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is Request) {
+      final returnValue = o.bodyBytes;
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Request.bodyBytes function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Request.bodyBytes function expects 1 argument(s) (the Request object + bodyBytes args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+void dart_Request_bodyBytes__set_to(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Request) {
+      if (args[1] is! List) {
+        throw ArgumentError(
+            'The dart/Request.bodyBytes= function expects its 2nd argument to be a List value, but received a ${typeString(args[1])} value.');
+      }
+
+      o.bodyBytes = List<int>.from(args[1] as List<Object?>);
+    } else {
+      throw ArgumentError(
+          'The dart/Request.bodyBytes= function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Request.bodyBytes= function expects 2 argument(s) (the Request object + bodyBytes= args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+String? dart_Request_body(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is Request) {
+      final returnValue = o.body;
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Request.body function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Request.body function expects 1 argument(s) (the Request object + body args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+void dart_Request_body__set_to(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Request) {
+      if (args[1] is! String) {
+        throw ArgumentError(
+            'The dart/Request.body= function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+      }
+
+      o.body = args[1] as String;
+    } else {
+      throw ArgumentError(
+          'The dart/Request.body= function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Request.body= function expects 2 argument(s) (the Request object + body= args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+IMap? dart_Request_bodyFields(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is Request) {
+      final returnValue = o.bodyFields;
+      return returnValue.toIMap();
+    } else {
+      throw ArgumentError(
+          'The dart/Request.bodyFields function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Request.bodyFields function expects 1 argument(s) (the Request object + bodyFields args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+void dart_Request_bodyFields__set_to(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is Request) {
+      if (args[1] is! Map) {
+        throw ArgumentError(
+            'The dart/Request.bodyFields= function expects its 2nd argument to be a Map value, but received a ${typeString(args[1])} value.');
+      }
+
+      o.bodyFields = Map<String, String>.from(args[1] as Map<Object?, Object?>);
+    } else {
+      throw ArgumentError(
+          'The dart/Request.bodyFields= function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Request.bodyFields= function expects 2 argument(s) (the Request object + bodyFields= args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+ByteStream? dart_Request_finalize(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is Request) {
+      final returnValue = o.finalize();
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Request.finalize function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Request.finalize function expects 1 argument(s) (the Request object + finalize args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Request? dart_Request_(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    if (args[0] is! String) {
+      throw ArgumentError(
+          'The dart/Request. function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+    }
+    if (args[1] is! Uri) {
+      throw ArgumentError(
+          'The dart/Request. function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+    }
+
+    final returnValue = Request(
+      args[0] as String,
+      args[1] as Uri,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/Request. function expects 2 constructor argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Uint8List dart_Response_bodyBytes(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is Response) {
+      return o.bodyBytes;
+    } else {
+      throw ArgumentError(
+          'The dart/Response.bodyBytes function expects its argument to be a Response but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Response.bodyBytes function expects 1 argument of type Response but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+String? dart_Response_body(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is Response) {
+      final returnValue = o.body;
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Response.body function expects its first argument to be a Response object but received a ${typeString(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Response.body function expects 1 argument(s) (the Response object + body args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_Response_fromStream(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! StreamedResponse) {
+      throw ArgumentError(
+          'The dart/Response.fromStream function expects its 1st argument to be a StreamedResponse value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = Response.fromStream(
+      args[0] as StreamedResponse,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/Response.fromStream function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Response? dart_Response_(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    if (args[0] is! String) {
+      throw ArgumentError(
+          'The dart/Response. function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+    }
+    if (args[1] is! int) {
+      throw ArgumentError(
+          'The dart/Response. function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+    }
+
+    final returnValue = Response(
+      args[0] as String,
+      args[1] as int,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/Response. function expects 2 constructor argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Response? dart_Response_bytes(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    if (args[0] is! List) {
+      throw ArgumentError(
+          'The dart/Response.bytes function expects its 1st argument to be a List value, but received a ${typeString(args[0])} value.');
+    }
+    if (args[1] is! int) {
+      throw ArgumentError(
+          'The dart/Response.bytes function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+    }
+
+    final returnValue = Response.bytes(
+      List<int>.from(args[0] as List<Object?>),
+      args[1] as int,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/Response.bytes function expects 2 constructor argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
 String dart_RuneIterator_string(PLEnv env, PLVector args) {
   if (args.length == 1) {
     final o = args[0];
@@ -12051,6 +12748,150 @@ num? dart_dart_math_pow(PLEnv env, PLVector args) {
   } else {
     throw ArgumentError(
         'The dart/dart-math-pow function expects 2 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_package_http_http_dart_head(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Uri) {
+      throw ArgumentError(
+          'The dart/package-http-http-dart-head function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = head(
+      args[0] as Uri,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/package-http-http-dart-head function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_package_http_http_dart_post(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Uri) {
+      throw ArgumentError(
+          'The dart/package-http-http-dart-post function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = post(
+      args[0] as Uri,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/package-http-http-dart-post function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_package_http_http_dart_put(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Uri) {
+      throw ArgumentError(
+          'The dart/package-http-http-dart-put function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = put(
+      args[0] as Uri,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/package-http-http-dart-put function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_package_http_http_dart_readBytes(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Uri) {
+      throw ArgumentError(
+          'The dart/package-http-http-dart-readBytes function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = readBytes(
+      args[0] as Uri,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/package-http-http-dart-readBytes function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_package_http_http_dart_get(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Uri) {
+      throw ArgumentError(
+          'The dart/package-http-http-dart-get function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = get(
+      args[0] as Uri,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/package-http-http-dart-get function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_package_http_http_dart_delete(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Uri) {
+      throw ArgumentError(
+          'The dart/package-http-http-dart-delete function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = delete(
+      args[0] as Uri,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/package-http-http-dart-delete function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_package_http_http_dart_patch(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Uri) {
+      throw ArgumentError(
+          'The dart/package-http-http-dart-patch function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = patch(
+      args[0] as Uri,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/package-http-http-dart-patch function expects 1 argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_package_http_http_dart_read(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! Uri) {
+      throw ArgumentError(
+          'The dart/package-http-http-dart-read function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+    }
+
+    final returnValue = read(
+      args[0] as Uri,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/package-http-http-dart-read function expects 1 argument(s) but received ${args.length} arguments.');
   }
 }
 // END Dart wrappers for PiLisp

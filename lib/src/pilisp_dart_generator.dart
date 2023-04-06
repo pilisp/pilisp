@@ -7,6 +7,7 @@ import 'dart:typed_data';
 
 import 'package:build/build.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
+import 'package:http/http.dart' as http;
 import 'package:pilisp/src/pilisp_core.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -19,6 +20,7 @@ final setType = reflectType(Set);
 
 final Set<String> prohibitedMethods = {
   'int.>>>', // NB: Labeled as an operator but not excluded by v.isOperator check
+  // 'package_http_http_dart__withClient'
   'Enum.compareByIndex', // NB: This and next have type args, which
   'Enum.compareByName', //      are not yet supported
   'Future.doWhile', // NB: Type needs to be specified differently
@@ -63,6 +65,7 @@ final Set<String> prohibitedMethods = {
   'Map.remove', // NB: Type-generic
   'Map.update', // NB: Type-generic
   'Map.updateAll', // NB: Type-generic
+  'Request.setContentLength=', // NB: Throws exception anyway
   'RuneIterator.rawIndex=', // NB: Setter
   'Set.add', // NB: Type-generic
   'Set.addAll', // NB: Type-generic
@@ -76,6 +79,7 @@ final Set<String> prohibitedMethods = {
 final Set<String> prohibitedFunctions = {
   'dart:math.max', // NB: Type-generic
   'dart:math.min', // NB: Type-generic
+  'package:http/http.dart._withClient', // NB: Type with leading .
 };
 
 /// Libraries are combed for their top-level functions. See [sourceClasses] for
@@ -85,6 +89,7 @@ final sourceLibraries = {
   'dart:core',
   'dart:convert',
   'dart:math',
+  'package:http/http.dart',
 };
 
 final sourceClasses = {
@@ -94,6 +99,7 @@ final sourceClasses = {
   BigInt,
   // bool, // skip
   // Comparable, // skip
+  http.Client,
   DateTime,
   // Deprecated, // skip
   double,
@@ -121,6 +127,8 @@ final sourceClasses = {
   // pragma, // skip
   RegExp,
   RegExpMatch,
+  http.Request,
+  http.Response,
   RuneIterator,
   Runes,
   Set,
@@ -138,8 +146,6 @@ final sourceClasses = {
   // WeakReference, // skip
   // == dart:math ==
   Random,
-  // == (WARNING not compatible for web target) dart:io ==
-  // io.Platform,
 };
 
 /// [ClassMirror.isAbstract] returns [true] for certain classes, either erroneously
@@ -160,6 +166,7 @@ final importsForGenerated = [
   'dart:convert',
   'dart:typed_data',
   'dart:math',
+  'package:http/http.dart',
   'package:fast_immutable_collections/fast_immutable_collections.dart',
   '../pilisp.dart',
   'pilisp_core.dart',
@@ -219,42 +226,50 @@ List<String> writeAllWrappers(
 
 List<String> writeFunctionWrappers(
     StringBuffer sb, String libName, Set<String> prohibitedFunctions) {
-  final libMirror = currentMirrorSystem()
+  // print(
+  //     '====> ALL LIBRARIES ====> ${currentMirrorSystem().libraries.entries.map((e) => e.key.toString()).join(', ')}');
+  final libEntries = currentMirrorSystem()
       .libraries
       .entries
-      .firstWhere((element) => element.key.toString() == libName)
-      .value;
-  sb.writeln('// Library $libName');
-  final List<String> functionDefs = [];
-  for (final v in libMirror.declarations.values) {
-    String declName = MirrorSystem.getName(v.simpleName);
-    // NB: Functions that aren't extension methods.
-    if (v is MethodMirror &&
-        v.isTopLevel &&
-        !declName.contains('.') &&
-        !prohibitedFunctions.contains('$libName.$declName')) {
-      sb.writeln('// START Function $declName');
-      final libraryNameMungedDart = libName.replaceAll(RegExp(r'\W'), '_');
-      final wrapperDartName = 'dart_${libraryNameMungedDart}_$declName';
-      final libraryNameMungedPiLisp = libName.replaceAll(RegExp(r'\W'), '-');
-      final wrapperPiLispName = 'dart/$libraryNameMungedPiLisp-$declName';
-      final paramsRequired =
-          v.parameters.where((param) => !param.isOptional).toList();
-      writeMethodWrappers(v, paramsRequired, sb, functionDefs, '', declName,
-          wrapperDartName, wrapperPiLispName,
-          libraryMirror: libMirror);
-      final paramsFull = v.parameters.where((param) => !param.isNamed).toList();
-      if (paramsRequired.length != paramsFull.length) {
-        final wrapperDartNameFull = '${wrapperDartName}_full';
-        final wrapperPiLispNameFull = '$wrapperPiLispName-full';
-        writeMethodWrappers(v, paramsFull, sb, functionDefs, '', declName,
-            wrapperDartNameFull, wrapperPiLispNameFull,
+      .where((element) => element.key.toString() == libName);
+  if (libEntries.isNotEmpty) {
+    final libMirror = libEntries.first.value;
+    sb.writeln('// Library $libName');
+    final List<String> functionDefs = [];
+    for (final v in libMirror.declarations.values) {
+      String declName = MirrorSystem.getName(v.simpleName);
+      // NB: Functions that aren't extension methods.
+      // print('PF $libName.$declName');
+      if (v is MethodMirror &&
+          v.isTopLevel &&
+          !declName.contains('.') &&
+          !prohibitedFunctions.contains('$libName.$declName')) {
+        sb.writeln('// START Function $declName');
+        final libraryNameMungedDart = libName.replaceAll(RegExp(r'\W'), '_');
+        final wrapperDartName = 'dart_${libraryNameMungedDart}_$declName';
+        final libraryNameMungedPiLisp = libName.replaceAll(RegExp(r'\W'), '-');
+        final wrapperPiLispName = 'dart/$libraryNameMungedPiLisp-$declName';
+        final paramsRequired =
+            v.parameters.where((param) => !param.isOptional).toList();
+        writeMethodWrappers(v, paramsRequired, sb, functionDefs, '', declName,
+            wrapperDartName, wrapperPiLispName,
             libraryMirror: libMirror);
+        final paramsFull =
+            v.parameters.where((param) => !param.isNamed).toList();
+        if (paramsRequired.length != paramsFull.length) {
+          final wrapperDartNameFull = '${wrapperDartName}_full';
+          final wrapperPiLispNameFull = '$wrapperPiLispName-full';
+          writeMethodWrappers(v, paramsFull, sb, functionDefs, '', declName,
+              wrapperDartNameFull, wrapperPiLispNameFull,
+              libraryMirror: libMirror);
+        }
+        sb.writeln('// END Function $declName');
       }
-      sb.writeln('// END Function $declName');
     }
+    return functionDefs;
+  } else {
+    return [];
   }
-  return functionDefs;
 }
 
 /// Immediately writes the innards of `wrapperBindings`, returns the function
@@ -413,7 +428,7 @@ void writeMethodWrappers(
         '// Skipping binding for constructor of abstract class $className');
   } else {
     sb.writeln(
-        "PLSymbol('$wrapperPiLispName'): PLBindingEntry($wrapperDartName),");
+        "PLSymbol('$wrapperPiLispName'): PLBindingEntry(${legalMethodName(wrapperDartName)}),");
   }
   final returnType = v.returnType;
   String returnTypeName = MirrorSystem.getName(returnType.simpleName);
@@ -435,7 +450,7 @@ void writeMethodWrappers(
     // Function
     functionDefs.add('''
     // ignore: non_constant_identifier_names, strict_raw_type
-    ${returnTypeName == 'void' || returnTypeName == 'dynamic' ? returnTypeName : '$returnTypeName?'} $wrapperDartName(PLEnv env, PLVector args) {
+    ${returnTypeName == 'void' || returnTypeName == 'dynamic' ? returnTypeName : '$returnTypeName?'} ${legalMethodName(wrapperDartName)}(PLEnv env, PLVector args) {
       if (${numParams == 0 ? 'args.isEmpty' : 'args.length == $numParams'}) {
         $paramCheckCode
         final returnValue = $declName$argCode;
@@ -447,13 +462,13 @@ void writeMethodWrappers(
   } else if (isInstanceMethod) {
     functionDefs.add('''
     // ignore: non_constant_identifier_names, strict_raw_type
-    ${returnTypeName == 'void' || returnTypeName == 'dynamic' ? returnTypeName : '$returnTypeName?'} $wrapperDartName(PLEnv env, PLVector args) {
+    ${returnTypeName == 'void' || returnTypeName == 'dynamic' ? returnTypeName : '$returnTypeName?'} ${legalMethodName(wrapperDartName)}(PLEnv env, PLVector args) {
       if (${numParams == 0 ? 'args.isEmpty' : 'args.length == $numParams'}) {
         final o = args[0];
         if (o is $className) {
           $paramCheckCode
-          final returnValue = o.$declName$argCode;
-          $returnCode
+          ${declName.endsWith('=') ? 'o.${declName.substring(0, declName.length - 1)} = ${argCode.substring(1).substring(0, argCode.length - 4)};' : 'final returnValue = o.$declName$argCode;'}
+          ${declName.endsWith('=') ? '' : returnCode}
         } else {
           throw ArgumentError('The $wrapperPiLispName function expects its first argument to be a $className object but received a \${typeString(o)} value.');
         }
@@ -472,7 +487,7 @@ void writeMethodWrappers(
     } else {
       functionDefs.add('''
     // ignore: non_constant_identifier_names, strict_raw_type
-    ${returnTypeName == 'void' || returnTypeName == 'dynamic' ? returnTypeName : '$returnTypeName?'} $wrapperDartName(PLEnv env, PLVector args) {
+    ${returnTypeName == 'void' || returnTypeName == 'dynamic' ? returnTypeName : '$returnTypeName?'} ${legalMethodName(wrapperDartName)}(PLEnv env, PLVector args) {
       if (${numParams == 0 ? 'args.isEmpty' : 'args.length == $numParams'}) {
         $paramCheckCode
         final returnValue = $className${ctorName.isEmpty ? '' : '.$ctorName'}$argCode;
@@ -486,7 +501,7 @@ void writeMethodWrappers(
     // Static
     functionDefs.add('''
     // ignore: non_constant_identifier_names, strict_raw_type
-    ${returnTypeName == 'void' || returnTypeName == 'dynamic' ? returnTypeName : '$returnTypeName?'} $wrapperDartName(PLEnv env, PLVector args) {
+    ${returnTypeName == 'void' || returnTypeName == 'dynamic' ? returnTypeName : '$returnTypeName?'} ${legalMethodName(wrapperDartName)}(PLEnv env, PLVector args) {
       if (${numParams == 0 ? 'args.isEmpty' : 'args.length == $numParams'}) {
         $paramCheckCode
         final returnValue = $className.$declName$argCode;
@@ -511,15 +526,16 @@ void writeVariableMirrorWrappers(
         "PLSymbol('$wrapperPiLispName'): PLBindingEntry($className.$declName),");
   } else if (!v.isPrivate) {
     sb.writeln(
-        "PLSymbol('$wrapperPiLispName'): PLBindingEntry($wrapperDartName),");
+        "PLSymbol('$wrapperPiLispName'): PLBindingEntry(${legalMethodName(wrapperDartName)}),");
     final variableTypeName = MirrorSystem.getName(v.type.simpleName);
     final isBrokenMethod = (className == 'DateTime' && declName == 'isUtc') ||
         (className == 'Runes' && declName == 'string') ||
         (className == 'RuneIterator' && declName == 'string') ||
-        (className == 'PLMultiMethod' && declName == 'isTypeDispatched');
+        (className == 'PLMultiMethod' && declName == 'isTypeDispatched') ||
+        (className == 'Response' && declName == 'bodyBytes');
     functionDefs.add('''
   // ignore: non_constant_identifier_names, strict_raw_type
-  $variableTypeName $wrapperDartName(PLEnv env, PLVector args) {
+  $variableTypeName ${legalMethodName(wrapperDartName)}(PLEnv env, PLVector args) {
     if (args.length == 1) {
       final o = args[0];
       if (o is $className) {
@@ -534,6 +550,15 @@ void writeVariableMirrorWrappers(
     //     I'm assuming it's either a trivial bug of mine, or a deep bug.
     //     Out of all the methods generated, this is the _only_ one to preesent
     //     this behavior.
+  }
+}
+
+String legalMethodName(String name) {
+  if (name.endsWith('=')) {
+    // NB. This appears to be how setters are designated.
+    return '${name.substring(0, name.length - 1)}__set_to';
+  } else {
+    return name;
   }
 }
 
