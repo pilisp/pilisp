@@ -68,8 +68,6 @@ List<String> writeAllWrappers(
 
 List<String> writeFunctionWrappers(
     StringBuffer sb, String libName, Set<String> prohibitedFunctions) {
-  // print(
-  //     '====> ALL LIBRARIES ====> ${currentMirrorSystem().libraries.entries.map((e) => e.key.toString()).join(', ')}');
   final libEntries = currentMirrorSystem()
       .libraries
       .entries
@@ -81,7 +79,6 @@ List<String> writeFunctionWrappers(
     for (final v in libMirror.declarations.values) {
       String declName = MirrorSystem.getName(v.simpleName);
       // NB: Functions that aren't extension methods.
-      // print('PF $libName.$declName');
       if (v is MethodMirror &&
           v.isTopLevel &&
           !declName.contains('.') &&
@@ -229,7 +226,7 @@ void writeMethodWrappers(
     paramCheckCode.writeln('''
     if (args[$argCardinal] is! ${paramTypeName.contains('->') ? formatFunctionTypeSignature(paramTypeName) : paramTypeName}) {
       throw ArgumentError(
-  'The $wrapperPiLispName function expects its $humanCardinal$ordinalSuffix argument to be a $paramTypeName value, but received a \${typeString(args[$argCardinal])} value.');
+  'The $wrapperPiLispName function expects its $humanCardinal$ordinalSuffix argument to be a $paramTypeName value, but received a \${PiLisp.typeName(args[$argCardinal])} value.');
     }''');
     final paramType = params[i].type;
     final paramTypeArgs = paramType.typeArguments;
@@ -312,7 +309,7 @@ void writeMethodWrappers(
           ${declName.endsWith('=') ? 'o.${declName.substring(0, declName.length - 1)} = ${argCode.substring(1).substring(0, argCode.length - 4)};' : 'final returnValue = o.$declName$argCode;'}
           ${declName.endsWith('=') ? '' : returnCode}
         } else {
-          throw ArgumentError('The $wrapperPiLispName function expects its first argument to be a $className object but received a \${typeString(o)} value.');
+          throw ArgumentError('The $wrapperPiLispName function expects its first argument to be a $className object but received a \${PiLisp.typeName(o)} value.');
         }
       } else {
         throw ArgumentError('The $wrapperPiLispName function expects $numParams argument(s) (the $className object + $declName args) but received \${args.length} arguments.');
@@ -383,7 +380,7 @@ void writeVariableMirrorWrappers(
       if (o is $className) {
         return o.$declName;
       } else {
-      throw ArgumentError('The $wrapperPiLispName function expects its argument to be a $className but received a \${typeString(o)} value.');
+      throw ArgumentError('The $wrapperPiLispName function expects its argument to be a $className but received a \${PiLisp.typeName(o)} value.');
       }
     } else {
       throw ArgumentError('The $wrapperPiLispName function expects 1 argument of type $className but received \${args.length} arguments.');

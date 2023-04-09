@@ -2178,7 +2178,7 @@ BigInt? dart_BigInt_parse(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/BigInt.parse function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/BigInt.parse function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = BigInt.parse(
@@ -2196,7 +2196,7 @@ BigInt? dart_BigInt_tryParse(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/BigInt.tryParse function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/BigInt.tryParse function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = BigInt.tryParse(
@@ -2218,7 +2218,7 @@ BigInt? dart_BigInt_abs(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.abs function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.abs function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2233,7 +2233,7 @@ BigInt? dart_BigInt_remainder(PLEnv env, PLVector args) {
     if (o is BigInt) {
       if (args[1] is! BigInt) {
         throw ArgumentError(
-            'The dart/BigInt.remainder function expects its 2nd argument to be a BigInt value, but received a ${typeString(args[1])} value.');
+            'The dart/BigInt.remainder function expects its 2nd argument to be a BigInt value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.remainder(
@@ -2242,7 +2242,7 @@ BigInt? dart_BigInt_remainder(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.remainder function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.remainder function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2257,7 +2257,7 @@ int? dart_BigInt_compareTo(PLEnv env, PLVector args) {
     if (o is BigInt) {
       if (args[1] is! BigInt) {
         throw ArgumentError(
-            'The dart/BigInt.compareTo function expects its 2nd argument to be a BigInt value, but received a ${typeString(args[1])} value.');
+            'The dart/BigInt.compareTo function expects its 2nd argument to be a BigInt value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.compareTo(
@@ -2266,7 +2266,7 @@ int? dart_BigInt_compareTo(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.compareTo function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.compareTo function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2283,7 +2283,7 @@ int? dart_BigInt_bitLength(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.bitLength function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.bitLength function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2300,7 +2300,7 @@ int? dart_BigInt_sign(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.sign function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.sign function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2317,7 +2317,7 @@ bool? dart_BigInt_isEven(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.isEven function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.isEven function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2334,7 +2334,7 @@ bool? dart_BigInt_isOdd(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.isOdd function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.isOdd function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2351,7 +2351,7 @@ bool? dart_BigInt_isNegative(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.isNegative function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.isNegative function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2366,7 +2366,7 @@ BigInt? dart_BigInt_pow(PLEnv env, PLVector args) {
     if (o is BigInt) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/BigInt.pow function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/BigInt.pow function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.pow(
@@ -2375,7 +2375,7 @@ BigInt? dart_BigInt_pow(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.pow function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.pow function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2390,11 +2390,11 @@ BigInt? dart_BigInt_modPow(PLEnv env, PLVector args) {
     if (o is BigInt) {
       if (args[1] is! BigInt) {
         throw ArgumentError(
-            'The dart/BigInt.modPow function expects its 2nd argument to be a BigInt value, but received a ${typeString(args[1])} value.');
+            'The dart/BigInt.modPow function expects its 2nd argument to be a BigInt value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! BigInt) {
         throw ArgumentError(
-            'The dart/BigInt.modPow function expects its 3rd argument to be a BigInt value, but received a ${typeString(args[2])} value.');
+            'The dart/BigInt.modPow function expects its 3rd argument to be a BigInt value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.modPow(
@@ -2404,7 +2404,7 @@ BigInt? dart_BigInt_modPow(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.modPow function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.modPow function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2419,7 +2419,7 @@ BigInt? dart_BigInt_modInverse(PLEnv env, PLVector args) {
     if (o is BigInt) {
       if (args[1] is! BigInt) {
         throw ArgumentError(
-            'The dart/BigInt.modInverse function expects its 2nd argument to be a BigInt value, but received a ${typeString(args[1])} value.');
+            'The dart/BigInt.modInverse function expects its 2nd argument to be a BigInt value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.modInverse(
@@ -2428,7 +2428,7 @@ BigInt? dart_BigInt_modInverse(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.modInverse function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.modInverse function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2443,7 +2443,7 @@ BigInt? dart_BigInt_gcd(PLEnv env, PLVector args) {
     if (o is BigInt) {
       if (args[1] is! BigInt) {
         throw ArgumentError(
-            'The dart/BigInt.gcd function expects its 2nd argument to be a BigInt value, but received a ${typeString(args[1])} value.');
+            'The dart/BigInt.gcd function expects its 2nd argument to be a BigInt value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.gcd(
@@ -2452,7 +2452,7 @@ BigInt? dart_BigInt_gcd(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.gcd function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.gcd function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2467,7 +2467,7 @@ BigInt? dart_BigInt_toUnsigned(PLEnv env, PLVector args) {
     if (o is BigInt) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/BigInt.toUnsigned function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/BigInt.toUnsigned function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.toUnsigned(
@@ -2476,7 +2476,7 @@ BigInt? dart_BigInt_toUnsigned(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.toUnsigned function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.toUnsigned function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2491,7 +2491,7 @@ BigInt? dart_BigInt_toSigned(PLEnv env, PLVector args) {
     if (o is BigInt) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/BigInt.toSigned function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/BigInt.toSigned function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.toSigned(
@@ -2500,7 +2500,7 @@ BigInt? dart_BigInt_toSigned(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.toSigned function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.toSigned function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2517,7 +2517,7 @@ bool? dart_BigInt_isValidInt(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.isValidInt function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.isValidInt function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2534,7 +2534,7 @@ int? dart_BigInt_toInt(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.toInt function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.toInt function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2551,7 +2551,7 @@ double? dart_BigInt_toDouble(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.toDouble function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.toDouble function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2568,7 +2568,7 @@ String? dart_BigInt_toString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.toString function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.toString function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2583,7 +2583,7 @@ String? dart_BigInt_toRadixString(PLEnv env, PLVector args) {
     if (o is BigInt) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/BigInt.toRadixString function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/BigInt.toRadixString function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.toRadixString(
@@ -2592,7 +2592,7 @@ String? dart_BigInt_toRadixString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/BigInt.toRadixString function expects its first argument to be a BigInt object but received a ${typeString(o)} value.');
+          'The dart/BigInt.toRadixString function expects its first argument to be a BigInt object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2605,7 +2605,7 @@ BigInt? dart_BigInt_from(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! num) {
       throw ArgumentError(
-          'The dart/BigInt.from function expects its 1st argument to be a num value, but received a ${typeString(args[0])} value.');
+          'The dart/BigInt.from function expects its 1st argument to be a num value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = BigInt.from(
@@ -2625,7 +2625,7 @@ Future? dart_Client_head(PLEnv env, PLVector args) {
     if (o is Client) {
       if (args[1] is! Uri) {
         throw ArgumentError(
-            'The dart/Client.head function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+            'The dart/Client.head function expects its 2nd argument to be a Uri value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.head(
@@ -2634,7 +2634,7 @@ Future? dart_Client_head(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Client.head function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+          'The dart/Client.head function expects its first argument to be a Client object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2649,7 +2649,7 @@ Future? dart_Client_get(PLEnv env, PLVector args) {
     if (o is Client) {
       if (args[1] is! Uri) {
         throw ArgumentError(
-            'The dart/Client.get function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+            'The dart/Client.get function expects its 2nd argument to be a Uri value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.get(
@@ -2658,7 +2658,7 @@ Future? dart_Client_get(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Client.get function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+          'The dart/Client.get function expects its first argument to be a Client object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2673,7 +2673,7 @@ Future? dart_Client_post(PLEnv env, PLVector args) {
     if (o is Client) {
       if (args[1] is! Uri) {
         throw ArgumentError(
-            'The dart/Client.post function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+            'The dart/Client.post function expects its 2nd argument to be a Uri value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.post(
@@ -2682,7 +2682,7 @@ Future? dart_Client_post(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Client.post function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+          'The dart/Client.post function expects its first argument to be a Client object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2697,7 +2697,7 @@ Future? dart_Client_put(PLEnv env, PLVector args) {
     if (o is Client) {
       if (args[1] is! Uri) {
         throw ArgumentError(
-            'The dart/Client.put function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+            'The dart/Client.put function expects its 2nd argument to be a Uri value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.put(
@@ -2706,7 +2706,7 @@ Future? dart_Client_put(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Client.put function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+          'The dart/Client.put function expects its first argument to be a Client object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2721,7 +2721,7 @@ Future? dart_Client_patch(PLEnv env, PLVector args) {
     if (o is Client) {
       if (args[1] is! Uri) {
         throw ArgumentError(
-            'The dart/Client.patch function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+            'The dart/Client.patch function expects its 2nd argument to be a Uri value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.patch(
@@ -2730,7 +2730,7 @@ Future? dart_Client_patch(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Client.patch function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+          'The dart/Client.patch function expects its first argument to be a Client object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2745,7 +2745,7 @@ Future? dart_Client_delete(PLEnv env, PLVector args) {
     if (o is Client) {
       if (args[1] is! Uri) {
         throw ArgumentError(
-            'The dart/Client.delete function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+            'The dart/Client.delete function expects its 2nd argument to be a Uri value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.delete(
@@ -2754,7 +2754,7 @@ Future? dart_Client_delete(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Client.delete function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+          'The dart/Client.delete function expects its first argument to be a Client object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2769,7 +2769,7 @@ Future? dart_Client_read(PLEnv env, PLVector args) {
     if (o is Client) {
       if (args[1] is! Uri) {
         throw ArgumentError(
-            'The dart/Client.read function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+            'The dart/Client.read function expects its 2nd argument to be a Uri value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.read(
@@ -2778,7 +2778,7 @@ Future? dart_Client_read(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Client.read function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+          'The dart/Client.read function expects its first argument to be a Client object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2793,7 +2793,7 @@ Future? dart_Client_readBytes(PLEnv env, PLVector args) {
     if (o is Client) {
       if (args[1] is! Uri) {
         throw ArgumentError(
-            'The dart/Client.readBytes function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+            'The dart/Client.readBytes function expects its 2nd argument to be a Uri value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.readBytes(
@@ -2802,7 +2802,7 @@ Future? dart_Client_readBytes(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Client.readBytes function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+          'The dart/Client.readBytes function expects its first argument to be a Client object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2817,7 +2817,7 @@ Future? dart_Client_send(PLEnv env, PLVector args) {
     if (o is Client) {
       if (args[1] is! BaseRequest) {
         throw ArgumentError(
-            'The dart/Client.send function expects its 2nd argument to be a BaseRequest value, but received a ${typeString(args[1])} value.');
+            'The dart/Client.send function expects its 2nd argument to be a BaseRequest value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.send(
@@ -2826,7 +2826,7 @@ Future? dart_Client_send(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Client.send function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+          'The dart/Client.send function expects its first argument to be a Client object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2843,7 +2843,7 @@ void dart_Client_close(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Client.close function expects its first argument to be a Client object but received a ${typeString(o)} value.');
+          'The dart/Client.close function expects its first argument to be a Client object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2859,7 +2859,7 @@ bool dart_DateTime_isUtc(PLEnv env, PLVector args) {
       return o.isUtc;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.isUtc function expects its argument to be a DateTime but received a ${typeString(o)} value.');
+          'The dart/DateTime.isUtc function expects its argument to be a DateTime but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2872,7 +2872,7 @@ DateTime? dart_DateTime_parse(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/DateTime.parse function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/DateTime.parse function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = DateTime.parse(
@@ -2890,7 +2890,7 @@ DateTime? dart_DateTime_tryParse(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/DateTime.tryParse function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/DateTime.tryParse function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = DateTime.tryParse(
@@ -2910,7 +2910,7 @@ bool? dart_DateTime_isBefore(PLEnv env, PLVector args) {
     if (o is DateTime) {
       if (args[1] is! DateTime) {
         throw ArgumentError(
-            'The dart/DateTime.isBefore function expects its 2nd argument to be a DateTime value, but received a ${typeString(args[1])} value.');
+            'The dart/DateTime.isBefore function expects its 2nd argument to be a DateTime value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.isBefore(
@@ -2919,7 +2919,7 @@ bool? dart_DateTime_isBefore(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.isBefore function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.isBefore function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2934,7 +2934,7 @@ bool? dart_DateTime_isAfter(PLEnv env, PLVector args) {
     if (o is DateTime) {
       if (args[1] is! DateTime) {
         throw ArgumentError(
-            'The dart/DateTime.isAfter function expects its 2nd argument to be a DateTime value, but received a ${typeString(args[1])} value.');
+            'The dart/DateTime.isAfter function expects its 2nd argument to be a DateTime value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.isAfter(
@@ -2943,7 +2943,7 @@ bool? dart_DateTime_isAfter(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.isAfter function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.isAfter function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2958,7 +2958,7 @@ bool? dart_DateTime_isAtSameMomentAs(PLEnv env, PLVector args) {
     if (o is DateTime) {
       if (args[1] is! DateTime) {
         throw ArgumentError(
-            'The dart/DateTime.isAtSameMomentAs function expects its 2nd argument to be a DateTime value, but received a ${typeString(args[1])} value.');
+            'The dart/DateTime.isAtSameMomentAs function expects its 2nd argument to be a DateTime value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.isAtSameMomentAs(
@@ -2967,7 +2967,7 @@ bool? dart_DateTime_isAtSameMomentAs(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.isAtSameMomentAs function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.isAtSameMomentAs function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -2982,7 +2982,7 @@ int? dart_DateTime_compareTo(PLEnv env, PLVector args) {
     if (o is DateTime) {
       if (args[1] is! DateTime) {
         throw ArgumentError(
-            'The dart/DateTime.compareTo function expects its 2nd argument to be a DateTime value, but received a ${typeString(args[1])} value.');
+            'The dart/DateTime.compareTo function expects its 2nd argument to be a DateTime value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.compareTo(
@@ -2991,7 +2991,7 @@ int? dart_DateTime_compareTo(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.compareTo function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.compareTo function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3008,7 +3008,7 @@ int? dart_DateTime_hashCode(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.hashCode function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.hashCode function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3025,7 +3025,7 @@ DateTime? dart_DateTime_toLocal(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.toLocal function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.toLocal function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3042,7 +3042,7 @@ DateTime? dart_DateTime_toUtc(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.toUtc function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.toUtc function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3059,7 +3059,7 @@ String? dart_DateTime_toString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.toString function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.toString function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3076,7 +3076,7 @@ String? dart_DateTime_toIso8601String(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.toIso8601String function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.toIso8601String function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3091,7 +3091,7 @@ DateTime? dart_DateTime_add(PLEnv env, PLVector args) {
     if (o is DateTime) {
       if (args[1] is! Duration) {
         throw ArgumentError(
-            'The dart/DateTime.add function expects its 2nd argument to be a Duration value, but received a ${typeString(args[1])} value.');
+            'The dart/DateTime.add function expects its 2nd argument to be a Duration value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.add(
@@ -3100,7 +3100,7 @@ DateTime? dart_DateTime_add(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.add function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.add function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3115,7 +3115,7 @@ DateTime? dart_DateTime_subtract(PLEnv env, PLVector args) {
     if (o is DateTime) {
       if (args[1] is! Duration) {
         throw ArgumentError(
-            'The dart/DateTime.subtract function expects its 2nd argument to be a Duration value, but received a ${typeString(args[1])} value.');
+            'The dart/DateTime.subtract function expects its 2nd argument to be a Duration value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.subtract(
@@ -3124,7 +3124,7 @@ DateTime? dart_DateTime_subtract(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.subtract function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.subtract function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3139,7 +3139,7 @@ Duration? dart_DateTime_difference(PLEnv env, PLVector args) {
     if (o is DateTime) {
       if (args[1] is! DateTime) {
         throw ArgumentError(
-            'The dart/DateTime.difference function expects its 2nd argument to be a DateTime value, but received a ${typeString(args[1])} value.');
+            'The dart/DateTime.difference function expects its 2nd argument to be a DateTime value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.difference(
@@ -3148,7 +3148,7 @@ Duration? dart_DateTime_difference(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.difference function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.difference function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3165,7 +3165,7 @@ int? dart_DateTime_millisecondsSinceEpoch(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.millisecondsSinceEpoch function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.millisecondsSinceEpoch function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3182,7 +3182,7 @@ int? dart_DateTime_microsecondsSinceEpoch(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.microsecondsSinceEpoch function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.microsecondsSinceEpoch function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3199,7 +3199,7 @@ String? dart_DateTime_timeZoneName(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.timeZoneName function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.timeZoneName function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3216,7 +3216,7 @@ Duration? dart_DateTime_timeZoneOffset(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.timeZoneOffset function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.timeZoneOffset function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3233,7 +3233,7 @@ int? dart_DateTime_year(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.year function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.year function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3250,7 +3250,7 @@ int? dart_DateTime_month(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.month function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.month function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3267,7 +3267,7 @@ int? dart_DateTime_day(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.day function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.day function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3284,7 +3284,7 @@ int? dart_DateTime_hour(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.hour function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.hour function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3301,7 +3301,7 @@ int? dart_DateTime_minute(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.minute function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.minute function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3318,7 +3318,7 @@ int? dart_DateTime_second(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.second function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.second function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3335,7 +3335,7 @@ int? dart_DateTime_millisecond(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.millisecond function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.millisecond function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3352,7 +3352,7 @@ int? dart_DateTime_microsecond(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.microsecond function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.microsecond function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3369,7 +3369,7 @@ int? dart_DateTime_weekday(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/DateTime.weekday function expects its first argument to be a DateTime object but received a ${typeString(o)} value.');
+          'The dart/DateTime.weekday function expects its first argument to be a DateTime object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3382,7 +3382,7 @@ DateTime? dart_DateTime_(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! int) {
       throw ArgumentError(
-          'The dart/DateTime. function expects its 1st argument to be a int value, but received a ${typeString(args[0])} value.');
+          'The dart/DateTime. function expects its 1st argument to be a int value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = DateTime(
@@ -3400,35 +3400,35 @@ DateTime? dart_DateTime__full(PLEnv env, PLVector args) {
   if (args.length == 8) {
     if (args[0] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.-full function expects its 1st argument to be a int value, but received a ${typeString(args[0])} value.');
+          'The dart/DateTime.-full function expects its 1st argument to be a int value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.-full function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+          'The dart/DateTime.-full function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+          'The dart/DateTime.-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
     }
     if (args[3] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.-full function expects its 4th argument to be a int value, but received a ${typeString(args[3])} value.');
+          'The dart/DateTime.-full function expects its 4th argument to be a int value, but received a ${PiLisp.typeName(args[3])} value.');
     }
     if (args[4] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.-full function expects its 5th argument to be a int value, but received a ${typeString(args[4])} value.');
+          'The dart/DateTime.-full function expects its 5th argument to be a int value, but received a ${PiLisp.typeName(args[4])} value.');
     }
     if (args[5] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.-full function expects its 6th argument to be a int value, but received a ${typeString(args[5])} value.');
+          'The dart/DateTime.-full function expects its 6th argument to be a int value, but received a ${PiLisp.typeName(args[5])} value.');
     }
     if (args[6] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.-full function expects its 7th argument to be a int value, but received a ${typeString(args[6])} value.');
+          'The dart/DateTime.-full function expects its 7th argument to be a int value, but received a ${PiLisp.typeName(args[6])} value.');
     }
     if (args[7] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.-full function expects its 8th argument to be a int value, but received a ${typeString(args[7])} value.');
+          'The dart/DateTime.-full function expects its 8th argument to be a int value, but received a ${PiLisp.typeName(args[7])} value.');
     }
 
     final returnValue = DateTime(
@@ -3453,7 +3453,7 @@ DateTime? dart_DateTime_utc(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.utc function expects its 1st argument to be a int value, but received a ${typeString(args[0])} value.');
+          'The dart/DateTime.utc function expects its 1st argument to be a int value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = DateTime.utc(
@@ -3471,35 +3471,35 @@ DateTime? dart_DateTime_utc_full(PLEnv env, PLVector args) {
   if (args.length == 8) {
     if (args[0] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.utc-full function expects its 1st argument to be a int value, but received a ${typeString(args[0])} value.');
+          'The dart/DateTime.utc-full function expects its 1st argument to be a int value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.utc-full function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+          'The dart/DateTime.utc-full function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.utc-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+          'The dart/DateTime.utc-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
     }
     if (args[3] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.utc-full function expects its 4th argument to be a int value, but received a ${typeString(args[3])} value.');
+          'The dart/DateTime.utc-full function expects its 4th argument to be a int value, but received a ${PiLisp.typeName(args[3])} value.');
     }
     if (args[4] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.utc-full function expects its 5th argument to be a int value, but received a ${typeString(args[4])} value.');
+          'The dart/DateTime.utc-full function expects its 5th argument to be a int value, but received a ${PiLisp.typeName(args[4])} value.');
     }
     if (args[5] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.utc-full function expects its 6th argument to be a int value, but received a ${typeString(args[5])} value.');
+          'The dart/DateTime.utc-full function expects its 6th argument to be a int value, but received a ${PiLisp.typeName(args[5])} value.');
     }
     if (args[6] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.utc-full function expects its 7th argument to be a int value, but received a ${typeString(args[6])} value.');
+          'The dart/DateTime.utc-full function expects its 7th argument to be a int value, but received a ${PiLisp.typeName(args[6])} value.');
     }
     if (args[7] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.utc-full function expects its 8th argument to be a int value, but received a ${typeString(args[7])} value.');
+          'The dart/DateTime.utc-full function expects its 8th argument to be a int value, but received a ${PiLisp.typeName(args[7])} value.');
     }
 
     final returnValue = DateTime.utc(
@@ -3535,7 +3535,7 @@ DateTime? dart_DateTime_fromMillisecondsSinceEpoch(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.fromMillisecondsSinceEpoch function expects its 1st argument to be a int value, but received a ${typeString(args[0])} value.');
+          'The dart/DateTime.fromMillisecondsSinceEpoch function expects its 1st argument to be a int value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = DateTime.fromMillisecondsSinceEpoch(
@@ -3553,7 +3553,7 @@ DateTime? dart_DateTime_fromMicrosecondsSinceEpoch(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! int) {
       throw ArgumentError(
-          'The dart/DateTime.fromMicrosecondsSinceEpoch function expects its 1st argument to be a int value, but received a ${typeString(args[0])} value.');
+          'The dart/DateTime.fromMicrosecondsSinceEpoch function expects its 1st argument to be a int value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = DateTime.fromMicrosecondsSinceEpoch(
@@ -3573,7 +3573,7 @@ double? dart_double_remainder(PLEnv env, PLVector args) {
     if (o is double) {
       if (args[1] is! num) {
         throw ArgumentError(
-            'The dart/double.remainder function expects its 2nd argument to be a num value, but received a ${typeString(args[1])} value.');
+            'The dart/double.remainder function expects its 2nd argument to be a num value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.remainder(
@@ -3582,7 +3582,7 @@ double? dart_double_remainder(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/double.remainder function expects its first argument to be a double object but received a ${typeString(o)} value.');
+          'The dart/double.remainder function expects its first argument to be a double object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3599,7 +3599,7 @@ double? dart_double_abs(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/double.abs function expects its first argument to be a double object but received a ${typeString(o)} value.');
+          'The dart/double.abs function expects its first argument to be a double object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3616,7 +3616,7 @@ double? dart_double_sign(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/double.sign function expects its first argument to be a double object but received a ${typeString(o)} value.');
+          'The dart/double.sign function expects its first argument to be a double object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3633,7 +3633,7 @@ int? dart_double_round(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/double.round function expects its first argument to be a double object but received a ${typeString(o)} value.');
+          'The dart/double.round function expects its first argument to be a double object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3650,7 +3650,7 @@ int? dart_double_floor(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/double.floor function expects its first argument to be a double object but received a ${typeString(o)} value.');
+          'The dart/double.floor function expects its first argument to be a double object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3667,7 +3667,7 @@ int? dart_double_ceil(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/double.ceil function expects its first argument to be a double object but received a ${typeString(o)} value.');
+          'The dart/double.ceil function expects its first argument to be a double object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3684,7 +3684,7 @@ int? dart_double_truncate(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/double.truncate function expects its first argument to be a double object but received a ${typeString(o)} value.');
+          'The dart/double.truncate function expects its first argument to be a double object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3701,7 +3701,7 @@ double? dart_double_roundToDouble(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/double.roundToDouble function expects its first argument to be a double object but received a ${typeString(o)} value.');
+          'The dart/double.roundToDouble function expects its first argument to be a double object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3718,7 +3718,7 @@ double? dart_double_floorToDouble(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/double.floorToDouble function expects its first argument to be a double object but received a ${typeString(o)} value.');
+          'The dart/double.floorToDouble function expects its first argument to be a double object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3735,7 +3735,7 @@ double? dart_double_ceilToDouble(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/double.ceilToDouble function expects its first argument to be a double object but received a ${typeString(o)} value.');
+          'The dart/double.ceilToDouble function expects its first argument to be a double object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3752,7 +3752,7 @@ double? dart_double_truncateToDouble(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/double.truncateToDouble function expects its first argument to be a double object but received a ${typeString(o)} value.');
+          'The dart/double.truncateToDouble function expects its first argument to be a double object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3769,7 +3769,7 @@ String? dart_double_toString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/double.toString function expects its first argument to be a double object but received a ${typeString(o)} value.');
+          'The dart/double.toString function expects its first argument to be a double object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3782,7 +3782,7 @@ double? dart_double_parse(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/double.parse function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/double.parse function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = double.parse(
@@ -3800,11 +3800,11 @@ double? dart_double_parse_full(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/double.parse-full function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/double.parse-full function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! double Function(String)) {
       throw ArgumentError(
-          'The dart/double.parse-full function expects its 2nd argument to be a (dart.core.String) -> dart.core.double value, but received a ${typeString(args[1])} value.');
+          'The dart/double.parse-full function expects its 2nd argument to be a (dart.core.String) -> dart.core.double value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = double.parse(
@@ -3823,7 +3823,7 @@ double? dart_double_tryParse(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/double.tryParse function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/double.tryParse function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = double.tryParse(
@@ -3845,7 +3845,7 @@ int? dart_Duration_inDays(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Duration.inDays function expects its first argument to be a Duration object but received a ${typeString(o)} value.');
+          'The dart/Duration.inDays function expects its first argument to be a Duration object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3862,7 +3862,7 @@ int? dart_Duration_inHours(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Duration.inHours function expects its first argument to be a Duration object but received a ${typeString(o)} value.');
+          'The dart/Duration.inHours function expects its first argument to be a Duration object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3879,7 +3879,7 @@ int? dart_Duration_inMinutes(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Duration.inMinutes function expects its first argument to be a Duration object but received a ${typeString(o)} value.');
+          'The dart/Duration.inMinutes function expects its first argument to be a Duration object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3896,7 +3896,7 @@ int? dart_Duration_inSeconds(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Duration.inSeconds function expects its first argument to be a Duration object but received a ${typeString(o)} value.');
+          'The dart/Duration.inSeconds function expects its first argument to be a Duration object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3913,7 +3913,7 @@ int? dart_Duration_inMilliseconds(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Duration.inMilliseconds function expects its first argument to be a Duration object but received a ${typeString(o)} value.');
+          'The dart/Duration.inMilliseconds function expects its first argument to be a Duration object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3930,7 +3930,7 @@ int? dart_Duration_inMicroseconds(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Duration.inMicroseconds function expects its first argument to be a Duration object but received a ${typeString(o)} value.');
+          'The dart/Duration.inMicroseconds function expects its first argument to be a Duration object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3947,7 +3947,7 @@ int? dart_Duration_hashCode(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Duration.hashCode function expects its first argument to be a Duration object but received a ${typeString(o)} value.');
+          'The dart/Duration.hashCode function expects its first argument to be a Duration object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3962,7 +3962,7 @@ int? dart_Duration_compareTo(PLEnv env, PLVector args) {
     if (o is Duration) {
       if (args[1] is! Duration) {
         throw ArgumentError(
-            'The dart/Duration.compareTo function expects its 2nd argument to be a Duration value, but received a ${typeString(args[1])} value.');
+            'The dart/Duration.compareTo function expects its 2nd argument to be a Duration value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.compareTo(
@@ -3971,7 +3971,7 @@ int? dart_Duration_compareTo(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Duration.compareTo function expects its first argument to be a Duration object but received a ${typeString(o)} value.');
+          'The dart/Duration.compareTo function expects its first argument to be a Duration object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -3988,7 +3988,7 @@ String? dart_Duration_toString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Duration.toString function expects its first argument to be a Duration object but received a ${typeString(o)} value.');
+          'The dart/Duration.toString function expects its first argument to be a Duration object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4005,7 +4005,7 @@ bool? dart_Duration_isNegative(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Duration.isNegative function expects its first argument to be a Duration object but received a ${typeString(o)} value.');
+          'The dart/Duration.isNegative function expects its first argument to be a Duration object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4022,7 +4022,7 @@ Duration? dart_Duration_abs(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Duration.abs function expects its first argument to be a Duration object but received a ${typeString(o)} value.');
+          'The dart/Duration.abs function expects its first argument to be a Duration object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4050,7 +4050,7 @@ int? dart_Enum_index(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Enum.index function expects its first argument to be a Enum object but received a ${typeString(o)} value.');
+          'The dart/Enum.index function expects its first argument to be a Enum object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4063,11 +4063,11 @@ dynamic dart_Function_apply(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! Function) {
       throw ArgumentError(
-          'The dart/Function.apply function expects its 1st argument to be a Function value, but received a ${typeString(args[0])} value.');
+          'The dart/Function.apply function expects its 1st argument to be a Function value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! List) {
       throw ArgumentError(
-          'The dart/Function.apply function expects its 2nd argument to be a List value, but received a ${typeString(args[1])} value.');
+          'The dart/Function.apply function expects its 2nd argument to be a List value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = Function.apply(
@@ -4086,15 +4086,15 @@ dynamic dart_Function_apply_full(PLEnv env, PLVector args) {
   if (args.length == 3) {
     if (args[0] is! Function) {
       throw ArgumentError(
-          'The dart/Function.apply-full function expects its 1st argument to be a Function value, but received a ${typeString(args[0])} value.');
+          'The dart/Function.apply-full function expects its 1st argument to be a Function value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! List) {
       throw ArgumentError(
-          'The dart/Function.apply-full function expects its 2nd argument to be a List value, but received a ${typeString(args[1])} value.');
+          'The dart/Function.apply-full function expects its 2nd argument to be a List value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! Map) {
       throw ArgumentError(
-          'The dart/Function.apply-full function expects its 3rd argument to be a Map value, but received a ${typeString(args[2])} value.');
+          'The dart/Function.apply-full function expects its 3rd argument to be a Map value, but received a ${PiLisp.typeName(args[2])} value.');
     }
 
     final returnValue = Function.apply(
@@ -4118,7 +4118,7 @@ int? dart_Function_hashCode(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Function.hashCode function expects its first argument to be a Function object but received a ${typeString(o)} value.');
+          'The dart/Function.hashCode function expects its first argument to be a Function object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4131,7 +4131,7 @@ Future? dart_Future_wait(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
-          'The dart/Future.wait function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+          'The dart/Future.wait function expects its 1st argument to be a Iterable value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Future.wait(
@@ -4149,7 +4149,7 @@ Future? dart_Future_any(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
-          'The dart/Future.any function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+          'The dart/Future.any function expects its 1st argument to be a Iterable value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Future.any(
@@ -4167,11 +4167,11 @@ Future? dart_Future_forEach(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
-          'The dart/Future.forEach function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+          'The dart/Future.forEach function expects its 1st argument to be a Iterable value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! dynamic Function(dynamic)) {
       throw ArgumentError(
-          'The dart/Future.forEach function expects its 2nd argument to be a (dynamic) -> dynamic value, but received a ${typeString(args[1])} value.');
+          'The dart/Future.forEach function expects its 2nd argument to be a (dynamic) -> dynamic value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = Future.forEach(
@@ -4192,7 +4192,7 @@ Future? dart_Future_then(PLEnv env, PLVector args) {
     if (o is Future) {
       if (args[1] is! dynamic Function(dynamic)) {
         throw ArgumentError(
-            'The dart/Future.then function expects its 2nd argument to be a (dynamic) -> dynamic value, but received a ${typeString(args[1])} value.');
+            'The dart/Future.then function expects its 2nd argument to be a (dynamic) -> dynamic value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.then(
@@ -4201,7 +4201,7 @@ Future? dart_Future_then(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Future.then function expects its first argument to be a Future object but received a ${typeString(o)} value.');
+          'The dart/Future.then function expects its first argument to be a Future object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4216,7 +4216,7 @@ Future? dart_Future_catchError(PLEnv env, PLVector args) {
     if (o is Future) {
       if (args[1] is! Function) {
         throw ArgumentError(
-            'The dart/Future.catchError function expects its 2nd argument to be a Function value, but received a ${typeString(args[1])} value.');
+            'The dart/Future.catchError function expects its 2nd argument to be a Function value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.catchError(
@@ -4225,7 +4225,7 @@ Future? dart_Future_catchError(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Future.catchError function expects its first argument to be a Future object but received a ${typeString(o)} value.');
+          'The dart/Future.catchError function expects its first argument to be a Future object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4240,7 +4240,7 @@ Future? dart_Future_whenComplete(PLEnv env, PLVector args) {
     if (o is Future) {
       if (args[1] is! void Function()) {
         throw ArgumentError(
-            'The dart/Future.whenComplete function expects its 2nd argument to be a () -> void value, but received a ${typeString(args[1])} value.');
+            'The dart/Future.whenComplete function expects its 2nd argument to be a () -> void value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.whenComplete(
@@ -4249,7 +4249,7 @@ Future? dart_Future_whenComplete(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Future.whenComplete function expects its first argument to be a Future object but received a ${typeString(o)} value.');
+          'The dart/Future.whenComplete function expects its first argument to be a Future object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4266,7 +4266,7 @@ Stream? dart_Future_asStream(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Future.asStream function expects its first argument to be a Future object but received a ${typeString(o)} value.');
+          'The dart/Future.asStream function expects its first argument to be a Future object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4281,7 +4281,7 @@ Future? dart_Future_timeout(PLEnv env, PLVector args) {
     if (o is Future) {
       if (args[1] is! Duration) {
         throw ArgumentError(
-            'The dart/Future.timeout function expects its 2nd argument to be a Duration value, but received a ${typeString(args[1])} value.');
+            'The dart/Future.timeout function expects its 2nd argument to be a Duration value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.timeout(
@@ -4290,7 +4290,7 @@ Future? dart_Future_timeout(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Future.timeout function expects its first argument to be a Future object but received a ${typeString(o)} value.');
+          'The dart/Future.timeout function expects its first argument to be a Future object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4303,7 +4303,7 @@ Future? dart_Future_(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! FutureOr Function()) {
       throw ArgumentError(
-          'The dart/Future. function expects its 1st argument to be a () -> dart.async.FutureOr value, but received a ${typeString(args[0])} value.');
+          'The dart/Future. function expects its 1st argument to be a () -> dart.async.FutureOr value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Future(
@@ -4321,7 +4321,7 @@ Future? dart_Future_microtask(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! FutureOr Function()) {
       throw ArgumentError(
-          'The dart/Future.microtask function expects its 1st argument to be a () -> dart.async.FutureOr value, but received a ${typeString(args[0])} value.');
+          'The dart/Future.microtask function expects its 1st argument to be a () -> dart.async.FutureOr value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Future.microtask(
@@ -4339,7 +4339,7 @@ Future? dart_Future_sync(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! FutureOr Function()) {
       throw ArgumentError(
-          'The dart/Future.sync function expects its 1st argument to be a () -> dart.async.FutureOr value, but received a ${typeString(args[0])} value.');
+          'The dart/Future.sync function expects its 1st argument to be a () -> dart.async.FutureOr value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Future.sync(
@@ -4357,7 +4357,7 @@ Future? dart_Future_error(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Object) {
       throw ArgumentError(
-          'The dart/Future.error function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+          'The dart/Future.error function expects its 1st argument to be a Object value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Future.error(
@@ -4375,11 +4375,11 @@ Future? dart_Future_error_full(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! Object) {
       throw ArgumentError(
-          'The dart/Future.error-full function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+          'The dart/Future.error-full function expects its 1st argument to be a Object value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! StackTrace) {
       throw ArgumentError(
-          'The dart/Future.error-full function expects its 2nd argument to be a StackTrace value, but received a ${typeString(args[1])} value.');
+          'The dart/Future.error-full function expects its 2nd argument to be a StackTrace value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = Future.error(
@@ -4398,7 +4398,7 @@ Future? dart_Future_delayed(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Duration) {
       throw ArgumentError(
-          'The dart/Future.delayed function expects its 1st argument to be a Duration value, but received a ${typeString(args[0])} value.');
+          'The dart/Future.delayed function expects its 1st argument to be a Duration value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Future.delayed(
@@ -4416,11 +4416,11 @@ Future? dart_Future_delayed_full(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! Duration) {
       throw ArgumentError(
-          'The dart/Future.delayed-full function expects its 1st argument to be a Duration value, but received a ${typeString(args[0])} value.');
+          'The dart/Future.delayed-full function expects its 1st argument to be a Duration value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! FutureOr Function()) {
       throw ArgumentError(
-          'The dart/Future.delayed-full function expects its 2nd argument to be a () -> dart.async.FutureOr value, but received a ${typeString(args[1])} value.');
+          'The dart/Future.delayed-full function expects its 2nd argument to be a () -> dart.async.FutureOr value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = Future.delayed(
@@ -4441,11 +4441,11 @@ int? dart_int_modPow(PLEnv env, PLVector args) {
     if (o is int) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/int.modPow function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/int.modPow function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! int) {
         throw ArgumentError(
-            'The dart/int.modPow function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+            'The dart/int.modPow function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.modPow(
@@ -4455,7 +4455,7 @@ int? dart_int_modPow(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.modPow function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.modPow function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4470,7 +4470,7 @@ int? dart_int_modInverse(PLEnv env, PLVector args) {
     if (o is int) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/int.modInverse function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/int.modInverse function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.modInverse(
@@ -4479,7 +4479,7 @@ int? dart_int_modInverse(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.modInverse function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.modInverse function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4494,7 +4494,7 @@ int? dart_int_gcd(PLEnv env, PLVector args) {
     if (o is int) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/int.gcd function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/int.gcd function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.gcd(
@@ -4503,7 +4503,7 @@ int? dart_int_gcd(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.gcd function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.gcd function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4520,7 +4520,7 @@ bool? dart_int_isEven(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.isEven function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.isEven function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4537,7 +4537,7 @@ bool? dart_int_isOdd(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.isOdd function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.isOdd function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4554,7 +4554,7 @@ int? dart_int_bitLength(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.bitLength function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.bitLength function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4569,7 +4569,7 @@ int? dart_int_toUnsigned(PLEnv env, PLVector args) {
     if (o is int) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/int.toUnsigned function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/int.toUnsigned function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.toUnsigned(
@@ -4578,7 +4578,7 @@ int? dart_int_toUnsigned(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.toUnsigned function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.toUnsigned function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4593,7 +4593,7 @@ int? dart_int_toSigned(PLEnv env, PLVector args) {
     if (o is int) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/int.toSigned function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/int.toSigned function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.toSigned(
@@ -4602,7 +4602,7 @@ int? dart_int_toSigned(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.toSigned function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.toSigned function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4619,7 +4619,7 @@ int? dart_int_abs(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.abs function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.abs function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4636,7 +4636,7 @@ int? dart_int_sign(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.sign function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.sign function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4653,7 +4653,7 @@ int? dart_int_round(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.round function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.round function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4670,7 +4670,7 @@ int? dart_int_floor(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.floor function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.floor function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4687,7 +4687,7 @@ int? dart_int_ceil(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.ceil function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.ceil function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4704,7 +4704,7 @@ int? dart_int_truncate(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.truncate function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.truncate function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4721,7 +4721,7 @@ double? dart_int_roundToDouble(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.roundToDouble function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.roundToDouble function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4738,7 +4738,7 @@ double? dart_int_floorToDouble(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.floorToDouble function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.floorToDouble function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4755,7 +4755,7 @@ double? dart_int_ceilToDouble(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.ceilToDouble function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.ceilToDouble function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4772,7 +4772,7 @@ double? dart_int_truncateToDouble(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.truncateToDouble function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.truncateToDouble function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4789,7 +4789,7 @@ String? dart_int_toString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.toString function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.toString function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4804,7 +4804,7 @@ String? dart_int_toRadixString(PLEnv env, PLVector args) {
     if (o is int) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/int.toRadixString function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/int.toRadixString function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.toRadixString(
@@ -4813,7 +4813,7 @@ String? dart_int_toRadixString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/int.toRadixString function expects its first argument to be a int object but received a ${typeString(o)} value.');
+          'The dart/int.toRadixString function expects its first argument to be a int object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4826,7 +4826,7 @@ int? dart_int_parse(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/int.parse function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/int.parse function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = int.parse(
@@ -4844,7 +4844,7 @@ int? dart_int_tryParse(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/int.tryParse function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/int.tryParse function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = int.tryParse(
@@ -4862,7 +4862,7 @@ int? dart_int_fromEnvironment(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/int.fromEnvironment function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/int.fromEnvironment function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = int.fromEnvironment(
@@ -4884,7 +4884,7 @@ Symbol? dart_Invocation_memberName(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Invocation.memberName function expects its first argument to be a Invocation object but received a ${typeString(o)} value.');
+          'The dart/Invocation.memberName function expects its first argument to be a Invocation object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4901,7 +4901,7 @@ IList? dart_Invocation_typeArguments(PLEnv env, PLVector args) {
       return returnValue.toIList();
     } else {
       throw ArgumentError(
-          'The dart/Invocation.typeArguments function expects its first argument to be a Invocation object but received a ${typeString(o)} value.');
+          'The dart/Invocation.typeArguments function expects its first argument to be a Invocation object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4918,7 +4918,7 @@ IList? dart_Invocation_positionalArguments(PLEnv env, PLVector args) {
       return returnValue.toIList();
     } else {
       throw ArgumentError(
-          'The dart/Invocation.positionalArguments function expects its first argument to be a Invocation object but received a ${typeString(o)} value.');
+          'The dart/Invocation.positionalArguments function expects its first argument to be a Invocation object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4935,7 +4935,7 @@ IMap? dart_Invocation_namedArguments(PLEnv env, PLVector args) {
       return returnValue.toIMap();
     } else {
       throw ArgumentError(
-          'The dart/Invocation.namedArguments function expects its first argument to be a Invocation object but received a ${typeString(o)} value.');
+          'The dart/Invocation.namedArguments function expects its first argument to be a Invocation object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4952,7 +4952,7 @@ bool? dart_Invocation_isMethod(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Invocation.isMethod function expects its first argument to be a Invocation object but received a ${typeString(o)} value.');
+          'The dart/Invocation.isMethod function expects its first argument to be a Invocation object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4969,7 +4969,7 @@ bool? dart_Invocation_isGetter(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Invocation.isGetter function expects its first argument to be a Invocation object but received a ${typeString(o)} value.');
+          'The dart/Invocation.isGetter function expects its first argument to be a Invocation object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -4986,7 +4986,7 @@ bool? dart_Invocation_isSetter(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Invocation.isSetter function expects its first argument to be a Invocation object but received a ${typeString(o)} value.');
+          'The dart/Invocation.isSetter function expects its first argument to be a Invocation object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5003,7 +5003,7 @@ bool? dart_Invocation_isAccessor(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Invocation.isAccessor function expects its first argument to be a Invocation object but received a ${typeString(o)} value.');
+          'The dart/Invocation.isAccessor function expects its first argument to be a Invocation object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5016,11 +5016,11 @@ Invocation? dart_Invocation_method(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! Symbol) {
       throw ArgumentError(
-          'The dart/Invocation.method function expects its 1st argument to be a Symbol value, but received a ${typeString(args[0])} value.');
+          'The dart/Invocation.method function expects its 1st argument to be a Symbol value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! Iterable) {
       throw ArgumentError(
-          'The dart/Invocation.method function expects its 2nd argument to be a Iterable value, but received a ${typeString(args[1])} value.');
+          'The dart/Invocation.method function expects its 2nd argument to be a Iterable value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = Invocation.method(
@@ -5039,15 +5039,15 @@ Invocation? dart_Invocation_method_full(PLEnv env, PLVector args) {
   if (args.length == 3) {
     if (args[0] is! Symbol) {
       throw ArgumentError(
-          'The dart/Invocation.method-full function expects its 1st argument to be a Symbol value, but received a ${typeString(args[0])} value.');
+          'The dart/Invocation.method-full function expects its 1st argument to be a Symbol value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! Iterable) {
       throw ArgumentError(
-          'The dart/Invocation.method-full function expects its 2nd argument to be a Iterable value, but received a ${typeString(args[1])} value.');
+          'The dart/Invocation.method-full function expects its 2nd argument to be a Iterable value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! Map) {
       throw ArgumentError(
-          'The dart/Invocation.method-full function expects its 3rd argument to be a Map value, but received a ${typeString(args[2])} value.');
+          'The dart/Invocation.method-full function expects its 3rd argument to be a Map value, but received a ${PiLisp.typeName(args[2])} value.');
     }
 
     final returnValue = Invocation.method(
@@ -5067,15 +5067,15 @@ Invocation? dart_Invocation_genericMethod(PLEnv env, PLVector args) {
   if (args.length == 3) {
     if (args[0] is! Symbol) {
       throw ArgumentError(
-          'The dart/Invocation.genericMethod function expects its 1st argument to be a Symbol value, but received a ${typeString(args[0])} value.');
+          'The dart/Invocation.genericMethod function expects its 1st argument to be a Symbol value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! Iterable) {
       throw ArgumentError(
-          'The dart/Invocation.genericMethod function expects its 2nd argument to be a Iterable value, but received a ${typeString(args[1])} value.');
+          'The dart/Invocation.genericMethod function expects its 2nd argument to be a Iterable value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! Iterable) {
       throw ArgumentError(
-          'The dart/Invocation.genericMethod function expects its 3rd argument to be a Iterable value, but received a ${typeString(args[2])} value.');
+          'The dart/Invocation.genericMethod function expects its 3rd argument to be a Iterable value, but received a ${PiLisp.typeName(args[2])} value.');
     }
 
     final returnValue = Invocation.genericMethod(
@@ -5095,19 +5095,19 @@ Invocation? dart_Invocation_genericMethod_full(PLEnv env, PLVector args) {
   if (args.length == 4) {
     if (args[0] is! Symbol) {
       throw ArgumentError(
-          'The dart/Invocation.genericMethod-full function expects its 1st argument to be a Symbol value, but received a ${typeString(args[0])} value.');
+          'The dart/Invocation.genericMethod-full function expects its 1st argument to be a Symbol value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! Iterable) {
       throw ArgumentError(
-          'The dart/Invocation.genericMethod-full function expects its 2nd argument to be a Iterable value, but received a ${typeString(args[1])} value.');
+          'The dart/Invocation.genericMethod-full function expects its 2nd argument to be a Iterable value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! Iterable) {
       throw ArgumentError(
-          'The dart/Invocation.genericMethod-full function expects its 3rd argument to be a Iterable value, but received a ${typeString(args[2])} value.');
+          'The dart/Invocation.genericMethod-full function expects its 3rd argument to be a Iterable value, but received a ${PiLisp.typeName(args[2])} value.');
     }
     if (args[3] is! Map) {
       throw ArgumentError(
-          'The dart/Invocation.genericMethod-full function expects its 4th argument to be a Map value, but received a ${typeString(args[3])} value.');
+          'The dart/Invocation.genericMethod-full function expects its 4th argument to be a Map value, but received a ${PiLisp.typeName(args[3])} value.');
     }
 
     final returnValue = Invocation.genericMethod(
@@ -5128,7 +5128,7 @@ Invocation? dart_Invocation_getter(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Symbol) {
       throw ArgumentError(
-          'The dart/Invocation.getter function expects its 1st argument to be a Symbol value, but received a ${typeString(args[0])} value.');
+          'The dart/Invocation.getter function expects its 1st argument to be a Symbol value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Invocation.getter(
@@ -5146,11 +5146,11 @@ Invocation? dart_Invocation_setter(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! Symbol) {
       throw ArgumentError(
-          'The dart/Invocation.setter function expects its 1st argument to be a Symbol value, but received a ${typeString(args[0])} value.');
+          'The dart/Invocation.setter function expects its 1st argument to be a Symbol value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! Object) {
       throw ArgumentError(
-          'The dart/Invocation.setter function expects its 2nd argument to be a Object value, but received a ${typeString(args[1])} value.');
+          'The dart/Invocation.setter function expects its 2nd argument to be a Object value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = Invocation.setter(
@@ -5169,7 +5169,7 @@ Iterable? dart_Iterable_castFrom(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
-          'The dart/Iterable.castFrom function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+          'The dart/Iterable.castFrom function expects its 1st argument to be a Iterable value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Iterable.castFrom(
@@ -5191,7 +5191,7 @@ Iterator? dart_Iterable_iterator(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.iterator function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.iterator function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5208,7 +5208,7 @@ Iterable? dart_Iterable_cast(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.cast function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.cast function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5223,7 +5223,7 @@ Iterable? dart_Iterable_map(PLEnv env, PLVector args) {
     if (o is Iterable) {
       if (args[1] is! dynamic Function(dynamic)) {
         throw ArgumentError(
-            'The dart/Iterable.map function expects its 2nd argument to be a (dynamic) -> dynamic value, but received a ${typeString(args[1])} value.');
+            'The dart/Iterable.map function expects its 2nd argument to be a (dynamic) -> dynamic value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.map(
@@ -5232,7 +5232,7 @@ Iterable? dart_Iterable_map(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.map function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.map function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5247,7 +5247,7 @@ Iterable? dart_Iterable_where(PLEnv env, PLVector args) {
     if (o is Iterable) {
       if (args[1] is! bool Function(dynamic)) {
         throw ArgumentError(
-            'The dart/Iterable.where function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${typeString(args[1])} value.');
+            'The dart/Iterable.where function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.where(
@@ -5256,7 +5256,7 @@ Iterable? dart_Iterable_where(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.where function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.where function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5273,7 +5273,7 @@ Iterable? dart_Iterable_whereType(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.whereType function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.whereType function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5288,7 +5288,7 @@ Iterable? dart_Iterable_expand(PLEnv env, PLVector args) {
     if (o is Iterable) {
       if (args[1] is! Iterable Function(dynamic)) {
         throw ArgumentError(
-            'The dart/Iterable.expand function expects its 2nd argument to be a (dynamic) -> dart.core.Iterable value, but received a ${typeString(args[1])} value.');
+            'The dart/Iterable.expand function expects its 2nd argument to be a (dynamic) -> dart.core.Iterable value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.expand(
@@ -5297,7 +5297,7 @@ Iterable? dart_Iterable_expand(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.expand function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.expand function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5312,7 +5312,7 @@ bool? dart_Iterable_contains(PLEnv env, PLVector args) {
     if (o is Iterable) {
       if (args[1] is! Object) {
         throw ArgumentError(
-            'The dart/Iterable.contains function expects its 2nd argument to be a Object value, but received a ${typeString(args[1])} value.');
+            'The dart/Iterable.contains function expects its 2nd argument to be a Object value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.contains(
@@ -5321,7 +5321,7 @@ bool? dart_Iterable_contains(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.contains function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.contains function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5336,7 +5336,7 @@ void dart_Iterable_forEach(PLEnv env, PLVector args) {
     if (o is Iterable) {
       if (args[1] is! void Function(dynamic)) {
         throw ArgumentError(
-            'The dart/Iterable.forEach function expects its 2nd argument to be a (dynamic) -> void value, but received a ${typeString(args[1])} value.');
+            'The dart/Iterable.forEach function expects its 2nd argument to be a (dynamic) -> void value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.forEach(
@@ -5345,7 +5345,7 @@ void dart_Iterable_forEach(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.forEach function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.forEach function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5360,11 +5360,11 @@ dynamic dart_Iterable_fold(PLEnv env, PLVector args) {
     if (o is Iterable) {
       if (args[1] is! dynamic) {
         throw ArgumentError(
-            'The dart/Iterable.fold function expects its 2nd argument to be a dynamic value, but received a ${typeString(args[1])} value.');
+            'The dart/Iterable.fold function expects its 2nd argument to be a dynamic value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! dynamic Function(dynamic, dynamic)) {
         throw ArgumentError(
-            'The dart/Iterable.fold function expects its 3rd argument to be a (dynamic, dynamic) -> dynamic value, but received a ${typeString(args[2])} value.');
+            'The dart/Iterable.fold function expects its 3rd argument to be a (dynamic, dynamic) -> dynamic value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.fold(
@@ -5374,7 +5374,7 @@ dynamic dart_Iterable_fold(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.fold function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.fold function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5389,7 +5389,7 @@ bool? dart_Iterable_every(PLEnv env, PLVector args) {
     if (o is Iterable) {
       if (args[1] is! bool Function(dynamic)) {
         throw ArgumentError(
-            'The dart/Iterable.every function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${typeString(args[1])} value.');
+            'The dart/Iterable.every function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.every(
@@ -5398,7 +5398,7 @@ bool? dart_Iterable_every(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.every function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.every function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5415,7 +5415,7 @@ String? dart_Iterable_join(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.join function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.join function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5430,7 +5430,7 @@ String? dart_Iterable_join_full(PLEnv env, PLVector args) {
     if (o is Iterable) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/Iterable.join-full function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/Iterable.join-full function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.join(
@@ -5439,7 +5439,7 @@ String? dart_Iterable_join_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.join-full function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.join-full function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5454,7 +5454,7 @@ bool? dart_Iterable_any(PLEnv env, PLVector args) {
     if (o is Iterable) {
       if (args[1] is! bool Function(dynamic)) {
         throw ArgumentError(
-            'The dart/Iterable.any function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${typeString(args[1])} value.');
+            'The dart/Iterable.any function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.any(
@@ -5463,7 +5463,7 @@ bool? dart_Iterable_any(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.any function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.any function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5480,7 +5480,7 @@ IList? dart_Iterable_toList(PLEnv env, PLVector args) {
       return returnValue.toIList();
     } else {
       throw ArgumentError(
-          'The dart/Iterable.toList function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.toList function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5497,7 +5497,7 @@ ISet? dart_Iterable_toSet(PLEnv env, PLVector args) {
       return returnValue.toISet();
     } else {
       throw ArgumentError(
-          'The dart/Iterable.toSet function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.toSet function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5514,7 +5514,7 @@ int? dart_Iterable_length(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.length function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.length function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5531,7 +5531,7 @@ bool? dart_Iterable_isEmpty(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.isEmpty function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.isEmpty function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5548,7 +5548,7 @@ bool? dart_Iterable_isNotEmpty(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.isNotEmpty function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.isNotEmpty function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5563,7 +5563,7 @@ Iterable? dart_Iterable_take(PLEnv env, PLVector args) {
     if (o is Iterable) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/Iterable.take function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/Iterable.take function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.take(
@@ -5572,7 +5572,7 @@ Iterable? dart_Iterable_take(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.take function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.take function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5587,7 +5587,7 @@ Iterable? dart_Iterable_takeWhile(PLEnv env, PLVector args) {
     if (o is Iterable) {
       if (args[1] is! bool Function(dynamic)) {
         throw ArgumentError(
-            'The dart/Iterable.takeWhile function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${typeString(args[1])} value.');
+            'The dart/Iterable.takeWhile function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.takeWhile(
@@ -5596,7 +5596,7 @@ Iterable? dart_Iterable_takeWhile(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.takeWhile function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.takeWhile function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5611,7 +5611,7 @@ Iterable? dart_Iterable_skip(PLEnv env, PLVector args) {
     if (o is Iterable) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/Iterable.skip function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/Iterable.skip function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.skip(
@@ -5620,7 +5620,7 @@ Iterable? dart_Iterable_skip(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.skip function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.skip function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5635,7 +5635,7 @@ Iterable? dart_Iterable_skipWhile(PLEnv env, PLVector args) {
     if (o is Iterable) {
       if (args[1] is! bool Function(dynamic)) {
         throw ArgumentError(
-            'The dart/Iterable.skipWhile function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${typeString(args[1])} value.');
+            'The dart/Iterable.skipWhile function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.skipWhile(
@@ -5644,7 +5644,7 @@ Iterable? dart_Iterable_skipWhile(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.skipWhile function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.skipWhile function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5661,7 +5661,7 @@ String? dart_Iterable_toString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterable.toString function expects its first argument to be a Iterable object but received a ${typeString(o)} value.');
+          'The dart/Iterable.toString function expects its first argument to be a Iterable object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5689,7 +5689,7 @@ bool? dart_Iterator_moveNext(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Iterator.moveNext function expects its first argument to be a Iterator object but received a ${typeString(o)} value.');
+          'The dart/Iterator.moveNext function expects its first argument to be a Iterator object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5702,7 +5702,7 @@ IList? dart_List_castFrom(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! List) {
       throw ArgumentError(
-          'The dart/List.castFrom function expects its 1st argument to be a List value, but received a ${typeString(args[0])} value.');
+          'The dart/List.castFrom function expects its 1st argument to be a List value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = List.castFrom(
@@ -5720,15 +5720,15 @@ void dart_List_copyRange(PLEnv env, PLVector args) {
   if (args.length == 3) {
     if (args[0] is! List) {
       throw ArgumentError(
-          'The dart/List.copyRange function expects its 1st argument to be a List value, but received a ${typeString(args[0])} value.');
+          'The dart/List.copyRange function expects its 1st argument to be a List value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! int) {
       throw ArgumentError(
-          'The dart/List.copyRange function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+          'The dart/List.copyRange function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! List) {
       throw ArgumentError(
-          'The dart/List.copyRange function expects its 3rd argument to be a List value, but received a ${typeString(args[2])} value.');
+          'The dart/List.copyRange function expects its 3rd argument to be a List value, but received a ${PiLisp.typeName(args[2])} value.');
     }
 
     final returnValue = List.copyRange(
@@ -5748,23 +5748,23 @@ void dart_List_copyRange_full(PLEnv env, PLVector args) {
   if (args.length == 5) {
     if (args[0] is! List) {
       throw ArgumentError(
-          'The dart/List.copyRange-full function expects its 1st argument to be a List value, but received a ${typeString(args[0])} value.');
+          'The dart/List.copyRange-full function expects its 1st argument to be a List value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! int) {
       throw ArgumentError(
-          'The dart/List.copyRange-full function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+          'The dart/List.copyRange-full function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! List) {
       throw ArgumentError(
-          'The dart/List.copyRange-full function expects its 3rd argument to be a List value, but received a ${typeString(args[2])} value.');
+          'The dart/List.copyRange-full function expects its 3rd argument to be a List value, but received a ${PiLisp.typeName(args[2])} value.');
     }
     if (args[3] is! int) {
       throw ArgumentError(
-          'The dart/List.copyRange-full function expects its 4th argument to be a int value, but received a ${typeString(args[3])} value.');
+          'The dart/List.copyRange-full function expects its 4th argument to be a int value, but received a ${PiLisp.typeName(args[3])} value.');
     }
     if (args[4] is! int) {
       throw ArgumentError(
-          'The dart/List.copyRange-full function expects its 5th argument to be a int value, but received a ${typeString(args[4])} value.');
+          'The dart/List.copyRange-full function expects its 5th argument to be a int value, but received a ${PiLisp.typeName(args[4])} value.');
     }
 
     final returnValue = List.copyRange(
@@ -5786,15 +5786,15 @@ void dart_List_writeIterable(PLEnv env, PLVector args) {
   if (args.length == 3) {
     if (args[0] is! List) {
       throw ArgumentError(
-          'The dart/List.writeIterable function expects its 1st argument to be a List value, but received a ${typeString(args[0])} value.');
+          'The dart/List.writeIterable function expects its 1st argument to be a List value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! int) {
       throw ArgumentError(
-          'The dart/List.writeIterable function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+          'The dart/List.writeIterable function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! Iterable) {
       throw ArgumentError(
-          'The dart/List.writeIterable function expects its 3rd argument to be a Iterable value, but received a ${typeString(args[2])} value.');
+          'The dart/List.writeIterable function expects its 3rd argument to be a Iterable value, but received a ${PiLisp.typeName(args[2])} value.');
     }
 
     final returnValue = List.writeIterable(
@@ -5818,7 +5818,7 @@ IList? dart_List_cast(PLEnv env, PLVector args) {
       return returnValue.toIList();
     } else {
       throw ArgumentError(
-          'The dart/List.cast function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.cast function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5835,7 +5835,7 @@ int? dart_List_length(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.length function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.length function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5852,7 +5852,7 @@ Iterable? dart_List_reversed(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.reversed function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.reversed function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5869,7 +5869,7 @@ void dart_List_sort(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.sort function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.sort function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5884,7 +5884,7 @@ void dart_List_sort_full(PLEnv env, PLVector args) {
     if (o is List) {
       if (args[1] is! int Function(dynamic, dynamic)) {
         throw ArgumentError(
-            'The dart/List.sort-full function expects its 2nd argument to be a (dynamic, dynamic) -> dart.core.int value, but received a ${typeString(args[1])} value.');
+            'The dart/List.sort-full function expects its 2nd argument to be a (dynamic, dynamic) -> dart.core.int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.sort(
@@ -5893,7 +5893,7 @@ void dart_List_sort_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.sort-full function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.sort-full function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5910,7 +5910,7 @@ void dart_List_shuffle(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.shuffle function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.shuffle function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5925,7 +5925,7 @@ void dart_List_shuffle_full(PLEnv env, PLVector args) {
     if (o is List) {
       if (args[1] is! Random) {
         throw ArgumentError(
-            'The dart/List.shuffle-full function expects its 2nd argument to be a Random value, but received a ${typeString(args[1])} value.');
+            'The dart/List.shuffle-full function expects its 2nd argument to be a Random value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.shuffle(
@@ -5934,7 +5934,7 @@ void dart_List_shuffle_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.shuffle-full function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.shuffle-full function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5949,7 +5949,7 @@ int? dart_List_indexWhere(PLEnv env, PLVector args) {
     if (o is List) {
       if (args[1] is! bool Function(dynamic)) {
         throw ArgumentError(
-            'The dart/List.indexWhere function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${typeString(args[1])} value.');
+            'The dart/List.indexWhere function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.indexWhere(
@@ -5958,7 +5958,7 @@ int? dart_List_indexWhere(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.indexWhere function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.indexWhere function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -5973,11 +5973,11 @@ int? dart_List_indexWhere_full(PLEnv env, PLVector args) {
     if (o is List) {
       if (args[1] is! bool Function(dynamic)) {
         throw ArgumentError(
-            'The dart/List.indexWhere-full function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${typeString(args[1])} value.');
+            'The dart/List.indexWhere-full function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! int) {
         throw ArgumentError(
-            'The dart/List.indexWhere-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+            'The dart/List.indexWhere-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.indexWhere(
@@ -5987,7 +5987,7 @@ int? dart_List_indexWhere_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.indexWhere-full function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.indexWhere-full function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6002,7 +6002,7 @@ int? dart_List_lastIndexWhere(PLEnv env, PLVector args) {
     if (o is List) {
       if (args[1] is! bool Function(dynamic)) {
         throw ArgumentError(
-            'The dart/List.lastIndexWhere function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${typeString(args[1])} value.');
+            'The dart/List.lastIndexWhere function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.lastIndexWhere(
@@ -6011,7 +6011,7 @@ int? dart_List_lastIndexWhere(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.lastIndexWhere function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.lastIndexWhere function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6026,11 +6026,11 @@ int? dart_List_lastIndexWhere_full(PLEnv env, PLVector args) {
     if (o is List) {
       if (args[1] is! bool Function(dynamic)) {
         throw ArgumentError(
-            'The dart/List.lastIndexWhere-full function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${typeString(args[1])} value.');
+            'The dart/List.lastIndexWhere-full function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! int) {
         throw ArgumentError(
-            'The dart/List.lastIndexWhere-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+            'The dart/List.lastIndexWhere-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.lastIndexWhere(
@@ -6040,7 +6040,7 @@ int? dart_List_lastIndexWhere_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.lastIndexWhere-full function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.lastIndexWhere-full function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6057,7 +6057,7 @@ void dart_List_clear(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.clear function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.clear function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6072,7 +6072,7 @@ bool? dart_List_remove(PLEnv env, PLVector args) {
     if (o is List) {
       if (args[1] is! Object) {
         throw ArgumentError(
-            'The dart/List.remove function expects its 2nd argument to be a Object value, but received a ${typeString(args[1])} value.');
+            'The dart/List.remove function expects its 2nd argument to be a Object value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.remove(
@@ -6081,7 +6081,7 @@ bool? dart_List_remove(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.remove function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.remove function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6096,7 +6096,7 @@ void dart_List_removeWhere(PLEnv env, PLVector args) {
     if (o is List) {
       if (args[1] is! bool Function(dynamic)) {
         throw ArgumentError(
-            'The dart/List.removeWhere function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${typeString(args[1])} value.');
+            'The dart/List.removeWhere function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.removeWhere(
@@ -6105,7 +6105,7 @@ void dart_List_removeWhere(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.removeWhere function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.removeWhere function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6120,7 +6120,7 @@ void dart_List_retainWhere(PLEnv env, PLVector args) {
     if (o is List) {
       if (args[1] is! bool Function(dynamic)) {
         throw ArgumentError(
-            'The dart/List.retainWhere function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${typeString(args[1])} value.');
+            'The dart/List.retainWhere function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.retainWhere(
@@ -6129,7 +6129,7 @@ void dart_List_retainWhere(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.retainWhere function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.retainWhere function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6144,7 +6144,7 @@ IList? dart_List_sublist(PLEnv env, PLVector args) {
     if (o is List) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/List.sublist function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/List.sublist function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.sublist(
@@ -6153,7 +6153,7 @@ IList? dart_List_sublist(PLEnv env, PLVector args) {
       return returnValue.toIList();
     } else {
       throw ArgumentError(
-          'The dart/List.sublist function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.sublist function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6168,11 +6168,11 @@ IList? dart_List_sublist_full(PLEnv env, PLVector args) {
     if (o is List) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/List.sublist-full function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/List.sublist-full function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! int) {
         throw ArgumentError(
-            'The dart/List.sublist-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+            'The dart/List.sublist-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.sublist(
@@ -6182,7 +6182,7 @@ IList? dart_List_sublist_full(PLEnv env, PLVector args) {
       return returnValue.toIList();
     } else {
       throw ArgumentError(
-          'The dart/List.sublist-full function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.sublist-full function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6197,11 +6197,11 @@ Iterable? dart_List_getRange(PLEnv env, PLVector args) {
     if (o is List) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/List.getRange function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/List.getRange function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! int) {
         throw ArgumentError(
-            'The dart/List.getRange function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+            'The dart/List.getRange function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.getRange(
@@ -6211,7 +6211,7 @@ Iterable? dart_List_getRange(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.getRange function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.getRange function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6226,11 +6226,11 @@ void dart_List_removeRange(PLEnv env, PLVector args) {
     if (o is List) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/List.removeRange function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/List.removeRange function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! int) {
         throw ArgumentError(
-            'The dart/List.removeRange function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+            'The dart/List.removeRange function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.removeRange(
@@ -6240,7 +6240,7 @@ void dart_List_removeRange(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/List.removeRange function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.removeRange function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6257,7 +6257,7 @@ IMap? dart_List_asMap(PLEnv env, PLVector args) {
       return returnValue.toIMap();
     } else {
       throw ArgumentError(
-          'The dart/List.asMap function expects its first argument to be a List object but received a ${typeString(o)} value.');
+          'The dart/List.asMap function expects its first argument to be a List object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6281,7 +6281,7 @@ IList? dart_List_from(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
-          'The dart/List.from function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+          'The dart/List.from function expects its 1st argument to be a Iterable value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = List.from(
@@ -6299,7 +6299,7 @@ IList? dart_List_unmodifiable(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
-          'The dart/List.unmodifiable function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+          'The dart/List.unmodifiable function expects its 1st argument to be a Iterable value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = List.unmodifiable(
@@ -6317,7 +6317,7 @@ IMap? dart_Map_castFrom(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Map) {
       throw ArgumentError(
-          'The dart/Map.castFrom function expects its 1st argument to be a Map value, but received a ${typeString(args[0])} value.');
+          'The dart/Map.castFrom function expects its 1st argument to be a Map value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Map.castFrom(
@@ -6339,7 +6339,7 @@ IMap? dart_Map_cast(PLEnv env, PLVector args) {
       return returnValue.toIMap();
     } else {
       throw ArgumentError(
-          'The dart/Map.cast function expects its first argument to be a Map object but received a ${typeString(o)} value.');
+          'The dart/Map.cast function expects its first argument to be a Map object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6354,7 +6354,7 @@ bool? dart_Map_containsValue(PLEnv env, PLVector args) {
     if (o is Map) {
       if (args[1] is! Object) {
         throw ArgumentError(
-            'The dart/Map.containsValue function expects its 2nd argument to be a Object value, but received a ${typeString(args[1])} value.');
+            'The dart/Map.containsValue function expects its 2nd argument to be a Object value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.containsValue(
@@ -6363,7 +6363,7 @@ bool? dart_Map_containsValue(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Map.containsValue function expects its first argument to be a Map object but received a ${typeString(o)} value.');
+          'The dart/Map.containsValue function expects its first argument to be a Map object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6378,7 +6378,7 @@ bool? dart_Map_containsKey(PLEnv env, PLVector args) {
     if (o is Map) {
       if (args[1] is! Object) {
         throw ArgumentError(
-            'The dart/Map.containsKey function expects its 2nd argument to be a Object value, but received a ${typeString(args[1])} value.');
+            'The dart/Map.containsKey function expects its 2nd argument to be a Object value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.containsKey(
@@ -6387,7 +6387,7 @@ bool? dart_Map_containsKey(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Map.containsKey function expects its first argument to be a Map object but received a ${typeString(o)} value.');
+          'The dart/Map.containsKey function expects its first argument to be a Map object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6404,7 +6404,7 @@ Iterable? dart_Map_entries(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Map.entries function expects its first argument to be a Map object but received a ${typeString(o)} value.');
+          'The dart/Map.entries function expects its first argument to be a Map object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6419,7 +6419,7 @@ IMap? dart_Map_map(PLEnv env, PLVector args) {
     if (o is Map) {
       if (args[1] is! MapEntry Function(dynamic, dynamic)) {
         throw ArgumentError(
-            'The dart/Map.map function expects its 2nd argument to be a (dynamic, dynamic) -> dart.core.MapEntry value, but received a ${typeString(args[1])} value.');
+            'The dart/Map.map function expects its 2nd argument to be a (dynamic, dynamic) -> dart.core.MapEntry value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.map(
@@ -6428,7 +6428,7 @@ IMap? dart_Map_map(PLEnv env, PLVector args) {
       return returnValue.toIMap();
     } else {
       throw ArgumentError(
-          'The dart/Map.map function expects its first argument to be a Map object but received a ${typeString(o)} value.');
+          'The dart/Map.map function expects its first argument to be a Map object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6443,7 +6443,7 @@ void dart_Map_addEntries(PLEnv env, PLVector args) {
     if (o is Map) {
       if (args[1] is! Iterable) {
         throw ArgumentError(
-            'The dart/Map.addEntries function expects its 2nd argument to be a Iterable value, but received a ${typeString(args[1])} value.');
+            'The dart/Map.addEntries function expects its 2nd argument to be a Iterable value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.addEntries(
@@ -6452,7 +6452,7 @@ void dart_Map_addEntries(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Map.addEntries function expects its first argument to be a Map object but received a ${typeString(o)} value.');
+          'The dart/Map.addEntries function expects its first argument to be a Map object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6467,7 +6467,7 @@ void dart_Map_removeWhere(PLEnv env, PLVector args) {
     if (o is Map) {
       if (args[1] is! bool Function(dynamic, dynamic)) {
         throw ArgumentError(
-            'The dart/Map.removeWhere function expects its 2nd argument to be a (dynamic, dynamic) -> dart.core.bool value, but received a ${typeString(args[1])} value.');
+            'The dart/Map.removeWhere function expects its 2nd argument to be a (dynamic, dynamic) -> dart.core.bool value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.removeWhere(
@@ -6476,7 +6476,7 @@ void dart_Map_removeWhere(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Map.removeWhere function expects its first argument to be a Map object but received a ${typeString(o)} value.');
+          'The dart/Map.removeWhere function expects its first argument to be a Map object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6493,7 +6493,7 @@ void dart_Map_clear(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Map.clear function expects its first argument to be a Map object but received a ${typeString(o)} value.');
+          'The dart/Map.clear function expects its first argument to be a Map object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6508,7 +6508,7 @@ void dart_Map_forEach(PLEnv env, PLVector args) {
     if (o is Map) {
       if (args[1] is! void Function(dynamic, dynamic)) {
         throw ArgumentError(
-            'The dart/Map.forEach function expects its 2nd argument to be a (dynamic, dynamic) -> void value, but received a ${typeString(args[1])} value.');
+            'The dart/Map.forEach function expects its 2nd argument to be a (dynamic, dynamic) -> void value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.forEach(
@@ -6517,7 +6517,7 @@ void dart_Map_forEach(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Map.forEach function expects its first argument to be a Map object but received a ${typeString(o)} value.');
+          'The dart/Map.forEach function expects its first argument to be a Map object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6534,7 +6534,7 @@ Iterable? dart_Map_keys(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Map.keys function expects its first argument to be a Map object but received a ${typeString(o)} value.');
+          'The dart/Map.keys function expects its first argument to be a Map object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6551,7 +6551,7 @@ Iterable? dart_Map_values(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Map.values function expects its first argument to be a Map object but received a ${typeString(o)} value.');
+          'The dart/Map.values function expects its first argument to be a Map object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6568,7 +6568,7 @@ int? dart_Map_length(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Map.length function expects its first argument to be a Map object but received a ${typeString(o)} value.');
+          'The dart/Map.length function expects its first argument to be a Map object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6585,7 +6585,7 @@ bool? dart_Map_isEmpty(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Map.isEmpty function expects its first argument to be a Map object but received a ${typeString(o)} value.');
+          'The dart/Map.isEmpty function expects its first argument to be a Map object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6602,7 +6602,7 @@ bool? dart_Map_isNotEmpty(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Map.isNotEmpty function expects its first argument to be a Map object but received a ${typeString(o)} value.');
+          'The dart/Map.isNotEmpty function expects its first argument to be a Map object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6615,7 +6615,7 @@ IMap? dart_Map_from(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Map) {
       throw ArgumentError(
-          'The dart/Map.from function expects its 1st argument to be a Map value, but received a ${typeString(args[0])} value.');
+          'The dart/Map.from function expects its 1st argument to be a Map value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Map.from(
@@ -6633,7 +6633,7 @@ IMap? dart_Map_unmodifiable(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Map) {
       throw ArgumentError(
-          'The dart/Map.unmodifiable function expects its 1st argument to be a Map value, but received a ${typeString(args[0])} value.');
+          'The dart/Map.unmodifiable function expects its 1st argument to be a Map value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Map.unmodifiable(
@@ -6662,7 +6662,7 @@ IMap? dart_Map_fromIterable(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
-          'The dart/Map.fromIterable function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+          'The dart/Map.fromIterable function expects its 1st argument to be a Iterable value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Map.fromIterable(
@@ -6680,7 +6680,7 @@ IMap? dart_Map_fromEntries(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
-          'The dart/Map.fromEntries function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+          'The dart/Map.fromEntries function expects its 1st argument to be a Iterable value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Map.fromEntries(
@@ -6702,7 +6702,7 @@ int? dart_Match_start(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Match.start function expects its first argument to be a Match object but received a ${typeString(o)} value.');
+          'The dart/Match.start function expects its first argument to be a Match object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6719,7 +6719,7 @@ int? dart_Match_end(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Match.end function expects its first argument to be a Match object but received a ${typeString(o)} value.');
+          'The dart/Match.end function expects its first argument to be a Match object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6734,7 +6734,7 @@ String? dart_Match_group(PLEnv env, PLVector args) {
     if (o is Match) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/Match.group function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/Match.group function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.group(
@@ -6743,7 +6743,7 @@ String? dart_Match_group(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Match.group function expects its first argument to be a Match object but received a ${typeString(o)} value.');
+          'The dart/Match.group function expects its first argument to be a Match object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6758,7 +6758,7 @@ IList? dart_Match_groups(PLEnv env, PLVector args) {
     if (o is Match) {
       if (args[1] is! List) {
         throw ArgumentError(
-            'The dart/Match.groups function expects its 2nd argument to be a List value, but received a ${typeString(args[1])} value.');
+            'The dart/Match.groups function expects its 2nd argument to be a List value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.groups(
@@ -6767,7 +6767,7 @@ IList? dart_Match_groups(PLEnv env, PLVector args) {
       return returnValue.toIList();
     } else {
       throw ArgumentError(
-          'The dart/Match.groups function expects its first argument to be a Match object but received a ${typeString(o)} value.');
+          'The dart/Match.groups function expects its first argument to be a Match object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6784,7 +6784,7 @@ int? dart_Match_groupCount(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Match.groupCount function expects its first argument to be a Match object but received a ${typeString(o)} value.');
+          'The dart/Match.groupCount function expects its first argument to be a Match object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6801,7 +6801,7 @@ String? dart_Match_input(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Match.input function expects its first argument to be a Match object but received a ${typeString(o)} value.');
+          'The dart/Match.input function expects its first argument to be a Match object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6818,7 +6818,7 @@ Pattern? dart_Match_pattern(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Match.pattern function expects its first argument to be a Match object but received a ${typeString(o)} value.');
+          'The dart/Match.pattern function expects its first argument to be a Match object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6835,7 +6835,7 @@ int? dart_num_hashCode(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.hashCode function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.hashCode function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6850,7 +6850,7 @@ int? dart_num_compareTo(PLEnv env, PLVector args) {
     if (o is num) {
       if (args[1] is! num) {
         throw ArgumentError(
-            'The dart/num.compareTo function expects its 2nd argument to be a num value, but received a ${typeString(args[1])} value.');
+            'The dart/num.compareTo function expects its 2nd argument to be a num value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.compareTo(
@@ -6859,7 +6859,7 @@ int? dart_num_compareTo(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.compareTo function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.compareTo function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6874,7 +6874,7 @@ num? dart_num_remainder(PLEnv env, PLVector args) {
     if (o is num) {
       if (args[1] is! num) {
         throw ArgumentError(
-            'The dart/num.remainder function expects its 2nd argument to be a num value, but received a ${typeString(args[1])} value.');
+            'The dart/num.remainder function expects its 2nd argument to be a num value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.remainder(
@@ -6883,7 +6883,7 @@ num? dart_num_remainder(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.remainder function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.remainder function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6900,7 +6900,7 @@ bool? dart_num_isNaN(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.isNaN function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.isNaN function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6917,7 +6917,7 @@ bool? dart_num_isNegative(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.isNegative function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.isNegative function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6934,7 +6934,7 @@ bool? dart_num_isInfinite(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.isInfinite function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.isInfinite function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6951,7 +6951,7 @@ bool? dart_num_isFinite(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.isFinite function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.isFinite function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6968,7 +6968,7 @@ num? dart_num_abs(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.abs function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.abs function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -6985,7 +6985,7 @@ num? dart_num_sign(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.sign function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.sign function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7002,7 +7002,7 @@ int? dart_num_round(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.round function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.round function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7019,7 +7019,7 @@ int? dart_num_floor(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.floor function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.floor function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7036,7 +7036,7 @@ int? dart_num_ceil(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.ceil function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.ceil function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7053,7 +7053,7 @@ int? dart_num_truncate(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.truncate function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.truncate function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7070,7 +7070,7 @@ double? dart_num_roundToDouble(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.roundToDouble function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.roundToDouble function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7087,7 +7087,7 @@ double? dart_num_floorToDouble(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.floorToDouble function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.floorToDouble function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7104,7 +7104,7 @@ double? dart_num_ceilToDouble(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.ceilToDouble function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.ceilToDouble function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7121,7 +7121,7 @@ double? dart_num_truncateToDouble(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.truncateToDouble function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.truncateToDouble function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7136,11 +7136,11 @@ num? dart_num_clamp(PLEnv env, PLVector args) {
     if (o is num) {
       if (args[1] is! num) {
         throw ArgumentError(
-            'The dart/num.clamp function expects its 2nd argument to be a num value, but received a ${typeString(args[1])} value.');
+            'The dart/num.clamp function expects its 2nd argument to be a num value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! num) {
         throw ArgumentError(
-            'The dart/num.clamp function expects its 3rd argument to be a num value, but received a ${typeString(args[2])} value.');
+            'The dart/num.clamp function expects its 3rd argument to be a num value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.clamp(
@@ -7150,7 +7150,7 @@ num? dart_num_clamp(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.clamp function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.clamp function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7167,7 +7167,7 @@ int? dart_num_toInt(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.toInt function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.toInt function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7184,7 +7184,7 @@ double? dart_num_toDouble(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.toDouble function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.toDouble function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7199,7 +7199,7 @@ String? dart_num_toStringAsFixed(PLEnv env, PLVector args) {
     if (o is num) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/num.toStringAsFixed function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/num.toStringAsFixed function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.toStringAsFixed(
@@ -7208,7 +7208,7 @@ String? dart_num_toStringAsFixed(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.toStringAsFixed function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.toStringAsFixed function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7225,7 +7225,7 @@ String? dart_num_toStringAsExponential(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.toStringAsExponential function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.toStringAsExponential function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7240,7 +7240,7 @@ String? dart_num_toStringAsExponential_full(PLEnv env, PLVector args) {
     if (o is num) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/num.toStringAsExponential-full function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/num.toStringAsExponential-full function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.toStringAsExponential(
@@ -7249,7 +7249,7 @@ String? dart_num_toStringAsExponential_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.toStringAsExponential-full function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.toStringAsExponential-full function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7264,7 +7264,7 @@ String? dart_num_toStringAsPrecision(PLEnv env, PLVector args) {
     if (o is num) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/num.toStringAsPrecision function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/num.toStringAsPrecision function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.toStringAsPrecision(
@@ -7273,7 +7273,7 @@ String? dart_num_toStringAsPrecision(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.toStringAsPrecision function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.toStringAsPrecision function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7290,7 +7290,7 @@ String? dart_num_toString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/num.toString function expects its first argument to be a num object but received a ${typeString(o)} value.');
+          'The dart/num.toString function expects its first argument to be a num object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7303,7 +7303,7 @@ num? dart_num_parse(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/num.parse function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/num.parse function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = num.parse(
@@ -7321,11 +7321,11 @@ num? dart_num_parse_full(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/num.parse-full function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/num.parse-full function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! num Function(String)) {
       throw ArgumentError(
-          'The dart/num.parse-full function expects its 2nd argument to be a (dart.core.String) -> dart.core.num value, but received a ${typeString(args[1])} value.');
+          'The dart/num.parse-full function expects its 2nd argument to be a (dart.core.String) -> dart.core.num value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = num.parse(
@@ -7344,7 +7344,7 @@ num? dart_num_tryParse(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/num.tryParse function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/num.tryParse function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = num.tryParse(
@@ -7366,7 +7366,7 @@ int? dart_Object_hashCode(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Object.hashCode function expects its first argument to be a Object object but received a ${typeString(o)} value.');
+          'The dart/Object.hashCode function expects its first argument to be a Object object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7383,7 +7383,7 @@ String? dart_Object_toString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Object.toString function expects its first argument to be a Object object but received a ${typeString(o)} value.');
+          'The dart/Object.toString function expects its first argument to be a Object object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7398,7 +7398,7 @@ dynamic dart_Object_noSuchMethod(PLEnv env, PLVector args) {
     if (o is Object) {
       if (args[1] is! Invocation) {
         throw ArgumentError(
-            'The dart/Object.noSuchMethod function expects its 2nd argument to be a Invocation value, but received a ${typeString(args[1])} value.');
+            'The dart/Object.noSuchMethod function expects its 2nd argument to be a Invocation value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.noSuchMethod(
@@ -7407,7 +7407,7 @@ dynamic dart_Object_noSuchMethod(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Object.noSuchMethod function expects its first argument to be a Object object but received a ${typeString(o)} value.');
+          'The dart/Object.noSuchMethod function expects its first argument to be a Object object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7424,7 +7424,7 @@ Type? dart_Object_runtimeType(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Object.runtimeType function expects its first argument to be a Object object but received a ${typeString(o)} value.');
+          'The dart/Object.runtimeType function expects its first argument to be a Object object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7437,11 +7437,11 @@ int? dart_Object_hash(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+          'The dart/Object.hash function expects its 1st argument to be a Object value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash function expects its 2nd argument to be a Object value, but received a ${typeString(args[1])} value.');
+          'The dart/Object.hash function expects its 2nd argument to be a Object value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = Object.hash(
@@ -7460,83 +7460,83 @@ int? dart_Object_hash_full(PLEnv env, PLVector args) {
   if (args.length == 20) {
     if (args[0] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+          'The dart/Object.hash-full function expects its 1st argument to be a Object value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 2nd argument to be a Object value, but received a ${typeString(args[1])} value.');
+          'The dart/Object.hash-full function expects its 2nd argument to be a Object value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 3rd argument to be a Object value, but received a ${typeString(args[2])} value.');
+          'The dart/Object.hash-full function expects its 3rd argument to be a Object value, but received a ${PiLisp.typeName(args[2])} value.');
     }
     if (args[3] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 4th argument to be a Object value, but received a ${typeString(args[3])} value.');
+          'The dart/Object.hash-full function expects its 4th argument to be a Object value, but received a ${PiLisp.typeName(args[3])} value.');
     }
     if (args[4] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 5th argument to be a Object value, but received a ${typeString(args[4])} value.');
+          'The dart/Object.hash-full function expects its 5th argument to be a Object value, but received a ${PiLisp.typeName(args[4])} value.');
     }
     if (args[5] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 6th argument to be a Object value, but received a ${typeString(args[5])} value.');
+          'The dart/Object.hash-full function expects its 6th argument to be a Object value, but received a ${PiLisp.typeName(args[5])} value.');
     }
     if (args[6] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 7th argument to be a Object value, but received a ${typeString(args[6])} value.');
+          'The dart/Object.hash-full function expects its 7th argument to be a Object value, but received a ${PiLisp.typeName(args[6])} value.');
     }
     if (args[7] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 8th argument to be a Object value, but received a ${typeString(args[7])} value.');
+          'The dart/Object.hash-full function expects its 8th argument to be a Object value, but received a ${PiLisp.typeName(args[7])} value.');
     }
     if (args[8] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 9th argument to be a Object value, but received a ${typeString(args[8])} value.');
+          'The dart/Object.hash-full function expects its 9th argument to be a Object value, but received a ${PiLisp.typeName(args[8])} value.');
     }
     if (args[9] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 10th argument to be a Object value, but received a ${typeString(args[9])} value.');
+          'The dart/Object.hash-full function expects its 10th argument to be a Object value, but received a ${PiLisp.typeName(args[9])} value.');
     }
     if (args[10] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 11th argument to be a Object value, but received a ${typeString(args[10])} value.');
+          'The dart/Object.hash-full function expects its 11th argument to be a Object value, but received a ${PiLisp.typeName(args[10])} value.');
     }
     if (args[11] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 12th argument to be a Object value, but received a ${typeString(args[11])} value.');
+          'The dart/Object.hash-full function expects its 12th argument to be a Object value, but received a ${PiLisp.typeName(args[11])} value.');
     }
     if (args[12] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 13th argument to be a Object value, but received a ${typeString(args[12])} value.');
+          'The dart/Object.hash-full function expects its 13th argument to be a Object value, but received a ${PiLisp.typeName(args[12])} value.');
     }
     if (args[13] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 14th argument to be a Object value, but received a ${typeString(args[13])} value.');
+          'The dart/Object.hash-full function expects its 14th argument to be a Object value, but received a ${PiLisp.typeName(args[13])} value.');
     }
     if (args[14] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 15th argument to be a Object value, but received a ${typeString(args[14])} value.');
+          'The dart/Object.hash-full function expects its 15th argument to be a Object value, but received a ${PiLisp.typeName(args[14])} value.');
     }
     if (args[15] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 16th argument to be a Object value, but received a ${typeString(args[15])} value.');
+          'The dart/Object.hash-full function expects its 16th argument to be a Object value, but received a ${PiLisp.typeName(args[15])} value.');
     }
     if (args[16] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 17th argument to be a Object value, but received a ${typeString(args[16])} value.');
+          'The dart/Object.hash-full function expects its 17th argument to be a Object value, but received a ${PiLisp.typeName(args[16])} value.');
     }
     if (args[17] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 18th argument to be a Object value, but received a ${typeString(args[17])} value.');
+          'The dart/Object.hash-full function expects its 18th argument to be a Object value, but received a ${PiLisp.typeName(args[17])} value.');
     }
     if (args[18] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 19th argument to be a Object value, but received a ${typeString(args[18])} value.');
+          'The dart/Object.hash-full function expects its 19th argument to be a Object value, but received a ${PiLisp.typeName(args[18])} value.');
     }
     if (args[19] is! Object) {
       throw ArgumentError(
-          'The dart/Object.hash-full function expects its 20th argument to be a Object value, but received a ${typeString(args[19])} value.');
+          'The dart/Object.hash-full function expects its 20th argument to be a Object value, but received a ${PiLisp.typeName(args[19])} value.');
     }
 
     final returnValue = Object.hash(
@@ -7573,7 +7573,7 @@ int? dart_Object_hashAll(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
-          'The dart/Object.hashAll function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+          'The dart/Object.hashAll function expects its 1st argument to be a Iterable value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Object.hashAll(
@@ -7591,7 +7591,7 @@ int? dart_Object_hashAllUnordered(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
-          'The dart/Object.hashAllUnordered function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+          'The dart/Object.hashAllUnordered function expects its 1st argument to be a Iterable value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Object.hashAllUnordered(
@@ -7622,7 +7622,7 @@ Iterable? dart_Pattern_allMatches(PLEnv env, PLVector args) {
     if (o is Pattern) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/Pattern.allMatches function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/Pattern.allMatches function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.allMatches(
@@ -7631,7 +7631,7 @@ Iterable? dart_Pattern_allMatches(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Pattern.allMatches function expects its first argument to be a Pattern object but received a ${typeString(o)} value.');
+          'The dart/Pattern.allMatches function expects its first argument to be a Pattern object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7646,11 +7646,11 @@ Iterable? dart_Pattern_allMatches_full(PLEnv env, PLVector args) {
     if (o is Pattern) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/Pattern.allMatches-full function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/Pattern.allMatches-full function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! int) {
         throw ArgumentError(
-            'The dart/Pattern.allMatches-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+            'The dart/Pattern.allMatches-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.allMatches(
@@ -7660,7 +7660,7 @@ Iterable? dart_Pattern_allMatches_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Pattern.allMatches-full function expects its first argument to be a Pattern object but received a ${typeString(o)} value.');
+          'The dart/Pattern.allMatches-full function expects its first argument to be a Pattern object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7675,7 +7675,7 @@ Match? dart_Pattern_matchAsPrefix(PLEnv env, PLVector args) {
     if (o is Pattern) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/Pattern.matchAsPrefix function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/Pattern.matchAsPrefix function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.matchAsPrefix(
@@ -7684,7 +7684,7 @@ Match? dart_Pattern_matchAsPrefix(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Pattern.matchAsPrefix function expects its first argument to be a Pattern object but received a ${typeString(o)} value.');
+          'The dart/Pattern.matchAsPrefix function expects its first argument to be a Pattern object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7699,11 +7699,11 @@ Match? dart_Pattern_matchAsPrefix_full(PLEnv env, PLVector args) {
     if (o is Pattern) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/Pattern.matchAsPrefix-full function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/Pattern.matchAsPrefix-full function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! int) {
         throw ArgumentError(
-            'The dart/Pattern.matchAsPrefix-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+            'The dart/Pattern.matchAsPrefix-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.matchAsPrefix(
@@ -7713,7 +7713,7 @@ Match? dart_Pattern_matchAsPrefix_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Pattern.matchAsPrefix-full function expects its first argument to be a Pattern object but received a ${typeString(o)} value.');
+          'The dart/Pattern.matchAsPrefix-full function expects its first argument to be a Pattern object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7726,7 +7726,7 @@ Object? dart_PiLisp_readString(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/PiLisp.readString function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/PiLisp.readString function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = PiLisp.readString(
@@ -7744,7 +7744,7 @@ Object? dart_PiLisp_eval(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Object) {
       throw ArgumentError(
-          'The dart/PiLisp.eval function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+          'The dart/PiLisp.eval function expects its 1st argument to be a Object value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = PiLisp.eval(
@@ -7762,7 +7762,7 @@ Object? dart_PiLisp_loadString(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/PiLisp.loadString function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/PiLisp.loadString function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = PiLisp.loadString(
@@ -7780,7 +7780,7 @@ String? dart_PiLisp_printToString(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Object) {
       throw ArgumentError(
-          'The dart/PiLisp.printToString function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+          'The dart/PiLisp.printToString function expects its 1st argument to be a Object value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = PiLisp.printToString(
@@ -7798,7 +7798,7 @@ void dart_PiLisp_printValue(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Object) {
       throw ArgumentError(
-          'The dart/PiLisp.printValue function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+          'The dart/PiLisp.printValue function expects its 1st argument to be a Object value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = PiLisp.printValue(
@@ -7816,7 +7816,7 @@ String? dart_PiLisp_typeName(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Object) {
       throw ArgumentError(
-          'The dart/PiLisp.typeName function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+          'The dart/PiLisp.typeName function expects its 1st argument to be a Object value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = PiLisp.typeName(
@@ -7849,7 +7849,7 @@ Object? dart_PLAwait_dereference(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/PLAwait.dereference function expects its first argument to be a PLAwait object but received a ${typeString(o)} value.');
+          'The dart/PLAwait.dereference function expects its first argument to be a PLAwait object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7864,7 +7864,7 @@ String? dart_PLAwait_printToString(PLEnv env, PLVector args) {
     if (o is PLAwait) {
       if (args[1] is! PLEnv) {
         throw ArgumentError(
-            'The dart/PLAwait.printToString function expects its 2nd argument to be a PLEnv value, but received a ${typeString(args[1])} value.');
+            'The dart/PLAwait.printToString function expects its 2nd argument to be a PLEnv value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.printToString(
@@ -7873,7 +7873,7 @@ String? dart_PLAwait_printToString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/PLAwait.printToString function expects its first argument to be a PLAwait object but received a ${typeString(o)} value.');
+          'The dart/PLAwait.printToString function expects its first argument to be a PLAwait object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7890,7 +7890,7 @@ String? dart_PLAwait_typeName(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/PLAwait.typeName function expects its first argument to be a PLAwait object but received a ${typeString(o)} value.');
+          'The dart/PLAwait.typeName function expects its first argument to be a PLAwait object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7903,7 +7903,7 @@ PLAwait? dart_PLAwait_forValue(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Object) {
       throw ArgumentError(
-          'The dart/PLAwait.forValue function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+          'The dart/PLAwait.forValue function expects its 1st argument to be a Object value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = PLAwait.forValue(
@@ -7924,7 +7924,7 @@ bool dart_PLMultiMethod_isTypeDispatched(PLEnv env, PLVector args) {
       return o.isTypeDispatched;
     } else {
       throw ArgumentError(
-          'The dart/PLMultiMethod.isTypeDispatched function expects its argument to be a PLMultiMethod but received a ${typeString(o)} value.');
+          'The dart/PLMultiMethod.isTypeDispatched function expects its argument to be a PLMultiMethod but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7941,7 +7941,7 @@ String? dart_PLMultiMethod_typeName(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/PLMultiMethod.typeName function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+          'The dart/PLMultiMethod.typeName function expects its first argument to be a PLMultiMethod object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7956,7 +7956,7 @@ String? dart_PLMultiMethod_printToString(PLEnv env, PLVector args) {
     if (o is PLMultiMethod) {
       if (args[1] is! PLEnv) {
         throw ArgumentError(
-            'The dart/PLMultiMethod.printToString function expects its 2nd argument to be a PLEnv value, but received a ${typeString(args[1])} value.');
+            'The dart/PLMultiMethod.printToString function expects its 2nd argument to be a PLEnv value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.printToString(
@@ -7965,7 +7965,7 @@ String? dart_PLMultiMethod_printToString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/PLMultiMethod.printToString function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+          'The dart/PLMultiMethod.printToString function expects its first argument to be a PLMultiMethod object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7982,7 +7982,7 @@ IMap? dart_PLMultiMethod_allMethodsByType(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/PLMultiMethod.allMethodsByType function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+          'The dart/PLMultiMethod.allMethodsByType function expects its first argument to be a PLMultiMethod object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -7999,7 +7999,7 @@ IMap? dart_PLMultiMethod_allMethodsByDispatch(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/PLMultiMethod.allMethodsByDispatch function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+          'The dart/PLMultiMethod.allMethodsByDispatch function expects its first argument to be a PLMultiMethod object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8014,11 +8014,11 @@ Object? dart_PLMultiMethod_invoke(PLEnv env, PLVector args) {
     if (o is PLMultiMethod) {
       if (args[1] is! PLEnv) {
         throw ArgumentError(
-            'The dart/PLMultiMethod.invoke function expects its 2nd argument to be a PLEnv value, but received a ${typeString(args[1])} value.');
+            'The dart/PLMultiMethod.invoke function expects its 2nd argument to be a PLEnv value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! Iterable) {
         throw ArgumentError(
-            'The dart/PLMultiMethod.invoke function expects its 3rd argument to be a Iterable value, but received a ${typeString(args[2])} value.');
+            'The dart/PLMultiMethod.invoke function expects its 3rd argument to be a Iterable value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.invoke(
@@ -8028,7 +8028,7 @@ Object? dart_PLMultiMethod_invoke(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/PLMultiMethod.invoke function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+          'The dart/PLMultiMethod.invoke function expects its first argument to be a PLMultiMethod object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8044,11 +8044,11 @@ Object? dart_PLMultiMethod_invokeTypeDispatchedMethod(
     if (o is PLMultiMethod) {
       if (args[1] is! PLEnv) {
         throw ArgumentError(
-            'The dart/PLMultiMethod.invokeTypeDispatchedMethod function expects its 2nd argument to be a PLEnv value, but received a ${typeString(args[1])} value.');
+            'The dart/PLMultiMethod.invokeTypeDispatchedMethod function expects its 2nd argument to be a PLEnv value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! Iterable) {
         throw ArgumentError(
-            'The dart/PLMultiMethod.invokeTypeDispatchedMethod function expects its 3rd argument to be a Iterable value, but received a ${typeString(args[2])} value.');
+            'The dart/PLMultiMethod.invokeTypeDispatchedMethod function expects its 3rd argument to be a Iterable value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.invokeTypeDispatchedMethod(
@@ -8058,7 +8058,7 @@ Object? dart_PLMultiMethod_invokeTypeDispatchedMethod(
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/PLMultiMethod.invokeTypeDispatchedMethod function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+          'The dart/PLMultiMethod.invokeTypeDispatchedMethod function expects its first argument to be a PLMultiMethod object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8073,11 +8073,11 @@ void dart_PLMultiMethod_addTypeDispatchedMethod(PLEnv env, PLVector args) {
     if (o is PLMultiMethod) {
       if (args[1] is! PLSymbol) {
         throw ArgumentError(
-            'The dart/PLMultiMethod.addTypeDispatchedMethod function expects its 2nd argument to be a PLSymbol value, but received a ${typeString(args[1])} value.');
+            'The dart/PLMultiMethod.addTypeDispatchedMethod function expects its 2nd argument to be a PLSymbol value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! PLInvocable) {
         throw ArgumentError(
-            'The dart/PLMultiMethod.addTypeDispatchedMethod function expects its 3rd argument to be a PLInvocable value, but received a ${typeString(args[2])} value.');
+            'The dart/PLMultiMethod.addTypeDispatchedMethod function expects its 3rd argument to be a PLInvocable value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.addTypeDispatchedMethod(
@@ -8087,7 +8087,7 @@ void dart_PLMultiMethod_addTypeDispatchedMethod(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/PLMultiMethod.addTypeDispatchedMethod function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+          'The dart/PLMultiMethod.addTypeDispatchedMethod function expects its first argument to be a PLMultiMethod object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8102,7 +8102,7 @@ void dart_PLMultiMethod_removeTypeDispatchedMethod(PLEnv env, PLVector args) {
     if (o is PLMultiMethod) {
       if (args[1] is! PLSymbol) {
         throw ArgumentError(
-            'The dart/PLMultiMethod.removeTypeDispatchedMethod function expects its 2nd argument to be a PLSymbol value, but received a ${typeString(args[1])} value.');
+            'The dart/PLMultiMethod.removeTypeDispatchedMethod function expects its 2nd argument to be a PLSymbol value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.removeTypeDispatchedMethod(
@@ -8111,7 +8111,7 @@ void dart_PLMultiMethod_removeTypeDispatchedMethod(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/PLMultiMethod.removeTypeDispatchedMethod function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+          'The dart/PLMultiMethod.removeTypeDispatchedMethod function expects its first argument to be a PLMultiMethod object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8127,11 +8127,11 @@ Object? dart_PLMultiMethod_invokeFunctionDispatchedMethod(
     if (o is PLMultiMethod) {
       if (args[1] is! PLEnv) {
         throw ArgumentError(
-            'The dart/PLMultiMethod.invokeFunctionDispatchedMethod function expects its 2nd argument to be a PLEnv value, but received a ${typeString(args[1])} value.');
+            'The dart/PLMultiMethod.invokeFunctionDispatchedMethod function expects its 2nd argument to be a PLEnv value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! Iterable) {
         throw ArgumentError(
-            'The dart/PLMultiMethod.invokeFunctionDispatchedMethod function expects its 3rd argument to be a Iterable value, but received a ${typeString(args[2])} value.');
+            'The dart/PLMultiMethod.invokeFunctionDispatchedMethod function expects its 3rd argument to be a Iterable value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.invokeFunctionDispatchedMethod(
@@ -8141,7 +8141,7 @@ Object? dart_PLMultiMethod_invokeFunctionDispatchedMethod(
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/PLMultiMethod.invokeFunctionDispatchedMethod function expects its first argument to be a PLMultiMethod object but received a ${typeString(o)} value.');
+          'The dart/PLMultiMethod.invokeFunctionDispatchedMethod function expects its first argument to be a PLMultiMethod object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8154,11 +8154,11 @@ PLMultiMethod? dart_PLMultiMethod_(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! PLSymbol) {
       throw ArgumentError(
-          'The dart/PLMultiMethod. function expects its 1st argument to be a PLSymbol value, but received a ${typeString(args[0])} value.');
+          'The dart/PLMultiMethod. function expects its 1st argument to be a PLSymbol value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! bool) {
       throw ArgumentError(
-          'The dart/PLMultiMethod. function expects its 2nd argument to be a bool value, but received a ${typeString(args[1])} value.');
+          'The dart/PLMultiMethod. function expects its 2nd argument to be a bool value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = PLMultiMethod(
@@ -8177,7 +8177,7 @@ String? dart_RegExp_escape(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/RegExp.escape function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/RegExp.escape function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = RegExp.escape(
@@ -8197,7 +8197,7 @@ RegExpMatch? dart_RegExp_firstMatch(PLEnv env, PLVector args) {
     if (o is RegExp) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/RegExp.firstMatch function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/RegExp.firstMatch function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.firstMatch(
@@ -8206,7 +8206,7 @@ RegExpMatch? dart_RegExp_firstMatch(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RegExp.firstMatch function expects its first argument to be a RegExp object but received a ${typeString(o)} value.');
+          'The dart/RegExp.firstMatch function expects its first argument to be a RegExp object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8221,7 +8221,7 @@ Iterable? dart_RegExp_allMatches(PLEnv env, PLVector args) {
     if (o is RegExp) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/RegExp.allMatches function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/RegExp.allMatches function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.allMatches(
@@ -8230,7 +8230,7 @@ Iterable? dart_RegExp_allMatches(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RegExp.allMatches function expects its first argument to be a RegExp object but received a ${typeString(o)} value.');
+          'The dart/RegExp.allMatches function expects its first argument to be a RegExp object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8245,11 +8245,11 @@ Iterable? dart_RegExp_allMatches_full(PLEnv env, PLVector args) {
     if (o is RegExp) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/RegExp.allMatches-full function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/RegExp.allMatches-full function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! int) {
         throw ArgumentError(
-            'The dart/RegExp.allMatches-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+            'The dart/RegExp.allMatches-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.allMatches(
@@ -8259,7 +8259,7 @@ Iterable? dart_RegExp_allMatches_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RegExp.allMatches-full function expects its first argument to be a RegExp object but received a ${typeString(o)} value.');
+          'The dart/RegExp.allMatches-full function expects its first argument to be a RegExp object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8274,7 +8274,7 @@ bool? dart_RegExp_hasMatch(PLEnv env, PLVector args) {
     if (o is RegExp) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/RegExp.hasMatch function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/RegExp.hasMatch function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.hasMatch(
@@ -8283,7 +8283,7 @@ bool? dart_RegExp_hasMatch(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RegExp.hasMatch function expects its first argument to be a RegExp object but received a ${typeString(o)} value.');
+          'The dart/RegExp.hasMatch function expects its first argument to be a RegExp object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8298,7 +8298,7 @@ String? dart_RegExp_stringMatch(PLEnv env, PLVector args) {
     if (o is RegExp) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/RegExp.stringMatch function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/RegExp.stringMatch function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.stringMatch(
@@ -8307,7 +8307,7 @@ String? dart_RegExp_stringMatch(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RegExp.stringMatch function expects its first argument to be a RegExp object but received a ${typeString(o)} value.');
+          'The dart/RegExp.stringMatch function expects its first argument to be a RegExp object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8324,7 +8324,7 @@ String? dart_RegExp_pattern(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RegExp.pattern function expects its first argument to be a RegExp object but received a ${typeString(o)} value.');
+          'The dart/RegExp.pattern function expects its first argument to be a RegExp object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8341,7 +8341,7 @@ bool? dart_RegExp_isMultiLine(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RegExp.isMultiLine function expects its first argument to be a RegExp object but received a ${typeString(o)} value.');
+          'The dart/RegExp.isMultiLine function expects its first argument to be a RegExp object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8358,7 +8358,7 @@ bool? dart_RegExp_isCaseSensitive(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RegExp.isCaseSensitive function expects its first argument to be a RegExp object but received a ${typeString(o)} value.');
+          'The dart/RegExp.isCaseSensitive function expects its first argument to be a RegExp object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8375,7 +8375,7 @@ bool? dart_RegExp_isUnicode(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RegExp.isUnicode function expects its first argument to be a RegExp object but received a ${typeString(o)} value.');
+          'The dart/RegExp.isUnicode function expects its first argument to be a RegExp object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8392,7 +8392,7 @@ bool? dart_RegExp_isDotAll(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RegExp.isDotAll function expects its first argument to be a RegExp object but received a ${typeString(o)} value.');
+          'The dart/RegExp.isDotAll function expects its first argument to be a RegExp object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8405,7 +8405,7 @@ RegExp? dart_RegExp_(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/RegExp. function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/RegExp. function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = RegExp(
@@ -8425,7 +8425,7 @@ String? dart_RegExpMatch_namedGroup(PLEnv env, PLVector args) {
     if (o is RegExpMatch) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/RegExpMatch.namedGroup function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/RegExpMatch.namedGroup function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.namedGroup(
@@ -8434,7 +8434,7 @@ String? dart_RegExpMatch_namedGroup(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RegExpMatch.namedGroup function expects its first argument to be a RegExpMatch object but received a ${typeString(o)} value.');
+          'The dart/RegExpMatch.namedGroup function expects its first argument to be a RegExpMatch object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8451,7 +8451,7 @@ Iterable? dart_RegExpMatch_groupNames(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RegExpMatch.groupNames function expects its first argument to be a RegExpMatch object but received a ${typeString(o)} value.');
+          'The dart/RegExpMatch.groupNames function expects its first argument to be a RegExpMatch object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8468,7 +8468,7 @@ int? dart_Request_contentLength(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Request.contentLength function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+          'The dart/Request.contentLength function expects its first argument to be a Request object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8483,13 +8483,13 @@ void dart_Request_contentLength__set_to(PLEnv env, PLVector args) {
     if (o is Request) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/Request.contentLength= function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/Request.contentLength= function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       o.contentLength = args[1] as int;
     } else {
       throw ArgumentError(
-          'The dart/Request.contentLength= function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+          'The dart/Request.contentLength= function expects its first argument to be a Request object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8506,7 +8506,7 @@ Encoding? dart_Request_encoding(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Request.encoding function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+          'The dart/Request.encoding function expects its first argument to be a Request object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8521,13 +8521,13 @@ void dart_Request_encoding__set_to(PLEnv env, PLVector args) {
     if (o is Request) {
       if (args[1] is! Encoding) {
         throw ArgumentError(
-            'The dart/Request.encoding= function expects its 2nd argument to be a Encoding value, but received a ${typeString(args[1])} value.');
+            'The dart/Request.encoding= function expects its 2nd argument to be a Encoding value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       o.encoding = args[1] as Encoding;
     } else {
       throw ArgumentError(
-          'The dart/Request.encoding= function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+          'The dart/Request.encoding= function expects its first argument to be a Request object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8544,7 +8544,7 @@ Uint8List? dart_Request_bodyBytes(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Request.bodyBytes function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+          'The dart/Request.bodyBytes function expects its first argument to be a Request object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8559,13 +8559,13 @@ void dart_Request_bodyBytes__set_to(PLEnv env, PLVector args) {
     if (o is Request) {
       if (args[1] is! List) {
         throw ArgumentError(
-            'The dart/Request.bodyBytes= function expects its 2nd argument to be a List value, but received a ${typeString(args[1])} value.');
+            'The dart/Request.bodyBytes= function expects its 2nd argument to be a List value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       o.bodyBytes = List<int>.from(args[1] as List<Object?>);
     } else {
       throw ArgumentError(
-          'The dart/Request.bodyBytes= function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+          'The dart/Request.bodyBytes= function expects its first argument to be a Request object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8582,7 +8582,7 @@ String? dart_Request_body(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Request.body function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+          'The dart/Request.body function expects its first argument to be a Request object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8597,13 +8597,13 @@ void dart_Request_body__set_to(PLEnv env, PLVector args) {
     if (o is Request) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/Request.body= function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/Request.body= function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       o.body = args[1] as String;
     } else {
       throw ArgumentError(
-          'The dart/Request.body= function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+          'The dart/Request.body= function expects its first argument to be a Request object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8620,7 +8620,7 @@ IMap? dart_Request_bodyFields(PLEnv env, PLVector args) {
       return returnValue.toIMap();
     } else {
       throw ArgumentError(
-          'The dart/Request.bodyFields function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+          'The dart/Request.bodyFields function expects its first argument to be a Request object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8635,13 +8635,13 @@ void dart_Request_bodyFields__set_to(PLEnv env, PLVector args) {
     if (o is Request) {
       if (args[1] is! Map) {
         throw ArgumentError(
-            'The dart/Request.bodyFields= function expects its 2nd argument to be a Map value, but received a ${typeString(args[1])} value.');
+            'The dart/Request.bodyFields= function expects its 2nd argument to be a Map value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       o.bodyFields = Map<String, String>.from(args[1] as Map<Object?, Object?>);
     } else {
       throw ArgumentError(
-          'The dart/Request.bodyFields= function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+          'The dart/Request.bodyFields= function expects its first argument to be a Request object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8658,7 +8658,7 @@ ByteStream? dart_Request_finalize(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Request.finalize function expects its first argument to be a Request object but received a ${typeString(o)} value.');
+          'The dart/Request.finalize function expects its first argument to be a Request object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8671,11 +8671,11 @@ Request? dart_Request_(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Request. function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Request. function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! Uri) {
       throw ArgumentError(
-          'The dart/Request. function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+          'The dart/Request. function expects its 2nd argument to be a Uri value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = Request(
@@ -8697,7 +8697,7 @@ Uint8List dart_Response_bodyBytes(PLEnv env, PLVector args) {
       return o.bodyBytes;
     } else {
       throw ArgumentError(
-          'The dart/Response.bodyBytes function expects its argument to be a Response but received a ${typeString(o)} value.');
+          'The dart/Response.bodyBytes function expects its argument to be a Response but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8714,7 +8714,7 @@ String? dart_Response_body(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Response.body function expects its first argument to be a Response object but received a ${typeString(o)} value.');
+          'The dart/Response.body function expects its first argument to be a Response object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8727,7 +8727,7 @@ Future? dart_Response_fromStream(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! StreamedResponse) {
       throw ArgumentError(
-          'The dart/Response.fromStream function expects its 1st argument to be a StreamedResponse value, but received a ${typeString(args[0])} value.');
+          'The dart/Response.fromStream function expects its 1st argument to be a StreamedResponse value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Response.fromStream(
@@ -8745,11 +8745,11 @@ Response? dart_Response_(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Response. function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Response. function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! int) {
       throw ArgumentError(
-          'The dart/Response. function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+          'The dart/Response. function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = Response(
@@ -8768,11 +8768,11 @@ Response? dart_Response_bytes(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! List) {
       throw ArgumentError(
-          'The dart/Response.bytes function expects its 1st argument to be a List value, but received a ${typeString(args[0])} value.');
+          'The dart/Response.bytes function expects its 1st argument to be a List value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! int) {
       throw ArgumentError(
-          'The dart/Response.bytes function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+          'The dart/Response.bytes function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = Response.bytes(
@@ -8794,7 +8794,7 @@ String dart_RuneIterator_string(PLEnv env, PLVector args) {
       return o.string;
     } else {
       throw ArgumentError(
-          'The dart/RuneIterator.string function expects its argument to be a RuneIterator but received a ${typeString(o)} value.');
+          'The dart/RuneIterator.string function expects its argument to be a RuneIterator but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8811,7 +8811,7 @@ int? dart_RuneIterator_rawIndex(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RuneIterator.rawIndex function expects its first argument to be a RuneIterator object but received a ${typeString(o)} value.');
+          'The dart/RuneIterator.rawIndex function expects its first argument to be a RuneIterator object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8828,7 +8828,7 @@ void dart_RuneIterator_reset(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RuneIterator.reset function expects its first argument to be a RuneIterator object but received a ${typeString(o)} value.');
+          'The dart/RuneIterator.reset function expects its first argument to be a RuneIterator object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8843,7 +8843,7 @@ void dart_RuneIterator_reset_full(PLEnv env, PLVector args) {
     if (o is RuneIterator) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/RuneIterator.reset-full function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/RuneIterator.reset-full function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.reset(
@@ -8852,7 +8852,7 @@ void dart_RuneIterator_reset_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RuneIterator.reset-full function expects its first argument to be a RuneIterator object but received a ${typeString(o)} value.');
+          'The dart/RuneIterator.reset-full function expects its first argument to be a RuneIterator object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8869,7 +8869,7 @@ int? dart_RuneIterator_current(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RuneIterator.current function expects its first argument to be a RuneIterator object but received a ${typeString(o)} value.');
+          'The dart/RuneIterator.current function expects its first argument to be a RuneIterator object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8886,7 +8886,7 @@ int? dart_RuneIterator_currentSize(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RuneIterator.currentSize function expects its first argument to be a RuneIterator object but received a ${typeString(o)} value.');
+          'The dart/RuneIterator.currentSize function expects its first argument to be a RuneIterator object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8903,7 +8903,7 @@ String? dart_RuneIterator_currentAsString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RuneIterator.currentAsString function expects its first argument to be a RuneIterator object but received a ${typeString(o)} value.');
+          'The dart/RuneIterator.currentAsString function expects its first argument to be a RuneIterator object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8920,7 +8920,7 @@ bool? dart_RuneIterator_moveNext(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RuneIterator.moveNext function expects its first argument to be a RuneIterator object but received a ${typeString(o)} value.');
+          'The dart/RuneIterator.moveNext function expects its first argument to be a RuneIterator object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8937,7 +8937,7 @@ bool? dart_RuneIterator_movePrevious(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/RuneIterator.movePrevious function expects its first argument to be a RuneIterator object but received a ${typeString(o)} value.');
+          'The dart/RuneIterator.movePrevious function expects its first argument to be a RuneIterator object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -8950,7 +8950,7 @@ RuneIterator? dart_RuneIterator_(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/RuneIterator. function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/RuneIterator. function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = RuneIterator(
@@ -8968,11 +8968,11 @@ RuneIterator? dart_RuneIterator_at(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/RuneIterator.at function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/RuneIterator.at function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! int) {
       throw ArgumentError(
-          'The dart/RuneIterator.at function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+          'The dart/RuneIterator.at function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = RuneIterator.at(
@@ -8994,7 +8994,7 @@ String dart_Runes_string(PLEnv env, PLVector args) {
       return o.string;
     } else {
       throw ArgumentError(
-          'The dart/Runes.string function expects its argument to be a Runes but received a ${typeString(o)} value.');
+          'The dart/Runes.string function expects its argument to be a Runes but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9011,7 +9011,7 @@ RuneIterator? dart_Runes_iterator(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Runes.iterator function expects its first argument to be a Runes object but received a ${typeString(o)} value.');
+          'The dart/Runes.iterator function expects its first argument to be a Runes object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9028,7 +9028,7 @@ int? dart_Runes_last(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Runes.last function expects its first argument to be a Runes object but received a ${typeString(o)} value.');
+          'The dart/Runes.last function expects its first argument to be a Runes object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9041,7 +9041,7 @@ Runes? dart_Runes_(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Runes. function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Runes. function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Runes(
@@ -9059,7 +9059,7 @@ ISet? dart_Set_castFrom(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Set) {
       throw ArgumentError(
-          'The dart/Set.castFrom function expects its 1st argument to be a Set value, but received a ${typeString(args[0])} value.');
+          'The dart/Set.castFrom function expects its 1st argument to be a Set value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Set.castFrom(
@@ -9081,7 +9081,7 @@ ISet? dart_Set_cast(PLEnv env, PLVector args) {
       return returnValue.toISet();
     } else {
       throw ArgumentError(
-          'The dart/Set.cast function expects its first argument to be a Set object but received a ${typeString(o)} value.');
+          'The dart/Set.cast function expects its first argument to be a Set object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9098,7 +9098,7 @@ Iterator? dart_Set_iterator(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Set.iterator function expects its first argument to be a Set object but received a ${typeString(o)} value.');
+          'The dart/Set.iterator function expects its first argument to be a Set object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9113,7 +9113,7 @@ bool? dart_Set_contains(PLEnv env, PLVector args) {
     if (o is Set) {
       if (args[1] is! Object) {
         throw ArgumentError(
-            'The dart/Set.contains function expects its 2nd argument to be a Object value, but received a ${typeString(args[1])} value.');
+            'The dart/Set.contains function expects its 2nd argument to be a Object value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.contains(
@@ -9122,7 +9122,7 @@ bool? dart_Set_contains(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Set.contains function expects its first argument to be a Set object but received a ${typeString(o)} value.');
+          'The dart/Set.contains function expects its first argument to be a Set object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9137,7 +9137,7 @@ bool? dart_Set_remove(PLEnv env, PLVector args) {
     if (o is Set) {
       if (args[1] is! Object) {
         throw ArgumentError(
-            'The dart/Set.remove function expects its 2nd argument to be a Object value, but received a ${typeString(args[1])} value.');
+            'The dart/Set.remove function expects its 2nd argument to be a Object value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.remove(
@@ -9146,7 +9146,7 @@ bool? dart_Set_remove(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Set.remove function expects its first argument to be a Set object but received a ${typeString(o)} value.');
+          'The dart/Set.remove function expects its first argument to be a Set object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9161,7 +9161,7 @@ void dart_Set_removeAll(PLEnv env, PLVector args) {
     if (o is Set) {
       if (args[1] is! Iterable) {
         throw ArgumentError(
-            'The dart/Set.removeAll function expects its 2nd argument to be a Iterable value, but received a ${typeString(args[1])} value.');
+            'The dart/Set.removeAll function expects its 2nd argument to be a Iterable value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.removeAll(
@@ -9170,7 +9170,7 @@ void dart_Set_removeAll(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Set.removeAll function expects its first argument to be a Set object but received a ${typeString(o)} value.');
+          'The dart/Set.removeAll function expects its first argument to be a Set object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9185,7 +9185,7 @@ void dart_Set_retainAll(PLEnv env, PLVector args) {
     if (o is Set) {
       if (args[1] is! Iterable) {
         throw ArgumentError(
-            'The dart/Set.retainAll function expects its 2nd argument to be a Iterable value, but received a ${typeString(args[1])} value.');
+            'The dart/Set.retainAll function expects its 2nd argument to be a Iterable value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.retainAll(
@@ -9194,7 +9194,7 @@ void dart_Set_retainAll(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Set.retainAll function expects its first argument to be a Set object but received a ${typeString(o)} value.');
+          'The dart/Set.retainAll function expects its first argument to be a Set object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9209,7 +9209,7 @@ void dart_Set_removeWhere(PLEnv env, PLVector args) {
     if (o is Set) {
       if (args[1] is! bool Function(dynamic)) {
         throw ArgumentError(
-            'The dart/Set.removeWhere function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${typeString(args[1])} value.');
+            'The dart/Set.removeWhere function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.removeWhere(
@@ -9218,7 +9218,7 @@ void dart_Set_removeWhere(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Set.removeWhere function expects its first argument to be a Set object but received a ${typeString(o)} value.');
+          'The dart/Set.removeWhere function expects its first argument to be a Set object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9233,7 +9233,7 @@ void dart_Set_retainWhere(PLEnv env, PLVector args) {
     if (o is Set) {
       if (args[1] is! bool Function(dynamic)) {
         throw ArgumentError(
-            'The dart/Set.retainWhere function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${typeString(args[1])} value.');
+            'The dart/Set.retainWhere function expects its 2nd argument to be a (dynamic) -> dart.core.bool value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.retainWhere(
@@ -9242,7 +9242,7 @@ void dart_Set_retainWhere(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Set.retainWhere function expects its first argument to be a Set object but received a ${typeString(o)} value.');
+          'The dart/Set.retainWhere function expects its first argument to be a Set object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9257,7 +9257,7 @@ bool? dart_Set_containsAll(PLEnv env, PLVector args) {
     if (o is Set) {
       if (args[1] is! Iterable) {
         throw ArgumentError(
-            'The dart/Set.containsAll function expects its 2nd argument to be a Iterable value, but received a ${typeString(args[1])} value.');
+            'The dart/Set.containsAll function expects its 2nd argument to be a Iterable value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.containsAll(
@@ -9266,7 +9266,7 @@ bool? dart_Set_containsAll(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Set.containsAll function expects its first argument to be a Set object but received a ${typeString(o)} value.');
+          'The dart/Set.containsAll function expects its first argument to be a Set object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9281,7 +9281,7 @@ ISet? dart_Set_intersection(PLEnv env, PLVector args) {
     if (o is Set) {
       if (args[1] is! Set) {
         throw ArgumentError(
-            'The dart/Set.intersection function expects its 2nd argument to be a Set value, but received a ${typeString(args[1])} value.');
+            'The dart/Set.intersection function expects its 2nd argument to be a Set value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.intersection(
@@ -9290,7 +9290,7 @@ ISet? dart_Set_intersection(PLEnv env, PLVector args) {
       return returnValue.toISet();
     } else {
       throw ArgumentError(
-          'The dart/Set.intersection function expects its first argument to be a Set object but received a ${typeString(o)} value.');
+          'The dart/Set.intersection function expects its first argument to be a Set object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9305,7 +9305,7 @@ ISet? dart_Set_difference(PLEnv env, PLVector args) {
     if (o is Set) {
       if (args[1] is! Set) {
         throw ArgumentError(
-            'The dart/Set.difference function expects its 2nd argument to be a Set value, but received a ${typeString(args[1])} value.');
+            'The dart/Set.difference function expects its 2nd argument to be a Set value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.difference(
@@ -9314,7 +9314,7 @@ ISet? dart_Set_difference(PLEnv env, PLVector args) {
       return returnValue.toISet();
     } else {
       throw ArgumentError(
-          'The dart/Set.difference function expects its first argument to be a Set object but received a ${typeString(o)} value.');
+          'The dart/Set.difference function expects its first argument to be a Set object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9331,7 +9331,7 @@ void dart_Set_clear(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Set.clear function expects its first argument to be a Set object but received a ${typeString(o)} value.');
+          'The dart/Set.clear function expects its first argument to be a Set object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9348,7 +9348,7 @@ ISet? dart_Set_toSet(PLEnv env, PLVector args) {
       return returnValue.toISet();
     } else {
       throw ArgumentError(
-          'The dart/Set.toSet function expects its first argument to be a Set object but received a ${typeString(o)} value.');
+          'The dart/Set.toSet function expects its first argument to be a Set object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9383,7 +9383,7 @@ ISet? dart_Set_from(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
-          'The dart/Set.from function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+          'The dart/Set.from function expects its 1st argument to be a Iterable value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Set.from(
@@ -9416,7 +9416,7 @@ String? dart_StackTrace_toString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StackTrace.toString function expects its first argument to be a StackTrace object but received a ${typeString(o)} value.');
+          'The dart/StackTrace.toString function expects its first argument to be a StackTrace object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9429,7 +9429,7 @@ StackTrace? dart_StackTrace_fromString(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/StackTrace.fromString function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/StackTrace.fromString function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = StackTrace.fromString(
@@ -9451,7 +9451,7 @@ int? dart_Stopwatch_frequency(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Stopwatch.frequency function expects its first argument to be a Stopwatch object but received a ${typeString(o)} value.');
+          'The dart/Stopwatch.frequency function expects its first argument to be a Stopwatch object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9468,7 +9468,7 @@ void dart_Stopwatch_start(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Stopwatch.start function expects its first argument to be a Stopwatch object but received a ${typeString(o)} value.');
+          'The dart/Stopwatch.start function expects its first argument to be a Stopwatch object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9485,7 +9485,7 @@ void dart_Stopwatch_stop(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Stopwatch.stop function expects its first argument to be a Stopwatch object but received a ${typeString(o)} value.');
+          'The dart/Stopwatch.stop function expects its first argument to be a Stopwatch object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9502,7 +9502,7 @@ void dart_Stopwatch_reset(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Stopwatch.reset function expects its first argument to be a Stopwatch object but received a ${typeString(o)} value.');
+          'The dart/Stopwatch.reset function expects its first argument to be a Stopwatch object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9519,7 +9519,7 @@ int? dart_Stopwatch_elapsedTicks(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Stopwatch.elapsedTicks function expects its first argument to be a Stopwatch object but received a ${typeString(o)} value.');
+          'The dart/Stopwatch.elapsedTicks function expects its first argument to be a Stopwatch object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9536,7 +9536,7 @@ Duration? dart_Stopwatch_elapsed(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Stopwatch.elapsed function expects its first argument to be a Stopwatch object but received a ${typeString(o)} value.');
+          'The dart/Stopwatch.elapsed function expects its first argument to be a Stopwatch object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9553,7 +9553,7 @@ int? dart_Stopwatch_elapsedMicroseconds(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Stopwatch.elapsedMicroseconds function expects its first argument to be a Stopwatch object but received a ${typeString(o)} value.');
+          'The dart/Stopwatch.elapsedMicroseconds function expects its first argument to be a Stopwatch object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9570,7 +9570,7 @@ int? dart_Stopwatch_elapsedMilliseconds(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Stopwatch.elapsedMilliseconds function expects its first argument to be a Stopwatch object but received a ${typeString(o)} value.');
+          'The dart/Stopwatch.elapsedMilliseconds function expects its first argument to be a Stopwatch object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9587,7 +9587,7 @@ bool? dart_Stopwatch_isRunning(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Stopwatch.isRunning function expects its first argument to be a Stopwatch object but received a ${typeString(o)} value.');
+          'The dart/Stopwatch.isRunning function expects its first argument to be a Stopwatch object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9613,7 +9613,7 @@ int? dart_String_codeUnitAt(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/String.codeUnitAt function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/String.codeUnitAt function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.codeUnitAt(
@@ -9622,7 +9622,7 @@ int? dart_String_codeUnitAt(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.codeUnitAt function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.codeUnitAt function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9639,7 +9639,7 @@ int? dart_String_length(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.length function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.length function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9656,7 +9656,7 @@ int? dart_String_hashCode(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.hashCode function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.hashCode function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9671,7 +9671,7 @@ int? dart_String_compareTo(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/String.compareTo function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/String.compareTo function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.compareTo(
@@ -9680,7 +9680,7 @@ int? dart_String_compareTo(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.compareTo function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.compareTo function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9695,7 +9695,7 @@ bool? dart_String_endsWith(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/String.endsWith function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/String.endsWith function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.endsWith(
@@ -9704,7 +9704,7 @@ bool? dart_String_endsWith(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.endsWith function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.endsWith function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9719,7 +9719,7 @@ bool? dart_String_startsWith(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.startsWith function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.startsWith function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.startsWith(
@@ -9728,7 +9728,7 @@ bool? dart_String_startsWith(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.startsWith function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.startsWith function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9743,11 +9743,11 @@ bool? dart_String_startsWith_full(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.startsWith-full function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.startsWith-full function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! int) {
         throw ArgumentError(
-            'The dart/String.startsWith-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+            'The dart/String.startsWith-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.startsWith(
@@ -9757,7 +9757,7 @@ bool? dart_String_startsWith_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.startsWith-full function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.startsWith-full function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9772,7 +9772,7 @@ int? dart_String_indexOf(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.indexOf function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.indexOf function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.indexOf(
@@ -9781,7 +9781,7 @@ int? dart_String_indexOf(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.indexOf function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.indexOf function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9796,11 +9796,11 @@ int? dart_String_indexOf_full(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.indexOf-full function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.indexOf-full function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! int) {
         throw ArgumentError(
-            'The dart/String.indexOf-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+            'The dart/String.indexOf-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.indexOf(
@@ -9810,7 +9810,7 @@ int? dart_String_indexOf_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.indexOf-full function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.indexOf-full function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9825,7 +9825,7 @@ int? dart_String_lastIndexOf(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.lastIndexOf function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.lastIndexOf function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.lastIndexOf(
@@ -9834,7 +9834,7 @@ int? dart_String_lastIndexOf(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.lastIndexOf function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.lastIndexOf function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9849,11 +9849,11 @@ int? dart_String_lastIndexOf_full(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.lastIndexOf-full function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.lastIndexOf-full function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! int) {
         throw ArgumentError(
-            'The dart/String.lastIndexOf-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+            'The dart/String.lastIndexOf-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.lastIndexOf(
@@ -9863,7 +9863,7 @@ int? dart_String_lastIndexOf_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.lastIndexOf-full function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.lastIndexOf-full function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9880,7 +9880,7 @@ bool? dart_String_isEmpty(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.isEmpty function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.isEmpty function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9897,7 +9897,7 @@ bool? dart_String_isNotEmpty(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.isNotEmpty function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.isNotEmpty function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9912,7 +9912,7 @@ String? dart_String_substring(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/String.substring function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/String.substring function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.substring(
@@ -9921,7 +9921,7 @@ String? dart_String_substring(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.substring function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.substring function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9936,11 +9936,11 @@ String? dart_String_substring_full(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/String.substring-full function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/String.substring-full function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! int) {
         throw ArgumentError(
-            'The dart/String.substring-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+            'The dart/String.substring-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.substring(
@@ -9950,7 +9950,7 @@ String? dart_String_substring_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.substring-full function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.substring-full function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9967,7 +9967,7 @@ String? dart_String_trim(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.trim function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.trim function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -9984,7 +9984,7 @@ String? dart_String_trimLeft(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.trimLeft function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.trimLeft function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10001,7 +10001,7 @@ String? dart_String_trimRight(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.trimRight function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.trimRight function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10016,7 +10016,7 @@ String? dart_String_padLeft(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/String.padLeft function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/String.padLeft function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.padLeft(
@@ -10025,7 +10025,7 @@ String? dart_String_padLeft(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.padLeft function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.padLeft function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10040,11 +10040,11 @@ String? dart_String_padLeft_full(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/String.padLeft-full function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/String.padLeft-full function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! String) {
         throw ArgumentError(
-            'The dart/String.padLeft-full function expects its 3rd argument to be a String value, but received a ${typeString(args[2])} value.');
+            'The dart/String.padLeft-full function expects its 3rd argument to be a String value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.padLeft(
@@ -10054,7 +10054,7 @@ String? dart_String_padLeft_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.padLeft-full function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.padLeft-full function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10069,7 +10069,7 @@ String? dart_String_padRight(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/String.padRight function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/String.padRight function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.padRight(
@@ -10078,7 +10078,7 @@ String? dart_String_padRight(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.padRight function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.padRight function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10093,11 +10093,11 @@ String? dart_String_padRight_full(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/String.padRight-full function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/String.padRight-full function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! String) {
         throw ArgumentError(
-            'The dart/String.padRight-full function expects its 3rd argument to be a String value, but received a ${typeString(args[2])} value.');
+            'The dart/String.padRight-full function expects its 3rd argument to be a String value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.padRight(
@@ -10107,7 +10107,7 @@ String? dart_String_padRight_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.padRight-full function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.padRight-full function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10122,7 +10122,7 @@ bool? dart_String_contains(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.contains function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.contains function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.contains(
@@ -10131,7 +10131,7 @@ bool? dart_String_contains(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.contains function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.contains function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10146,11 +10146,11 @@ bool? dart_String_contains_full(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.contains-full function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.contains-full function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! int) {
         throw ArgumentError(
-            'The dart/String.contains-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+            'The dart/String.contains-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.contains(
@@ -10160,7 +10160,7 @@ bool? dart_String_contains_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.contains-full function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.contains-full function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10175,11 +10175,11 @@ String? dart_String_replaceFirst(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.replaceFirst function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.replaceFirst function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! String) {
         throw ArgumentError(
-            'The dart/String.replaceFirst function expects its 3rd argument to be a String value, but received a ${typeString(args[2])} value.');
+            'The dart/String.replaceFirst function expects its 3rd argument to be a String value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.replaceFirst(
@@ -10189,7 +10189,7 @@ String? dart_String_replaceFirst(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.replaceFirst function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.replaceFirst function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10204,15 +10204,15 @@ String? dart_String_replaceFirst_full(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.replaceFirst-full function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.replaceFirst-full function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! String) {
         throw ArgumentError(
-            'The dart/String.replaceFirst-full function expects its 3rd argument to be a String value, but received a ${typeString(args[2])} value.');
+            'The dart/String.replaceFirst-full function expects its 3rd argument to be a String value, but received a ${PiLisp.typeName(args[2])} value.');
       }
       if (args[3] is! int) {
         throw ArgumentError(
-            'The dart/String.replaceFirst-full function expects its 4th argument to be a int value, but received a ${typeString(args[3])} value.');
+            'The dart/String.replaceFirst-full function expects its 4th argument to be a int value, but received a ${PiLisp.typeName(args[3])} value.');
       }
 
       final returnValue = o.replaceFirst(
@@ -10223,7 +10223,7 @@ String? dart_String_replaceFirst_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.replaceFirst-full function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.replaceFirst-full function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10238,11 +10238,11 @@ String? dart_String_replaceFirstMapped(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.replaceFirstMapped function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.replaceFirstMapped function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! String Function(Match)) {
         throw ArgumentError(
-            'The dart/String.replaceFirstMapped function expects its 3rd argument to be a (dart.core.Match) -> dart.core.String value, but received a ${typeString(args[2])} value.');
+            'The dart/String.replaceFirstMapped function expects its 3rd argument to be a (dart.core.Match) -> dart.core.String value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.replaceFirstMapped(
@@ -10252,7 +10252,7 @@ String? dart_String_replaceFirstMapped(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.replaceFirstMapped function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.replaceFirstMapped function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10267,15 +10267,15 @@ String? dart_String_replaceFirstMapped_full(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.replaceFirstMapped-full function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.replaceFirstMapped-full function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! String Function(Match)) {
         throw ArgumentError(
-            'The dart/String.replaceFirstMapped-full function expects its 3rd argument to be a (dart.core.Match) -> dart.core.String value, but received a ${typeString(args[2])} value.');
+            'The dart/String.replaceFirstMapped-full function expects its 3rd argument to be a (dart.core.Match) -> dart.core.String value, but received a ${PiLisp.typeName(args[2])} value.');
       }
       if (args[3] is! int) {
         throw ArgumentError(
-            'The dart/String.replaceFirstMapped-full function expects its 4th argument to be a int value, but received a ${typeString(args[3])} value.');
+            'The dart/String.replaceFirstMapped-full function expects its 4th argument to be a int value, but received a ${PiLisp.typeName(args[3])} value.');
       }
 
       final returnValue = o.replaceFirstMapped(
@@ -10286,7 +10286,7 @@ String? dart_String_replaceFirstMapped_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.replaceFirstMapped-full function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.replaceFirstMapped-full function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10301,11 +10301,11 @@ String? dart_String_replaceAll(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.replaceAll function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.replaceAll function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! String) {
         throw ArgumentError(
-            'The dart/String.replaceAll function expects its 3rd argument to be a String value, but received a ${typeString(args[2])} value.');
+            'The dart/String.replaceAll function expects its 3rd argument to be a String value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.replaceAll(
@@ -10315,7 +10315,7 @@ String? dart_String_replaceAll(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.replaceAll function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.replaceAll function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10330,11 +10330,11 @@ String? dart_String_replaceAllMapped(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.replaceAllMapped function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.replaceAllMapped function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! String Function(Match)) {
         throw ArgumentError(
-            'The dart/String.replaceAllMapped function expects its 3rd argument to be a (dart.core.Match) -> dart.core.String value, but received a ${typeString(args[2])} value.');
+            'The dart/String.replaceAllMapped function expects its 3rd argument to be a (dart.core.Match) -> dart.core.String value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.replaceAllMapped(
@@ -10344,7 +10344,7 @@ String? dart_String_replaceAllMapped(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.replaceAllMapped function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.replaceAllMapped function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10359,15 +10359,15 @@ String? dart_String_replaceRange(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/String.replaceRange function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/String.replaceRange function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! int) {
         throw ArgumentError(
-            'The dart/String.replaceRange function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+            'The dart/String.replaceRange function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
       }
       if (args[3] is! String) {
         throw ArgumentError(
-            'The dart/String.replaceRange function expects its 4th argument to be a String value, but received a ${typeString(args[3])} value.');
+            'The dart/String.replaceRange function expects its 4th argument to be a String value, but received a ${PiLisp.typeName(args[3])} value.');
       }
 
       final returnValue = o.replaceRange(
@@ -10378,7 +10378,7 @@ String? dart_String_replaceRange(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.replaceRange function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.replaceRange function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10393,7 +10393,7 @@ IList? dart_String_split(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.split function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.split function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.split(
@@ -10402,7 +10402,7 @@ IList? dart_String_split(PLEnv env, PLVector args) {
       return returnValue.toIList();
     } else {
       throw ArgumentError(
-          'The dart/String.split function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.split function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10417,7 +10417,7 @@ String? dart_String_splitMapJoin(PLEnv env, PLVector args) {
     if (o is String) {
       if (args[1] is! Pattern) {
         throw ArgumentError(
-            'The dart/String.splitMapJoin function expects its 2nd argument to be a Pattern value, but received a ${typeString(args[1])} value.');
+            'The dart/String.splitMapJoin function expects its 2nd argument to be a Pattern value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.splitMapJoin(
@@ -10426,7 +10426,7 @@ String? dart_String_splitMapJoin(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.splitMapJoin function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.splitMapJoin function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10443,7 +10443,7 @@ IList? dart_String_codeUnits(PLEnv env, PLVector args) {
       return returnValue.toIList();
     } else {
       throw ArgumentError(
-          'The dart/String.codeUnits function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.codeUnits function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10460,7 +10460,7 @@ Runes? dart_String_runes(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.runes function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.runes function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10477,7 +10477,7 @@ String? dart_String_toLowerCase(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.toLowerCase function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.toLowerCase function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10494,7 +10494,7 @@ String? dart_String_toUpperCase(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/String.toUpperCase function expects its first argument to be a String object but received a ${typeString(o)} value.');
+          'The dart/String.toUpperCase function expects its first argument to be a String object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10507,7 +10507,7 @@ String? dart_String_fromCharCodes(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
-          'The dart/String.fromCharCodes function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+          'The dart/String.fromCharCodes function expects its 1st argument to be a Iterable value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = String.fromCharCodes(
@@ -10525,15 +10525,15 @@ String? dart_String_fromCharCodes_full(PLEnv env, PLVector args) {
   if (args.length == 3) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
-          'The dart/String.fromCharCodes-full function expects its 1st argument to be a Iterable value, but received a ${typeString(args[0])} value.');
+          'The dart/String.fromCharCodes-full function expects its 1st argument to be a Iterable value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! int) {
       throw ArgumentError(
-          'The dart/String.fromCharCodes-full function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+          'The dart/String.fromCharCodes-full function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! int) {
       throw ArgumentError(
-          'The dart/String.fromCharCodes-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+          'The dart/String.fromCharCodes-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
     }
 
     final returnValue = String.fromCharCodes(
@@ -10553,7 +10553,7 @@ String? dart_String_fromCharCode(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! int) {
       throw ArgumentError(
-          'The dart/String.fromCharCode function expects its 1st argument to be a int value, but received a ${typeString(args[0])} value.');
+          'The dart/String.fromCharCode function expects its 1st argument to be a int value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = String.fromCharCode(
@@ -10571,7 +10571,7 @@ String? dart_String_fromEnvironment(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/String.fromEnvironment function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/String.fromEnvironment function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = String.fromEnvironment(
@@ -10593,7 +10593,7 @@ int? dart_StringBuffer_length(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringBuffer.length function expects its first argument to be a StringBuffer object but received a ${typeString(o)} value.');
+          'The dart/StringBuffer.length function expects its first argument to be a StringBuffer object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10610,7 +10610,7 @@ bool? dart_StringBuffer_isEmpty(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringBuffer.isEmpty function expects its first argument to be a StringBuffer object but received a ${typeString(o)} value.');
+          'The dart/StringBuffer.isEmpty function expects its first argument to be a StringBuffer object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10627,7 +10627,7 @@ bool? dart_StringBuffer_isNotEmpty(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringBuffer.isNotEmpty function expects its first argument to be a StringBuffer object but received a ${typeString(o)} value.');
+          'The dart/StringBuffer.isNotEmpty function expects its first argument to be a StringBuffer object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10642,7 +10642,7 @@ void dart_StringBuffer_write(PLEnv env, PLVector args) {
     if (o is StringBuffer) {
       if (args[1] is! Object) {
         throw ArgumentError(
-            'The dart/StringBuffer.write function expects its 2nd argument to be a Object value, but received a ${typeString(args[1])} value.');
+            'The dart/StringBuffer.write function expects its 2nd argument to be a Object value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.write(
@@ -10651,7 +10651,7 @@ void dart_StringBuffer_write(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringBuffer.write function expects its first argument to be a StringBuffer object but received a ${typeString(o)} value.');
+          'The dart/StringBuffer.write function expects its first argument to be a StringBuffer object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10666,7 +10666,7 @@ void dart_StringBuffer_writeCharCode(PLEnv env, PLVector args) {
     if (o is StringBuffer) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/StringBuffer.writeCharCode function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/StringBuffer.writeCharCode function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.writeCharCode(
@@ -10675,7 +10675,7 @@ void dart_StringBuffer_writeCharCode(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringBuffer.writeCharCode function expects its first argument to be a StringBuffer object but received a ${typeString(o)} value.');
+          'The dart/StringBuffer.writeCharCode function expects its first argument to be a StringBuffer object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10690,7 +10690,7 @@ void dart_StringBuffer_writeAll(PLEnv env, PLVector args) {
     if (o is StringBuffer) {
       if (args[1] is! Iterable) {
         throw ArgumentError(
-            'The dart/StringBuffer.writeAll function expects its 2nd argument to be a Iterable value, but received a ${typeString(args[1])} value.');
+            'The dart/StringBuffer.writeAll function expects its 2nd argument to be a Iterable value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.writeAll(
@@ -10699,7 +10699,7 @@ void dart_StringBuffer_writeAll(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringBuffer.writeAll function expects its first argument to be a StringBuffer object but received a ${typeString(o)} value.');
+          'The dart/StringBuffer.writeAll function expects its first argument to be a StringBuffer object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10714,11 +10714,11 @@ void dart_StringBuffer_writeAll_full(PLEnv env, PLVector args) {
     if (o is StringBuffer) {
       if (args[1] is! Iterable) {
         throw ArgumentError(
-            'The dart/StringBuffer.writeAll-full function expects its 2nd argument to be a Iterable value, but received a ${typeString(args[1])} value.');
+            'The dart/StringBuffer.writeAll-full function expects its 2nd argument to be a Iterable value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! String) {
         throw ArgumentError(
-            'The dart/StringBuffer.writeAll-full function expects its 3rd argument to be a String value, but received a ${typeString(args[2])} value.');
+            'The dart/StringBuffer.writeAll-full function expects its 3rd argument to be a String value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.writeAll(
@@ -10728,7 +10728,7 @@ void dart_StringBuffer_writeAll_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringBuffer.writeAll-full function expects its first argument to be a StringBuffer object but received a ${typeString(o)} value.');
+          'The dart/StringBuffer.writeAll-full function expects its first argument to be a StringBuffer object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10745,7 +10745,7 @@ void dart_StringBuffer_writeln(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringBuffer.writeln function expects its first argument to be a StringBuffer object but received a ${typeString(o)} value.');
+          'The dart/StringBuffer.writeln function expects its first argument to be a StringBuffer object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10760,7 +10760,7 @@ void dart_StringBuffer_writeln_full(PLEnv env, PLVector args) {
     if (o is StringBuffer) {
       if (args[1] is! Object) {
         throw ArgumentError(
-            'The dart/StringBuffer.writeln-full function expects its 2nd argument to be a Object value, but received a ${typeString(args[1])} value.');
+            'The dart/StringBuffer.writeln-full function expects its 2nd argument to be a Object value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.writeln(
@@ -10769,7 +10769,7 @@ void dart_StringBuffer_writeln_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringBuffer.writeln-full function expects its first argument to be a StringBuffer object but received a ${typeString(o)} value.');
+          'The dart/StringBuffer.writeln-full function expects its first argument to be a StringBuffer object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10786,7 +10786,7 @@ void dart_StringBuffer_clear(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringBuffer.clear function expects its first argument to be a StringBuffer object but received a ${typeString(o)} value.');
+          'The dart/StringBuffer.clear function expects its first argument to be a StringBuffer object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10803,7 +10803,7 @@ String? dart_StringBuffer_toString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringBuffer.toString function expects its first argument to be a StringBuffer object but received a ${typeString(o)} value.');
+          'The dart/StringBuffer.toString function expects its first argument to be a StringBuffer object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10827,7 +10827,7 @@ StringBuffer? dart_StringBuffer__full(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Object) {
       throw ArgumentError(
-          'The dart/StringBuffer.-full function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+          'The dart/StringBuffer.-full function expects its 1st argument to be a Object value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = StringBuffer(
@@ -10847,7 +10847,7 @@ void dart_StringSink_write(PLEnv env, PLVector args) {
     if (o is StringSink) {
       if (args[1] is! Object) {
         throw ArgumentError(
-            'The dart/StringSink.write function expects its 2nd argument to be a Object value, but received a ${typeString(args[1])} value.');
+            'The dart/StringSink.write function expects its 2nd argument to be a Object value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.write(
@@ -10856,7 +10856,7 @@ void dart_StringSink_write(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringSink.write function expects its first argument to be a StringSink object but received a ${typeString(o)} value.');
+          'The dart/StringSink.write function expects its first argument to be a StringSink object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10871,7 +10871,7 @@ void dart_StringSink_writeAll(PLEnv env, PLVector args) {
     if (o is StringSink) {
       if (args[1] is! Iterable) {
         throw ArgumentError(
-            'The dart/StringSink.writeAll function expects its 2nd argument to be a Iterable value, but received a ${typeString(args[1])} value.');
+            'The dart/StringSink.writeAll function expects its 2nd argument to be a Iterable value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.writeAll(
@@ -10880,7 +10880,7 @@ void dart_StringSink_writeAll(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringSink.writeAll function expects its first argument to be a StringSink object but received a ${typeString(o)} value.');
+          'The dart/StringSink.writeAll function expects its first argument to be a StringSink object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10895,11 +10895,11 @@ void dart_StringSink_writeAll_full(PLEnv env, PLVector args) {
     if (o is StringSink) {
       if (args[1] is! Iterable) {
         throw ArgumentError(
-            'The dart/StringSink.writeAll-full function expects its 2nd argument to be a Iterable value, but received a ${typeString(args[1])} value.');
+            'The dart/StringSink.writeAll-full function expects its 2nd argument to be a Iterable value, but received a ${PiLisp.typeName(args[1])} value.');
       }
       if (args[2] is! String) {
         throw ArgumentError(
-            'The dart/StringSink.writeAll-full function expects its 3rd argument to be a String value, but received a ${typeString(args[2])} value.');
+            'The dart/StringSink.writeAll-full function expects its 3rd argument to be a String value, but received a ${PiLisp.typeName(args[2])} value.');
       }
 
       final returnValue = o.writeAll(
@@ -10909,7 +10909,7 @@ void dart_StringSink_writeAll_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringSink.writeAll-full function expects its first argument to be a StringSink object but received a ${typeString(o)} value.');
+          'The dart/StringSink.writeAll-full function expects its first argument to be a StringSink object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10926,7 +10926,7 @@ void dart_StringSink_writeln(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringSink.writeln function expects its first argument to be a StringSink object but received a ${typeString(o)} value.');
+          'The dart/StringSink.writeln function expects its first argument to be a StringSink object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10941,7 +10941,7 @@ void dart_StringSink_writeln_full(PLEnv env, PLVector args) {
     if (o is StringSink) {
       if (args[1] is! Object) {
         throw ArgumentError(
-            'The dart/StringSink.writeln-full function expects its 2nd argument to be a Object value, but received a ${typeString(args[1])} value.');
+            'The dart/StringSink.writeln-full function expects its 2nd argument to be a Object value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.writeln(
@@ -10950,7 +10950,7 @@ void dart_StringSink_writeln_full(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringSink.writeln-full function expects its first argument to be a StringSink object but received a ${typeString(o)} value.');
+          'The dart/StringSink.writeln-full function expects its first argument to be a StringSink object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10965,7 +10965,7 @@ void dart_StringSink_writeCharCode(PLEnv env, PLVector args) {
     if (o is StringSink) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/StringSink.writeCharCode function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/StringSink.writeCharCode function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.writeCharCode(
@@ -10974,7 +10974,7 @@ void dart_StringSink_writeCharCode(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/StringSink.writeCharCode function expects its first argument to be a StringSink object but received a ${typeString(o)} value.');
+          'The dart/StringSink.writeCharCode function expects its first argument to be a StringSink object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -10991,7 +10991,7 @@ int? dart_Symbol_hashCode(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Symbol.hashCode function expects its first argument to be a Symbol object but received a ${typeString(o)} value.');
+          'The dart/Symbol.hashCode function expects its first argument to be a Symbol object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11004,7 +11004,7 @@ Symbol? dart_Symbol_(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Symbol. function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Symbol. function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Symbol(
@@ -11037,7 +11037,7 @@ String? dart_Uri_scheme(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.scheme function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.scheme function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11054,7 +11054,7 @@ String? dart_Uri_authority(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.authority function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.authority function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11071,7 +11071,7 @@ String? dart_Uri_userInfo(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.userInfo function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.userInfo function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11088,7 +11088,7 @@ String? dart_Uri_host(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.host function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.host function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11105,7 +11105,7 @@ int? dart_Uri_port(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.port function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.port function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11122,7 +11122,7 @@ String? dart_Uri_path(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.path function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.path function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11139,7 +11139,7 @@ String? dart_Uri_query(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.query function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.query function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11156,7 +11156,7 @@ String? dart_Uri_fragment(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.fragment function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.fragment function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11173,7 +11173,7 @@ IList? dart_Uri_pathSegments(PLEnv env, PLVector args) {
       return returnValue.toIList();
     } else {
       throw ArgumentError(
-          'The dart/Uri.pathSegments function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.pathSegments function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11190,7 +11190,7 @@ IMap? dart_Uri_queryParameters(PLEnv env, PLVector args) {
       return returnValue.toIMap();
     } else {
       throw ArgumentError(
-          'The dart/Uri.queryParameters function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.queryParameters function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11207,7 +11207,7 @@ IMap? dart_Uri_queryParametersAll(PLEnv env, PLVector args) {
       return returnValue.toIMap();
     } else {
       throw ArgumentError(
-          'The dart/Uri.queryParametersAll function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.queryParametersAll function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11224,7 +11224,7 @@ bool? dart_Uri_isAbsolute(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.isAbsolute function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.isAbsolute function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11241,7 +11241,7 @@ bool? dart_Uri_hasScheme(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.hasScheme function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.hasScheme function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11258,7 +11258,7 @@ bool? dart_Uri_hasAuthority(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.hasAuthority function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.hasAuthority function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11275,7 +11275,7 @@ bool? dart_Uri_hasPort(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.hasPort function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.hasPort function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11292,7 +11292,7 @@ bool? dart_Uri_hasQuery(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.hasQuery function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.hasQuery function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11309,7 +11309,7 @@ bool? dart_Uri_hasFragment(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.hasFragment function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.hasFragment function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11326,7 +11326,7 @@ bool? dart_Uri_hasEmptyPath(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.hasEmptyPath function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.hasEmptyPath function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11343,7 +11343,7 @@ bool? dart_Uri_hasAbsolutePath(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.hasAbsolutePath function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.hasAbsolutePath function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11360,7 +11360,7 @@ String? dart_Uri_origin(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.origin function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.origin function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11375,7 +11375,7 @@ bool? dart_Uri_isScheme(PLEnv env, PLVector args) {
     if (o is Uri) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/Uri.isScheme function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/Uri.isScheme function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.isScheme(
@@ -11384,7 +11384,7 @@ bool? dart_Uri_isScheme(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.isScheme function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.isScheme function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11401,7 +11401,7 @@ String? dart_Uri_toFilePath(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.toFilePath function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.toFilePath function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11418,7 +11418,7 @@ UriData? dart_Uri_data(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.data function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.data function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11435,7 +11435,7 @@ int? dart_Uri_hashCode(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.hashCode function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.hashCode function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11452,7 +11452,7 @@ String? dart_Uri_toString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.toString function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.toString function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11469,7 +11469,7 @@ Uri? dart_Uri_replace(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.replace function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.replace function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11486,7 +11486,7 @@ Uri? dart_Uri_removeFragment(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.removeFragment function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.removeFragment function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11501,7 +11501,7 @@ Uri? dart_Uri_resolve(PLEnv env, PLVector args) {
     if (o is Uri) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/Uri.resolve function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/Uri.resolve function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.resolve(
@@ -11510,7 +11510,7 @@ Uri? dart_Uri_resolve(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.resolve function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.resolve function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11525,7 +11525,7 @@ Uri? dart_Uri_resolveUri(PLEnv env, PLVector args) {
     if (o is Uri) {
       if (args[1] is! Uri) {
         throw ArgumentError(
-            'The dart/Uri.resolveUri function expects its 2nd argument to be a Uri value, but received a ${typeString(args[1])} value.');
+            'The dart/Uri.resolveUri function expects its 2nd argument to be a Uri value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.resolveUri(
@@ -11534,7 +11534,7 @@ Uri? dart_Uri_resolveUri(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.resolveUri function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.resolveUri function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11551,7 +11551,7 @@ Uri? dart_Uri_normalizePath(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Uri.normalizePath function expects its first argument to be a Uri object but received a ${typeString(o)} value.');
+          'The dart/Uri.normalizePath function expects its first argument to be a Uri object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -11564,7 +11564,7 @@ Uri? dart_Uri_parse(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.parse function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.parse function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.parse(
@@ -11582,15 +11582,15 @@ Uri? dart_Uri_parse_full(PLEnv env, PLVector args) {
   if (args.length == 3) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.parse-full function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.parse-full function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! int) {
       throw ArgumentError(
-          'The dart/Uri.parse-full function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+          'The dart/Uri.parse-full function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! int) {
       throw ArgumentError(
-          'The dart/Uri.parse-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+          'The dart/Uri.parse-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
     }
 
     final returnValue = Uri.parse(
@@ -11610,7 +11610,7 @@ Uri? dart_Uri_tryParse(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.tryParse function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.tryParse function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.tryParse(
@@ -11628,15 +11628,15 @@ Uri? dart_Uri_tryParse_full(PLEnv env, PLVector args) {
   if (args.length == 3) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.tryParse-full function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.tryParse-full function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! int) {
       throw ArgumentError(
-          'The dart/Uri.tryParse-full function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+          'The dart/Uri.tryParse-full function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! int) {
       throw ArgumentError(
-          'The dart/Uri.tryParse-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+          'The dart/Uri.tryParse-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
     }
 
     final returnValue = Uri.tryParse(
@@ -11656,7 +11656,7 @@ String? dart_Uri_encodeComponent(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.encodeComponent function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.encodeComponent function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.encodeComponent(
@@ -11674,7 +11674,7 @@ String? dart_Uri_encodeQueryComponent(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.encodeQueryComponent function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.encodeQueryComponent function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.encodeQueryComponent(
@@ -11692,7 +11692,7 @@ String? dart_Uri_decodeComponent(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.decodeComponent function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.decodeComponent function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.decodeComponent(
@@ -11710,7 +11710,7 @@ String? dart_Uri_decodeQueryComponent(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.decodeQueryComponent function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.decodeQueryComponent function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.decodeQueryComponent(
@@ -11728,7 +11728,7 @@ String? dart_Uri_encodeFull(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.encodeFull function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.encodeFull function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.encodeFull(
@@ -11746,7 +11746,7 @@ String? dart_Uri_decodeFull(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.decodeFull function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.decodeFull function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.decodeFull(
@@ -11764,7 +11764,7 @@ IMap? dart_Uri_splitQueryString(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.splitQueryString function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.splitQueryString function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.splitQueryString(
@@ -11782,7 +11782,7 @@ IList? dart_Uri_parseIPv4Address(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.parseIPv4Address function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.parseIPv4Address function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.parseIPv4Address(
@@ -11800,7 +11800,7 @@ IList? dart_Uri_parseIPv6Address(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.parseIPv6Address function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.parseIPv6Address function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.parseIPv6Address(
@@ -11818,15 +11818,15 @@ IList? dart_Uri_parseIPv6Address_full(PLEnv env, PLVector args) {
   if (args.length == 3) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.parseIPv6Address-full function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.parseIPv6Address-full function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! int) {
       throw ArgumentError(
-          'The dart/Uri.parseIPv6Address-full function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+          'The dart/Uri.parseIPv6Address-full function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! int) {
       throw ArgumentError(
-          'The dart/Uri.parseIPv6Address-full function expects its 3rd argument to be a int value, but received a ${typeString(args[2])} value.');
+          'The dart/Uri.parseIPv6Address-full function expects its 3rd argument to be a int value, but received a ${PiLisp.typeName(args[2])} value.');
     }
 
     final returnValue = Uri.parseIPv6Address(
@@ -11857,7 +11857,7 @@ Uri? dart_Uri_http(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.http function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.http function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.http(
@@ -11875,15 +11875,15 @@ Uri? dart_Uri_http_full(PLEnv env, PLVector args) {
   if (args.length == 3) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.http-full function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.http-full function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! String) {
       throw ArgumentError(
-          'The dart/Uri.http-full function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+          'The dart/Uri.http-full function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! Map) {
       throw ArgumentError(
-          'The dart/Uri.http-full function expects its 3rd argument to be a Map value, but received a ${typeString(args[2])} value.');
+          'The dart/Uri.http-full function expects its 3rd argument to be a Map value, but received a ${PiLisp.typeName(args[2])} value.');
     }
 
     final returnValue = Uri.http(
@@ -11903,7 +11903,7 @@ Uri? dart_Uri_https(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.https function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.https function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.https(
@@ -11921,15 +11921,15 @@ Uri? dart_Uri_https_full(PLEnv env, PLVector args) {
   if (args.length == 3) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.https-full function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.https-full function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! String) {
       throw ArgumentError(
-          'The dart/Uri.https-full function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+          'The dart/Uri.https-full function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
     }
     if (args[2] is! Map) {
       throw ArgumentError(
-          'The dart/Uri.https-full function expects its 3rd argument to be a Map value, but received a ${typeString(args[2])} value.');
+          'The dart/Uri.https-full function expects its 3rd argument to be a Map value, but received a ${PiLisp.typeName(args[2])} value.');
     }
 
     final returnValue = Uri.https(
@@ -11949,7 +11949,7 @@ Uri? dart_Uri_file(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.file function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.file function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.file(
@@ -11967,7 +11967,7 @@ Uri? dart_Uri_directory(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.directory function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.directory function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.directory(
@@ -11985,7 +11985,7 @@ Uri? dart_Uri_dataFromString(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/Uri.dataFromString function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.dataFromString function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.dataFromString(
@@ -12003,7 +12003,7 @@ Uri? dart_Uri_dataFromBytes(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! List) {
       throw ArgumentError(
-          'The dart/Uri.dataFromBytes function expects its 1st argument to be a List value, but received a ${typeString(args[0])} value.');
+          'The dart/Uri.dataFromBytes function expects its 1st argument to be a List value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Uri.dataFromBytes(
@@ -12021,7 +12021,7 @@ UriData? dart_UriData_parse(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/UriData.parse function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/UriData.parse function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = UriData.parse(
@@ -12043,7 +12043,7 @@ Uri? dart_UriData_uri(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/UriData.uri function expects its first argument to be a UriData object but received a ${typeString(o)} value.');
+          'The dart/UriData.uri function expects its first argument to be a UriData object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -12060,7 +12060,7 @@ String? dart_UriData_mimeType(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/UriData.mimeType function expects its first argument to be a UriData object but received a ${typeString(o)} value.');
+          'The dart/UriData.mimeType function expects its first argument to be a UriData object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -12075,7 +12075,7 @@ bool? dart_UriData_isMimeType(PLEnv env, PLVector args) {
     if (o is UriData) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/UriData.isMimeType function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/UriData.isMimeType function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.isMimeType(
@@ -12084,7 +12084,7 @@ bool? dart_UriData_isMimeType(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/UriData.isMimeType function expects its first argument to be a UriData object but received a ${typeString(o)} value.');
+          'The dart/UriData.isMimeType function expects its first argument to be a UriData object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -12101,7 +12101,7 @@ String? dart_UriData_charset(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/UriData.charset function expects its first argument to be a UriData object but received a ${typeString(o)} value.');
+          'The dart/UriData.charset function expects its first argument to be a UriData object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -12116,7 +12116,7 @@ bool? dart_UriData_isCharset(PLEnv env, PLVector args) {
     if (o is UriData) {
       if (args[1] is! String) {
         throw ArgumentError(
-            'The dart/UriData.isCharset function expects its 2nd argument to be a String value, but received a ${typeString(args[1])} value.');
+            'The dart/UriData.isCharset function expects its 2nd argument to be a String value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.isCharset(
@@ -12125,7 +12125,7 @@ bool? dart_UriData_isCharset(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/UriData.isCharset function expects its first argument to be a UriData object but received a ${typeString(o)} value.');
+          'The dart/UriData.isCharset function expects its first argument to be a UriData object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -12140,7 +12140,7 @@ bool? dart_UriData_isEncoding(PLEnv env, PLVector args) {
     if (o is UriData) {
       if (args[1] is! Encoding) {
         throw ArgumentError(
-            'The dart/UriData.isEncoding function expects its 2nd argument to be a Encoding value, but received a ${typeString(args[1])} value.');
+            'The dart/UriData.isEncoding function expects its 2nd argument to be a Encoding value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.isEncoding(
@@ -12149,7 +12149,7 @@ bool? dart_UriData_isEncoding(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/UriData.isEncoding function expects its first argument to be a UriData object but received a ${typeString(o)} value.');
+          'The dart/UriData.isEncoding function expects its first argument to be a UriData object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -12166,7 +12166,7 @@ bool? dart_UriData_isBase64(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/UriData.isBase64 function expects its first argument to be a UriData object but received a ${typeString(o)} value.');
+          'The dart/UriData.isBase64 function expects its first argument to be a UriData object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -12183,7 +12183,7 @@ String? dart_UriData_contentText(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/UriData.contentText function expects its first argument to be a UriData object but received a ${typeString(o)} value.');
+          'The dart/UriData.contentText function expects its first argument to be a UriData object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -12200,7 +12200,7 @@ String? dart_UriData_contentAsString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/UriData.contentAsString function expects its first argument to be a UriData object but received a ${typeString(o)} value.');
+          'The dart/UriData.contentAsString function expects its first argument to be a UriData object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -12217,7 +12217,7 @@ IMap? dart_UriData_parameters(PLEnv env, PLVector args) {
       return returnValue.toIMap();
     } else {
       throw ArgumentError(
-          'The dart/UriData.parameters function expects its first argument to be a UriData object but received a ${typeString(o)} value.');
+          'The dart/UriData.parameters function expects its first argument to be a UriData object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -12234,7 +12234,7 @@ String? dart_UriData_toString(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/UriData.toString function expects its first argument to be a UriData object but received a ${typeString(o)} value.');
+          'The dart/UriData.toString function expects its first argument to be a UriData object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -12247,7 +12247,7 @@ UriData? dart_UriData_fromString(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/UriData.fromString function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/UriData.fromString function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = UriData.fromString(
@@ -12265,7 +12265,7 @@ UriData? dart_UriData_fromBytes(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! List) {
       throw ArgumentError(
-          'The dart/UriData.fromBytes function expects its 1st argument to be a List value, but received a ${typeString(args[0])} value.');
+          'The dart/UriData.fromBytes function expects its 1st argument to be a List value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = UriData.fromBytes(
@@ -12283,7 +12283,7 @@ UriData? dart_UriData_fromUri(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Uri) {
       throw ArgumentError(
-          'The dart/UriData.fromUri function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+          'The dart/UriData.fromUri function expects its 1st argument to be a Uri value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = UriData.fromUri(
@@ -12303,7 +12303,7 @@ int? dart_Random_nextInt(PLEnv env, PLVector args) {
     if (o is Random) {
       if (args[1] is! int) {
         throw ArgumentError(
-            'The dart/Random.nextInt function expects its 2nd argument to be a int value, but received a ${typeString(args[1])} value.');
+            'The dart/Random.nextInt function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
       }
 
       final returnValue = o.nextInt(
@@ -12312,7 +12312,7 @@ int? dart_Random_nextInt(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Random.nextInt function expects its first argument to be a Random object but received a ${typeString(o)} value.');
+          'The dart/Random.nextInt function expects its first argument to be a Random object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -12329,7 +12329,7 @@ double? dart_Random_nextDouble(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Random.nextDouble function expects its first argument to be a Random object but received a ${typeString(o)} value.');
+          'The dart/Random.nextDouble function expects its first argument to be a Random object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -12346,7 +12346,7 @@ bool? dart_Random_nextBool(PLEnv env, PLVector args) {
       return returnValue;
     } else {
       throw ArgumentError(
-          'The dart/Random.nextBool function expects its first argument to be a Random object but received a ${typeString(o)} value.');
+          'The dart/Random.nextBool function expects its first argument to be a Random object but received a ${PiLisp.typeName(o)} value.');
     }
   } else {
     throw ArgumentError(
@@ -12370,7 +12370,7 @@ Random? dart_Random__full(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! int) {
       throw ArgumentError(
-          'The dart/Random.-full function expects its 1st argument to be a int value, but received a ${typeString(args[0])} value.');
+          'The dart/Random.-full function expects its 1st argument to be a int value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = Random(
@@ -12399,7 +12399,7 @@ void dart_dart_core_print(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Object) {
       throw ArgumentError(
-          'The dart/dart-core-print function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-core-print function expects its 1st argument to be a Object value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = print(
@@ -12417,11 +12417,11 @@ bool? dart_dart_core_identical(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! Object) {
       throw ArgumentError(
-          'The dart/dart-core-identical function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-core-identical function expects its 1st argument to be a Object value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! Object) {
       throw ArgumentError(
-          'The dart/dart-core-identical function expects its 2nd argument to be a Object value, but received a ${typeString(args[1])} value.');
+          'The dart/dart-core-identical function expects its 2nd argument to be a Object value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = identical(
@@ -12440,7 +12440,7 @@ int? dart_dart_core_identityHashCode(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Object) {
       throw ArgumentError(
-          'The dart/dart-core-identityHashCode function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-core-identityHashCode function expects its 1st argument to be a Object value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = identityHashCode(
@@ -12458,7 +12458,7 @@ String? dart_dart_convert_base64Encode(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! List) {
       throw ArgumentError(
-          'The dart/dart-convert-base64Encode function expects its 1st argument to be a List value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-convert-base64Encode function expects its 1st argument to be a List value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = base64Encode(
@@ -12476,7 +12476,7 @@ dynamic dart_dart_convert_jsonDecode(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/dart-convert-jsonDecode function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-convert-jsonDecode function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = jsonDecode(
@@ -12494,7 +12494,7 @@ Uint8List? dart_dart_convert_base64Decode(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
-          'The dart/dart-convert-base64Decode function expects its 1st argument to be a String value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-convert-base64Decode function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = base64Decode(
@@ -12512,7 +12512,7 @@ String? dart_dart_convert_jsonEncode(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Object) {
       throw ArgumentError(
-          'The dart/dart-convert-jsonEncode function expects its 1st argument to be a Object value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-convert-jsonEncode function expects its 1st argument to be a Object value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = jsonEncode(
@@ -12530,7 +12530,7 @@ String? dart_dart_convert_base64UrlEncode(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! List) {
       throw ArgumentError(
-          'The dart/dart-convert-base64UrlEncode function expects its 1st argument to be a List value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-convert-base64UrlEncode function expects its 1st argument to be a List value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = base64UrlEncode(
@@ -12548,11 +12548,11 @@ double? dart_dart_math_atan2(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! num) {
       throw ArgumentError(
-          'The dart/dart-math-atan2 function expects its 1st argument to be a num value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-math-atan2 function expects its 1st argument to be a num value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! num) {
       throw ArgumentError(
-          'The dart/dart-math-atan2 function expects its 2nd argument to be a num value, but received a ${typeString(args[1])} value.');
+          'The dart/dart-math-atan2 function expects its 2nd argument to be a num value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = atan2(
@@ -12571,7 +12571,7 @@ double? dart_dart_math_sqrt(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! num) {
       throw ArgumentError(
-          'The dart/dart-math-sqrt function expects its 1st argument to be a num value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-math-sqrt function expects its 1st argument to be a num value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = sqrt(
@@ -12589,7 +12589,7 @@ double? dart_dart_math_atan(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! num) {
       throw ArgumentError(
-          'The dart/dart-math-atan function expects its 1st argument to be a num value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-math-atan function expects its 1st argument to be a num value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = atan(
@@ -12607,7 +12607,7 @@ double? dart_dart_math_asin(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! num) {
       throw ArgumentError(
-          'The dart/dart-math-asin function expects its 1st argument to be a num value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-math-asin function expects its 1st argument to be a num value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = asin(
@@ -12625,7 +12625,7 @@ double? dart_dart_math_exp(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! num) {
       throw ArgumentError(
-          'The dart/dart-math-exp function expects its 1st argument to be a num value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-math-exp function expects its 1st argument to be a num value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = exp(
@@ -12643,7 +12643,7 @@ double? dart_dart_math_sin(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! num) {
       throw ArgumentError(
-          'The dart/dart-math-sin function expects its 1st argument to be a num value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-math-sin function expects its 1st argument to be a num value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = sin(
@@ -12661,7 +12661,7 @@ double? dart_dart_math_tan(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! num) {
       throw ArgumentError(
-          'The dart/dart-math-tan function expects its 1st argument to be a num value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-math-tan function expects its 1st argument to be a num value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = tan(
@@ -12679,7 +12679,7 @@ double? dart_dart_math_cos(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! num) {
       throw ArgumentError(
-          'The dart/dart-math-cos function expects its 1st argument to be a num value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-math-cos function expects its 1st argument to be a num value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = cos(
@@ -12697,7 +12697,7 @@ double? dart_dart_math_log(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! num) {
       throw ArgumentError(
-          'The dart/dart-math-log function expects its 1st argument to be a num value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-math-log function expects its 1st argument to be a num value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = log(
@@ -12715,7 +12715,7 @@ double? dart_dart_math_acos(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! num) {
       throw ArgumentError(
-          'The dart/dart-math-acos function expects its 1st argument to be a num value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-math-acos function expects its 1st argument to be a num value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = acos(
@@ -12733,11 +12733,11 @@ num? dart_dart_math_pow(PLEnv env, PLVector args) {
   if (args.length == 2) {
     if (args[0] is! num) {
       throw ArgumentError(
-          'The dart/dart-math-pow function expects its 1st argument to be a num value, but received a ${typeString(args[0])} value.');
+          'The dart/dart-math-pow function expects its 1st argument to be a num value, but received a ${PiLisp.typeName(args[0])} value.');
     }
     if (args[1] is! num) {
       throw ArgumentError(
-          'The dart/dart-math-pow function expects its 2nd argument to be a num value, but received a ${typeString(args[1])} value.');
+          'The dart/dart-math-pow function expects its 2nd argument to be a num value, but received a ${PiLisp.typeName(args[1])} value.');
     }
 
     final returnValue = pow(
@@ -12756,7 +12756,7 @@ Future? dart_package_http_http_dart_head(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Uri) {
       throw ArgumentError(
-          'The dart/package-http-http-dart-head function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+          'The dart/package-http-http-dart-head function expects its 1st argument to be a Uri value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = head(
@@ -12774,7 +12774,7 @@ Future? dart_package_http_http_dart_post(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Uri) {
       throw ArgumentError(
-          'The dart/package-http-http-dart-post function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+          'The dart/package-http-http-dart-post function expects its 1st argument to be a Uri value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = post(
@@ -12792,7 +12792,7 @@ Future? dart_package_http_http_dart_put(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Uri) {
       throw ArgumentError(
-          'The dart/package-http-http-dart-put function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+          'The dart/package-http-http-dart-put function expects its 1st argument to be a Uri value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = put(
@@ -12810,7 +12810,7 @@ Future? dart_package_http_http_dart_readBytes(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Uri) {
       throw ArgumentError(
-          'The dart/package-http-http-dart-readBytes function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+          'The dart/package-http-http-dart-readBytes function expects its 1st argument to be a Uri value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = readBytes(
@@ -12828,7 +12828,7 @@ Future? dart_package_http_http_dart_get(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Uri) {
       throw ArgumentError(
-          'The dart/package-http-http-dart-get function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+          'The dart/package-http-http-dart-get function expects its 1st argument to be a Uri value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = get(
@@ -12846,7 +12846,7 @@ Future? dart_package_http_http_dart_delete(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Uri) {
       throw ArgumentError(
-          'The dart/package-http-http-dart-delete function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+          'The dart/package-http-http-dart-delete function expects its 1st argument to be a Uri value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = delete(
@@ -12864,7 +12864,7 @@ Future? dart_package_http_http_dart_patch(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Uri) {
       throw ArgumentError(
-          'The dart/package-http-http-dart-patch function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+          'The dart/package-http-http-dart-patch function expects its 1st argument to be a Uri value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = patch(
@@ -12882,7 +12882,7 @@ Future? dart_package_http_http_dart_read(PLEnv env, PLVector args) {
   if (args.length == 1) {
     if (args[0] is! Uri) {
       throw ArgumentError(
-          'The dart/package-http-http-dart-read function expects its 1st argument to be a Uri value, but received a ${typeString(args[0])} value.');
+          'The dart/package-http-http-dart-read function expects its 1st argument to be a Uri value, but received a ${PiLisp.typeName(args[0])} value.');
     }
 
     final returnValue = read(
