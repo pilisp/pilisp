@@ -343,8 +343,8 @@ void writeMethodWrappers(
     ${returnTypeName == 'void' || returnTypeName == 'dynamic' ? returnTypeName : '$returnTypeName?'} ${legalMethodName(wrapperDartName)}(PLEnv env, PLVector args) {
       if (${numParams == 0 ? 'args.isEmpty' : 'args.length == $numParams'}) {
         $paramCheckCode
-        final returnValue = $className.$declName$argCode;
-        $returnCode
+        ${declName.endsWith('=') ? '$className.${declName.substring(0, declName.length - 1)} = ${argCode.substring(1).substring(0, argCode.length - 4)};' : 'final returnValue = $className.$declName$argCode;'}
+        ${declName.endsWith('=') ? '' : returnCode}
       } else {
         throw ArgumentError('The $wrapperPiLispName function expects $numParams argument(s) but received \${args.length} arguments.');
       }
