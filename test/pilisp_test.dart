@@ -1150,6 +1150,36 @@ void main() {
         });
       });
     });
+    group('Env', () {
+      group('completions', () {
+        test('for bindings', () {
+          expect(
+              piLispEnv.completionsFor('con').toIList().sort(),
+              IList([
+                'concat',
+                'cond',
+                'conj',
+                'cons',
+                'contains-key?',
+                'contains-value?',
+                'contains?'
+              ]));
+          evalProgram('(def constitution "YES")');
+          expect(
+              piLispEnv.completionsFor('con').toIList().sort(),
+              IList([
+                'concat',
+                'cond',
+                'conj',
+                'cons',
+                'constitution',
+                'contains-key?',
+                'contains-value?',
+                'contains?'
+              ]));
+        });
+      });
+    });
   });
   group('Library', () {
     // test('/ DEBUG', () {

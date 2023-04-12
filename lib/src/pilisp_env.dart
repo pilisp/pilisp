@@ -516,6 +516,47 @@ class PLEnv {
     addBindingValue(symbolCatchHandlers, pcf.catchClauses);
     addBindingValue(symbolFinallyHandler, pcf.finallyClause);
   }
+
+  Iterable<String> completionsFor(String completionPrefix) {
+    List<String> matches = [];
+
+    // Matches on keys of `cd`ed-into parent entity
+    if (completionPrefix.startsWith('.')) {
+      final actualPrefix = completionPrefix.substring(1);
+
+      if (parent != null) {
+        final pe = parent!;
+        if (pe is IMap) {
+          final keys = pe.toKeyList();
+          for (final k in keys) {
+            String? kName;
+            if (k is PLSymbol) {
+              kName = k.name;
+            } else if (k is PLTerm) {
+              kName = k.name;
+            } else if (k is String) {
+              kName = k;
+            }
+            if (kName != null && kName.startsWith(actualPrefix)) {
+              matches.add(kName);
+            }
+          }
+        }
+      }
+    } else {
+      // All bindings in the [PLEnv]
+      for (final scope in scopes) {
+        for (final bindingSym in scope.keys) {
+          final symName = bindingSym.name;
+          if (symName.startsWith(completionPrefix)) {
+            matches.add(symName);
+          }
+        }
+      }
+    }
+
+    return matches.distinct();
+  }
 }
 
 /// A [PLBindingEntry] represents a symbol bound to a value in the PiLisp
