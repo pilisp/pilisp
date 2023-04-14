@@ -1,3 +1,16 @@
+## v1.0.0-alpha.8
+
+* Adds initial multimethod support via `defmulti` and `defmethod`, for dispatch by `type` only
+   * Does not yet support arbitrary dispatch functions
+   * Does support `:default`
+* Adds `boolean`, `current-time-millis`
+* Supports setters in generated Dart code
+* More Dart code documentation of public forms
+* Adds [http](https://pub.dev/packages/http) package and includes in code gen
+   * This package is multi-platform, hence its inclusion in the core language.
+* Makes `ibool` convert by truthy-ness, not just strict `true` or `false`
+* Adds `PLEnv.completionsFor` to provide completions based on all bindings in scope
+
 ## v1.0.0-alpha.7
 
 * Adds `PLAwait` value that signals to Dart code evaluating PiLisp programs that the final value should be `await`ed.
