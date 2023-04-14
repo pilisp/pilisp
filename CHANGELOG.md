@@ -1,3 +1,7 @@
+## v1.0.0-alpha.9
+
+* Bump dependency on `pilisp_cli` so that minimum Dart SDK version is acceptable for analysis on pub.dev
+
 ## v1.0.0-alpha.8
 
 * Adds initial multimethod support via `defmulti` and `defmethod`, for dispatch by `type` only
