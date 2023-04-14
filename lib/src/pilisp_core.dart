@@ -171,7 +171,9 @@ class PLMultiMethod extends PLNamedInvocable {
 
   // Multi-methods
 
-  Object? invokeFunctionDispatchedMethod(PLEnv env, Iterable<Object?> args) {}
+  Object? invokeFunctionDispatchedMethod(PLEnv env, Iterable<Object?> args) {
+    throw UnimplementedError;
+  }
 }
 
 bool isIdenticalFn(PLEnv env, PLVector args) {
