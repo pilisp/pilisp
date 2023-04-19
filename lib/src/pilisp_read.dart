@@ -13,7 +13,8 @@ RegExp matchesStringInnards = RegExp('(?:[^"\\\\]|\\\\.)*');
 /// https://dart.dev/guides/language/specifications/DartLangSpec-v2.10.pdf
 RegExp matchesStringEscape = RegExp(
     r'\\(?:x([0-9a-fA-F]{2})|u([0-9a-fA-F]{4})|u\{([0-9a-fA-F]+)\}|(.))');
-RegExp matchesSymbol = RegExp(r'([.:])?([^0-9].*)$');
+RegExp matchesSymbol = RegExp(r'([^0-9\.:].*)$');
+RegExp matchesTerm = RegExp(r'([\.:])(.*)$');
 
 int at = '@'.codeUnitAt(0);
 int backSlash = r'\'.codeUnitAt(0);
@@ -533,26 +534,29 @@ class PiLispStringReader {
           } else {
             final parsedSymbol = matchesSymbol.matchAsPrefix(token);
             if (parsedSymbol != null) {
-              final isTerm = parsedSymbol.group(1);
-              final symbolName = parsedSymbol.group(2);
+              final symbolName = parsedSymbol.group(1);
               if (symbolName != null) {
-                if (isTerm != null) {
-                  return PLTerm(symbolName);
-                } else {
-                  var sym = PLSymbol(symbolName);
-                  if (isInAnonymousFn && sym.name.startsWith('%')) {
-                    if (sym == PLSymbol('%')) {
-                      sym = PLSymbol('%1');
-                    }
-                    anonymousFnArgs = anonymousFnArgs.add(sym);
+                var sym = PLSymbol(symbolName);
+                if (isInAnonymousFn && sym.name.startsWith('%')) {
+                  if (sym == PLSymbol('%')) {
+                    sym = PLSymbol('%1');
                   }
-                  return sym;
+                  anonymousFnArgs = anonymousFnArgs.add(sym);
                 }
+                return sym;
               } else {
                 throw FormatException(
                     'Line $loc Developer error: Symbol regexp matched, but symbol name did not.');
               }
             } else {
+              final parsedTerm = matchesTerm.matchAsPrefix(token);
+              if (parsedTerm != null) {
+                final termName = parsedTerm.group(2);
+                if (termName != null) {
+                  return PLTerm(termName);
+                }
+              }
+              // Final Else:
               throw UnreadableFormException(
                   'Line $loc Unreadable form encountered: $token');
             }
