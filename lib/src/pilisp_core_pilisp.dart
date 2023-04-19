@@ -214,11 +214,32 @@ final piLispCore = r'''
     (dart/PLMultiMethod.removeTypeDispatchedMethod multi-method dispatch-value)
     (throw (ex-info "Unimplemented"))))
 
+;; # Transients
+
+(declare cond vector? map? set? list? name vec set)
+
+(defn transient
+  [x]
+  (cond
+    (or (vector? x)
+        (list? x))
+    (to-dart-list x)
+
+    (map? x)
+    (to-dart-map x)
+
+    (set? x)
+    (to-dart-set x)
+
+    :else (throw (ex-info (str "A " (type x) " value does not support a transient (mutable) version of itself.")))))
+
 (defn into
   {:doc "Returns a new coll consisting of to-coll with all of the items of from-coll conjoined. A transducer may be supplied."}
   ([] [])
   ([to] to)
   ([to from]
+   ;; TODO Determine why this causes a StackOverflow
+   #_(persistent! (reduce conj! (transient to) from))
    (reduce conj to from)))
 
 (defmacro when
@@ -428,6 +449,8 @@ final piLispCore = r'''
 (defn identity
   {:doc "Return the argument provided."}
   [x] x)
+
+(defn id [x] x) ;; alias for ease of typing
 
 (defn comp
   {:doc "Returns the composition of the given functions."}
@@ -972,7 +995,6 @@ final piLispCore = r'''
   [pred coll]
   (filter (complement pred) coll))
 
-;; TODO Support vector use-case
 (defn assoc
   {:doc "assoc[iate]. When applied to a map, returns a new map of the same (hashed/sorted) type, that contains the mapping of key(s) to val(s). When applied to a vector, returns a new vector that contains val at index. Note - index must be <= (count vector)."}
   ([map key val] (assoc* map key val))
@@ -982,8 +1004,19 @@ final piLispCore = r'''
        (if (next kvs)
          (apply assoc ret (first kvs) (second kvs) (nnext kvs))
          (throw (ex-info
-                 "assoc expects even number of arguments after map/vector, found odd number"
-                 {})))
+                 "assoc expects even number of arguments after map/vector, found odd number")))
+       ret))))
+
+(defn assoc!
+  {:doc "Like assoc, but for Dart maps, mutating the original maps provided."}
+  ([map key val] (assoc!* map key val))
+  ([map key val & kvs]
+   (let [ret (assoc!* map key val)]
+     (if kvs
+       (if (next kvs)
+         (apply assoc! ret (first kvs) (second kvs) (nnext kvs))
+         (throw (ex-info
+                 "assoc! expects even number of arguments after map/vector, found odd number")))
        ret))))
 
 (defn update

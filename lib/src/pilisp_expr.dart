@@ -714,7 +714,7 @@ class PLVector extends PLExprIterable
   // ignore: overridden_fields
   final IList<Object?> _elements;
 
-  PLVector(Iterable<Object?> elements) : _elements = IList(elements);
+  PLVector(Iterable<Object?> elements) : _elements = elements.toIList();
 
   @override
   PLVector newInstance(IList<Object?> ilist) => PLVector(ilist);
@@ -969,16 +969,6 @@ Object? macroExpand(PLEnv env, Object? form) {
   return form;
 }
 
-extension on Iterable<Object?> {
-  PLVector toPLVector() {
-    return PLVector(this);
-  }
-
-  PLList toPLList() {
-    return PLList(this);
-  }
-}
-
 extension on IMap<Object?, Object?> {
   Object? _plEval(PLEnv env) {
     return map((key, value) => MapEntry(plEval(env, key), plEval(env, value)));
@@ -1072,6 +1062,18 @@ extension IListToPLVector on IList<Object?> {
 extension ListToPLVector on List<Object?> {
   PLVector toPLVector() {
     return PLVector(this);
+  }
+}
+
+extension IterableToPLVector on Iterable<Object?> {
+  PLVector toPLVector() {
+    return PLVector(this);
+  }
+}
+
+extension IterableToPLList on Iterable<Object?> {
+  PLList toPLList() {
+    return PLList(this);
   }
 }
 

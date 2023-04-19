@@ -149,10 +149,22 @@ class PLEnv {
         vectorFn, IMap({termDoc: 'Returns a vector of the arguments.'})),
     PLSymbol('hash-map'): PLBindingEntry.withMeta(
         hashMapFn, IMap({termDoc: 'Returns a hash-map of the arguments.'})),
+    PLSymbol('persistent!'): PLBindingEntry.withMeta(
+        persistentBangFn,
+        IMap({
+          termDoc:
+              'Returns a persistent (immutable) version of the given mutable collection. Returns vectors for iterables. Throws an error if not a Dart Iterable, Map, or Set.'
+        })),
     PLSymbol('conj'): PLBindingEntry.withMeta(
         conjFn,
         IMap({
           termDoc: 'Returns a new collection with the item added (conjoined).'
+        })),
+    PLSymbol('conj!'): PLBindingEntry.withMeta(
+        conjBangFn,
+        IMap({
+          termDoc:
+              'Returns the Dart list provided, mutated to have the given item added to the end.'
         })),
     PLSymbol('to-dart-list'): PLBindingEntry.withMeta(
         toDartListFn,
@@ -191,6 +203,12 @@ class PLEnv {
         })),
     PLSymbol('assoc*'): PLBindingEntry.withMeta(assocFn,
         IMap({termDoc: 'Returns a new map with the value mapped to key.'})),
+    PLSymbol('assoc!*'): PLBindingEntry.withMeta(
+        assocBangFn,
+        IMap({
+          termDoc:
+              'Returns the Dart map provided with entry at key mutated to have the given value.'
+        })),
     PLSymbol('dissoc'): PLBindingEntry.withMeta(
         dissocFn,
         IMap({

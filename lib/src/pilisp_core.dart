@@ -703,6 +703,25 @@ Map<Object?, Object?> toDartMapFn(PLEnv env, PLVector args) {
   }
 }
 
+Object? persistentBangFn(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final coll = args[0];
+    if (coll is Iterable) {
+      return coll.toPLVector();
+    } else if (coll is Map) {
+      return coll.toIMap();
+    } else if (coll is Set) {
+      return coll.toISet();
+    } else {
+      throw ArgumentError(
+          'The persistent! functions expects its argument to be a Dart List, Map, or Set, but received a ${typeString(coll)} value');
+    }
+  } else {
+    throw ArgumentError(
+        'The persistent! function expects 1 argument, but received ${args.length} arguments.');
+  }
+}
+
 Set<Object?> toDartSetFn(PLEnv env, PLVector args) {
   if (args.length == 1) {
     final coll = args[0];
@@ -770,6 +789,34 @@ Object? conjFn(PLEnv env, PLVector args) {
   }
 }
 
+Object? conjBangFn(PLEnv env, PLVector args) {
+  if (args.isEmpty) {
+    return [];
+  }
+  final coll = args[0];
+  final xs = args.skip(1);
+  if (coll is List) {
+    return coll..addAll(xs);
+  } else if (coll is Map) {
+    for (final x in xs) {
+      if (x is PLVector && x.length == 2) {
+        coll[x[0]] = x[1];
+      } else if (x is IMap<Object?, Object?>) {
+        coll.addAll(x.unlock);
+      } else if (x == null) {
+        throw ArgumentError(
+            'Cannot conj! ${plPrintToString(env, x)} onto a Dart Map. Only PiLisp maps and two-item vectors supported.');
+      }
+    }
+    return coll;
+  } else if (coll is Set) {
+    return coll..addAll(xs);
+  } else {
+    throw ArgumentError(
+        'The conj! function expects its first argument to be a Dart List, Map, or Set, but received a ${typeString(coll)} value.');
+  }
+}
+
 Object? assocFn(PLEnv env, PLVector args) {
   if (args.length >= 3) {
     final coll = args[0];
@@ -791,11 +838,40 @@ Object? assocFn(PLEnv env, PLVector args) {
       }
     } else {
       throw ArgumentError(
-          'The assoc* function expects its first argument to be a map, but received a ${typeString(coll)}');
+          'The assoc* function expects its first argument to be a map or a vector, but received a ${typeString(coll)}');
     }
   } else {
     throw ArgumentError(
         'The assoc* function expects at least 3 arguments, but only received ${args.length} arguments.');
+  }
+}
+
+Object? assocBangFn(PLEnv env, PLVector args) {
+  if (args.length >= 3) {
+    final coll = args[0];
+    final key = args[1];
+    final value = args[2];
+    if (coll is Map) {
+      return coll..[key] = value;
+    } else if (coll is List) {
+      if (key is int) {
+        if (key == coll.length) {
+          // NB. Match Clojure behavior
+          return coll..add(value);
+        } else {
+          return coll..[key] = value;
+        }
+      } else {
+        throw ArgumentError(
+            'When assoc!-ing into a vector, the key must be an integer, but received a ${typeString(key)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The assoc!* function expects its first argument to be a map or a vector, but received a ${typeString(coll)}');
+    }
+  } else {
+    throw ArgumentError(
+        'The assoc!* function expects at least 3 arguments, but only received ${args.length} arguments.');
   }
 }
 

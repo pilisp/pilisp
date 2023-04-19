@@ -1150,8 +1150,35 @@ void main() {
         });
       });
     });
-    group('Env', () {
-      group('completions', () {
+    group('/ Core functions in Dart', () {
+      group('/ assoc!*', () {
+        test('/ handles Dart maps', () {
+          expect(evalProgram('''
+(assoc!* (to-dart-map {.apple 1 .banana 2}) .apple 100)
+'''), {
+            PLTerm('apple'): 100,
+            PLTerm('banana'): 2,
+          });
+          expect(evalProgram('''
+(assoc!* (to-dart-map {.apple 1 .banana 2}) .carrot 3)
+'''), {
+            PLTerm('apple'): 1,
+            PLTerm('banana'): 2,
+            PLTerm('carrot'): 3,
+          });
+        });
+        test('/ handles Dart lists', () {
+          expect(evalProgram('''
+(assoc!* (to-dart-list [1 2 3]) 0 2)
+'''), [2, 2, 3]);
+          expect(evalProgram('''
+(assoc!* (to-dart-list [1 2 3]) 3 4)
+'''), [1, 2, 3, 4]);
+        });
+      });
+    });
+    group('/ Env', () {
+      group('/ completions', () {
         test('for bindings', () {
           expect(
               piLispEnv.completionsFor('con').toIList().sort(),
@@ -1159,6 +1186,7 @@ void main() {
                 'concat',
                 'cond',
                 'conj',
+                'conj!',
                 'cons',
                 'contains-key?',
                 'contains-value?',
@@ -1171,6 +1199,7 @@ void main() {
                 'concat',
                 'cond',
                 'conj',
+                'conj!',
                 'cons',
                 'constitution',
                 'contains-key?',
