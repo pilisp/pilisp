@@ -297,6 +297,47 @@ class PLEnv {
           termDoc:
               'Returns true if arguments are greater than or equal to one another, left to right.'
         })),
+    // (clojure.core/bit-and clojure.core/bit-and-not clojure.core/bit-clear clojure.core/bit-flip clojure.core/bit-not clojure.core/bit-or clojure.core/bit-set clojure.core/bit-shift-left clojure.core/bit-shift-right clojure.core/bit-test clojure.core/bit-xor clojure.core/unsigned-bit-shift-right)
+    PLSymbol('bit-and*'):
+        PLBindingEntry.withMeta(bitAndFn, IMap({termDoc: 'Bitwise: x & y'})),
+    PLSymbol('bit-and-not*'):
+        PLBindingEntry.withMeta(bitAndFn, IMap({termDoc: 'Bitwise: x & ~y'})),
+    PLSymbol('bit-clear'): PLBindingEntry.withMeta(
+        bitClearFn,
+        IMap({
+          termDoc:
+              'Clear the bit of x at given index idx. Bitwise: x & ~(1 << idx)'
+        })),
+    PLSymbol('bit-flip'): PLBindingEntry.withMeta(
+        bitFlipFn,
+        IMap({
+          termDoc:
+              'Flip the bit of x at given index idx. Bitwise: x ^ (1 << idx)'
+        })),
+    PLSymbol('bit-not'): PLBindingEntry.withMeta(
+        bitNotFn, IMap({termDoc: 'Bitwise complement: ~x'})),
+    PLSymbol('bit-or*'):
+        PLBindingEntry.withMeta(bitOrFn, IMap({termDoc: 'Bitwise: x | y'})),
+    PLSymbol('bit-set'): PLBindingEntry.withMeta(
+        bitSetFn,
+        IMap({
+          termDoc:
+              'Set the bit of x at given index idx. Bitwise: x | (1 << idx)'
+        })),
+    PLSymbol('bit-shift-left'): PLBindingEntry.withMeta(
+        bitShiftLeftFn, IMap({termDoc: 'Bitwise: x << n'})),
+    PLSymbol('bit-shift-right'): PLBindingEntry.withMeta(
+        bitShiftRightFn, IMap({termDoc: 'Bitwise: x >> n'})),
+    PLSymbol('bit-test'): PLBindingEntry.withMeta(
+        bitTestFn,
+        IMap({
+          termDoc:
+              'Test the bit of x at given index idx. Bitwise: (x & (1 << idx)) != 0'
+        })),
+    PLSymbol('bit-xor*'):
+        PLBindingEntry.withMeta(bitXorFn, IMap({termDoc: 'Bitwise: x ^ y'})),
+    PLSymbol('bit-unsigned-bit-shift-right'): PLBindingEntry.withMeta(
+        bitUnsignedBitShiftRightFn, IMap({termDoc: 'Bitwise: x >>> n'})),
     PLSymbol('str'): PLBindingEntry.withMeta(
         strFn,
         IMap({

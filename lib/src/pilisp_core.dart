@@ -1621,6 +1621,252 @@ num remainderFn(PLEnv env, PLVector args) {
   }
 }
 
+int bitAndFn(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final x = args[0];
+    final y = args[1];
+    if (x is int) {
+      if (y is int) {
+        return x & y;
+      } else {
+        throw ArgumentError(
+            'The bit-and* function expects its second argument to be an int, but received a ${typeString(y)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The bit-and* function expects its first argument to be an int, but received a ${typeString(x)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The bit-and* function expects 2 arguments, but received ${args.length} arguments.');
+  }
+}
+
+int bitAndNotFn(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final x = args[0];
+    final y = args[1];
+    if (x is int) {
+      if (y is int) {
+        return x & ~y;
+      } else {
+        throw ArgumentError(
+            'The bit-and-not* function expects its second argument to be an int, but received a ${typeString(y)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The bit-and-not* function expects its first argument to be an int, but received a ${typeString(x)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The bit-and-not* function expects 2 arguments, but received ${args.length} arguments.');
+  }
+}
+
+int bitClearFn(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final x = args[0];
+    final idx = args[1];
+    if (x is int) {
+      if (idx is int) {
+        return x & ~(1 << idx);
+      } else {
+        throw ArgumentError(
+            'The bit-clear function expects its second argument to be an int, but received a ${typeString(idx)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The bit-clear function expects its first argument to be an int, but received a ${typeString(x)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The bit-clear function expects 2 arguments, but received ${args.length} arguments.');
+  }
+}
+
+int bitFlipFn(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final x = args[0];
+    final idx = args[1];
+    if (x is int) {
+      if (idx is int) {
+        return x ^ (1 << idx);
+      } else {
+        throw ArgumentError(
+            'The bit-flip function expects its second argument to be an int, but received a ${typeString(idx)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The bit-flip function expects its first argument to be an int, but received a ${typeString(x)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The bit-flip function expects 2 arguments, but received ${args.length} arguments.');
+  }
+}
+
+int bitNotFn(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final x = args[0];
+    if (x is int) {
+      return ~x;
+    } else {
+      throw ArgumentError(
+          'The bit-not function expects its first argument to be an int, but received a ${typeString(x)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The bit-not function expects 1 arguments, but received ${args.length} arguments.');
+  }
+}
+
+int bitOrFn(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final x = args[0];
+    final y = args[1];
+    if (x is int) {
+      if (y is int) {
+        return x | y;
+      } else {
+        throw ArgumentError(
+            'The bit-or* function expects its second argument to be an int, but received a ${typeString(y)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The bit-or* function expects its first argument to be an int, but received a ${typeString(x)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The bit-or* function expects 2 arguments, but received ${args.length} arguments.');
+  }
+}
+
+int bitSetFn(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final x = args[0];
+    final idx = args[1];
+    if (x is int) {
+      if (idx is int) {
+        return x | (1 << idx);
+      } else {
+        throw ArgumentError(
+            'The bit-set function expects its second argument to be an int, but received a ${typeString(idx)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The bit-set function expects its first argument to be an int, but received a ${typeString(x)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The bit-set function expects 2 arguments, but received ${args.length} arguments.');
+  }
+}
+
+int bitShiftLeftFn(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final x = args[0];
+    final n = args[1];
+    if (x is int) {
+      if (n is int) {
+        return x << n;
+      } else {
+        throw ArgumentError(
+            'The bit-shift-left function expects its second argument to be an int, but received a ${typeString(n)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The bit-shift-left function expects its first argument to be an int, but received a ${typeString(x)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The bit-shift-left function expects 2 arguments, but received ${args.length} arguments.');
+  }
+}
+
+int bitShiftRightFn(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final x = args[0];
+    final n = args[1];
+    if (x is int) {
+      if (n is int) {
+        return x >> n;
+      } else {
+        throw ArgumentError(
+            'The bit-shift-right function expects its second argument to be an int, but received a ${typeString(n)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The bit-shift-right function expects its first argument to be an int, but received a ${typeString(x)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The bit-shift-right function expects 2 arguments, but received ${args.length} arguments.');
+  }
+}
+
+bool bitTestFn(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final x = args[0];
+    final idx = args[1];
+    if (x is int) {
+      if (idx is int) {
+        return (x & (1 << idx)) != 0;
+      } else {
+        throw ArgumentError(
+            'The bit-test function expects its second argument to be an int, but received a ${typeString(idx)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The bit-test function expects its first argument to be an int, but received a ${typeString(x)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The bit-test function expects 2 arguments, but received ${args.length} arguments.');
+  }
+}
+
+int bitXorFn(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final x = args[0];
+    final y = args[1];
+    if (x is int) {
+      if (y is int) {
+        return x ^ y;
+      } else {
+        throw ArgumentError(
+            'The bit-xor* function expects its second argument to be an int, but received a ${typeString(y)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The bit-xor* function expects its first argument to be an int, but received a ${typeString(x)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The bit-xor* function expects 2 arguments, but received ${args.length} arguments.');
+  }
+}
+
+int bitUnsignedBitShiftRightFn(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final x = args[0];
+    final n = args[1];
+    if (x is int) {
+      if (n is int) {
+        return x >>> n;
+      } else {
+        throw ArgumentError(
+            'The unsigned-bit-shift-right function expects its second argument to be an int, but received a ${typeString(n)} value.');
+      }
+    } else {
+      throw ArgumentError(
+          'The unsigned-bit-shift-right function expects its first argument to be an int, but received a ${typeString(x)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The unsigned-bit-shift-right function expects 2 arguments, but received ${args.length} arguments.');
+  }
+}
+
 String strFn(PLEnv env, PLVector args) {
   final sb = StringBuffer();
   for (final arg in args.iter) {

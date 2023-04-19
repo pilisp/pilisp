@@ -1345,6 +1345,42 @@ final piLispCore = r'''
         :ret (empty c1)}
        (first ss))))))
 
+;; # bitwise operations
+
+(defn bit-and
+  ([x y]
+   (bit-and* x y))
+  ([x y & more]
+   (reduce bit-and* (bit-and* x y) more)))
+
+(defn bit-and-not
+  ([x y]
+   (bit-and-not* x y))
+  ([x y & more]
+   (reduce bit-and-not* (bit-and-not* x y) more)))
+
+(defn bit-or
+  ([x y]
+   (bit-or* x y))
+  ([x y & more]
+   (reduce bit-or* (bit-or* x y) more)))
+
+(defn bit-xor
+  ([x y]
+   (bit-xor* x y))
+  ([x y & more]
+   (reduce bit-xor* (bit-xor* x y) more)))
+
+;;; # case
+(declare ->)
+
+(defn shift-mask
+  {:private true}
+  [shift mask x]
+  (-> x (bit-shift-right shift) (bit-and mask)))
+
+;; end case
+
 (defn min
   ([a b] (if (< a b) a b))
   ([a b & cs]
