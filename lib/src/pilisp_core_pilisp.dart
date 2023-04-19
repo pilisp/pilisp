@@ -151,6 +151,10 @@ final piLispCore = r'''
 (defn tenth   [coll] (nth coll 9))
 
 (defn last [coll] (nth coll (dec (count coll))))
+(defn lst
+  {:doc "Construct a list from the coll. See also: map, set, vec"}
+  [coll]
+  (apply list coll))
 
 (def defmacro
   {.macro true}
@@ -808,15 +812,26 @@ final piLispCore = r'''
   [x & forms]
   (->>* x (seq forms)))
 
-(defn set [coll]
+(defn set
+  {:doc "Construct a set from the coll. See also: lst, map, vec"}
+  [coll]
   (if (set? coll)
     coll
     (into #{} coll)))
 
-(defn vec [coll]
+(defn vec
+  {:doc "Construct a vector from the coll. See also: lst, map, set"}
+  [coll]
   (if (vector? coll)
     coll
     (apply vector (seq coll))))
+
+(defn to-map
+  {:doc "Make a map out of coll. Also available via map function for consistency in three-letter collection constructor names (lst, map, set, vec)"}
+  [coll]
+  (if (map? coll)
+    coll
+    (into {} (seq coll))))
 
 (defn every?
   "Returns true if (pred x) is logical true for every x in coll, else false."
@@ -876,6 +891,10 @@ final piLispCore = r'''
 (declare interleave)
 
 (defn map
+  ([f]
+   (if (not (fn? f))
+     (to-map f)
+     (throw (ex-info "Transducers are not yet implemented in PiLisp."))))
   ([f coll]
    (when-let [s (seq coll)]
      (let [ret (reduce
