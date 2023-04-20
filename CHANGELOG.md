@@ -1,3 +1,14 @@
+## v1.0.0-alpha.10
+
+* Adds not=, distinct?, private fns for case macro
+* Adds repl/completions (used by inf-pilisp to provide auto-complete)
+* Adds bitwise operations as functions: `bit-and` `bit-and-not` `bit-clear` `bit-flip` `bit-not` `bit-or` `bit-set` `bit-shift-left` `bit-shift-right` `bit-test` `bit-unsigned-bit-shift-right` `bit-xor`
+* Adds WIP `transient` and `persistent!`
+* Adds Three-letter names for functions that take a collection and produce another (rather than taking the _items_ to produce it): `lst` `map` `set` `vec`
+   * For `map`, if you pass a single argument that is not a function, it will try to `to-map` it.
+* Upgraded REPL experience by default (line editing, auto-complete). Use `pl -r` for the older, simpler REPL.
+* Upgraded [fast_immutable_collections](https://github.com/marcglasberg/fast_immutable_collections) to latest stable (^9.0.0)
+
 ## v1.0.0-alpha.9
 
 * Bump dependency on `pilisp_cli` so that minimum Dart SDK version is acceptable for analysis on pub.dev
