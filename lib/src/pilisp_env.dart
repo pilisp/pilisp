@@ -438,6 +438,8 @@ class PLEnv {
           termDoc: 'Returns a Future<PLVector> value via Dart'
               's Future.value constructor.'
         })),
+    PLSymbol('repl/completions'): PLBindingEntry.withMeta(replCompletionsFn,
+        IMap({termDoc: 'Return a list of completions for the given prefix.'})),
   }).addAll(wrapperBindings.toIMap());
 
   /// PiLisp does not have namespaces. As such, nested scopes perform the work

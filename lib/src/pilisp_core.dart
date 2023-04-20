@@ -2242,3 +2242,20 @@ Function dartFunctionFn(PLEnv env, PLVector args) {
         'The dart-function function expects 2 arguments, but received ${args.length} arguments.');
   }
 }
+
+// # Tooling
+
+PLList replCompletionsFn(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final prefix = args[0];
+    if (prefix is String) {
+      return env.completionsFor(prefix).toPLList();
+    } else {
+      throw ArgumentError(
+          'The repl/completions function expects its first argument to be a string, but received a ${typeString(prefix)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The repl/completions function expects 1 argument, but received ${args.length} arguments.');
+  }
+}
