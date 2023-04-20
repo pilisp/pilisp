@@ -1372,12 +1372,65 @@ final piLispCore = r'''
    (reduce bit-xor* (bit-xor* x y) more)))
 
 ;;; # case
+
 (declare ->)
+
+(defn not=
+  {:doc "Same as (not (= obj1 obj2))"}
+  ([x] false)
+  ([x y] (not (= x y)))
+  ([x y & more]
+   (not (apply = x y more))))
+
+(defn distinct?
+  {:doc "Returns true if no two of the arguments are ="}
+  ([x] true)
+  ([x y] (not (= x y)))
+  ([x y & more]
+   (if (not= x y)
+     (reduce
+      (fn [acc x]
+        (let [{:keys [s xs]} acc
+              etc (next xs)]
+          (if xs
+            (if (contains? s xs)
+              (reduced false)
+              (-> acc
+                  (update :s conj x)
+                  (update :xs etc))))))
+      {:s #{x y}
+       :xs more})
+     false)))
 
 (defn shift-mask
   {:private true}
   [shift mask x]
   (-> x (bit-shift-right shift) (bit-and mask)))
+
+(def max-mask-bits {:private true} 13)
+
+(def max-switch-table-size {:private true} (bit-shift-left 1 max-mask-bits))
+
+(defn maybe-min-hash
+  {:doc "Takes a collection of hashes and returns [shift mask] or nil if none found"
+   :private true}
+  [hashes]
+  (first
+   (filter (fn [x]
+             (let [[s m] x]
+               (apply distinct? (map #(shift-mask s m %) hashes))))
+           (reduce
+            (fn [acc x]
+              (let [{:keys [masks shifts]} acc
+                    mask (first masks)
+                    shift (first shifts)]
+                (-> acc
+                    (update :masks (next masks))
+                    (update :shifts (next shifts))
+                    (update :ret conj [shift mask]))))
+            {:masks (map #(dec (bit-shift-left 1 %)) (range 1 (inc max-mask-bits)))
+             :shifts (range 0 31)
+             :ret []}))))
 
 ;; end case
 
