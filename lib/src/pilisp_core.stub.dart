@@ -13,7 +13,6 @@ import 'package:http/http.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import '../pilisp.dart';
 import 'pilisp_core.dart';
-import 'pilisp_expr.dart';
 
 Map<PLSymbol, PLBindingEntry> wrapperBindings = {
 // Class BigInt with 42 declarations
@@ -413,7 +412,6 @@ Map<PLSymbol, PLBindingEntry> wrapperBindings = {
 // END toString -----------------------
 // START parse -----------------------
   PLSymbol('dart/double.parse'): PLBindingEntry(dart_double_parse),
-  PLSymbol('dart/double.parse-full'): PLBindingEntry(dart_double_parse_full),
 // END parse -----------------------
 // START tryParse -----------------------
   PLSymbol('dart/double.tryParse'): PLBindingEntry(dart_double_tryParse),
@@ -3792,29 +3790,6 @@ double? dart_double_parse(PLEnv env, PLVector args) {
   } else {
     throw ArgumentError(
         'The dart/double.parse function expects 1 argument(s) but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-double? dart_double_parse_full(PLEnv env, PLVector args) {
-  if (args.length == 2) {
-    if (args[0] is! String) {
-      throw ArgumentError(
-          'The dart/double.parse-full function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
-    }
-    if (args[1] is! double Function(String)) {
-      throw ArgumentError(
-          'The dart/double.parse-full function expects its 2nd argument to be a (dart.core.String) -> dart.core.double value, but received a ${PiLisp.typeName(args[1])} value.');
-    }
-
-    final returnValue = double.parse(
-      args[0] as String,
-      args[1] as double Function(String),
-    );
-    return returnValue;
-  } else {
-    throw ArgumentError(
-        'The dart/double.parse-full function expects 2 argument(s) but received ${args.length} arguments.');
   }
 }
 

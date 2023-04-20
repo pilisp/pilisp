@@ -8,6 +8,7 @@ import '../pilisp_core.dart';
 final Set<String> prohibitedMethods = {
   'int.>>>', // NB: Labeled as an operator but not excluded by v.isOperator check
   // 'package_http_http_dart__withClient'
+  'dart_double_parse_full', // NB: Deprecated optional argument
   'Enum.compareByIndex', // NB: This and next have type args, which
   'Enum.compareByName', //      are not yet supported
   'Future.doWhile', // NB: Type needs to be specified differently

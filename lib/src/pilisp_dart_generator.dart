@@ -90,17 +90,21 @@ List<String> writeFunctionWrappers(
         final wrapperPiLispName = 'dart/$libraryNameMungedPiLisp-$declName';
         final paramsRequired =
             v.parameters.where((param) => !param.isOptional).toList();
-        writeMethodWrappers(v, paramsRequired, sb, functionDefs, '', declName,
-            wrapperDartName, wrapperPiLispName,
-            libraryMirror: libMirror);
+        if (!prohibitedFunctions.contains(wrapperDartName)) {
+          writeMethodWrappers(v, paramsRequired, sb, functionDefs, '', declName,
+              wrapperDartName, wrapperPiLispName,
+              libraryMirror: libMirror);
+        }
         final paramsFull =
             v.parameters.where((param) => !param.isNamed).toList();
         if (paramsRequired.length != paramsFull.length) {
           final wrapperDartNameFull = '${wrapperDartName}_full';
           final wrapperPiLispNameFull = '$wrapperPiLispName-full';
-          writeMethodWrappers(v, paramsFull, sb, functionDefs, '', declName,
-              wrapperDartNameFull, wrapperPiLispNameFull,
-              libraryMirror: libMirror);
+          if (!prohibitedFunctions.contains(wrapperDartNameFull)) {
+            writeMethodWrappers(v, paramsFull, sb, functionDefs, '', declName,
+                wrapperDartNameFull, wrapperPiLispNameFull,
+                libraryMirror: libMirror);
+          }
         }
         sb.writeln('// END Function $declName');
       }
@@ -137,7 +141,7 @@ List<String> writeWrappers(StringBuffer sb, ClassMirror cm,
             declName, wrapperDartName, functionDefs);
       } else if (v is MethodMirror) {
         writeMethodMirrorWrappers(cm, v, sb, functionDefs, className, declName,
-            wrapperDartName, wrapperPiLispName,
+            wrapperDartName, wrapperPiLispName, prohibitedMethods,
             desiredConstructors: desiredConstructors);
       }
       sb.writeln('// END $declName -----------------------');
@@ -155,20 +159,25 @@ void writeMethodMirrorWrappers(
     String declName,
     String wrapperDartName,
     String wrapperPiLispName,
+    Set<String> prohibitedMethods,
     {Set<String>? desiredConstructors}) {
   if (v.isConstructor) {
     final paramsRequired =
         v.parameters.where((element) => !element.isOptional).toList();
-    writeMethodWrappers(v, paramsRequired, sb, functionDefs, className,
-        declName, wrapperDartName, wrapperPiLispName,
-        classMirror: cm, desiredConstructors: desiredConstructors);
+    if (!prohibitedFunctions.contains(wrapperDartName)) {
+      writeMethodWrappers(v, paramsRequired, sb, functionDefs, className,
+          declName, wrapperDartName, wrapperPiLispName,
+          classMirror: cm, desiredConstructors: desiredConstructors);
+    }
     final paramsFull = v.parameters.where((param) => !param.isNamed).toList();
     if (paramsRequired.length != paramsFull.length) {
       final wrapperDartNameFull = '${wrapperDartName}_full';
       final wrapperPiLispNameFull = '$wrapperPiLispName-full';
-      writeMethodWrappers(v, paramsFull, sb, functionDefs, className, declName,
-          wrapperDartNameFull, wrapperPiLispNameFull,
-          classMirror: cm, desiredConstructors: desiredConstructors);
+      if (!prohibitedMethods.contains(wrapperDartNameFull)) {
+        writeMethodWrappers(v, paramsFull, sb, functionDefs, className,
+            declName, wrapperDartNameFull, wrapperPiLispNameFull,
+            classMirror: cm, desiredConstructors: desiredConstructors);
+      }
     }
   } else if (v.isOperator) {
     io.stderr.writeln('Skipping operator: $className.$declName');
@@ -177,16 +186,20 @@ void writeMethodMirrorWrappers(
   } else {
     final paramsRequired =
         v.parameters.where((element) => !element.isOptional).toList();
-    writeMethodWrappers(v, paramsRequired, sb, functionDefs, className,
-        declName, wrapperDartName, wrapperPiLispName,
-        classMirror: cm, desiredConstructors: desiredConstructors);
+    if (!prohibitedMethods.contains(wrapperDartName)) {
+      writeMethodWrappers(v, paramsRequired, sb, functionDefs, className,
+          declName, wrapperDartName, wrapperPiLispName,
+          classMirror: cm, desiredConstructors: desiredConstructors);
+    }
     final paramsFull = v.parameters.where((param) => !param.isNamed).toList();
     if (paramsRequired.length != paramsFull.length) {
       final wrapperDartNameFull = '${wrapperDartName}_full';
       final wrapperPiLispNameFull = '$wrapperPiLispName-full';
-      writeMethodWrappers(v, paramsFull, sb, functionDefs, className, declName,
-          wrapperDartNameFull, wrapperPiLispNameFull,
-          classMirror: cm, desiredConstructors: desiredConstructors);
+      if (!prohibitedMethods.contains(wrapperDartNameFull)) {
+        writeMethodWrappers(v, paramsFull, sb, functionDefs, className,
+            declName, wrapperDartNameFull, wrapperPiLispNameFull,
+            classMirror: cm, desiredConstructors: desiredConstructors);
+      }
     }
   }
 }
