@@ -157,5 +157,4 @@ final importsForGenerated = [
   'package:fast_immutable_collections/fast_immutable_collections.dart',
   '../pilisp.dart',
   'pilisp_core.dart',
-  'pilisp_expr.dart',
 ];
