@@ -70,6 +70,12 @@ final Set<String> prohibitedFunctions = {
   'package:http/http.dart._withClient', // NB: Type with leading .
 };
 
+final Map<String, String> correctedTypes = {
+  'BaseResponse.request': 'BaseRequest?',
+  'BaseResponse.reasonPhrase': 'String?',
+  'BaseResponse.contentLength': 'int?',
+};
+
 /// Libraries are combed for their top-level functions. See [sourceClasses] for
 /// the explicit listing of classes that are use for generation.
 final sourceLibraries = {
@@ -115,6 +121,8 @@ final sourceClasses = {
   // pragma, // skip
   RegExp,
   RegExpMatch,
+  http.BaseRequest,
+  http.BaseResponse,
   http.Request,
   http.Response,
   RuneIterator,

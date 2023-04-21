@@ -373,21 +373,20 @@ void writeVariableMirrorWrappers(
     String declName,
     String wrapperDartName,
     List<String> functionDefs) {
+  final classDeclName = '$className.$declName';
   if (v.isStatic && !v.isPrivate) {
     sb.writeln(
-        "PLSymbol('$wrapperPiLispName'): PLBindingEntry($className.$declName),");
+        "PLSymbol('$wrapperPiLispName'): PLBindingEntry($classDeclName),");
   } else if (!v.isPrivate) {
     sb.writeln(
         "PLSymbol('$wrapperPiLispName'): PLBindingEntry(${legalMethodName(wrapperDartName)}),");
-    final variableTypeName = MirrorSystem.getName(v.type.simpleName);
-    final isBrokenMethod = (className == 'DateTime' && declName == 'isUtc') ||
-        (className == 'Runes' && declName == 'string') ||
-        (className == 'RuneIterator' && declName == 'string') ||
-        (className == 'PLMultiMethod' && declName == 'isTypeDispatched') ||
-        (className == 'Response' && declName == 'bodyBytes');
+    String variableTypeName = MirrorSystem.getName(v.type.simpleName);
+    if (correctedTypes.containsKey('$className.$declName')) {
+      variableTypeName = correctedTypes[classDeclName]!;
+    }
     functionDefs.add('''
   // ignore: non_constant_identifier_names, strict_raw_type
-  $variableTypeName ${legalMethodName(wrapperDartName)}(PLEnv env, PLVector args) {
+  $variableTypeName ${legalMethodName(wrapperDartName)}(PLEnv env, PLVector args) { // variable wrapper
     if (args.length == 1) {
       final o = args[0];
       if (o is $className) {
@@ -397,7 +396,8 @@ void writeVariableMirrorWrappers(
       }
     } else {
       throw ArgumentError('The $wrapperPiLispName function expects 1 argument of type $className but received \${args.length} arguments.');
-    }${isBrokenMethod ? '}' : ''}''');
+    }
+  }''');
     // NB: I'm not taking more time to track this down   ^
     //     I'm assuming it's either a trivial bug of mine, or a deep bug.
     //     Out of all the methods generated, this is the _only_ one to preesent
