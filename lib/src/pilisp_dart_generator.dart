@@ -398,10 +398,6 @@ void writeVariableMirrorWrappers(
       throw ArgumentError('The $wrapperPiLispName function expects 1 argument of type $className but received \${args.length} arguments.');
     }
   }''');
-    // NB: I'm not taking more time to track this down   ^
-    //     I'm assuming it's either a trivial bug of mine, or a deep bug.
-    //     Out of all the methods generated, this is the _only_ one to preesent
-    //     this behavior.
   }
 }
 
