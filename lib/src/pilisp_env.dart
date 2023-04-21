@@ -616,7 +616,8 @@ class PLEnv {
       }
     }
 
-    return matches.distinct();
+    final distinctCompletions = matches.distinct();
+    return distinctCompletions..sort();
   }
 }
 
