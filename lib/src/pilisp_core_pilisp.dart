@@ -1973,6 +1973,20 @@ final piLispCore = r'''
 (defn current-time-millis []
   (dart/DateTime.millisecondsSinceEpoch (dart/DateTime.now)))
 
+;; # HTTP
+;;
+;; NB. These rely on the http package, which provides a cross-platform interface.
+
+(defn http/get-request [uri]
+  (dart/Request. "get"
+                 (if (string? uri)
+                   (dart/Uri.parse uri)
+                   uri)))
+
+(defn http/get [uri]
+  (dart/BaseRequest.send (http/get-request uri)))
+
+
 ;; # Test Framework
 
 (def test/suite-empty
