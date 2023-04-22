@@ -135,7 +135,8 @@ List<String> writeWrappers(StringBuffer sb, ClassMirror cm,
     final wrapperDartName = 'dart_${className}_$declName';
     final wrapperPiLispName = 'dart/$className.$declName';
     if (!prohibitedMethods.contains('$className.$declName') &&
-        !prohibitedMethods.contains('$className.${declName}_full')) {
+        !prohibitedMethods.contains('$className.${declName}_full') &&
+        !prohibitedConstructors.contains(wrapperDartName)) {
       if (v is VariableMirror) {
         writeVariableMirrorWrappers(v, sb, wrapperPiLispName, className,
             declName, wrapperDartName, functionDefs);
@@ -337,9 +338,12 @@ void writeMethodWrappers(
         ctorName.isEmpty) {
       io.stderr.writeln('Skipping constructor for abstract class $className');
     } else {
-      functionDefs.add('''
+      // ctor
+      if (!prohibitedConstructors.contains(ctorName) &&
+          !prohibitedConstructors.contains(wrapperDartName)) {
+        functionDefs.add('''
     // ignore: non_constant_identifier_names, strict_raw_type
-    ${returnTypeName == 'void' || returnTypeName == 'dynamic' ? returnTypeName : '$returnTypeName?'} ${legalMethodName(wrapperDartName)}(PLEnv env, PLVector args) {
+    ${returnTypeName == 'void' || returnTypeName == 'dynamic' ? returnTypeName : '$returnTypeName?'} ${legalMethodName(wrapperDartName)}(PLEnv env, PLVector args) { // ctor
       if (${numParams == 0 ? 'args.isEmpty' : 'args.length == $numParams'}) {
         $paramCheckCode
         final returnValue = $className${ctorName.isEmpty ? '' : '.$ctorName'}$argCode;
@@ -348,6 +352,7 @@ void writeMethodWrappers(
         throw ArgumentError('The $wrapperPiLispName function expects $numParams constructor argument(s) but received \${args.length} arguments.');
       }
     }''');
+      }
     }
   } else {
     // Static

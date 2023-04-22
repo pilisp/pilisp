@@ -7,7 +7,6 @@ import '../pilisp_core.dart';
 
 final Set<String> prohibitedMethods = {
   'int.>>>', // NB: Labeled as an operator but not excluded by v.isOperator check
-  // 'package_http_http_dart__withClient'
   'dart_double_parse_full', // NB: Deprecated optional argument
   'Enum.compareByIndex', // NB: This and next have type args, which
   'Enum.compareByName', //      are not yet supported
@@ -70,6 +69,11 @@ final Set<String> prohibitedFunctions = {
   'package:http/http.dart._withClient', // NB: Type with leading .
 };
 
+final Set<String> prohibitedConstructors = {
+  'dart_ByteStream_', // NB. Type-generic argument incorrectly generated
+  'dart_StreamedResponse_', // NB. Type-generic argument incorrectly generated
+};
+
 final Map<String, String> correctedTypes = {
   'BaseResponse.request': 'BaseRequest?',
   'BaseResponse.reasonPhrase': 'String?',
@@ -91,6 +95,7 @@ final sourceClasses = {
   // == dart:convert ==
   // == dart:core ==
   BigInt,
+  http.ByteStream,
   // bool, // skip
   // Comparable, // skip
   http.Client,
@@ -132,6 +137,7 @@ final sourceClasses = {
   StackTrace,
   Stopwatch,
   // Stream,
+  http.StreamedResponse,
   String,
   StringBuffer,
   StringSink,

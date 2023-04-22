@@ -126,6 +126,27 @@ Map<PLSymbol, PLBindingEntry> wrapperBindings = {
 // START CTOR from -----------------------
   PLSymbol('dart/BigInt.from'): PLBindingEntry(dart_BigInt_from),
 // END from -----------------------
+// Class ByteStream with 5 declarations
+// START toBytes -----------------------
+  PLSymbol('dart/ByteStream.toBytes'): PLBindingEntry(dart_ByteStream_toBytes),
+// END toBytes -----------------------
+// START bytesToString -----------------------
+  PLSymbol('dart/ByteStream.bytesToString'):
+      PLBindingEntry(dart_ByteStream_bytesToString),
+  PLSymbol('dart/ByteStream.bytesToString-full'):
+      PLBindingEntry(dart_ByteStream_bytesToString_full),
+// END bytesToString -----------------------
+// START toStringStream -----------------------
+  PLSymbol('dart/ByteStream.toStringStream'):
+      PLBindingEntry(dart_ByteStream_toStringStream),
+  PLSymbol('dart/ByteStream.toStringStream-full'):
+      PLBindingEntry(dart_ByteStream_toStringStream_full),
+// END toStringStream -----------------------
+// START CTOR  -----------------------
+// START CTOR fromBytes -----------------------
+  PLSymbol('dart/ByteStream.fromBytes'):
+      PLBindingEntry(dart_ByteStream_fromBytes),
+// END fromBytes -----------------------
 // Class Client with 11 declarations
 // START head -----------------------
   PLSymbol('dart/Client.head'): PLBindingEntry(dart_Client_head),
@@ -1703,6 +1724,12 @@ Map<PLSymbol, PLBindingEntry> wrapperBindings = {
 // START CTOR  -----------------------
   PLSymbol('dart/Stopwatch.'): PLBindingEntry(dart_Stopwatch_),
 // END  -----------------------
+// Class StreamedResponse with 2 declarations
+// START stream -----------------------
+  PLSymbol('dart/StreamedResponse.stream'):
+      PLBindingEntry(dart_StreamedResponse_stream),
+// END stream -----------------------
+// START CTOR  -----------------------
 // Class String with 35 declarations
 // START [] -----------------------
 // END [] -----------------------
@@ -2709,6 +2736,7 @@ String? dart_BigInt_toRadixString(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 BigInt? dart_BigInt_from(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! num) {
       throw ArgumentError(
@@ -2722,6 +2750,124 @@ BigInt? dart_BigInt_from(PLEnv env, PLVector args) {
   } else {
     throw ArgumentError(
         'The dart/BigInt.from function expects 1 constructor argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_ByteStream_toBytes(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is ByteStream) {
+      final returnValue = o.toBytes();
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/ByteStream.toBytes function expects its first argument to be a ByteStream object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/ByteStream.toBytes function expects 1 argument(s) (the ByteStream object + toBytes args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_ByteStream_bytesToString(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is ByteStream) {
+      final returnValue = o.bytesToString();
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/ByteStream.bytesToString function expects its first argument to be a ByteStream object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/ByteStream.bytesToString function expects 1 argument(s) (the ByteStream object + bytesToString args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_ByteStream_bytesToString_full(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is ByteStream) {
+      if (args[1] is! Encoding) {
+        throw ArgumentError(
+            'The dart/ByteStream.bytesToString-full function expects its 2nd argument to be a Encoding value, but received a ${PiLisp.typeName(args[1])} value.');
+      }
+
+      final returnValue = o.bytesToString(
+        args[1] as Encoding,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/ByteStream.bytesToString-full function expects its first argument to be a ByteStream object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/ByteStream.bytesToString-full function expects 2 argument(s) (the ByteStream object + bytesToString args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Stream? dart_ByteStream_toStringStream(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is ByteStream) {
+      final returnValue = o.toStringStream();
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/ByteStream.toStringStream function expects its first argument to be a ByteStream object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/ByteStream.toStringStream function expects 1 argument(s) (the ByteStream object + toStringStream args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Stream? dart_ByteStream_toStringStream_full(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is ByteStream) {
+      if (args[1] is! Encoding) {
+        throw ArgumentError(
+            'The dart/ByteStream.toStringStream-full function expects its 2nd argument to be a Encoding value, but received a ${PiLisp.typeName(args[1])} value.');
+      }
+
+      final returnValue = o.toStringStream(
+        args[1] as Encoding,
+      );
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/ByteStream.toStringStream-full function expects its first argument to be a ByteStream object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/ByteStream.toStringStream-full function expects 2 argument(s) (the ByteStream object + toStringStream args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+ByteStream? dart_ByteStream_fromBytes(PLEnv env, PLVector args) {
+  // ctor
+  if (args.length == 1) {
+    if (args[0] is! List) {
+      throw ArgumentError(
+          'The dart/ByteStream.fromBytes function expects its 1st argument to be a List value, but received a ${PiLisp.typeName(args[0])} value.');
+    }
+
+    final returnValue = ByteStream.fromBytes(
+      List<int>.from(args[0] as List<Object?>),
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/ByteStream.fromBytes function expects 1 constructor argument(s) but received ${args.length} arguments.');
   }
 }
 
@@ -3487,6 +3633,7 @@ int? dart_DateTime_weekday(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 DateTime? dart_DateTime_(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! int) {
       throw ArgumentError(
@@ -3505,6 +3652,7 @@ DateTime? dart_DateTime_(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 DateTime? dart_DateTime__full(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 8) {
     if (args[0] is! int) {
       throw ArgumentError(
@@ -3558,6 +3706,7 @@ DateTime? dart_DateTime__full(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 DateTime? dart_DateTime_utc(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! int) {
       throw ArgumentError(
@@ -3576,6 +3725,7 @@ DateTime? dart_DateTime_utc(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 DateTime? dart_DateTime_utc_full(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 8) {
     if (args[0] is! int) {
       throw ArgumentError(
@@ -3629,6 +3779,7 @@ DateTime? dart_DateTime_utc_full(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 DateTime? dart_DateTime_now(PLEnv env, PLVector args) {
+  // ctor
   if (args.isEmpty) {
     final returnValue = DateTime.now();
     return returnValue;
@@ -3640,6 +3791,7 @@ DateTime? dart_DateTime_now(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 DateTime? dart_DateTime_fromMillisecondsSinceEpoch(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! int) {
       throw ArgumentError(
@@ -3658,6 +3810,7 @@ DateTime? dart_DateTime_fromMillisecondsSinceEpoch(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 DateTime? dart_DateTime_fromMicrosecondsSinceEpoch(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! int) {
       throw ArgumentError(
@@ -4117,6 +4270,7 @@ Duration? dart_Duration_abs(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Duration? dart_Duration_(PLEnv env, PLVector args) {
+  // ctor
   if (args.isEmpty) {
     final returnValue = Duration();
     return returnValue;
@@ -4385,6 +4539,7 @@ Future? dart_Future_timeout(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Future? dart_Future_(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! FutureOr Function()) {
       throw ArgumentError(
@@ -4403,6 +4558,7 @@ Future? dart_Future_(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Future? dart_Future_microtask(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! FutureOr Function()) {
       throw ArgumentError(
@@ -4421,6 +4577,7 @@ Future? dart_Future_microtask(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Future? dart_Future_sync(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! FutureOr Function()) {
       throw ArgumentError(
@@ -4439,6 +4596,7 @@ Future? dart_Future_sync(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Future? dart_Future_error(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! Object) {
       throw ArgumentError(
@@ -4457,6 +4615,7 @@ Future? dart_Future_error(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Future? dart_Future_error_full(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 2) {
     if (args[0] is! Object) {
       throw ArgumentError(
@@ -4480,6 +4639,7 @@ Future? dart_Future_error_full(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Future? dart_Future_delayed(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! Duration) {
       throw ArgumentError(
@@ -4498,6 +4658,7 @@ Future? dart_Future_delayed(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Future? dart_Future_delayed_full(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 2) {
     if (args[0] is! Duration) {
       throw ArgumentError(
@@ -4944,6 +5105,7 @@ int? dart_int_tryParse(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 int? dart_int_fromEnvironment(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -5098,6 +5260,7 @@ bool? dart_Invocation_isAccessor(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Invocation? dart_Invocation_method(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 2) {
     if (args[0] is! Symbol) {
       throw ArgumentError(
@@ -5121,6 +5284,7 @@ Invocation? dart_Invocation_method(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Invocation? dart_Invocation_method_full(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 3) {
     if (args[0] is! Symbol) {
       throw ArgumentError(
@@ -5149,6 +5313,7 @@ Invocation? dart_Invocation_method_full(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Invocation? dart_Invocation_genericMethod(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 3) {
     if (args[0] is! Symbol) {
       throw ArgumentError(
@@ -5177,6 +5342,7 @@ Invocation? dart_Invocation_genericMethod(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Invocation? dart_Invocation_genericMethod_full(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 4) {
     if (args[0] is! Symbol) {
       throw ArgumentError(
@@ -5210,6 +5376,7 @@ Invocation? dart_Invocation_genericMethod_full(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Invocation? dart_Invocation_getter(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! Symbol) {
       throw ArgumentError(
@@ -5228,6 +5395,7 @@ Invocation? dart_Invocation_getter(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Invocation? dart_Invocation_setter(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 2) {
     if (args[0] is! Symbol) {
       throw ArgumentError(
@@ -5756,6 +5924,7 @@ String? dart_Iterable_toString(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Iterable? dart_Iterable_empty(PLEnv env, PLVector args) {
+  // ctor
   if (args.isEmpty) {
     final returnValue = Iterable.empty();
     return returnValue;
@@ -6352,6 +6521,7 @@ IMap? dart_List_asMap(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 IList? dart_List_empty(PLEnv env, PLVector args) {
+  // ctor
   if (args.isEmpty) {
     final returnValue = List.empty();
     return returnValue.toIList();
@@ -6363,6 +6533,7 @@ IList? dart_List_empty(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 IList? dart_List_from(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
@@ -6381,6 +6552,7 @@ IList? dart_List_from(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 IList? dart_List_unmodifiable(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
@@ -6697,6 +6869,7 @@ bool? dart_Map_isNotEmpty(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 IMap? dart_Map_from(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! Map) {
       throw ArgumentError(
@@ -6715,6 +6888,7 @@ IMap? dart_Map_from(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 IMap? dart_Map_unmodifiable(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! Map) {
       throw ArgumentError(
@@ -6733,6 +6907,7 @@ IMap? dart_Map_unmodifiable(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 IMap? dart_Map_identity(PLEnv env, PLVector args) {
+  // ctor
   if (args.isEmpty) {
     final returnValue = Map.identity();
     return returnValue.toIMap();
@@ -6744,6 +6919,7 @@ IMap? dart_Map_identity(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 IMap? dart_Map_fromIterable(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
@@ -6762,6 +6938,7 @@ IMap? dart_Map_fromIterable(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 IMap? dart_Map_fromEntries(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
@@ -7691,6 +7868,7 @@ int? dart_Object_hashAllUnordered(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Object? dart_Object_(PLEnv env, PLVector args) {
+  // ctor
   if (args.isEmpty) {
     final returnValue = Object();
     return returnValue;
@@ -7916,6 +8094,7 @@ String? dart_PiLisp_typeName(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 PiLisp? dart_PiLisp_(PLEnv env, PLVector args) {
+  // ctor
   if (args.isEmpty) {
     final returnValue = PiLisp();
     return returnValue;
@@ -7985,6 +8164,7 @@ String? dart_PLAwait_typeName(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 PLAwait? dart_PLAwait_forValue(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! Object) {
       throw ArgumentError(
@@ -8237,6 +8417,7 @@ Object? dart_PLMultiMethod_invokeFunctionDispatchedMethod(
 
 // ignore: non_constant_identifier_names, strict_raw_type
 PLMultiMethod? dart_PLMultiMethod_(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 2) {
     if (args[0] is! PLSymbol) {
       throw ArgumentError(
@@ -8488,6 +8669,7 @@ bool? dart_RegExp_isDotAll(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 RegExp? dart_RegExp_(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -9144,6 +9326,7 @@ ByteStream? dart_Request_finalize(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Request? dart_Request_(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 2) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -9219,6 +9402,7 @@ Future? dart_Response_fromStream(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Response? dart_Response_(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 2) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -9242,6 +9426,7 @@ Response? dart_Response_(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Response? dart_Response_bytes(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 2) {
     if (args[0] is! List) {
       throw ArgumentError(
@@ -9425,6 +9610,7 @@ bool? dart_RuneIterator_movePrevious(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 RuneIterator? dart_RuneIterator_(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -9443,6 +9629,7 @@ RuneIterator? dart_RuneIterator_(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 RuneIterator? dart_RuneIterator_at(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 2) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -9517,6 +9704,7 @@ int? dart_Runes_last(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Runes? dart_Runes_(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -9837,6 +10025,7 @@ ISet? dart_Set_toSet(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 ISet? dart_Set_(PLEnv env, PLVector args) {
+  // ctor
   if (args.isEmpty) {
     final returnValue = Set();
     return returnValue.toISet();
@@ -9848,6 +10037,7 @@ ISet? dart_Set_(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 ISet? dart_Set_identity(PLEnv env, PLVector args) {
+  // ctor
   if (args.isEmpty) {
     final returnValue = Set.identity();
     return returnValue.toISet();
@@ -9859,6 +10049,7 @@ ISet? dart_Set_identity(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 ISet? dart_Set_from(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
@@ -9905,6 +10096,7 @@ String? dart_StackTrace_toString(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 StackTrace? dart_StackTrace_fromString(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -10076,12 +10268,30 @@ bool? dart_Stopwatch_isRunning(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Stopwatch? dart_Stopwatch_(PLEnv env, PLVector args) {
+  // ctor
   if (args.isEmpty) {
     final returnValue = Stopwatch();
     return returnValue;
   } else {
     throw ArgumentError(
         'The dart/Stopwatch. function expects 0 constructor argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+ByteStream dart_StreamedResponse_stream(PLEnv env, PLVector args) {
+  // variable wrapper
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is StreamedResponse) {
+      return o.stream;
+    } else {
+      throw ArgumentError(
+          'The dart/StreamedResponse.stream function expects its argument to be a StreamedResponse but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/StreamedResponse.stream function expects 1 argument of type StreamedResponse but received ${args.length} arguments.');
   }
 }
 
@@ -10983,6 +11193,7 @@ String? dart_String_toUpperCase(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 String? dart_String_fromCharCodes(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
@@ -11001,6 +11212,7 @@ String? dart_String_fromCharCodes(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 String? dart_String_fromCharCodes_full(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 3) {
     if (args[0] is! Iterable) {
       throw ArgumentError(
@@ -11029,6 +11241,7 @@ String? dart_String_fromCharCodes_full(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 String? dart_String_fromCharCode(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! int) {
       throw ArgumentError(
@@ -11047,6 +11260,7 @@ String? dart_String_fromCharCode(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 String? dart_String_fromEnvironment(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -11292,6 +11506,7 @@ String? dart_StringBuffer_toString(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 StringBuffer? dart_StringBuffer_(PLEnv env, PLVector args) {
+  // ctor
   if (args.isEmpty) {
     final returnValue = StringBuffer();
     return returnValue;
@@ -11303,6 +11518,7 @@ StringBuffer? dart_StringBuffer_(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 StringBuffer? dart_StringBuffer__full(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! Object) {
       throw ArgumentError(
@@ -11480,6 +11696,7 @@ int? dart_Symbol_hashCode(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Symbol? dart_Symbol_(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -12322,6 +12539,7 @@ IList? dart_Uri_parseIPv6Address_full(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Uri? dart_Uri_(PLEnv env, PLVector args) {
+  // ctor
   if (args.isEmpty) {
     final returnValue = Uri();
     return returnValue;
@@ -12333,6 +12551,7 @@ Uri? dart_Uri_(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Uri? dart_Uri_http(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -12351,6 +12570,7 @@ Uri? dart_Uri_http(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Uri? dart_Uri_http_full(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 3) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -12379,6 +12599,7 @@ Uri? dart_Uri_http_full(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Uri? dart_Uri_https(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -12397,6 +12618,7 @@ Uri? dart_Uri_https(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Uri? dart_Uri_https_full(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 3) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -12425,6 +12647,7 @@ Uri? dart_Uri_https_full(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Uri? dart_Uri_file(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -12443,6 +12666,7 @@ Uri? dart_Uri_file(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Uri? dart_Uri_directory(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -12461,6 +12685,7 @@ Uri? dart_Uri_directory(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Uri? dart_Uri_dataFromString(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -12479,6 +12704,7 @@ Uri? dart_Uri_dataFromString(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Uri? dart_Uri_dataFromBytes(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! List) {
       throw ArgumentError(
@@ -12723,6 +12949,7 @@ String? dart_UriData_toString(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 UriData? dart_UriData_fromString(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! String) {
       throw ArgumentError(
@@ -12741,6 +12968,7 @@ UriData? dart_UriData_fromString(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 UriData? dart_UriData_fromBytes(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! List) {
       throw ArgumentError(
@@ -12759,6 +12987,7 @@ UriData? dart_UriData_fromBytes(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 UriData? dart_UriData_fromUri(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! Uri) {
       throw ArgumentError(
@@ -12835,6 +13064,7 @@ bool? dart_Random_nextBool(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Random? dart_Random_(PLEnv env, PLVector args) {
+  // ctor
   if (args.isEmpty) {
     final returnValue = Random();
     return returnValue;
@@ -12846,6 +13076,7 @@ Random? dart_Random_(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Random? dart_Random__full(PLEnv env, PLVector args) {
+  // ctor
   if (args.length == 1) {
     if (args[0] is! int) {
       throw ArgumentError(
@@ -12864,6 +13095,7 @@ Random? dart_Random__full(PLEnv env, PLVector args) {
 
 // ignore: non_constant_identifier_names, strict_raw_type
 Random? dart_Random_secure(PLEnv env, PLVector args) {
+  // ctor
   if (args.isEmpty) {
     final returnValue = Random.secure();
     return returnValue;
