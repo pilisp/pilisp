@@ -1607,7 +1607,7 @@ final piLispCore = r'''
 
 (defn str/from-char-codes
   [char-codes]
-  (dart/String.fromCharCodes (to-dart-int-list char-codes)))
+  (dart/String.fromCharCodes (to-dart-list-of-int char-codes)))
 
 (defn str/upper-case
   {:doc "Converts string to all upper-case."}

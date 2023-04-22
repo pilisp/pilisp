@@ -171,14 +171,14 @@ class PLEnv {
         IMap({
           termDoc: 'Returns a Dart List representation of the given collection.'
         })),
-    PLSymbol('to-dart-int-list'): PLBindingEntry.withMeta(
-        toDartIntListFn,
+    PLSymbol('to-dart-list-of-int'): PLBindingEntry.withMeta(
+        toDartListOfIntFn,
         IMap({
           termDoc:
               'Returns a Dart List<int> representation of the given collection.'
         })),
-    PLSymbol('to-dart-future-list'): PLBindingEntry.withMeta(
-        toDartFutureListFn,
+    PLSymbol('to-dart-list-of-future'): PLBindingEntry.withMeta(
+        toDartListOfFutureFn,
         IMap({
           termDoc:
               'Returns a Dart List<Future<dynamic>> representation of the given collection.'
@@ -188,10 +188,23 @@ class PLEnv {
         IMap({
           termDoc: 'Returns a Dart Map representation of the given collection.'
         })),
+    PLSymbol('to-dart-map-of-string-string'): PLBindingEntry.withMeta(
+        toDartMapOfStringStringFn,
+        IMap({
+          termDoc:
+              'Returns a Dart Map<String, String> representation of the given collection.'
+        })),
+
     PLSymbol('to-dart-set'): PLBindingEntry.withMeta(
         toDartSetFn,
         IMap({
           termDoc: 'Returns a Dart Set representation of the given collection.'
+        })),
+    PLSymbol('dart-assoc-string-string'): PLBindingEntry.withMeta(
+        dartAssocStringStringFn,
+        IMap({
+          termDoc:
+              'Given a Dart Map<String, String>, associate the keys to values and return the mutated map. A variable number of key-value pairs is accepted, like the assoc function.'
         })),
     PLSymbol('cons'): PLBindingEntry.withMeta(consFn,
         IMap({termDoc: 'Returns a new collection with the item prepended.'})),

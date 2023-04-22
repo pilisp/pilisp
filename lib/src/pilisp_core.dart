@@ -589,101 +589,57 @@ List<Object?> toDartListFn(PLEnv env, PLVector args) {
   }
 }
 
-List<int> toDartIntListFn(PLEnv env, PLVector args) {
+List<int> toDartListOfIntFn(PLEnv env, PLVector args) {
   if (args.length == 1) {
     final coll = args[0];
     List<int> l = [];
     if (coll is PLList) {
-      for (final x in coll.iter) {
-        if (x is int) {
-          l.add(x);
-        } else {
-          throw ArgumentError(
-              'The to-dart-int-list function expects all of the items in the collection passed to it to be ints, but received a ${typeString(x)} value.');
-        }
-      }
+      return List<int>.from(coll.iter);
     } else if (coll is PLVector) {
-      for (final x in coll.iter) {
-        if (x is int) {
-          l.add(x);
-        } else {
-          throw ArgumentError(
-              'The to-dart-int-list function expects all of the items in the collection passed to it to be ints, but received a ${typeString(x)} value.');
-        }
-      }
+      return List<int>.from(coll.iter);
     } else if (coll is IList) {
-      for (final x in coll) {
-        if (x is int) {
-          l.add(x);
-        } else {
-          throw ArgumentError(
-              'The to-dart-int-list function expects all of the items in the collection passed to it to be ints, but received a ${typeString(x)} value.');
-        }
-      }
+      return List<int>.from(coll);
     } else if (coll is List) {
       if (coll is List<int>) {
         return coll;
       } else {
         throw ArgumentError(
-            'The dart-to-int-list function expects a list passed to it to be List<int>, but received a ${typeString(coll)} value.');
+            'The dart-to-list-of-int function expects a list passed to it to be a List<int> or castable to that type, but received a ${typeString(coll)} value.');
       }
     } else {
       throw ArgumentError(
-          'The to-dart-int-list function does not know how to convert a ${typeString(coll)} value into a Dart List.');
+          'The to-dart-list-of-int function does not know how to convert a ${typeString(coll)} value into a Dart List<int>.');
     }
-    return l;
   } else {
     throw FormatException(
-        'The to-dart-int-list function expects 1 argument, but received ${args.length} arguments.');
+        'The to-dart-list-of-int function expects 1 argument, but received ${args.length} arguments.');
   }
 }
 
-List<Future<dynamic>> toDartFutureListFn(PLEnv env, PLVector args) {
+List<Future<dynamic>> toDartListOfFutureFn(PLEnv env, PLVector args) {
   if (args.length == 1) {
     final coll = args[0];
     List<Future<dynamic>> l = [];
     if (coll is PLList) {
-      for (final x in coll.iter) {
-        if (x is Future) {
-          l.add(x);
-        } else {
-          throw ArgumentError(
-              'The to-dart-future-list function expects all of the items in the collection passed to it to be Futures, but received a ${typeString(x)} value.');
-        }
-      }
+      return List<Future<dynamic>>.from(coll.iter);
     } else if (coll is PLVector) {
-      for (final x in coll.iter) {
-        if (x is Future) {
-          l.add(x);
-        } else {
-          throw ArgumentError(
-              'The to-dart-future-list function expects all of the items in the collection passed to it to be Futures, but received a ${typeString(x)} value.');
-        }
-      }
+      return List<Future<dynamic>>.from(coll.iter);
     } else if (coll is IList) {
-      for (final x in coll) {
-        if (x is Future) {
-          l.add(x);
-        } else {
-          throw ArgumentError(
-              'The to-dart-future-list function expects all of the items in the collection passed to it to be Futures, but received a ${typeString(x)} value.');
-        }
-      }
+      return List<Future<dynamic>>.from(coll);
     } else if (coll is List) {
       if (coll is List<Future>) {
         return coll;
       } else {
         throw ArgumentError(
-            'The dart-to-int-list function expects a list passed to it to be List<Future<dynamic>>, but received a ${typeString(coll)} value.');
+            'The dart-to-list-of-future function expects a list passed to it to be List<Future<dynamic>> or castable to that type, but received a ${typeString(coll)} value.');
       }
     } else {
       throw ArgumentError(
-          'The to-dart-future-list function does not know how to convert a ${typeString(coll)} value into a Dart List.');
+          'The to-dart-list-of-future function does not know how to convert a ${typeString(coll)} value into a Dart List.');
     }
-    return l;
   } else {
     throw FormatException(
-        'The to-dart-future-list function expects 1 argument, but received ${args.length} arguments.');
+        'The to-dart-list-of-future function expects 1 argument, but received ${args.length} arguments.');
   }
 }
 
@@ -696,10 +652,57 @@ Map<Object?, Object?> toDartMapFn(PLEnv env, PLVector args) {
       return coll;
     }
     throw ArgumentError(
-        'The to-dart-map function does not know how to convert a ${typeString(coll)} value into a Dart Map.');
+        'The to-dart-map function does not know how to convert a ${typeString(coll)} value into a Dart Map<Object?, Object?>.');
   } else {
     throw FormatException(
         'The to-dart-map function expects 1 argument, but received ${args.length} arguments.');
+  }
+}
+
+Map<Object?, Object?> toDartMapOfStringStringFn(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final coll = args[0];
+    if (coll is IMap) {
+      return Map<String, String>.from(coll.unlock);
+    } else if (coll is Map) {
+      return coll;
+    }
+    throw ArgumentError(
+        'The to-dart-map-of-string-string function does not know how to convert a ${typeString(coll)} value into a Dart Map<String, String>.');
+  } else {
+    throw FormatException(
+        'The to-dart-map-of-string-string function expects 1 argument, but received ${args.length} arguments.');
+  }
+}
+
+Map<String, String> dartAssocStringStringFn(PLEnv env, PLVector args) {
+  if (args.length > 1 && args.length.isOdd) {
+    final m = args[0];
+    if (m is Map<String, String>) {
+      final kvs = args.skip(1).toList();
+      for (int i = 0; i < kvs.length; i += 2) {
+        final k = kvs[i];
+        final v = kvs[i + 1];
+        if (k is String) {
+          if (v is String) {
+            m[k] = v;
+          } else {
+            throw ArgumentError(
+                'The dart-assoc-string-string function expects the values to associate to be String values, but encountered a ${typeString(k)} value.');
+          }
+        } else {
+          throw ArgumentError(
+              'The dart-assoc-string-string function expects the keys to associate to be String values, but encountered a ${typeString(k)} value.');
+        }
+      }
+      return m;
+    } else {
+      throw ArgumentError(
+          'The dart-assoc-string-string function expects its first argument to be a Map<String, String>, but received a ${typeString(m)} value');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart-assoc-string-string function expects a Map<String, String> argument followed by an even number of key/value pairs, but received ${args.length} arguments.');
   }
 }
 
@@ -955,21 +958,6 @@ Object? applyFn(PLEnv env, PLVector args) {
         'The apply function expects two arguments, but received ${args.length}');
   }
 }
-
-// Object? Function(Iterable<Object?>) dartFnFn(PLEnv env, PLVector args) {
-//   if (args.length == 1) {
-//     final plFn = args[0];
-//     if (plFn is PLFunction) {
-//       return ((Iterable<Object?> params) => plFn.invoke(env, params));
-//     } else {
-//       throw ArgumentError(
-//           'The dart/fn function expects its argument to be a function, but received a ${typeString(plFn)} value.');
-//     }
-//   } else {
-//     throw FormatException(
-//         'The dart/fn function expects 1 argument, but received ${args.length} arguments.');
-//   }
-// }
 
 Object? nthFn(PLEnv env, PLVector args) {
   if (args.length == 2) {
