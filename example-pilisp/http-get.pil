@@ -1,0 +1,11 @@
+#!/usr/bin/env pl -l
+;;-*- mode: pilisp -*-
+
+;; HTTP GET request, featuring use of PiLisp's Future handling.
+(future/await
+ (future/then (http/get "https://danielgregoire.dev/feed.xml")
+              (fn [resp]
+                (future/then (-> (dart/StreamedResponse.stream resp)
+                                 dart/ByteStream.bytesToString)
+                             (fn [string]
+                               (println string))))))

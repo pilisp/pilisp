@@ -8,5 +8,7 @@ echo '[BUILD] Building native executable...'
 ./script/compile
 echo '[TEST] Running PiLisp test suite...'
 ./pl test/pilisp_test.pil
-echo '[TEST] Running examples...'
+echo '[EXAMPLE] Running Dart examples...'
 dart run example/pilisp_example.dart
+echo '[EXAMPLE] Running PiLisp examples...'
+./pl example-pilisp/http-get.pil
