@@ -1973,6 +1973,16 @@ final piLispCore = r'''
 (defn current-time-millis []
   (dart/DateTime.millisecondsSinceEpoch (dart/DateTime.now)))
 
+;; # JSON
+
+(defn json/decode
+  [s]
+  (to-value (dart/dart-convert-jsonDecode s)))
+
+(defn json/encode
+  [o]
+  (dart/dart-convert-jsonEncode o))
+
 ;; # HTTP
 ;;
 ;; NB. These rely on the http package, which provides a cross-platform interface.
