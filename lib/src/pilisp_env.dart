@@ -166,6 +166,12 @@ class PLEnv {
           termDoc:
               'Returns the Dart list provided, mutated to have the given item added to the end.'
         })),
+    PLSymbol('to-value'): PLBindingEntry.withMeta(
+        toValueFn,
+        IMap({
+          termDoc:
+              'Return a value for the given argument. If a mutable collection, returns a (recursively) immutable one.'
+        })),
     PLSymbol('to-dart-list'): PLBindingEntry.withMeta(
         toDartListFn,
         IMap({

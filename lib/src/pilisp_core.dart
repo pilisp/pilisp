@@ -569,6 +569,31 @@ IMap<Object?, Object?> hashMapFn(PLEnv env, PLVector args) {
   }
 }
 
+/// While PiLisp can work with any Dart values, for data structure, immutable ones
+/// are preferable to mutable.
+///
+/// If the argument is a collection, it is recursively traversed to return a fully
+/// immutable version of itself.
+///
+/// Any other types of values are returned as-is.
+Object? toValueFn(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is List<Object?>) {
+      return o.lockRecursive;
+    } else if (o is Map<Object?, Object?>) {
+      return o.lockRecursive;
+    } else if (o is Set<Object?>) {
+      return o.lockRecursive;
+    } else {
+      return o;
+    }
+  } else {
+    throw ArgumentError(
+        'The to-expr function expects one argument, but received ${args.length} arguments.');
+  }
+}
+
 List<Object?> toDartListFn(PLEnv env, PLVector args) {
   if (args.length == 1) {
     final coll = args[0];
