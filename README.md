@@ -28,10 +28,34 @@ PiLisp & Clojure](doc/Comparison-PiLisp-Clojure.md) for more information.
 * `dart pub add pilisp` to add as a library to your Dart project.
 
 For CLI use, download the latest release for your platform and run the `pl`
-executable. Run with `rlwrap` or similar for a better line editing
-experience.
+executable.
 
-For use in your Dart programs:
+```shell
+$ pl
+pl>
+```
+
+Run the `help` command for all options:
+
+```shell
+$ pl help
+Run a PiLisp REPL, or try the subcommands for more options.
+
+Usage: pl <command> [arguments]
+
+Global options:
+-h, --help    Print this usage information.
+
+Available commands:
+  eval   Evaluate PiLisp code passed as arguments.
+  load   Load PiLisp code saved in files.
+  repl   Start a PiLisp REPL.
+
+Run "pl help <command>" for more information about a command.
+```
+
+For use in your Dart programs, `PiLisp.loadString` will read and evaluate
+program source:
 
 ```dart
 PiLisp.loadString('(+ 1 2 3 4)');
