@@ -426,7 +426,7 @@ class PLList extends PLExprIterable
                     symbol = maybeSymbol;
                   } else {
                     throw FormatException(
-                        "The let special form's bindings must be symbols, but encountered a ${typeString(maybeSymbol)} value: ${plPrintToString(env, maybeSymbol)}");
+                        "The let* special form's bindings must be symbols, but encountered a ${typeString(maybeSymbol)} value: ${plPrintToString(env, maybeSymbol)}");
                   }
                 } else {
                   // Follows let semantics of Clojure, in which each binding is
@@ -1309,38 +1309,43 @@ PLInterpretedCode interpretBody(Object? form, PLEnv env) {
         final bindingVector = form[1];
         PLList interpretedLetForm = PLList([symbolLet]);
         if (bindingVector is PLVector) {
-          PLVector interpretedLetBindingVector = PLVector([]);
-          env.pushEmptyClosureScope();
-          for (int i = 0; i < bindingVector.length; i++) {
-            if (i.isEven) {
-              final sym = bindingVector[i];
-              if (sym is PLSymbol) {
-                env.addClosureScopedSymbol(sym);
-                // CODE ADD
-                interpretedLetBindingVector =
-                    interpretedLetBindingVector.add(sym);
+          if (bindingVector.length.isEven) {
+            PLVector interpretedLetBindingVector = PLVector([]);
+            env.pushEmptyClosureScope();
+            for (int i = 0; i < bindingVector.length; i++) {
+              if (i.isEven) {
+                final sym = bindingVector[i];
+                if (sym is PLSymbol) {
+                  env.addClosureScopedSymbol(sym);
+                  // CODE ADD
+                  interpretedLetBindingVector =
+                      interpretedLetBindingVector.add(sym);
+                } else {
+                  throw 'Developer Error: Bindings must be symbols, but encountered a ${typeString(sym)} value.';
+                }
               } else {
-                throw 'Developer Error: Bindings must be symbols, but encountered a ${typeString(sym)} value.';
+                final interpretedBindingValue =
+                    interpretBody(bindingVector[i], env);
+                closedScopeMappings.addAll(interpretedBindingValue.closedScope);
+                // CODE ADD
+                interpretedLetBindingVector = interpretedLetBindingVector
+                    .add(interpretedBindingValue.code);
               }
-            } else {
-              final interpretedBindingValue =
-                  interpretBody(bindingVector[i], env);
-              closedScopeMappings.addAll(interpretedBindingValue.closedScope);
-              // CODE ADD
-              interpretedLetBindingVector =
-                  interpretedLetBindingVector.add(interpretedBindingValue.code);
             }
+            // CODE ADD
+            final interpretedLetBodyInterpretedCode =
+                interpretBody(PLList([symbolDo]).addAll(form.skip(2)), env);
+            closedScopeMappings
+                .addAll(interpretedLetBodyInterpretedCode.closedScope);
+            interpretedLetForm = interpretedLetForm
+                .add(interpretedLetBindingVector)
+                .add(interpretedLetBodyInterpretedCode.code);
+            code.add(interpretedLetForm);
+            env.popClosureScope();
+          } else {
+            throw FormatException(
+                "The let special form's bindings vector must have an even number of elements, encountered ${bindingVector.length} elements.");
           }
-          // CODE ADD
-          final interpretedLetBodyInterpretedCode =
-              interpretBody(PLList([symbolDo]).addAll(form.skip(2)), env);
-          closedScopeMappings
-              .addAll(interpretedLetBodyInterpretedCode.closedScope);
-          interpretedLetForm = interpretedLetForm
-              .add(interpretedLetBindingVector)
-              .add(interpretedLetBodyInterpretedCode.code);
-          code.add(interpretedLetForm);
-          env.popClosureScope();
         } else {
           throw 'Developer Error: first arg to let must be a binding vector.';
         }

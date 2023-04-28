@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:http/http.dart' as http;
@@ -8,6 +9,7 @@ import '../pilisp_core.dart';
 final Set<String> prohibitedMethods = {
   'int.>>>', // NB: Labeled as an operator but not excluded by v.isOperator check
   'dart_double_parse_full', // NB: Deprecated optional argument
+  'Encoding.decodeStream', // NB: Wrong generic type
   'Enum.compareByIndex', // NB: This and next have type args, which
   'Enum.compareByName', //      are not yet supported
   'Future.doWhile', // NB: Type needs to be specified differently
@@ -91,9 +93,8 @@ final sourceLibraries = {
 };
 
 final sourceClasses = {
-  // == dart:collection ==
-  // == dart:convert ==
-  // == dart:core ==
+  http.BaseRequest,
+  http.BaseResponse,
   BigInt,
   http.ByteStream,
   // bool, // skip
@@ -103,6 +104,7 @@ final sourceClasses = {
   // Deprecated, // skip
   double,
   Duration,
+  Encoding,
   Enum,
   // Expando, // skip
   // Finalizer, // skip
@@ -126,8 +128,6 @@ final sourceClasses = {
   // pragma, // skip
   RegExp,
   RegExpMatch,
-  http.BaseRequest,
-  http.BaseResponse,
   http.Request,
   http.Response,
   RuneIterator,
@@ -146,7 +146,6 @@ final sourceClasses = {
   Uri,
   UriData,
   // WeakReference, // skip
-  // == dart:math ==
   Random,
 };
 

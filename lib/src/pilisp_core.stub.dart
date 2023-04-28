@@ -15,6 +15,115 @@ import '../pilisp.dart';
 import 'pilisp_core.dart';
 
 Map<PLSymbol, PLBindingEntry> wrapperBindings = {
+// Class BaseRequest with 24 declarations
+// START method -----------------------
+  PLSymbol('dart/BaseRequest.method'): PLBindingEntry(dart_BaseRequest_method),
+// END method -----------------------
+// START url -----------------------
+  PLSymbol('dart/BaseRequest.url'): PLBindingEntry(dart_BaseRequest_url),
+// END url -----------------------
+// START _contentLength -----------------------
+// END _contentLength -----------------------
+// START _persistentConnection -----------------------
+// END _persistentConnection -----------------------
+// START _followRedirects -----------------------
+// END _followRedirects -----------------------
+// START _maxRedirects -----------------------
+// END _maxRedirects -----------------------
+// START headers -----------------------
+  PLSymbol('dart/BaseRequest.headers'):
+      PLBindingEntry(dart_BaseRequest_headers),
+// END headers -----------------------
+// START _finalized -----------------------
+// END _finalized -----------------------
+// START _tokenRE -----------------------
+// END _tokenRE -----------------------
+// START contentLength -----------------------
+  PLSymbol('dart/BaseRequest.contentLength'):
+      PLBindingEntry(dart_BaseRequest_contentLength),
+// END contentLength -----------------------
+// START contentLength= -----------------------
+  PLSymbol('dart/BaseRequest.contentLength='):
+      PLBindingEntry(dart_BaseRequest_contentLength__set_to),
+// END contentLength= -----------------------
+// START persistentConnection -----------------------
+  PLSymbol('dart/BaseRequest.persistentConnection'):
+      PLBindingEntry(dart_BaseRequest_persistentConnection),
+// END persistentConnection -----------------------
+// START persistentConnection= -----------------------
+  PLSymbol('dart/BaseRequest.persistentConnection='):
+      PLBindingEntry(dart_BaseRequest_persistentConnection__set_to),
+// END persistentConnection= -----------------------
+// START followRedirects -----------------------
+  PLSymbol('dart/BaseRequest.followRedirects'):
+      PLBindingEntry(dart_BaseRequest_followRedirects),
+// END followRedirects -----------------------
+// START followRedirects= -----------------------
+  PLSymbol('dart/BaseRequest.followRedirects='):
+      PLBindingEntry(dart_BaseRequest_followRedirects__set_to),
+// END followRedirects= -----------------------
+// START maxRedirects -----------------------
+  PLSymbol('dart/BaseRequest.maxRedirects'):
+      PLBindingEntry(dart_BaseRequest_maxRedirects),
+// END maxRedirects -----------------------
+// START maxRedirects= -----------------------
+  PLSymbol('dart/BaseRequest.maxRedirects='):
+      PLBindingEntry(dart_BaseRequest_maxRedirects__set_to),
+// END maxRedirects= -----------------------
+// START finalized -----------------------
+  PLSymbol('dart/BaseRequest.finalized'):
+      PLBindingEntry(dart_BaseRequest_finalized),
+// END finalized -----------------------
+// START _validateMethod -----------------------
+// END _validateMethod -----------------------
+// START finalize -----------------------
+  PLSymbol('dart/BaseRequest.finalize'):
+      PLBindingEntry(dart_BaseRequest_finalize),
+// END finalize -----------------------
+// START send -----------------------
+  PLSymbol('dart/BaseRequest.send'): PLBindingEntry(dart_BaseRequest_send),
+// END send -----------------------
+// START _checkFinalized -----------------------
+// END _checkFinalized -----------------------
+// START toString -----------------------
+  PLSymbol('dart/BaseRequest.toString'):
+      PLBindingEntry(dart_BaseRequest_toString),
+// END toString -----------------------
+// START CTOR  -----------------------
+// Skipping binding for constructor of abstract class BaseRequest
+// END  -----------------------
+// Class BaseResponse with 8 declarations
+// START request -----------------------
+  PLSymbol('dart/BaseResponse.request'):
+      PLBindingEntry(dart_BaseResponse_request),
+// END request -----------------------
+// START statusCode -----------------------
+  PLSymbol('dart/BaseResponse.statusCode'):
+      PLBindingEntry(dart_BaseResponse_statusCode),
+// END statusCode -----------------------
+// START reasonPhrase -----------------------
+  PLSymbol('dart/BaseResponse.reasonPhrase'):
+      PLBindingEntry(dart_BaseResponse_reasonPhrase),
+// END reasonPhrase -----------------------
+// START contentLength -----------------------
+  PLSymbol('dart/BaseResponse.contentLength'):
+      PLBindingEntry(dart_BaseResponse_contentLength),
+// END contentLength -----------------------
+// START headers -----------------------
+  PLSymbol('dart/BaseResponse.headers'):
+      PLBindingEntry(dart_BaseResponse_headers),
+// END headers -----------------------
+// START isRedirect -----------------------
+  PLSymbol('dart/BaseResponse.isRedirect'):
+      PLBindingEntry(dart_BaseResponse_isRedirect),
+// END isRedirect -----------------------
+// START persistentConnection -----------------------
+  PLSymbol('dart/BaseResponse.persistentConnection'):
+      PLBindingEntry(dart_BaseResponse_persistentConnection),
+// END persistentConnection -----------------------
+// START CTOR  -----------------------
+// Skipping binding for constructor of abstract class BaseResponse
+// END  -----------------------
 // Class BigInt with 42 declarations
 // START zero -----------------------
   PLSymbol('dart/BigInt.zero'): PLBindingEntry(dart_BigInt_zero),
@@ -561,6 +670,23 @@ Map<PLSymbol, PLBindingEntry> wrapperBindings = {
 // END unary- -----------------------
 // START CTOR  -----------------------
   PLSymbol('dart/Duration.'): PLBindingEntry(dart_Duration_),
+// END  -----------------------
+// Class Encoding with 6 declarations
+// START encoder -----------------------
+  PLSymbol('dart/Encoding.encoder'): PLBindingEntry(dart_Encoding_encoder),
+// END encoder -----------------------
+// START decoder -----------------------
+  PLSymbol('dart/Encoding.decoder'): PLBindingEntry(dart_Encoding_decoder),
+// END decoder -----------------------
+// START decodeStream -----------------------
+// START name -----------------------
+  PLSymbol('dart/Encoding.name'): PLBindingEntry(dart_Encoding_name),
+// END name -----------------------
+// START getByName -----------------------
+  PLSymbol('dart/Encoding.getByName'): PLBindingEntry(dart_Encoding_getByName),
+// END getByName -----------------------
+// START CTOR  -----------------------
+// Skipping binding for constructor of abstract class Encoding
 // END  -----------------------
 // Class Enum with 4 declarations
 // START index -----------------------
@@ -1378,115 +1504,6 @@ Map<PLSymbol, PLBindingEntry> wrapperBindings = {
 // START CTOR  -----------------------
 // Skipping binding for constructor of abstract class RegExpMatch
 // END  -----------------------
-// Class BaseRequest with 24 declarations
-// START method -----------------------
-  PLSymbol('dart/BaseRequest.method'): PLBindingEntry(dart_BaseRequest_method),
-// END method -----------------------
-// START url -----------------------
-  PLSymbol('dart/BaseRequest.url'): PLBindingEntry(dart_BaseRequest_url),
-// END url -----------------------
-// START _contentLength -----------------------
-// END _contentLength -----------------------
-// START _persistentConnection -----------------------
-// END _persistentConnection -----------------------
-// START _followRedirects -----------------------
-// END _followRedirects -----------------------
-// START _maxRedirects -----------------------
-// END _maxRedirects -----------------------
-// START headers -----------------------
-  PLSymbol('dart/BaseRequest.headers'):
-      PLBindingEntry(dart_BaseRequest_headers),
-// END headers -----------------------
-// START _finalized -----------------------
-// END _finalized -----------------------
-// START _tokenRE -----------------------
-// END _tokenRE -----------------------
-// START contentLength -----------------------
-  PLSymbol('dart/BaseRequest.contentLength'):
-      PLBindingEntry(dart_BaseRequest_contentLength),
-// END contentLength -----------------------
-// START contentLength= -----------------------
-  PLSymbol('dart/BaseRequest.contentLength='):
-      PLBindingEntry(dart_BaseRequest_contentLength__set_to),
-// END contentLength= -----------------------
-// START persistentConnection -----------------------
-  PLSymbol('dart/BaseRequest.persistentConnection'):
-      PLBindingEntry(dart_BaseRequest_persistentConnection),
-// END persistentConnection -----------------------
-// START persistentConnection= -----------------------
-  PLSymbol('dart/BaseRequest.persistentConnection='):
-      PLBindingEntry(dart_BaseRequest_persistentConnection__set_to),
-// END persistentConnection= -----------------------
-// START followRedirects -----------------------
-  PLSymbol('dart/BaseRequest.followRedirects'):
-      PLBindingEntry(dart_BaseRequest_followRedirects),
-// END followRedirects -----------------------
-// START followRedirects= -----------------------
-  PLSymbol('dart/BaseRequest.followRedirects='):
-      PLBindingEntry(dart_BaseRequest_followRedirects__set_to),
-// END followRedirects= -----------------------
-// START maxRedirects -----------------------
-  PLSymbol('dart/BaseRequest.maxRedirects'):
-      PLBindingEntry(dart_BaseRequest_maxRedirects),
-// END maxRedirects -----------------------
-// START maxRedirects= -----------------------
-  PLSymbol('dart/BaseRequest.maxRedirects='):
-      PLBindingEntry(dart_BaseRequest_maxRedirects__set_to),
-// END maxRedirects= -----------------------
-// START finalized -----------------------
-  PLSymbol('dart/BaseRequest.finalized'):
-      PLBindingEntry(dart_BaseRequest_finalized),
-// END finalized -----------------------
-// START _validateMethod -----------------------
-// END _validateMethod -----------------------
-// START finalize -----------------------
-  PLSymbol('dart/BaseRequest.finalize'):
-      PLBindingEntry(dart_BaseRequest_finalize),
-// END finalize -----------------------
-// START send -----------------------
-  PLSymbol('dart/BaseRequest.send'): PLBindingEntry(dart_BaseRequest_send),
-// END send -----------------------
-// START _checkFinalized -----------------------
-// END _checkFinalized -----------------------
-// START toString -----------------------
-  PLSymbol('dart/BaseRequest.toString'):
-      PLBindingEntry(dart_BaseRequest_toString),
-// END toString -----------------------
-// START CTOR  -----------------------
-// Skipping binding for constructor of abstract class BaseRequest
-// END  -----------------------
-// Class BaseResponse with 8 declarations
-// START request -----------------------
-  PLSymbol('dart/BaseResponse.request'):
-      PLBindingEntry(dart_BaseResponse_request),
-// END request -----------------------
-// START statusCode -----------------------
-  PLSymbol('dart/BaseResponse.statusCode'):
-      PLBindingEntry(dart_BaseResponse_statusCode),
-// END statusCode -----------------------
-// START reasonPhrase -----------------------
-  PLSymbol('dart/BaseResponse.reasonPhrase'):
-      PLBindingEntry(dart_BaseResponse_reasonPhrase),
-// END reasonPhrase -----------------------
-// START contentLength -----------------------
-  PLSymbol('dart/BaseResponse.contentLength'):
-      PLBindingEntry(dart_BaseResponse_contentLength),
-// END contentLength -----------------------
-// START headers -----------------------
-  PLSymbol('dart/BaseResponse.headers'):
-      PLBindingEntry(dart_BaseResponse_headers),
-// END headers -----------------------
-// START isRedirect -----------------------
-  PLSymbol('dart/BaseResponse.isRedirect'):
-      PLBindingEntry(dart_BaseResponse_isRedirect),
-// END isRedirect -----------------------
-// START persistentConnection -----------------------
-  PLSymbol('dart/BaseResponse.persistentConnection'):
-      PLBindingEntry(dart_BaseResponse_persistentConnection),
-// END persistentConnection -----------------------
-// START CTOR  -----------------------
-// Skipping binding for constructor of abstract class BaseResponse
-// END  -----------------------
 // Class Request with 17 declarations
 // START _defaultEncoding -----------------------
 // END _defaultEncoding -----------------------
@@ -2273,6 +2290,396 @@ Map<PLSymbol, PLBindingEntry> wrapperBindings = {
       PLBindingEntry(dart_package_http_http_dart_read),
 // END Function read
 };
+
+// ignore: non_constant_identifier_names, strict_raw_type
+String dart_BaseRequest_method(PLEnv env, PLVector args) {
+  // variable wrapper
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseRequest) {
+      return o.method;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseRequest.method function expects its argument to be a BaseRequest but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseRequest.method function expects 1 argument of type BaseRequest but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Uri dart_BaseRequest_url(PLEnv env, PLVector args) {
+  // variable wrapper
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseRequest) {
+      return o.url;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseRequest.url function expects its argument to be a BaseRequest but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseRequest.url function expects 1 argument of type BaseRequest but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Map dart_BaseRequest_headers(PLEnv env, PLVector args) {
+  // variable wrapper
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseRequest) {
+      return o.headers;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseRequest.headers function expects its argument to be a BaseRequest but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseRequest.headers function expects 1 argument of type BaseRequest but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+int? dart_BaseRequest_contentLength(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseRequest) {
+      final returnValue = o.contentLength;
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseRequest.contentLength function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseRequest.contentLength function expects 1 argument(s) (the BaseRequest object + contentLength args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+void dart_BaseRequest_contentLength__set_to(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is BaseRequest) {
+      if (args[1] is! int) {
+        throw ArgumentError(
+            'The dart/BaseRequest.contentLength= function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
+      }
+
+      o.contentLength = args[1] as int;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseRequest.contentLength= function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseRequest.contentLength= function expects 2 argument(s) (the BaseRequest object + contentLength= args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+bool? dart_BaseRequest_persistentConnection(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseRequest) {
+      final returnValue = o.persistentConnection;
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseRequest.persistentConnection function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseRequest.persistentConnection function expects 1 argument(s) (the BaseRequest object + persistentConnection args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+void dart_BaseRequest_persistentConnection__set_to(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is BaseRequest) {
+      if (args[1] is! bool) {
+        throw ArgumentError(
+            'The dart/BaseRequest.persistentConnection= function expects its 2nd argument to be a bool value, but received a ${PiLisp.typeName(args[1])} value.');
+      }
+
+      o.persistentConnection = args[1] as bool;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseRequest.persistentConnection= function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseRequest.persistentConnection= function expects 2 argument(s) (the BaseRequest object + persistentConnection= args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+bool? dart_BaseRequest_followRedirects(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseRequest) {
+      final returnValue = o.followRedirects;
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseRequest.followRedirects function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseRequest.followRedirects function expects 1 argument(s) (the BaseRequest object + followRedirects args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+void dart_BaseRequest_followRedirects__set_to(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is BaseRequest) {
+      if (args[1] is! bool) {
+        throw ArgumentError(
+            'The dart/BaseRequest.followRedirects= function expects its 2nd argument to be a bool value, but received a ${PiLisp.typeName(args[1])} value.');
+      }
+
+      o.followRedirects = args[1] as bool;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseRequest.followRedirects= function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseRequest.followRedirects= function expects 2 argument(s) (the BaseRequest object + followRedirects= args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+int? dart_BaseRequest_maxRedirects(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseRequest) {
+      final returnValue = o.maxRedirects;
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseRequest.maxRedirects function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseRequest.maxRedirects function expects 1 argument(s) (the BaseRequest object + maxRedirects args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+void dart_BaseRequest_maxRedirects__set_to(PLEnv env, PLVector args) {
+  if (args.length == 2) {
+    final o = args[0];
+    if (o is BaseRequest) {
+      if (args[1] is! int) {
+        throw ArgumentError(
+            'The dart/BaseRequest.maxRedirects= function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
+      }
+
+      o.maxRedirects = args[1] as int;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseRequest.maxRedirects= function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseRequest.maxRedirects= function expects 2 argument(s) (the BaseRequest object + maxRedirects= args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+bool? dart_BaseRequest_finalized(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseRequest) {
+      final returnValue = o.finalized;
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseRequest.finalized function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseRequest.finalized function expects 1 argument(s) (the BaseRequest object + finalized args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+ByteStream? dart_BaseRequest_finalize(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseRequest) {
+      final returnValue = o.finalize();
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseRequest.finalize function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseRequest.finalize function expects 1 argument(s) (the BaseRequest object + finalize args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Future? dart_BaseRequest_send(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseRequest) {
+      final returnValue = o.send();
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseRequest.send function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseRequest.send function expects 1 argument(s) (the BaseRequest object + send args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+String? dart_BaseRequest_toString(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseRequest) {
+      final returnValue = o.toString();
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseRequest.toString function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseRequest.toString function expects 1 argument(s) (the BaseRequest object + toString args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+BaseRequest? dart_BaseResponse_request(PLEnv env, PLVector args) {
+  // variable wrapper
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseResponse) {
+      return o.request;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseResponse.request function expects its argument to be a BaseResponse but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseResponse.request function expects 1 argument of type BaseResponse but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+int dart_BaseResponse_statusCode(PLEnv env, PLVector args) {
+  // variable wrapper
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseResponse) {
+      return o.statusCode;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseResponse.statusCode function expects its argument to be a BaseResponse but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseResponse.statusCode function expects 1 argument of type BaseResponse but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+String? dart_BaseResponse_reasonPhrase(PLEnv env, PLVector args) {
+  // variable wrapper
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseResponse) {
+      return o.reasonPhrase;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseResponse.reasonPhrase function expects its argument to be a BaseResponse but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseResponse.reasonPhrase function expects 1 argument of type BaseResponse but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+int? dart_BaseResponse_contentLength(PLEnv env, PLVector args) {
+  // variable wrapper
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseResponse) {
+      return o.contentLength;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseResponse.contentLength function expects its argument to be a BaseResponse but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseResponse.contentLength function expects 1 argument of type BaseResponse but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Map dart_BaseResponse_headers(PLEnv env, PLVector args) {
+  // variable wrapper
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseResponse) {
+      return o.headers;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseResponse.headers function expects its argument to be a BaseResponse but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseResponse.headers function expects 1 argument of type BaseResponse but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+bool dart_BaseResponse_isRedirect(PLEnv env, PLVector args) {
+  // variable wrapper
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseResponse) {
+      return o.isRedirect;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseResponse.isRedirect function expects its argument to be a BaseResponse but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseResponse.isRedirect function expects 1 argument of type BaseResponse but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+bool dart_BaseResponse_persistentConnection(PLEnv env, PLVector args) {
+  // variable wrapper
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is BaseResponse) {
+      return o.persistentConnection;
+    } else {
+      throw ArgumentError(
+          'The dart/BaseResponse.persistentConnection function expects its argument to be a BaseResponse but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/BaseResponse.persistentConnection function expects 1 argument of type BaseResponse but received ${args.length} arguments.');
+  }
+}
 
 // ignore: non_constant_identifier_names, strict_raw_type
 BigInt? dart_BigInt_zero(PLEnv env, PLVector args) {
@@ -4277,6 +4684,75 @@ Duration? dart_Duration_(PLEnv env, PLVector args) {
   } else {
     throw ArgumentError(
         'The dart/Duration. function expects 0 constructor argument(s) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Converter? dart_Encoding_encoder(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is Encoding) {
+      final returnValue = o.encoder;
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Encoding.encoder function expects its first argument to be a Encoding object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Encoding.encoder function expects 1 argument(s) (the Encoding object + encoder args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Converter? dart_Encoding_decoder(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is Encoding) {
+      final returnValue = o.decoder;
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Encoding.decoder function expects its first argument to be a Encoding object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Encoding.decoder function expects 1 argument(s) (the Encoding object + decoder args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+String? dart_Encoding_name(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    final o = args[0];
+    if (o is Encoding) {
+      final returnValue = o.name;
+      return returnValue;
+    } else {
+      throw ArgumentError(
+          'The dart/Encoding.name function expects its first argument to be a Encoding object but received a ${PiLisp.typeName(o)} value.');
+    }
+  } else {
+    throw ArgumentError(
+        'The dart/Encoding.name function expects 1 argument(s) (the Encoding object + name args) but received ${args.length} arguments.');
+  }
+}
+
+// ignore: non_constant_identifier_names, strict_raw_type
+Encoding? dart_Encoding_getByName(PLEnv env, PLVector args) {
+  if (args.length == 1) {
+    if (args[0] is! String) {
+      throw ArgumentError(
+          'The dart/Encoding.getByName function expects its 1st argument to be a String value, but received a ${PiLisp.typeName(args[0])} value.');
+    }
+
+    final returnValue = Encoding.getByName(
+      args[0] as String,
+    );
+    return returnValue;
+  } else {
+    throw ArgumentError(
+        'The dart/Encoding.getByName function expects 1 argument(s) but received ${args.length} arguments.');
   }
 }
 
@@ -8724,396 +9200,6 @@ Iterable? dart_RegExpMatch_groupNames(PLEnv env, PLVector args) {
   } else {
     throw ArgumentError(
         'The dart/RegExpMatch.groupNames function expects 1 argument(s) (the RegExpMatch object + groupNames args) but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-String dart_BaseRequest_method(PLEnv env, PLVector args) {
-  // variable wrapper
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseRequest) {
-      return o.method;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseRequest.method function expects its argument to be a BaseRequest but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseRequest.method function expects 1 argument of type BaseRequest but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-Uri dart_BaseRequest_url(PLEnv env, PLVector args) {
-  // variable wrapper
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseRequest) {
-      return o.url;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseRequest.url function expects its argument to be a BaseRequest but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseRequest.url function expects 1 argument of type BaseRequest but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-Map dart_BaseRequest_headers(PLEnv env, PLVector args) {
-  // variable wrapper
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseRequest) {
-      return o.headers;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseRequest.headers function expects its argument to be a BaseRequest but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseRequest.headers function expects 1 argument of type BaseRequest but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-int? dart_BaseRequest_contentLength(PLEnv env, PLVector args) {
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseRequest) {
-      final returnValue = o.contentLength;
-      return returnValue;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseRequest.contentLength function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseRequest.contentLength function expects 1 argument(s) (the BaseRequest object + contentLength args) but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-void dart_BaseRequest_contentLength__set_to(PLEnv env, PLVector args) {
-  if (args.length == 2) {
-    final o = args[0];
-    if (o is BaseRequest) {
-      if (args[1] is! int) {
-        throw ArgumentError(
-            'The dart/BaseRequest.contentLength= function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
-      }
-
-      o.contentLength = args[1] as int;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseRequest.contentLength= function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseRequest.contentLength= function expects 2 argument(s) (the BaseRequest object + contentLength= args) but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-bool? dart_BaseRequest_persistentConnection(PLEnv env, PLVector args) {
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseRequest) {
-      final returnValue = o.persistentConnection;
-      return returnValue;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseRequest.persistentConnection function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseRequest.persistentConnection function expects 1 argument(s) (the BaseRequest object + persistentConnection args) but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-void dart_BaseRequest_persistentConnection__set_to(PLEnv env, PLVector args) {
-  if (args.length == 2) {
-    final o = args[0];
-    if (o is BaseRequest) {
-      if (args[1] is! bool) {
-        throw ArgumentError(
-            'The dart/BaseRequest.persistentConnection= function expects its 2nd argument to be a bool value, but received a ${PiLisp.typeName(args[1])} value.');
-      }
-
-      o.persistentConnection = args[1] as bool;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseRequest.persistentConnection= function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseRequest.persistentConnection= function expects 2 argument(s) (the BaseRequest object + persistentConnection= args) but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-bool? dart_BaseRequest_followRedirects(PLEnv env, PLVector args) {
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseRequest) {
-      final returnValue = o.followRedirects;
-      return returnValue;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseRequest.followRedirects function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseRequest.followRedirects function expects 1 argument(s) (the BaseRequest object + followRedirects args) but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-void dart_BaseRequest_followRedirects__set_to(PLEnv env, PLVector args) {
-  if (args.length == 2) {
-    final o = args[0];
-    if (o is BaseRequest) {
-      if (args[1] is! bool) {
-        throw ArgumentError(
-            'The dart/BaseRequest.followRedirects= function expects its 2nd argument to be a bool value, but received a ${PiLisp.typeName(args[1])} value.');
-      }
-
-      o.followRedirects = args[1] as bool;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseRequest.followRedirects= function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseRequest.followRedirects= function expects 2 argument(s) (the BaseRequest object + followRedirects= args) but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-int? dart_BaseRequest_maxRedirects(PLEnv env, PLVector args) {
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseRequest) {
-      final returnValue = o.maxRedirects;
-      return returnValue;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseRequest.maxRedirects function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseRequest.maxRedirects function expects 1 argument(s) (the BaseRequest object + maxRedirects args) but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-void dart_BaseRequest_maxRedirects__set_to(PLEnv env, PLVector args) {
-  if (args.length == 2) {
-    final o = args[0];
-    if (o is BaseRequest) {
-      if (args[1] is! int) {
-        throw ArgumentError(
-            'The dart/BaseRequest.maxRedirects= function expects its 2nd argument to be a int value, but received a ${PiLisp.typeName(args[1])} value.');
-      }
-
-      o.maxRedirects = args[1] as int;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseRequest.maxRedirects= function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseRequest.maxRedirects= function expects 2 argument(s) (the BaseRequest object + maxRedirects= args) but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-bool? dart_BaseRequest_finalized(PLEnv env, PLVector args) {
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseRequest) {
-      final returnValue = o.finalized;
-      return returnValue;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseRequest.finalized function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseRequest.finalized function expects 1 argument(s) (the BaseRequest object + finalized args) but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-ByteStream? dart_BaseRequest_finalize(PLEnv env, PLVector args) {
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseRequest) {
-      final returnValue = o.finalize();
-      return returnValue;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseRequest.finalize function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseRequest.finalize function expects 1 argument(s) (the BaseRequest object + finalize args) but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-Future? dart_BaseRequest_send(PLEnv env, PLVector args) {
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseRequest) {
-      final returnValue = o.send();
-      return returnValue;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseRequest.send function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseRequest.send function expects 1 argument(s) (the BaseRequest object + send args) but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-String? dart_BaseRequest_toString(PLEnv env, PLVector args) {
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseRequest) {
-      final returnValue = o.toString();
-      return returnValue;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseRequest.toString function expects its first argument to be a BaseRequest object but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseRequest.toString function expects 1 argument(s) (the BaseRequest object + toString args) but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-BaseRequest? dart_BaseResponse_request(PLEnv env, PLVector args) {
-  // variable wrapper
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseResponse) {
-      return o.request;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseResponse.request function expects its argument to be a BaseResponse but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseResponse.request function expects 1 argument of type BaseResponse but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-int dart_BaseResponse_statusCode(PLEnv env, PLVector args) {
-  // variable wrapper
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseResponse) {
-      return o.statusCode;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseResponse.statusCode function expects its argument to be a BaseResponse but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseResponse.statusCode function expects 1 argument of type BaseResponse but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-String? dart_BaseResponse_reasonPhrase(PLEnv env, PLVector args) {
-  // variable wrapper
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseResponse) {
-      return o.reasonPhrase;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseResponse.reasonPhrase function expects its argument to be a BaseResponse but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseResponse.reasonPhrase function expects 1 argument of type BaseResponse but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-int? dart_BaseResponse_contentLength(PLEnv env, PLVector args) {
-  // variable wrapper
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseResponse) {
-      return o.contentLength;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseResponse.contentLength function expects its argument to be a BaseResponse but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseResponse.contentLength function expects 1 argument of type BaseResponse but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-Map dart_BaseResponse_headers(PLEnv env, PLVector args) {
-  // variable wrapper
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseResponse) {
-      return o.headers;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseResponse.headers function expects its argument to be a BaseResponse but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseResponse.headers function expects 1 argument of type BaseResponse but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-bool dart_BaseResponse_isRedirect(PLEnv env, PLVector args) {
-  // variable wrapper
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseResponse) {
-      return o.isRedirect;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseResponse.isRedirect function expects its argument to be a BaseResponse but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseResponse.isRedirect function expects 1 argument of type BaseResponse but received ${args.length} arguments.');
-  }
-}
-
-// ignore: non_constant_identifier_names, strict_raw_type
-bool dart_BaseResponse_persistentConnection(PLEnv env, PLVector args) {
-  // variable wrapper
-  if (args.length == 1) {
-    final o = args[0];
-    if (o is BaseResponse) {
-      return o.persistentConnection;
-    } else {
-      throw ArgumentError(
-          'The dart/BaseResponse.persistentConnection function expects its argument to be a BaseResponse but received a ${PiLisp.typeName(o)} value.');
-    }
-  } else {
-    throw ArgumentError(
-        'The dart/BaseResponse.persistentConnection function expects 1 argument of type BaseResponse but received ${args.length} arguments.');
   }
 }
 

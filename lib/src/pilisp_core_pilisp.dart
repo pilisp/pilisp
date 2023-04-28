@@ -1977,14 +1977,140 @@ final piLispCore = r'''
 ;;
 ;; NB. These rely on the http package, which provides a cross-platform interface.
 
-(defn http/get-request [uri]
-  (dart/Request. "get"
-                 (if (string? uri)
-                   (dart/Uri.parse uri)
-                   uri)))
+(defn ensure-uri
+  {:private true}
+  [uri]
+  (if (string? uri)
+    (dart/Uri.parse uri)
+    uri))
 
-(defn http/get [uri]
-  (dart/BaseRequest.send (http/get-request uri)))
+(defn ensure-encoding
+  {:private true}
+  [encoding]
+  (if (string? encoding)
+    (dart/Encoding.getByName encoding)
+    encoding))
+
+(def http/valid-option-keys
+  #{:body
+    :body-bytes
+    :body-fields
+    :content-length
+    :encoding
+    :follow-redirects
+    :headers
+    :max-redirects
+    :method
+    :persistent-connection
+    :uri ;; synonym for :url
+    :url ;; synonym for :uri
+    })
+
+(defn http/validate-options
+  {:private true}
+  [options]
+  (let [{:keys [body
+                body-bytes
+                body-fields
+                content-length
+                encoding
+                follow-redirects
+                headers
+                max-redirects
+                method
+                persistent-connection
+                uri
+                url]} options]
+    (assert (not (and uri url)) "Specify only one of :uri or :url (synonyms)")
+    (assert (or (not (and body body-fields))
+                (not (and body body-bytes))
+                (not (and body-bytes body-fields))) "Specify only one of :body :body-fields or :body-bytes")
+    options))
+
+(def encoding/utf-8 (dart/Encoding.getByName "utf-8"))
+(def encoding/ascii (dart/Encoding.getByName "ascii"))
+(def encoding/latin1 (dart/Encoding.getByName "latin1"))
+
+(defn http/request [options]
+  (let [{:keys [body
+                body-bytes
+                body-fields
+                content-length
+                encoding
+                follow-redirects
+                headers
+                max-redirects
+                method
+                persistent-connection
+                uri
+                url]
+         :or {encoding encoding/utf-8
+              follow-redirects true
+              headers {"Accept" "application/json"
+                       "Content-Type" "application/json"
+                       "User-Agent" "pilisp program"}
+              method "get"
+              ;; This is the underyling Dart default
+              persistent-connection true}} (http/validate-options options)
+        method (str/lower-case method)
+        req (dart/Request. method (ensure-uri (or uri url)))
+        headers-mut (dart/BaseRequest.headers req)
+        _ (reduce
+           (fn [dart-map entry]
+             (dart-assoc-string-string dart-map (key entry) (val entry)))
+           headers-mut
+           headers)
+        _ (when (contains? options :content-length)
+            (dart/Request.contentLength= req content-length))
+        _ (when (contains? options :body)
+            (dart/Request.body= req body))
+        _ (when (contains? options :body-bytes)
+            (dart/Request.bodyBytes= req (to-dart-list-of-int body-bytes)))
+        _ (when (contains? options :body-fields)
+            (dart/Request.bodyFields= req (to-dart-map-of-string-string body-fields)))
+        _ (dart/Request.encoding= req (ensure-encoding encoding))
+        _ (dart/BaseRequest.persistentConnection= req persistent-connection)]
+    req))
+
+(defn http/request-send
+  [req]
+  (dart/BaseRequest.send req))
+
+(defn http/delete
+  ([uri]
+   (http/request-send (http/request {:method "delete" :uri uri})))
+  ([uri options]
+   (http/request-send (http/request (assoc options :method "delete" :uri uri)))))
+
+(defn http/get
+  ([uri]
+   (http/request-send (http/request {:method "get" :uri uri})))
+  ([uri options]
+   (http/request-send (http/request (assoc options :method "get" :uri uri)))))
+
+(defn http/head
+  ([uri]
+   (http/request-send (http/request {:method "head" :uri uri})))
+  ([uri options]
+   (http/request-send (http/request (assoc options :method "head" :uri uri)))))
+
+(defn http/patch
+  ([uri]
+   (http/request-send (http/request {:method "patch" :uri uri})))
+  ([uri options]
+   (http/request-send (http/request (assoc options :method "patch" :uri uri)))))
+
+(defn http/post
+  ([uri]
+   (http/request-send (http/request {:method "post" :uri uri})))
+  ([uri options]
+   (http/request-send (http/request (assoc options :method "post" :uri uri)))))
+
+(defn http/put
+  ([uri]
+   (http/request-send (http/request {:method "put" :uri uri})))
+  ([uri options]
+   (http/request-send (http/request (assoc options :method "put" :uri uri)))))
 
 
 ;; # Test Framework
