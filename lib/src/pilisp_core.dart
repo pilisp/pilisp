@@ -592,7 +592,6 @@ List<Object?> toDartListFn(PLEnv env, PLVector args) {
 List<int> toDartListOfIntFn(PLEnv env, PLVector args) {
   if (args.length == 1) {
     final coll = args[0];
-    List<int> l = [];
     if (coll is PLList) {
       return List<int>.from(coll.iter);
     } else if (coll is PLVector) {
@@ -619,7 +618,6 @@ List<int> toDartListOfIntFn(PLEnv env, PLVector args) {
 List<Future<dynamic>> toDartListOfFutureFn(PLEnv env, PLVector args) {
   if (args.length == 1) {
     final coll = args[0];
-    List<Future<dynamic>> l = [];
     if (coll is PLList) {
       return List<Future<dynamic>>.from(coll.iter);
     } else if (coll is PLVector) {
