@@ -7,8 +7,8 @@ dart test
 echo '[BUILD] Building native executable...'
 ./script/compile
 echo '[TEST] Running PiLisp test suite...'
-./pl load test/pilisp_test.pil
+./pl load --file test/pilisp_test.pil
 echo '[EXAMPLE] Running Dart examples...'
 dart run example/pilisp_example.dart
 echo '[EXAMPLE] Running PiLisp examples...'
-./pl load example-pilisp/http-get.pil
+./pl load --file example-pilisp/http-get.pil
