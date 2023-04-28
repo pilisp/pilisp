@@ -1,4 +1,3 @@
-#!/usr/bin/env pl -l
 ;;-*- mode: pilisp -*-
 
 ;; HTTP GET request, featuring use of PiLisp's Future handling.
