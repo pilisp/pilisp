@@ -1,3 +1,11 @@
+## v1.0.0-alpha.11
+
+* Adds `http/` functions
+* Upgrades pilisp_cli to latest, including auto-completion and new signature
+* Code gen for http package classes and `Encoding`
+* Adds `to-dart-map-of-string-string` and `dart-assoc-string-string` for working with Dart `Map<String, String>` values
+* Auto-completion at CLI via
+
 ## v1.0.0-alpha.10
 
 * Adds not=, distinct?, private fns for case macro
