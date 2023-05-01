@@ -586,7 +586,6 @@ IMap<Object?, Object?> hashMapFn(PLEnv env, PLVector args) {
 ///
 /// Any other types of values are returned as-is.
 Object? toValueFn(PLEnv env, PLVector args) {
-  ;
   if (args.length == 1) {
     final o = args[0];
     if (o is List<Object?>) {
