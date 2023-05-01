@@ -253,7 +253,7 @@ PLEnv envFn(PLEnv env, PLVector args) {
   }
 }
 
-bool debugBangFn(PLEnv env, PLVector args) {
+bool plDebugBangFn(PLEnv env, PLVector args) {
   if (args.length == 1) {
     final bl = args[0];
     if (bl is bool) {
@@ -266,6 +266,15 @@ bool debugBangFn(PLEnv env, PLVector args) {
   } else {
     throw FormatException(
         'The debug! function expects 1 argument, but received ${args.length} arguments.');
+  }
+}
+
+bool plIsScriptFn(PLEnv env, PLVector args) {
+  if (args.isEmpty) {
+    return env.isScript;
+  } else {
+    throw ArgumentError(
+        'The pl/script? function expects no arguments, but received ${args.length} arguments.');
   }
 }
 
@@ -577,6 +586,7 @@ IMap<Object?, Object?> hashMapFn(PLEnv env, PLVector args) {
 ///
 /// Any other types of values are returned as-is.
 Object? toValueFn(PLEnv env, PLVector args) {
+  ;
   if (args.length == 1) {
     final o = args[0];
     if (o is List<Object?>) {
@@ -711,7 +721,7 @@ Map<String, String> dartAssocStringStringFn(PLEnv env, PLVector args) {
             m[k] = v;
           } else {
             throw ArgumentError(
-                'The dart-assoc-string-string function expects the values to associate to be String values, but encountered a ${typeString(k)} value.');
+                'The dart-assoc-string-string function expects the values to associate to be String values, but encountered a ${typeString(v)} value.');
           }
         } else {
           throw ArgumentError(

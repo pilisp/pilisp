@@ -16,7 +16,11 @@ const declaredValue = Object();
 /// The [PLEnv] class stores the bindings and language-level settings for the
 /// current environment.
 class PLEnv {
-  /// When set to true, print methods should output legal JSON.
+  /// Flag to signal when a PiLisp program is being invoked as a script (as
+  /// opposed to being included in a compiled program).
+  bool isScript = false;
+
+  /// When `true`, print methods should output legal JSON.
   bool isPrintJson = false;
 
   /// The index at which indenting printed output should begin.
@@ -60,6 +64,8 @@ class PLEnv {
   static final IMap<PLSymbol, PLBindingEntry> baseScope = IMap({
     PLSymbol('*pilisp-version*'): PLBindingEntry.withMeta('1.0.0-alpha.1',
         IMap({termDoc: 'Returns the current version of PiLisp.'})),
+    PLSymbol('pl/script?'): PLBindingEntry.withMeta(plIsScriptFn,
+        IMap({termDoc: 'Whether this program is being invoked as a script.'})),
     PLSymbol('identical?'): PLBindingEntry.withMeta(isIdenticalFn,
         IMap({termDoc: 'Returns true if x and y are the same object.'})),
     PLSymbol('bindings*'): PLBindingEntry.withMeta(
@@ -98,7 +104,7 @@ class PLEnv {
           termDoc:
               'Return a binding for the given symbol. Throws an exception if unresolvable.'
         })),
-    PLSymbol('pl/debug!'): PLBindingEntry.withMeta(debugBangFn,
+    PLSymbol('pl/debug!'): PLBindingEntry.withMeta(plDebugBangFn,
         IMap({termDoc: 'Set the debug environment to true or false.'})),
     PLSymbol('next-symbol-id'): PLBindingEntry.withMeta(
         nextSymbolIdFn,
