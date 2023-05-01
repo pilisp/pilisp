@@ -2338,4 +2338,8 @@ final piLispCore = r'''
                   (dart/String.contains doc search))))
           (bindings)))))
 
+;; # CLI
+
+;; To be defined by programs that pass through their command line arguments.
+(declare *command-line-args*)
 ''';
