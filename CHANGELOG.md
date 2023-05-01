@@ -1,3 +1,10 @@
+## v1.0.0-alpha.12
+
+* Incorporates latest pilisp_cli dependency with new signature for CLI invocation
+* New `pl/script?` is false when a PiLisp program is being compiled (via string interpolation in a Dart program that is then compiled) using `pl compile` via the pilisp_cli tool.
+* Adds `json/decode` and `json/encode` using `dart:convert`, but decoding returns immutable collections
+* Adds `to-value` which acts as an identity function, except for mutable collections for which it returns immutable equivalents.
+
 ## v1.0.0-alpha.11
 
 * Adds `http/` functions
