@@ -1,3 +1,7 @@
+## (WIP) v1.0.0-alpha.13
+
+* Latest pilisp_cli, including new `compile` command and changes to `load` and `eval` commands
+
 ## v1.0.0-alpha.12
 
 * Incorporates latest pilisp_cli dependency with new signature for CLI invocation
