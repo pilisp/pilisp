@@ -1957,8 +1957,16 @@ final piLispCore = r'''
 (def future future/value)
 
 (defn future/then
-  [fut function]
-  (dart/Future.then fut (dart-dynamic-function-1 function)))
+  [fut then-function]
+  (dart/Future.then fut (dart-dynamic-function-1 then-function)))
+
+(defn future/catch-error
+  [fut err-function]
+  (dart/Future.then fut (dart-dynamic-function-1 err-function)))
+
+(defn future/when-complete
+  [fut finally-function]
+  (dart/Future.then fut (dart-dynamic-function-1 finally-function)))
 
 (defn future/await
   {:doc "Return an object that indicates to Dart code invoking this PiLisp program that the user wants to `await` the value. Accepts any value, calling Dart's `Future.value` constructor on non-Futures."}
@@ -2041,6 +2049,11 @@ final piLispCore = r'''
 (def encoding/ascii (dart/Encoding.getByName "ascii"))
 (def encoding/latin1 (dart/Encoding.getByName "latin1"))
 
+(def http/default-headers
+  {"Accept" "application/json"
+   "Content-Type" "application/json"
+   "User-Agent" "pilisp program"})
+
 (defn http/request [options]
   (let [{:keys [body
                 body-bytes
@@ -2056,9 +2069,7 @@ final piLispCore = r'''
                 url]
          :or {encoding encoding/utf-8
               follow-redirects true
-              headers {"Accept" "application/json"
-                       "Content-Type" "application/json"
-                       "User-Agent" "pilisp program"}
+              headers http/default-headers
               method "get"
               ;; This is the underyling Dart default
               persistent-connection true}} (http/validate-options options)
