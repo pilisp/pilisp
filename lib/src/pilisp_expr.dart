@@ -201,7 +201,7 @@ class PLTerm extends PLExpr implements PLInvocable {
 }
 
 class PLException extends PLExpr implements Exception {
-  List<String>? _stackTrace;
+  Iterable<String>? _stackTrace;
   bool isThrown = false;
   String message;
   String _stackTraceMessage = '';
@@ -225,13 +225,13 @@ class PLException extends PLExpr implements Exception {
     return 'exception';
   }
 
-  List<String> get stackTrace => _stackTrace ?? [];
+  Iterable<String> get stackTrace => _stackTrace ?? [];
 
   void saveStackTrace(PLEnv env, Object? topLevelForm) {
     final st = env.currentStackTrace();
     String msg = '';
     if (st.isNotEmpty) {
-      msg = st.reversed.map((e) => '  from $e').join('\n');
+      msg = st.toList().reversed.map((e) => '  from $e').join('\n');
     }
     final topLevel =
         'Thrown from expression:\n${plPrintToString(env, topLevelForm)}';
@@ -624,7 +624,17 @@ class PLList extends PLExprIterable
           return inv.invoke(env, args);
         } else if (inv is Function) {
           // NB: These are the *Fn functions defined in pilisp_core.dart
-          return inv(env, args.toPLVector());
+          // TODO Make fuller wrappers for these so that names, metadata, etc., can be better.
+          env.pushStackFrame(formatStaticDartFnName(inv));
+          try {
+            return inv(env, args.toPLVector());
+          } on PLInvocationException {
+            rethrow;
+          } catch (e) {
+            throw PLInvocationException(e, env.stackFrames.toList());
+          } finally {
+            env.popStackFrame();
+          }
         } else if (inv is IMap) {
           return inv.invoke(env, args);
         } else if (inv is ISet) {
@@ -662,7 +672,16 @@ class PLList extends PLExprIterable
     } else if (inv is ISet) {
       return inv.invoke(env, args);
     } else if (inv is Function) {
-      return inv(env, args.toPLVector());
+      env.pushStackFrame(formatStaticDartFnName(inv));
+      try {
+        return inv(env, args.toPLVector());
+      } on PLInvocationException {
+        rethrow;
+      } catch (e) {
+        throw PLInvocationException(e, env.stackFrames.toList());
+      } finally {
+        env.popStackFrame();
+      }
     } else {
       throw UnsupportedError('The value $inv is not invocable.');
     }
@@ -702,6 +721,21 @@ class PLList extends PLExprIterable
   Object? invoke(PLEnv env, Iterable<Object?> args) {
     throw UnsupportedError(
         'Lists cannot be invoked. Vectors and maps can. Tried to invoke: $this');
+  }
+}
+
+String formatStaticDartFnName(Function fn) {
+  final fnString = fn.toString();
+  try {
+    final end = fnString.lastIndexOf("Fn'");
+    final start = fnString.lastIndexOf("'", end);
+    if (start != -1 && end != -1) {
+      return fnString.substring(start + 1, end);
+    } else {
+      return fnString;
+    }
+  } catch (_) {
+    return fnString;
   }
 }
 
@@ -1624,7 +1658,7 @@ class PLFunction extends PLNamedInvocable {
       Object? returnValue;
       env.pushScope(arity.closedScope); // .unlock);
       env.pushEmptyScope();
-      env.pushStackFrame(name);
+      env.pushStackFrame(name.name);
       try {
         for (var i = 0; i < finalParams.length; i++) {
           final sym = finalParams[i];
@@ -1643,7 +1677,7 @@ class PLFunction extends PLNamedInvocable {
       Object? returnValue;
       env.pushScope(arity.closedScope); // .unlock);
       env.pushEmptyScope();
-      env.pushStackFrame(name);
+      env.pushStackFrame(name.name);
       try {
         for (var i = 0; i < finalParams.length; i++) {
           final sym = finalParams[i];
@@ -1651,6 +1685,10 @@ class PLFunction extends PLNamedInvocable {
           env.addBindingValue(sym, value);
         }
         returnValue = plEval(env, arity.interpretedBody ?? arity.body);
+      } on PLInvocationException {
+        rethrow;
+      } catch (e) {
+        throw PLInvocationException(e, env.stackFrames.toList());
       } finally {
         env.popStackFrame();
         env.popScope(); // empty scope

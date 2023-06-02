@@ -1,5 +1,7 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:pilisp/pilisp.dart';
+import 'package:pilisp/src/pilisp_core.dart';
+import 'package:pilisp/src/pilisp_expr.dart';
 
 import 'package:test/test.dart';
 
@@ -1209,6 +1211,20 @@ void main() {
         });
       });
     });
+    group('/ Errors', () {
+      test('/ PiLisp stack traces', () {
+        try {
+          PiLisp.loadString('''(defn bang [] (conj 2 3))
+        (bang)''');
+        } catch (e) {
+          expect(e, isA<PLInvocationException>());
+          if (e is PLInvocationException) {
+            expect(e.rootCause(), isA<UnsupportedError>());
+            expect(e.stackFrames, ['bang', 'conj']);
+          }
+        }
+      });
+    });
   });
   group('Library', () {
     // test('/ DEBUG', () {
@@ -1231,7 +1247,8 @@ void main() {
       group('/ collections', () {
         group('/ seq', () {
           test('/ seq basics', () {
-            expect(() => evalProgram('(seq)'), throwsA(isA<FormatException>()));
+            expect(() => evalProgram('(seq)'),
+                throwsA(isA<PLInvocationException>()));
             expect(evalProgram('(seq [])'), null);
             expect(evalProgram("(seq '()))"), null);
           });
@@ -1254,18 +1271,19 @@ void main() {
         });
         test('/ conj', () {
           expect(evalProgram('(conj)'), allOf(isA<PLVector>(), PLVector([])));
-          expect(
-              () => evalProgram('(conj 1)'), throwsA(isA<UnsupportedError>()));
+          expect(() => evalProgram('(conj 1)'),
+              throwsA(isA<PLInvocationException>()));
           expect(evalProgram('(conj [] 1)'), evalProgram('[1]'));
           expect(evalProgram('(conj [] 1 2 3 "4" .five [6 7])'),
               evalProgram('[1 2 3 "4" .five [6 7]]'));
         });
         test('/ cons', () {
-          expect(() => evalProgram('(cons)'), throwsA(isA<UnsupportedError>()));
-          expect(
-              () => evalProgram('(cons 1)'), throwsA(isA<UnsupportedError>()));
+          expect(() => evalProgram('(cons)'),
+              throwsA(isA<PLInvocationException>()));
+          expect(() => evalProgram('(cons 1)'),
+              throwsA(isA<PLInvocationException>()));
           expect(() => evalProgram('(cons 1 2)'),
-              throwsA(isA<UnsupportedError>()));
+              throwsA(isA<PLInvocationException>()));
           expect(evalProgram("(cons 1 '(2 3))"), evalProgram("'(1 2 3)"));
           expect(evalProgram('(cons [.a .b] [.c .d])'),
               evalProgram('[[.a .b] .c .d]'));
@@ -1278,7 +1296,7 @@ void main() {
         });
         test('/ nth*', () {
           expect(() => evalProgram('(nth* [] 1 .default)'),
-              throwsA(isA<FormatException>()));
+              throwsA(isA<PLInvocationException>()));
         });
         test('/ next', () {
           expect(evalProgram('(next [])'), null);
@@ -1296,16 +1314,17 @@ void main() {
           expect(evalProgram('(+ 1 -2 3)'), 2);
           expect(evalProgram('(+ 1 2.5 3)'), 6.5);
           expect(() => evalProgram('(+ 1 nil 3)'),
-              throwsA(isA<UnsupportedError>()));
+              throwsA(isA<PLInvocationException>()));
         });
         test('/ -', () {
-          expect(() => evalProgram('(-)'), throwsA(isA<FormatException>()));
+          expect(
+              () => evalProgram('(-)'), throwsA(isA<PLInvocationException>()));
           expect(evalProgram('(- 1)'), -1);
           expect(evalProgram('(- 1 2 3)'), -4);
           expect(evalProgram('(- 1 -2 3)'), 0);
           expect(evalProgram('(- 1 2.5 3)'), -4.5);
           expect(() => evalProgram('(- 1 nil 3)'),
-              throwsA(isA<UnsupportedError>()));
+              throwsA(isA<PLInvocationException>()));
         });
         test('/ *', () {
           expect(evalProgram('(*)'), 1);
@@ -1314,16 +1333,17 @@ void main() {
           expect(evalProgram('(* 1 -2 3)'), -6);
           expect(evalProgram('(* 1 2.5 3)'), 7.5);
           expect(() => evalProgram('(* 1 nil 3)'),
-              throwsA(isA<UnsupportedError>()));
+              throwsA(isA<PLInvocationException>()));
         });
         test('/ /', () {
-          expect(() => evalProgram('(/)'), throwsA(isA<FormatException>()));
+          expect(
+              () => evalProgram('(/)'), throwsA(isA<PLInvocationException>()));
           expect(evalProgram('(/ 2)'), 0.5);
           expect(evalProgram('(/ 6 3)'), 2);
           expect(evalProgram('(/ 6 3 2)'), 1);
           expect(evalProgram('(/ 6 1.5)'), 4);
           expect(() => evalProgram('(/ 1 nil 3)'),
-              throwsA(isA<UnsupportedError>()));
+              throwsA(isA<PLInvocationException>()));
         });
       });
       group('/ comparisons', () {
@@ -1429,9 +1449,13 @@ void main() {
           expect(evalProgram('(nth [0 1 2] 0)'), 0);
           expect(evalProgram('(nth [0 1 2] 1)'), 1);
           expect(evalProgram('(nth [0 1 2] 2)'), 2);
-          expect(
-              () => evalProgram('(nth [0 1 2] 3)'), throwsA(isA<RangeError>()));
           expect(evalProgram('(nth [0 1 2] 3 .default)'), PLTerm('default'));
+          try {
+            evalProgram('(nth [0 1 2] 3)');
+          } catch (e) {
+            expect(e, isA<PLInvocationException>());
+            expect((e as PLInvocationException).rootCause(), isA<RangeError>());
+          }
         });
         test('/ take', () {
           expect(
@@ -1517,6 +1541,11 @@ void main() {
           expect(evalProgram('''((partial + 5))'''), 5);
         });
       });
+    });
+  });
+  group('Utilities', () {
+    test('formatStaticDartFnName', () {
+      expect(formatStaticDartFnName(conjFn), 'conj');
     });
   });
 }

@@ -29,8 +29,11 @@ class PLEnv {
   /// Methods pretty-print by default, using [indentSize] spaces to indent.
   int indentSize = 2;
 
-  /// When set to true, print PiLisp stack traces in addition to Dart ones.
+  /// When set to true, print PiLisp stack traces.
   bool printStackTraces = true;
+
+  /// When set to true, print Dart stack traces.
+  bool printDartStackTraces = true;
 
   /// The names of the frames of the stack.
   List<String> stackFrames = [];
@@ -562,16 +565,20 @@ class PLEnv {
     return false;
   }
 
-  void pushStackFrame(PLSymbol frameName) {
-    stackFrames.add(frameName.toString());
+  void pushStackFrame(String frameName) {
+    stackFrames.add(frameName);
   }
 
   void popStackFrame() {
     stackFrames.removeLast();
   }
 
-  List<String> currentStackTrace() {
-    return stackFrames.map((e) => 'fn: $e').toList();
+  Iterable<String> currentStackTrace() {
+    return PLEnv.formatStackTrace(stackFrames);
+  }
+
+  static Iterable<String> formatStackTrace(List<String> frames) {
+    return frames.reversed.map((e) => 'fn: $e');
   }
 
   String currentIndentation() => ' ' * (indentSize * indentIndex);
