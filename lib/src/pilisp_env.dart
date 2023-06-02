@@ -29,11 +29,9 @@ class PLEnv {
   /// Methods pretty-print by default, using [indentSize] spaces to indent.
   int indentSize = 2;
 
-  /// When set to true, print PiLisp stack traces.
+  /// When set to true, print PiLisp stack traces. Set [isDebug] to `true` to
+  /// print Dart stack traces.
   bool printStackTraces = true;
-
-  /// When set to true, print Dart stack traces.
-  bool printDartStackTraces = true;
 
   /// The names of the frames of the stack.
   List<String> stackFrames = [];

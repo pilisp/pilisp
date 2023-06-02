@@ -70,10 +70,10 @@ class PiLisp {
         frames = ev.currentStackTrace();
       }
       if (frames.isNotEmpty) {
-        print(frames.join('  \n'));
+        print('  ${frames.join('\n  ')}');
       }
     }
-    if (ev.printDartStackTraces && stackTrace != null) {
+    if (ev.isDebug && stackTrace != null) {
       print(stackTrace);
     }
     if (expr is PLList) {
