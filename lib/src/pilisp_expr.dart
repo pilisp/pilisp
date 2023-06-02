@@ -201,10 +201,7 @@ class PLTerm extends PLExpr implements PLInvocable {
 }
 
 class PLException extends PLExpr implements Exception {
-  Iterable<String>? _stackTrace;
-  bool isThrown = false;
   String message;
-  String _stackTraceMessage = '';
   IMap<Object?, Object?> data = IMap<Object?, Object?>({});
 
   PLException(this.message);
@@ -225,26 +222,9 @@ class PLException extends PLExpr implements Exception {
     return 'exception';
   }
 
-  Iterable<String> get stackTrace => _stackTrace ?? [];
-
-  void saveStackTrace(PLEnv env, Object? topLevelForm) {
-    final st = env.currentStackTrace();
-    String msg = '';
-    if (st.isNotEmpty) {
-      msg = st.toList().reversed.map((e) => '  from $e').join('\n');
-    }
-    final topLevel =
-        'Thrown from expression:\n${plPrintToString(env, topLevelForm)}';
-    msg = msg.isEmpty ? topLevel : '$topLevel\n$msg';
-    _stackTraceMessage = msg;
-    _stackTrace = st;
-  }
-
   @override
   String toString() {
-    String msg = 'PiLisp Exception: $message';
-    msg += _stackTraceMessage.isEmpty ? '' : '\n$_stackTraceMessage';
-    return msg;
+    return '#<PLException: $message>';
   }
 }
 
@@ -557,10 +537,8 @@ class PLList extends PLExprIterable
               'The throw special form expects a single exception value, but encountered ${length - 1} arguments.');
         }
         final exception = plEval(env, this[1]);
+        // TODO Consider allowing throwing any value, since Dart supports that.
         if (exception is PLException) {
-          // NB: What was this boolean for?
-          exception.isThrown = true;
-          exception.saveStackTrace(env, this);
           throw exception;
         } else {
           throw FormatException(
