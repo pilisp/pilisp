@@ -55,20 +55,33 @@ class PiLisp {
   /// some PiLisp code), evaluate it and return the resulting value.
   static Object? eval(Object expr, {PLEnv? env}) {
     final ev = env ?? piLispEnv;
-    try {
-      return plEval(ev, expr);
-    } catch (e) {
-      if (expr is PLList) {
-        if (expr.loc != null) {
-          final id = ev.nextId();
-          print('($id) Error on line ${expr.loc}');
-          print('($id) Form:\n${plPrintToString(ev, expr)}');
-        }
+    return plEval(ev, expr);
+  }
+
+  static void logEvalException(Object? expr, Object? exception,
+      {PLEnv? env, StackTrace? stackTrace}) {
+    final ev = env ?? piLispEnv;
+    print(exception);
+    if (ev.printStackTraces) {
+      Iterable<String> frames;
+      if (exception is PLInvocationException) {
+        frames = PLEnv.formatStackTrace(exception.stackFrames);
+      } else {
+        frames = ev.currentStackTrace();
       }
-      if (ev.printStackTraces) {
-        print(ev.currentStackTrace());
+      if (frames.isNotEmpty) {
+        print('  ${frames.join('\n  ')}');
       }
-      rethrow;
+    }
+    if (ev.isDebug && stackTrace != null) {
+      print(stackTrace);
+    }
+    if (expr is PLList) {
+      if (expr.loc != null) {
+        final id = ev.nextId();
+        print('($id) Error on line ${expr.loc}');
+        print('($id) Form:\n${plPrintToString(ev, expr)}');
+      }
     }
   }
 
@@ -76,14 +89,7 @@ class PiLisp {
   /// final one.
   static Object? loadString(String programSource, {PLEnv? env}) {
     final ev = env ?? piLispEnv;
-    try {
-      return plLoad(env ?? piLispEnv, programSource);
-    } catch (e) {
-      if (ev.printStackTraces) {
-        print(ev.currentStackTrace());
-      }
-      rethrow;
-    }
+    return plLoad(ev, programSource);
   }
 
   /// Returns a string of the given [value] as a readable PiLisp form.
