@@ -170,7 +170,6 @@ class PiLispStringReader {
             throw MismatchedDelimiter(
                 'Line ${loc.left} Unexpected closing delimiter. Expected ${String.fromCharCode(delimiter)} but encountered ${String.fromCharCode(cu)}');
           } else {
-            // TODO Not sure this is reachable.
             throw UnimplementedError(
                 'Line $loc Reader macro ${String.fromCharCode(cu)} has not been implemented yet.');
           }
@@ -464,7 +463,6 @@ class PiLispStringReader {
           } else if (charEscape == 'v') {
             return '\v';
           } else {
-            // TODO This is stricter than Dart. Consider.
             throw UnsupportedEscapeCharacter(
                 'Line $startLoc Unsupported q string escape character: \\$charEscape');
           }
