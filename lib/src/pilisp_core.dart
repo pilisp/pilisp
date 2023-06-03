@@ -1061,16 +1061,26 @@ Object? getFn(PLEnv env, PLVector args) {
 }
 
 int countFn(PLEnv env, PLVector args) {
-  final fst = args[0];
-  if (fst is String) {
-    return fst.length;
-  }
-  // TODO Don't create a seq just to do count. Check types, use seq as fallback.
-  final seq = seqFn(env, PLVector([fst]));
-  if (seq == null) {
-    return 0;
+  final coll = args[0];
+  if (coll is Iterable) {
+    return coll.length;
+  } else if (coll is String) {
+    return coll.length;
+  } else if (coll is PLVector) {
+    return coll.length;
+  } else if (coll is PLList) {
+    return coll.length;
+  } else if (coll is IMap) {
+    return coll.length;
+  } else if (coll is Map) {
+    return coll.length;
   } else {
-    return seqLength(seq);
+    final seq = seqFn(env, PLVector([coll]));
+    if (seq == null) {
+      return 0;
+    } else {
+      return seqLength(seq);
+    }
   }
 }
 
