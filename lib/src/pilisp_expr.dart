@@ -1721,7 +1721,6 @@ class PLNil extends PLExpr {
 }
 
 Object? plEval(PLEnv env, Object? expr) {
-  // env.debugPrint('[DEBUG] ${plPrintToString(env, expr)}');
   if (expr is PLExpr) {
     return expr.eval(env);
   } else if (expr is IMap) {

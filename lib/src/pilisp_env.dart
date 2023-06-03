@@ -591,13 +591,6 @@ class PLEnv {
     indentDec();
   }
 
-  // TODO Consider how to ensure string building is avoided until needed.
-  void debugPrint(String s) {
-    if (isDebug) {
-      print(s);
-    }
-  }
-
   String indentedString(String s) {
     return currentIndentation() + s;
   }
