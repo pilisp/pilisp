@@ -214,32 +214,11 @@ final piLispCore = r'''
     (dart/PLMultiMethod.removeTypeDispatchedMethod multi-method dispatch-value)
     (throw (ex-info "Unimplemented"))))
 
-;; # Transients
-
-(declare cond vector? map? set? list? name vec set)
-
-(defn transient
-  [x]
-  (cond
-    (or (vector? x)
-        (list? x))
-    (to-dart-list x)
-
-    (map? x)
-    (to-dart-map x)
-
-    (set? x)
-    (to-dart-set x)
-
-    :else (throw (ex-info (str "A " (type x) " value does not support a transient (mutable) version of itself.")))))
-
 (defn into
   {:doc "Returns a new coll consisting of to-coll with all of the items of from-coll conjoined. A transducer may be supplied."}
   ([] [])
   ([to] to)
   ([to from]
-   ;; TODO Determine why this causes a StackOverflow
-   #_(persistent! (reduce conj! (transient to) from))
    (reduce conj to from)))
 
 (defmacro when
