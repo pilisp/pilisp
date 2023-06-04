@@ -91,7 +91,12 @@ final piLispCore = r'''
   ;; NB. For core PiLisp, Dart's print is used, which appends a new line.
   (apply print xs #_(conj xs "\n")))
 
+;; # State/"Atom"
+
 (def ! write-state)
+(def atom   state)
+(def reset! write-state)
+(def swap!  write-state)
 
 ;; # Math
 

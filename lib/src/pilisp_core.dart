@@ -17,8 +17,7 @@ import 'pilisp_print.dart';
 //  - eval
 
 abstract class PLDeref {
-  /// Return a contained value, honoring the given [timeout] by throwing an
-  /// exception if it is exceeded.
+  /// Return a value contained by this instance of [PLDeref].
   Object? dereference({int timeout = 10000});
 }
 
