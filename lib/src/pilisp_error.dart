@@ -1,7 +1,5 @@
 import 'package:pilisp/src/pilisp_public.dart';
 
-import 'pilisp_expr.dart';
-
 class UndefinedSymbol implements Exception {
   final PLSymbol symbol;
 
