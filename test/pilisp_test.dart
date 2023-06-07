@@ -1550,12 +1550,13 @@ void main() {
   });
 }
 
-Object? evalProgram(String s, {PLEnv? customEnv}) {
-  if (customEnv != null) {
-    return PiLisp.eval(PiLisp.readString(s), env: customEnv);
-  } else {
-    final beenRead = PiLisp.readString(s);
+Object? evalProgram(String s) {
+  final beenRead = PiLisp.readString(s);
+  try {
     return PiLisp.eval(beenRead);
+  } catch (e) {
+    PiLisp.logEvalException(beenRead, e);
+    rethrow;
   }
 }
 
