@@ -1168,7 +1168,10 @@ PLExprIterable sortFn(PLEnv env, PLVector args) {
     final comparator = args[0];
     final coll = seqFn(env, PLVector([args[1]]));
     if (comparator is int Function(Object?, Object?)) {
-      if (coll is PLVector) {
+      if (coll == null) {
+        // NB. Clojure returns an empty PersistentList for this.
+        return PLVector([]);
+      } else if (coll is PLVector) {
         return coll.sort(comparator);
       } else if (coll is PLList) {
         return coll.sort(comparator);
