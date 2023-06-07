@@ -17,3 +17,7 @@ dependencies:
   http: ^1.0.0
   pilisp_cli: ^1.0.0-alpha.14
   source_gen: ^1.2.4
+
+dependency_overrides:
+  pilisp_cli:
+    path: ../pilisp-cli
