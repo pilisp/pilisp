@@ -617,6 +617,14 @@ class PLList extends PLExprIterable
           return inv.invoke(env, args);
         } else if (inv is ISet) {
           return inv.invoke(env, args);
+        } else if (inv is String) {
+          // Oh boy
+          if (args.length == 1 || args.length == 2) {
+            return getFn(env, PLVector(args.toList()..insert(1, inv)));
+          } else {
+            throw ArgumentError(
+                'When invoked, a string expects 1 or 2 arguments, but received ${args.length} arguments.');
+          }
         } else {
           throw UnsupportedError(
               'The ${typeString(inv)} value ${plPrintToString(env, inv)} is not invocable.');
@@ -659,6 +667,14 @@ class PLList extends PLExprIterable
         throw PLInvocationException(e, env.stackFrames.toList());
       } finally {
         env.popStackFrame();
+      }
+    } else if (inv is String) {
+      // Oh boy
+      if (args.length == 1 || args.length == 2) {
+        return getFn(env, PLVector(args.toList()..insert(1, inv)));
+      } else {
+        throw ArgumentError(
+            'When invoked, a string expects 1 or 2 arguments, but received ${args.length} arguments.');
       }
     } else {
       throw UnsupportedError('The value $inv is not invocable.');
