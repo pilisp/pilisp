@@ -694,7 +694,17 @@ Map<Object?, Object?> toDartMapOfStringStringFn(PLEnv env, PLVector args) {
   if (args.length == 1) {
     final coll = args[0];
     if (coll is IMap) {
-      return Map<String, String>.from(coll.unlock);
+      final m = <String, String>{};
+      for (final k in coll.keys) {
+        String kStr;
+        if (k is PLTerm) {
+          kStr = k.name;
+        } else {
+          kStr = k.toString();
+        }
+        m[kStr] = coll[k]!.toString();
+      }
+      return m;
     } else if (coll is Map) {
       return coll;
     }
