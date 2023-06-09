@@ -1,3 +1,5 @@
+*(Repository Deprecated: See [pilisp/pilisp-monorepo](https://github.com/pilisp/pilisp-monorepo))*
+
 PiLisp—An interpreted Lisp inspired by Clojure.
 
 Runs on all supported Dart targets.
